@@ -117,7 +117,7 @@ public class DependenciaDTO implements Serializable{
     public void setEncargadoDependencia(AdministradorDTO encargadoDependencia) {
         this.encargadoDependencia = encargadoDependencia;
     }
+}
 
     
     
-}

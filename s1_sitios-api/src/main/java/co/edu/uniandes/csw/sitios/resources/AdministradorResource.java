@@ -22,12 +22,12 @@ import javax.ws.rs.Produces;
  * Recurso administrador
  * @author estudiante
  */
-@Path("administradores")
+@Path("admins")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class AdministradorResource {
-    public final static Logger LOGGER = Logger.getLogger(UsuarioResource.class.getName());
+    public final static Logger LOGGER = Logger.getLogger(AdministradorResource.class.getName());
     
     /**
      * Permite dar un administador segun su Id.

@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  * Recurso Usuario
  * @author estudiante
  */
-@Path("usuarios")
+@Path("users")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
