@@ -36,6 +36,11 @@ public class DependenciaDTO implements Serializable{
      * telefono de la dependencia
      */
     private int telefono;
+    
+    /**
+     * Persona a cargo de la dependencia
+     */
+    private AdministradorDTO encargadoDependencia;
 
     /**
      * Constructor DependenciDTO vacio.
@@ -99,6 +104,20 @@ public class DependenciaDTO implements Serializable{
         this.telefono = telefono;
     }
 
-    
-    
+    /**
+     * @return the encargadoDependencia
+     */
+    public AdministradorDTO getEncargadoDependencia() {
+        return encargadoDependencia;
+    }
+
+    /**
+     * @param encargadoDependencia the encargadoDependencia to set
+     */
+    public void setEncargadoDependencia(AdministradorDTO encargadoDependencia) {
+        this.encargadoDependencia = encargadoDependencia;
+    }
 }
+
+    
+    
