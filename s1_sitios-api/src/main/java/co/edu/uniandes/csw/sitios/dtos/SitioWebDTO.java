@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -229,7 +230,7 @@ public class SitioWebDTO  implements Serializable{
         /**
          * Categoria que puede tener un sitio web
          */
-        public Enum Categoria
+        public enum Categoria
         {
             Administrativo,
             Informativo,
