@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.csw.sitios.resources;
 
+import co.edu.uniandes.csw.sitios.dtos.EstadoWebDTO;
+import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -46,7 +48,7 @@ public class EstadoWebResource {
     @POST
     public EstadoWebDTO createEstadoWeb(EstadoWebDTO estadoWeb) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "EstadoWebResource createEstadoWeb: input: {0}", estadoWeb.toString());
-        EstadoWebDTO nuevoEstadoWebDTO = nul;
+        EstadoWebDTO nuevoEstadoWebDTO = null;
         return nuevoEstadoWebDTO;
     }
 
@@ -70,7 +72,7 @@ public class EstadoWebResource {
     @GET
     public EstadoWebDTO getEstadoWeb()
     {
-        EstadoWebDTO nuevoEstadoWebDTO = nul;
+        EstadoWebDTO nuevoEstadoWebDTO = null;
         return nuevoEstadoWebDTO;
     }
     

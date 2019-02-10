@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import java.io.Serializable;
+import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -26,7 +27,7 @@ public class EstadoWebDTO implements Serializable{
     /**
      * represnta el estado del sitio web
      */
-    private Estado estado;
+    //private Estado estado;
     
     /**
      * descripcion general del estado del sitio
@@ -54,18 +55,18 @@ public class EstadoWebDTO implements Serializable{
      * la entidad que viene de argumento.
      *
      * @param pEstadoWebEntity: Es la entidad que se va a convertir a DTO
-     */
+     
     public EstadoWebDTO(EstadoWebEntity pEstadoWebEntity) 
     {
         if (pEstadoWebEntity != null) {
             this.id = pEstadoWebEntity.getId();
-            this.estado = pEstadoWebEntity.getEstado();
+            //this.estado = pEstadoWebEntity.getEstado();
             this.descripcion = pEstadoWebEntity.getDescripcion();
             this.fechaCambio = pEstadoWebEntity.getFechaCambio();
             
         }
     }
-
+    */
     
     //__________________________________________________________________________
     // Metodos
@@ -94,8 +95,8 @@ public class EstadoWebDTO implements Serializable{
      * Devuelve el estado correspondiente al Sitio web.
      *
      * @return the name
-     */
-    public String getEstado() 
+     
+    public Estado getEstado() 
     {
         return estado;
     }
@@ -104,11 +105,12 @@ public class EstadoWebDTO implements Serializable{
      * Modifica el estado corrrespondiente al sitio web.
      *
      * @param estado the estado to set
-     */
+     
     public void setEstado(Estado estado) 
     {
         this.estado = estado;
     }
+    */
     
     /**
      * Devuelve la descripcion correspondiente al estado del Sitio web.
@@ -127,7 +129,7 @@ public class EstadoWebDTO implements Serializable{
      */
     public void setDescripcion(String descripcion) 
     {
-        this.descripcion = estado;
+        this.descripcion = descripcion;
     }
     
      /**
@@ -145,7 +147,7 @@ public class EstadoWebDTO implements Serializable{
      *
      * @param fechaCambio the fechaCambio to set
      */
-    public void setFechaCambio(String fechaCambio) 
+    public void setFechaCambio(Date fechaCambio) 
     {
         this.fechaCambio = fechaCambio;
     }
