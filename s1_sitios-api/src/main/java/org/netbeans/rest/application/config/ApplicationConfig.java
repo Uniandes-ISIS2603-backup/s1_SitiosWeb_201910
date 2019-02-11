@@ -37,9 +37,11 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.uniandes.csw.sitios.resources.DependenciaResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.EstadoWebResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.NotificacionResourse.class);
+        resources.add(co.edu.uniandes.csw.sitios.resources.PlataformaDeDespliegueResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.SitioWebResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.TecnologiaResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.TicketResource.class);
+        resources.add(co.edu.uniandes.csw.sitios.resources.TipoHostingResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.TipoTecnologiaResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.UsuarioResource.class);
     }

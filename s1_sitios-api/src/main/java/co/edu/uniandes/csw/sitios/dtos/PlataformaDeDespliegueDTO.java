@@ -46,7 +46,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /*
     * Tipo de Hosting usado por la plataforma de despliegue.
     */
-    private TipoHosting tipoHosting;
+    private TipoHostingDTO tipoHosting;
 
     
     /**
@@ -142,14 +142,14 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * @return the tipoHosting
      */
-    public TipoHosting getTipoHosting() {
+    public TipoHostingDTO getTipoHosting() {
         return tipoHosting;
     }
 
     /**
      * @param tipoHosting the tipoHosting to set
      */
-    public void setTipoHosting(TipoHosting tipoHosting) {
+    public void setTipoHosting(TipoHostingDTO tipoHosting) {
         this.tipoHosting = tipoHosting;
     }
 

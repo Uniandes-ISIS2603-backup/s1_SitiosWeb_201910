@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.resources;
 
-
+import co.edu.uniandes.csw.sitios.dtos.TipoHostingDTO;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
