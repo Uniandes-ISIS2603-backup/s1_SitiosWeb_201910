@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
  *
  * @author estudiante
  */
-@Path("tecnologias")
+@Path("technologies")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

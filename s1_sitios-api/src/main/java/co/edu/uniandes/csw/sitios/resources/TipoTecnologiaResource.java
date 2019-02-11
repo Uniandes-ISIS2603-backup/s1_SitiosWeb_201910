@@ -7,12 +7,20 @@ package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.TipoDeTecnologiaDTO;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 /**
  *
  * @author estudiante
  */
+@Path("technologyTypes")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class TipoTecnologiaResource {
     private static final Logger LOGGER = Logger.getLogger(TipoTecnologiaResource.class.getName());
     
