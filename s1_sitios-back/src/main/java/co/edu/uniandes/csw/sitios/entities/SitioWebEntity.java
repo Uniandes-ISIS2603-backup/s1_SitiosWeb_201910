@@ -58,22 +58,22 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * estado actual del sitio web
 	 */
 	
-	private EstadoWeb EstadoActual;
+	private EstadoWebEntity EstadoActual;
 
 	/**
 	 * historial completo de estados que ha tenido este sitio
 	 */
-	private List<EstadoWeb> historialDeEstados;
+	private List<EstadoWebEntity> historialDeEstados;
 
 	/**
 	 * Lugar donde se encuentra desplegado el sitio web
 	 */
-	private PlataformaDeDespliegue plataformaDeDespliegue;
+	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
 	/**
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
-	private List<Tecnologia> tecnologiasDeDesarrollo;
+	private List<TecnologiaEntity> tecnologiasDeDesarrollo;
 
     public String getNombre() {
         return nombre;
@@ -131,89 +131,89 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         this.imagen = imagen;
     }
 
-    public EstadoWeb getEstadoActual() {
+    public EstadoWebEntity getEstadoActual() {
         return EstadoActual;
     }
 
-    public void setEstadoActual(EstadoWeb EstadoActual) {
+    public void setEstadoActual(EstadoWebEntity EstadoActual) {
         this.EstadoActual = EstadoActual;
     }
 
-    public List<EstadoWeb> getHistorialDeEstados() {
+    public List<EstadoWebEntity> getHistorialDeEstados() {
         return historialDeEstados;
     }
 
-    public void setHistorialDeEstados(List<EstadoWeb> historialDeEstados) {
+    public void setHistorialDeEstados(List<EstadoWebEntity> historialDeEstados) {
         this.historialDeEstados = historialDeEstados;
     }
 
-    public PlataformaDeDespliegue getPlataformaDeDespliegue() {
+    public PlataformaDeDespliegueEntity getPlataformaDeDespliegue() {
         return plataformaDeDespliegue;
     }
 
-    public void setPlataformaDeDespliegue(PlataformaDeDespliegue plataformaDeDespliegue) {
+    public void setPlataformaDeDespliegue(PlataformaDeDespliegueEntity plataformaDeDespliegue) {
         this.plataformaDeDespliegue = plataformaDeDespliegue;
     }
 
-    public List<Tecnologia> getTecnologiasDeDesarrollo() {
+    public List<TecnologiaEntity> getTecnologiasDeDesarrollo() {
         return tecnologiasDeDesarrollo;
     }
 
-    public void setTecnologiasDeDesarrollo(List<Tecnologia> tecnologiasDeDesarrollo) {
+    public void setTecnologiasDeDesarrollo(List<TecnologiaEntity> tecnologiasDeDesarrollo) {
         this.tecnologiasDeDesarrollo = tecnologiasDeDesarrollo;
     }
 
-    public List<Administrador> getSolicitantes() {
+    public List<AdministradorEntity> getSolicitantes() {
         return solicitantes;
     }
 
-    public void setSolicitantes(List<Administrador> solicitantes) {
+    public void setSolicitantes(List<AdministradorEntity> solicitantes) {
         this.solicitantes = solicitantes;
     }
 
-    public List<SitioWeb> getSitiosRelacionados() {
+    public List<SitioWebEntity> getSitiosRelacionados() {
         return sitiosRelacionados;
     }
 
-    public void setSitiosRelacionados(List<SitioWeb> sitiosRelacionados) {
+    public void setSitiosRelacionados(List<SitioWebEntity> sitiosRelacionados) {
         this.sitiosRelacionados = sitiosRelacionados;
     }
 
-    public List<Administrador> getSoportes() {
+    public List<AdministradorEntity> getSoportes() {
         return soportes;
     }
 
-    public void setSoportes(List<Administrador> soportes) {
+    public void setSoportes(List<AdministradorEntity> soportes) {
         this.soportes = soportes;
     }
 
-    public Administrador getResponsable() {
+    public AdministradorEntity getResponsable() {
         return responsable;
     }
 
-    public void setResponsable(Administrador responsable) {
+    public void setResponsable(AdministradorEntity responsable) {
         this.responsable = responsable;
     }
 
 	/**
 	 * Personas que solicitaron el sitio web
 	 */
-	private List<Administrador> solicitantes;
+	private List<AdministradorEntity> solicitantes;
 
 	/**
 	 * Sitios web que estan asociados a este
 	 */
-	private List<SitioWeb> sitiosRelacionados;
+	private List<SitioWebEntity> sitiosRelacionados;
 
 	/**
 	 * Personas encargadas del soporte del sitio
 	 */
-	private List<Administrador> soportes;
+	private List<AdministradorEntity> soportes;
 
 	/**
 	 * Responsable del sitio web
 	 */
-	private Administrador responsable;
+	private AdministradorEntity responsable;
     
         /**
          * Categoria que puede tener un sitio web

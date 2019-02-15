@@ -13,27 +13,27 @@ import java.io.Serializable;
  */
 public class NotificacionEntity extends BaseEntity implements Serializable {
 
-    public Persona getNotificado() {
+    public PersonaEntity getNotificado() {
         return notificado;
     }
 
-    public void setNotificado(Persona notificado) {
+    public void setNotificado(PersonaEntity notificado) {
         this.notificado = notificado;
     }
 
-    public EstadoWeb getCambioSitio() {
+    public EstadoWebEntity getCambioSitio() {
         return cambioSitio;
     }
 
-    public void setCambioSitio(EstadoWeb cambioSitio) {
+    public void setCambioSitio(EstadoWebEntity cambioSitio) {
         this.cambioSitio = cambioSitio;
     }
 
-    public SitioWeb getSitioWeb() {
+    public SitioWebEntity getSitioWeb() {
         return sitioWeb;
     }
 
-    public void setSitioWeb(SitioWeb sitioWeb) {
+    public void setSitioWeb(SitioWebEntity sitioWeb) {
         this.sitioWeb = sitioWeb;
     }
     
@@ -43,16 +43,16 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     /**
      * Persona a la cual se debe notificar
      */
-    private Persona notificado;
+    private PersonaEntity notificado;
     
     /**
      * nuevo estado al cual se cambio el sitio web
      */
-    private EstadoWeb cambioSitio;
+    private EstadoWebEntity cambioSitio;
     
     /**
      * Sitio en el cual se presento el cambio
      */
-    private SitioWeb sitioWeb;
+    private SitioWebEntity sitioWeb;
    
 }
