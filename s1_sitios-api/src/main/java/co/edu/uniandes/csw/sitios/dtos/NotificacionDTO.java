@@ -25,7 +25,7 @@ public class NotificacionDTO  implements Serializable{
      */
     private PersonaDTO notificado;
 
-   x
+   
     /**
      * nuevo estado al cual se cambio el sitio web
      */
