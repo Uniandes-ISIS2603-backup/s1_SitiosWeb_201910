@@ -71,25 +71,7 @@ public class SitioWebDTO  implements Serializable{
 	 */
 	private PlataformaDeDespliegueDTO plataformaDeDespliegue;
 
-	/**
-	 * Tecnologias usadas en el desarrollo del sitio
-	 */
-	private List<TecnologiaDTO> tecnologiasDeDesarrollo;
 
-	/**
-	 * Personas que solicitaron el sitio web
-	 */
-	private List<AdministradorDTO> solicitantes;
-
-	/**
-	 * Sitios web que estan asociados a este
-	 */
-	private List<SitioWebDTO> sitiosRelacionados;
-
-	/**
-	 * Personas encargadas del soporte del sitio
-	 */
-	private List<AdministradorDTO> soportes;
 
 	/**
 	 * Responsable del sitio web
@@ -229,37 +211,6 @@ public class SitioWebDTO  implements Serializable{
         this.plataformaDeDespliegue = plataformaDeDespliegue;
     }
 
-    public List<TecnologiaDTO> getTecnologiasDeDesarrollo() {
-        return tecnologiasDeDesarrollo;
-    }
-
-    public void setTecnologiasDeDesarrollo(List<TecnologiaDTO> tecnologiasDeDesarrollo) {
-        this.tecnologiasDeDesarrollo = tecnologiasDeDesarrollo;
-    }
-
-    public List<AdministradorDTO> getSolicitantes() {
-        return solicitantes;
-    }
-
-    public void setSolicitantes(List<AdministradorDTO> solicitantes) {
-        this.solicitantes = solicitantes;
-    }
-
-    public List<SitioWebDTO> getSitiosRelacionados() {
-        return sitiosRelacionados;
-    }
-
-    public void setSitiosRelacionados(List<SitioWebDTO> sitiosRelacionados) {
-        this.sitiosRelacionados = sitiosRelacionados;
-    }
-
-    public List<AdministradorDTO> getSoportes() {
-        return soportes;
-    }
-
-    public void setSoportes(List<AdministradorDTO> soportes) {
-        this.soportes = soportes;
-    }
 
     public AdministradorDTO getResponsable() {
         return responsable;

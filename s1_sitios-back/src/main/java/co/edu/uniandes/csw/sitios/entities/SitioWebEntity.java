@@ -5,6 +5,11 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
+import uk.co.jemos.podam.common.PodamExclude;
+
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +46,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * fecha de publicacion del sitio web
 	 */
+    @Temporal(TemporalType.DATE)
 	private Date fechaLanzamiento;
 
 	/**
@@ -57,23 +63,57 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * estado actual del sitio web
 	 */
-	
+    @PodamExclude
+    @ManyToOne
 	private EstadoWebEntity EstadoActual;
-
-	/**
-	 * historial completo de estados que ha tenido este sitio
-	 */
-	private List<EstadoWebEntity> historialDeEstados;
 
 	/**
 	 * Lugar donde se encuentra desplegado el sitio web
 	 */
+    @PodamExclude
+    @ManyToOne
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
+
+    /**
+     * Responsable del sitio web
+     */
+    @PodamExclude
+    @ManyToOne
+    private AdministradorEntity responsable;
+
+
+	/**
+	 * historial completo de estados que ha tenido este sitio
+	 */
+    @PodamExclude
+    
+	private List<EstadoWebEntity> historialDeEstados;
+
 
 	/**
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
+    @PodamExclude
 	private List<TecnologiaEntity> tecnologiasDeDesarrollo;
+
+    /**
+     * Personas que solicitaron el sitio web
+     */
+    @PodamExclude
+    private List<AdministradorEntity> solicitantes;
+
+    /**
+     * Sitios web que estan asociados a este
+     */
+    @PodamExclude
+    private List<SitioWebEntity> sitiosRelacionados;
+
+    /**
+     * Personas encargadas del soporte del sitio
+     */
+    @PodamExclude
+    private List<AdministradorEntity> soportes;
+
 
     public String getNombre() {
         return nombre;
@@ -195,25 +235,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         this.responsable = responsable;
     }
 
-	/**
-	 * Personas que solicitaron el sitio web
-	 */
-	private List<AdministradorEntity> solicitantes;
 
-	/**
-	 * Sitios web que estan asociados a este
-	 */
-	private List<SitioWebEntity> sitiosRelacionados;
-
-	/**
-	 * Personas encargadas del soporte del sitio
-	 */
-	private List<AdministradorEntity> soportes;
-
-	/**
-	 * Responsable del sitio web
-	 */
-	private AdministradorEntity responsable;
     
         /**
          * Categoria que puede tener un sitio web
