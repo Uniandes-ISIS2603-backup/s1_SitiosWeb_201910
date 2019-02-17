@@ -5,6 +5,11 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
+import uk.co.jemos.podam.common.PodamExclude;
+
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 /**
@@ -43,16 +48,22 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     /**
      * Persona a la cual se debe notificar
      */
+    @PodamExclude
+    @ManyToMany
     private PersonaEntity notificado;
     
     /**
      * nuevo estado al cual se cambio el sitio web
      */
+    @PodamExclude
+    @ManyToMany
     private EstadoWebEntity cambioSitio;
     
     /**
      * Sitio en el cual se presento el cambio
      */
+    @PodamExclude
+    @ManyToMany
     private SitioWebEntity sitioWeb;
    
 }

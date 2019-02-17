@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import uk.co.jemos.podam.common.PodamExclude;
 
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,8 +64,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * estado actual del sitio web
 	 */
-        //TODO asignar multiplicidad
-                
+
     @PodamExclude
     @ManyToOne
 	private EstadoWebEntity EstadoActual;
@@ -89,38 +89,37 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * historial completo de estados que ha tenido este sitio
 	 */
-     //TODO asignar multiplicidad
     @PodamExclude
-    
+    @ManyToMany
 	private List<EstadoWebEntity> historialDeEstados;
 
 
 	/**
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
-     //TODO asignar multiplicidad
     @PodamExclude
+    @ManyToMany
 	private List<TecnologiaEntity> tecnologiasDeDesarrollo;
 
     /**
      * Personas que solicitaron el sitio web
      */
     @PodamExclude
-     //TODO asignar multiplicidad
+    @ManyToMany
     private List<AdministradorEntity> solicitantes;
 
     /**
      * Sitios web que estan asociados a este
      */
     @PodamExclude
-     //TODO asignar multiplicidad
+    @ManyToMany
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**
      * Personas encargadas del soporte del sitio
      */
     @PodamExclude
-     //TODO asignar multiplicidad
+    @ManyToMany
     private List<AdministradorEntity> soportes;
 
 
