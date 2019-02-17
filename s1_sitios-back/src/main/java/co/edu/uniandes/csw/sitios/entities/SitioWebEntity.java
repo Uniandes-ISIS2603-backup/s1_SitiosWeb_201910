@@ -63,6 +63,8 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * estado actual del sitio web
 	 */
+        //TODO asignar multiplicidad
+                
     @PodamExclude
     @ManyToOne
 	private EstadoWebEntity EstadoActual;
@@ -70,6 +72,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * Lugar donde se encuentra desplegado el sitio web
 	 */
+     //TODO asignar multiplicidad
     @PodamExclude
     @ManyToOne
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
@@ -77,6 +80,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
     /**
      * Responsable del sitio web
      */
+     //TODO asignar multiplicidad
     @PodamExclude
     @ManyToOne
     private AdministradorEntity responsable;
@@ -85,6 +89,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * historial completo de estados que ha tenido este sitio
 	 */
+     //TODO asignar multiplicidad
     @PodamExclude
     
 	private List<EstadoWebEntity> historialDeEstados;
@@ -93,6 +98,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
+     //TODO asignar multiplicidad
     @PodamExclude
 	private List<TecnologiaEntity> tecnologiasDeDesarrollo;
 
@@ -100,18 +106,21 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
      * Personas que solicitaron el sitio web
      */
     @PodamExclude
+     //TODO asignar multiplicidad
     private List<AdministradorEntity> solicitantes;
 
     /**
      * Sitios web que estan asociados a este
      */
     @PodamExclude
+     //TODO asignar multiplicidad
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**
      * Personas encargadas del soporte del sitio
      */
     @PodamExclude
+     //TODO asignar multiplicidad
     private List<AdministradorEntity> soportes;
 
 
