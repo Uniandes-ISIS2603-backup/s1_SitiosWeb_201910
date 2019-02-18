@@ -98,7 +98,10 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
     @PodamExclude
-    @ManyToMany
+    @javax.persistence.ManyToMany(
+        mappedBy = "sitiosWeb",
+        fetch = javax.persistence.FetchType.LAZY
+    )
 	private List<TecnologiaEntity> tecnologiasDeDesarrollo;
 
     /**

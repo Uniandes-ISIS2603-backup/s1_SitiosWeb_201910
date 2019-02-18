@@ -39,12 +39,13 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     /*
     *List of websites associated to this technology
     */
-   // private List<SitioWebEntity> sitiosWebList;
+    private List<SitioWebEntity> sitiosWebList;
     
-    //TODO
-    //@javax.persistence.ManyToOne(
-    //)
-    //SitioWeb sitiosWeb;
+    @javax.persistence.ManyToMany(
+        mappedBy = "tecnologiasDeDesorrollo",
+        fetch = javax.persistence.FetchType.LAZY
+    )
+    private List<SitioWebEntity> sitiosWeb;
     
     /*
     *Constructor
@@ -127,38 +128,38 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     /**
     *@return List of websites associated with this technology
     */
-    //public List<SitioWebEntity> getSitiosWeb()
-    //{
-    //    return sitiosWebList
-    //}
+    public List<SitioWebEntity> getSitiosWeb()
+    {
+        return sitiosWebList;
+    }
     
     /**
     *@return the number of websites associated with this technology
     */
-    //public Integer getCantidadSitiosWeb()
-    //{
-    //    return sitiosWebList.size();
-    //}
+    public Integer getCantidadSitiosWeb()
+    {
+        return sitiosWebList.size();
+    }
     
     /**
      * @param newSitioWeb: Website to be added
      * @return true or false if the website was succesfully added.
      */
     
-    //public boolean agregarSitioWeb(SitioWebEntity sitioWeb)
-    //{
-    //    sitiosWebList.add(sitioWeb);
-    //    return true;
-    //}
+    public boolean agregarSitioWeb(SitioWebEntity sitioWeb)
+    {
+        sitiosWebList.add(sitioWeb);
+        return true;
+    }
     
-        /**
+     /**
      * @param deleteSitioWeb: Website to be deleted
      * @return true or false if the website was succesfully deleted.
      */
     
-   // public boolean borrarSitioWeb(SitioWebEntity deleteSitioWeb)
-   // {
-   //     sitiosWebList.remove(sitioWeb);
-   //     return true;
-   //}
+    public boolean borrarSitioWeb(SitioWebEntity deleteSitioWeb)
+    {
+        sitiosWebList.remove(deleteSitioWeb);
+        return true;
+    }
 }
