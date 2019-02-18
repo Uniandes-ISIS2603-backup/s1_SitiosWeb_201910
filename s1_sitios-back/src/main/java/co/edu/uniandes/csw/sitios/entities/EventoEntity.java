@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.sitios.dtos;
+package co.edu.uniandes.csw.sitios.entities;
 
-import co.edu.uniandes.csw.sitios.entities.EventoEntity;
-import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
 
 /**
- * EventoDTO implementa Serializable
+ *
  * @author estudiante
  */
-public class EventoDTO implements Serializable{
+@Entity
+public class EventoEntity extends BaseEntity {
     
     //-------------------------------------
     // Atributos---------------------------
@@ -33,31 +33,9 @@ public class EventoDTO implements Serializable{
     /**
      * Constructor EventoDTO vacio
      */
-    public EventoDTO() {
+    public EventoEntity() {
     }
 
-    /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
-     * @param entity != null
-     */
-    public EventoDTO( EventoEntity entity ){
-        if(entity != null) {
-            this.descripcion = entity.getDescripcion();
-        }
-    }
-    
-    /**
-     * Chequeo de la implementacion toEntity del DTO
-     * @return EventoEntity
-     */
-    public EventoEntity toEntity() {
-        EventoEntity entity = new EventoEntity();
-        entity.setDescripcion(this.descripcion);
-        entity.setFecha(this.fecha);
-        return entity;
-    }
-    
     /**
      * @return the fecha
      */
@@ -85,6 +63,5 @@ public class EventoDTO implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
+
 }
