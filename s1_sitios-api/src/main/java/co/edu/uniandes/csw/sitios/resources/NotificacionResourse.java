@@ -28,8 +28,6 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class NotificacionResourse {
       private static final Logger LOGGER = Logger.getLogger(NotificacionResourse.class.getName());
-      
-    
      /**
      * Crea una noticiacion con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -57,7 +55,7 @@ public class NotificacionResourse {
      * @return NotificacionDTO. 
      */
     @GET
-        @Path("{id: \\d+}")
+    @Path("{id: \\d+}")
     public NotificacionDTO getNotificacion( @PathParam("id") int id ){
         return null;
     }

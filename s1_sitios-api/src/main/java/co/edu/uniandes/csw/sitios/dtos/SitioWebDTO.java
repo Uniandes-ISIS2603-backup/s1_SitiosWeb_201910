@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -18,13 +19,115 @@ public class SitioWebDTO  implements Serializable{
     	/**
 	 * identificador unico
 	 */
-	private long id;
+	private Long id;
+	 
+	private String nombre;
 
-    public long getId() {
+	/**
+	 * descripcion del sitio
+         */
+	private String descripcion;
+
+	/**
+	 * proposito del sitio
+	 */
+	
+	private String proposito;
+
+	/**
+	 * audiencia esperada del sitio web
+	 */
+	private Long audienciaEsperada;
+
+	/**
+	 * fecha de publicacion del sitio web
+	 */
+	private Date fechaLanzamiento;
+
+	/**
+	 * Categoria a la cual pertenece el sitio
+	 */
+	private Categoria categoriaSitio;
+
+	/**
+	 * ruta a la imagen representativa del sitio
+	 */
+	
+	private String imagen;
+
+	/**
+	 * estado actual del sitio web
+	 */
+	
+	private EstadoWebDTO EstadoActual;
+
+	/**
+	 * historial completo de estados que ha tenido este sitio
+	 */
+	private List<EstadoWebDTO> historialDeEstados;
+
+	/**
+	 * Lugar donde se encuentra desplegado el sitio web
+	 */
+	private PlataformaDeDespliegueDTO plataformaDeDespliegue;
+
+
+
+	/**
+	 * Responsable del sitio web
+	 */
+	private AdministradorDTO responsable;
+    
+        /**
+         * Categoria que puede tener un sitio web
+         */
+        public enum Categoria
+        {
+            Administrativo,
+            Informativo,
+            Academico,
+            Otros
+        }
+        
+        
+        /**
+         * Constructor por defecto
+         */
+        public SitioWebDTO()
+        {
+        }
+        
+        public SitioWebDTO(SitioWebEntity entity){
+            if(entity != null) {
+      
+                this.id=entity.getId();
+                this.audienciaEsperada=entity.getAudienciaEsperada();
+                this.descripcion=entity.getDescripcion();
+                this.imagen=entity.getNombre();
+                this.proposito=entity.getProposito();
+                this.nombre=entity.getNombre();
+                this.fechaLanzamiento=entity.getFechaLanzamiento();
+            }
+        }
+        
+        public SitioWebEntity toEntity()
+        {
+            SitioWebEntity entity= new SitioWebEntity();
+            entity.setId(id);
+            entity.setAudienciaEsperada(audienciaEsperada);
+            entity.setDescripcion(descripcion);
+            entity.setImagen(imagen);
+            entity.setProposito(proposito);
+            entity.setNombre(nombre);
+            entity.setFechaLanzamiento(fechaLanzamiento);
+            return entity;
+        }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,11 +155,11 @@ public class SitioWebDTO  implements Serializable{
         this.proposito = proposito;
     }
 
-    public long getAudienciaEsperada() {
+    public Long getAudienciaEsperada() {
         return audienciaEsperada;
     }
 
-    public void setAudienciaEsperada(long audienciaEsperada) {
+    public void setAudienciaEsperada(Long audienciaEsperada) {
         this.audienciaEsperada = audienciaEsperada;
     }
 
@@ -108,37 +211,6 @@ public class SitioWebDTO  implements Serializable{
         this.plataformaDeDespliegue = plataformaDeDespliegue;
     }
 
-    public List<TecnologiaDTO> getTecnologiasDeDesarrollo() {
-        return tecnologiasDeDesarrollo;
-    }
-
-    public void setTecnologiasDeDesarrollo(List<TecnologiaDTO> tecnologiasDeDesarrollo) {
-        this.tecnologiasDeDesarrollo = tecnologiasDeDesarrollo;
-    }
-
-    public List<AdministradorDTO> getSolicitantes() {
-        return solicitantes;
-    }
-
-    public void setSolicitantes(List<AdministradorDTO> solicitantes) {
-        this.solicitantes = solicitantes;
-    }
-
-    public List<SitioWebDTO> getSitiosRelacionados() {
-        return sitiosRelacionados;
-    }
-
-    public void setSitiosRelacionados(List<SitioWebDTO> sitiosRelacionados) {
-        this.sitiosRelacionados = sitiosRelacionados;
-    }
-
-    public List<AdministradorDTO> getSoportes() {
-        return soportes;
-    }
-
-    public void setSoportes(List<AdministradorDTO> soportes) {
-        this.soportes = soportes;
-    }
 
     public AdministradorDTO getResponsable() {
         return responsable;
@@ -147,104 +219,6 @@ public class SitioWebDTO  implements Serializable{
     public void setResponsable(AdministradorDTO responsable) {
         this.responsable = responsable;
     }
-
-	/**
-	 * nombre del sitio web
-         * nomre != "" && nombre !=null
-	 */
-	private String nombre;
-
-	/**
-	 * descripcion del sitio
-         */
-	private String descripcion;
-
-	/**
-	 * proposito del sitio
-	 */
-	
-	private String proposito;
-
-	/**
-	 * audiencia esperada del sitio web
-	 */
-	private long audienciaEsperada;
-
-	/**
-	 * fecha de publicacion del sitio web
-	 */
-	private Date fechaLanzamiento;
-
-	/**
-	 * Categoria a la cual pertenece el sitio
-	 */
-	private Categoria categoriaSitio;
-
-	/**
-	 * ruta a la imagen representativa del sitio
-	 */
-	
-	private String imagen;
-
-	/**
-	 * estado actual del sitio web
-	 */
-	
-	private EstadoWebDTO EstadoActual;
-
-	/**
-	 * historial completo de estados que ha tenido este sitio
-	 */
-	private List<EstadoWebDTO> historialDeEstados;
-
-	/**
-	 * Lugar donde se encuentra desplegado el sitio web
-	 */
-	private PlataformaDeDespliegueDTO plataformaDeDespliegue;
-
-	/**
-	 * Tecnologias usadas en el desarrollo del sitio
-	 */
-	private List<TecnologiaDTO> tecnologiasDeDesarrollo;
-
-	/**
-	 * Personas que solicitaron el sitio web
-	 */
-	private List<AdministradorDTO> solicitantes;
-
-	/**
-	 * Sitios web que estan asociados a este
-	 */
-	private List<SitioWebDTO> sitiosRelacionados;
-
-	/**
-	 * Personas encargadas del soporte del sitio
-	 */
-	private List<AdministradorDTO> soportes;
-
-	/**
-	 * Responsable del sitio web
-	 */
-	private AdministradorDTO responsable;
-    
-        /**
-         * Categoria que puede tener un sitio web
-         */
-        public enum Categoria
-        {
-            Administrativo,
-            Informativo,
-            Academico,
-            Otros
-        }
-        
-        
-        /**
-         * Constructor por defecto
-         */
-        public SitioWebDTO()
-        {
-        }
 
         
         
