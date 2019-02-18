@@ -6,8 +6,11 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.TecnologiaDTO;
+import co.edu.uniandes.csw.sitios.ejb.TecnologiaLogic;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
@@ -26,6 +29,9 @@ import javax.ws.rs.Produces;
 public class TecnologiaResource {
     
     private static final Logger LOGGER = Logger.getLogger(TecnologiaResource.class.getName());
+    
+    @Inject
+    private TecnologiaLogic technologyLogic;
     /**
     * Creates a new website technology.
     * @param tecnologia to be created. tecnologia!=null.
@@ -34,7 +40,10 @@ public class TecnologiaResource {
     @POST
     public TecnologiaDTO createTechnology(TecnologiaDTO tecnologia)
     {
-        return tecnologia;
+        LOGGER.log(Level.INFO, "TecnologiaResource createTechnology: input: {0}", tecnologia);
+        TecnologiaDTO tecnologiaDTO = new TecnologiaDTO(technologyLogic.createTechnology(tecnologia.toEntity()));
+        LOGGER.log(Level.INFO, "TecnologiaResource createTechnology: output: {0}", tecnologiaDTO);
+        return tecnologiaDTO;
     }
     /**
      * Updates the information of a given technology.
