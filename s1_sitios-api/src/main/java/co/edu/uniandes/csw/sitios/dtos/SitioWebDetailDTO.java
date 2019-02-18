@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity;
 
@@ -93,7 +94,7 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
         }
         if(soportes!=null)
         {
-            List<AdministradorEntity> suppEntity= new ArrayList<>();
+            List<AdministradorEntity> admEntity= new ArrayList<>();
             for(AdministradorDTO adms: soportes)
             {
                 admEntity.add(adms.toEntity());
