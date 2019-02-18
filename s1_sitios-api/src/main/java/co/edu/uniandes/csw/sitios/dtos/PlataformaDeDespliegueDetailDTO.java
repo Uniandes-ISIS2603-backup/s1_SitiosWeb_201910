@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +17,7 @@ public class PlataformaDeDespliegueDetailDTO extends PlataformaDeDespliegueDTO {
 * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
 * plataforma de Despliegue    
 */
-private List<SitioWebDTO> sitiosWeb;
+private ArrayList<SitioWebDTO> sitiosWeb;
 
 /*
 * Constructor vacio de plataformaDeDespliegueDetailDTO
