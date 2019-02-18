@@ -57,6 +57,7 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      */
     @PodamExclude
     @ManyToMany
+    //TODO CERTIFICATE THIS
     private EstadoWebEntity cambioSitio;
     
     /**
