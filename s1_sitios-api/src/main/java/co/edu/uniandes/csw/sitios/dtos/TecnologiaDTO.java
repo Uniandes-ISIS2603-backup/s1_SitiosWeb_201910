@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity;
 import java.io.Serializable;
 
 /**
@@ -12,7 +13,7 @@ import java.io.Serializable;
  * @author estudiante
  */
 public class TecnologiaDTO implements Serializable{
-    
+       
     /*
     *Name of the technology
     */
@@ -29,13 +30,33 @@ public class TecnologiaDTO implements Serializable{
     *Technology official website
     */
     private String url;
+    /*
+    *Technology Type
+    */
+    private String techCategory;
     
     /*
     *Constructor
     */
-    public TecnologiaDTO()
+    public TecnologiaDTO(TecnologiaEntity entity)
     {
-        
+      if(entity != null) {
+     
+        this.name=entity.getName();
+        this.version=entity.getVersion();
+        this.url=entity.getUrl();
+        this.techCategory=entity.getTechCategory();
+      }
+    }
+    public TecnologiaEntity toEntity()
+    {
+        TecnologiaEntity entity = new TecnologiaEntity();
+        entity.setName(name);
+        entity.setVersion(version);
+        entity.setDescription(descripcion);
+        entity.setUrl(url);
+        entity.setTechCategory(techCategory);
+        return entity;
     }
     /**
      * @return the name

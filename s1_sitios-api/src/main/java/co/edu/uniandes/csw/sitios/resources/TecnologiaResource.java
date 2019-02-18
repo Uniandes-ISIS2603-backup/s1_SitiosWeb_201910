@@ -43,7 +43,7 @@ public class TecnologiaResource {
      * @return technology with updated information.
      */
     @PUT
-    public TecnologiaDTO updateTechnology(TecnologiaDTO tecnologia, Long id)
+    public TecnologiaDTO updateTechnology(TecnologiaDTO tecnologia)
     {
         return tecnologia;
     }

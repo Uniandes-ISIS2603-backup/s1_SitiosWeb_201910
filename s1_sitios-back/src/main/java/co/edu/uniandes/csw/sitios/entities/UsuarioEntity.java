@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.sitios.dtos;
+package co.edu.uniandes.csw.sitios.entities;
 
-import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
-import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.Entity;
 
 /**
- * UsuarioDTO implementa Serializable
+ *
  * @author estudiante
  */
-public class UsuarioDTO extends PersonaDTO implements Serializable{
-    
+@Entity
+public class UsuarioEntity extends PersonaEntity{
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
+   
     /**
      * nombre de usuario, String != ("" y null)
      */
@@ -30,32 +31,18 @@ public class UsuarioDTO extends PersonaDTO implements Serializable{
     /**
      * Constructor UsuarioDTO vacio
      */
-    public UsuarioDTO(){
+    public UsuarioEntity(){
          
     }
     
-    /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
-     * @param entity != null
+     /**
+     * Collecion de tickets
      */
-    public UsuarioDTO( UsuarioEntity entity ){
-        if(entity != null) {
-            this.id = entity.id;
-        }
-    }
-    
-    /**
-     * Chequeo de la implementacion toEntity del DTO
-     * @return UsuarioEntity
-     */
-    @Override
-    public UsuarioEntity toEntity() {
-        UsuarioEntity entity = new UsuarioEntity();
-        entity.setNumeroTickets(this.numeroTickets);
-        entity.setUserName(this.userName);
-        return entity;
-    }
+    @javax.persistence.OneToMany(
+      //  mappedBy = "usuario", //verificar.
+        fetch = javax.persistence.FetchType.LAZY
+    )
+    private Collection<TicketEntity> tickets;
 
     /**
      * @return the userName
@@ -84,6 +71,19 @@ public class UsuarioDTO extends PersonaDTO implements Serializable{
     public void setNumeroTickets(Integer numeroTickets) {
         this.numeroTickets = numeroTickets;
     }
-  
+
+    /**
+     * @return the tickets
+     */
+    public Collection<TicketEntity> getTickets() {
+        return tickets;
+    }
+
+    /**
+     * @param tickets the tickets to set
+     */
+    public void setTickets(Collection<TicketEntity> tickets) {
+        this.tickets = tickets;
+    }
     
 }

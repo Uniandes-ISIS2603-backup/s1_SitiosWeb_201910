@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.PersonaEntity;
 import java.io.Serializable;
 
 /**
@@ -13,7 +14,7 @@ import java.io.Serializable;
  */
 public class PersonaDTO implements Serializable{
     
-    protected long id;
+    protected Long id;
     
     protected String nombre;
     
@@ -21,17 +22,43 @@ public class PersonaDTO implements Serializable{
     
     protected String password;
     
-    protected long telefono;
+    protected Long telefono;
 
     public PersonaDTO()
     {
+        
     }
     
-    public long getId() {
+    /**
+     * Constructor que se usa para checkear la entidad
+     * del DTO
+     * @param entity != null
+     */
+    public PersonaDTO( PersonaEntity entity ){
+        if(entity != null) {
+            this.nombre = entity.getNombre();
+        }
+    }
+    
+    /**
+     * Chequeo de la implementacion toEntity del DTO
+     * @return PersonaEntity
+     */
+    public PersonaEntity toEntity() {
+        PersonaEntity entity = new PersonaEntity();
+        entity.setNombre(this.nombre);
+        entity.setEmail(this.email);
+        entity.setId(this.id);
+        entity.setPassword(this.password);
+        entity.setTelefono(this.telefono);
+        return entity;
+    }
+    
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -59,11 +86,11 @@ public class PersonaDTO implements Serializable{
         this.password = password;
     }
 
-    public long getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
     
