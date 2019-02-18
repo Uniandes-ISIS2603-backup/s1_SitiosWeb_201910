@@ -18,10 +18,6 @@ public class PersonaEntity extends BaseEntity {
     // Atributos---------------------------
     //-------------------------------------
     
-    /**
-     * Atributo de identidad de la persona
-     */
-    public Long id;
     
     /**
      * Atributo de nombre de la persona
@@ -47,20 +43,6 @@ public class PersonaEntity extends BaseEntity {
      * Constructor PersonaEntity vacio
      */
     public PersonaEntity() {
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**

@@ -11,11 +11,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Albert Molano
  */
+@Entity
 public class NotificacionEntity extends BaseEntity implements Serializable {
 
     public PersonaEntity getNotificado() {
@@ -49,22 +51,21 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      * Persona a la cual se debe notificar
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToOne
     private PersonaEntity notificado;
     
     /**
      * nuevo estado al cual se cambio el sitio web
      */
     @PodamExclude
-    @ManyToMany
-    //TODO CERTIFICATE THIS
+    @ManyToOne
     private EstadoWebEntity cambioSitio;
     
     /**
      * Sitio en el cual se presento el cambio
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToOne
     private SitioWebEntity sitioWeb;
    
 }
