@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
-import co.edu.uniandes.csw.sitios.dtos.PlataformaDeDespliegueDTO;
 import java.io.Serializable;
 
 /**
@@ -58,7 +57,7 @@ public TipoHostingDTO(){
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-
+    
     /**
      * @return the plataformaDeDespliegue
      */
