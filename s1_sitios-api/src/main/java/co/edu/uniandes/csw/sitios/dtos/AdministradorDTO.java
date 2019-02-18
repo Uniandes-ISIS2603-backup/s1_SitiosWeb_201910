@@ -5,13 +5,16 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import java.io.Serializable;
 
 /**
  * AdministradorDTO implementa Serializable
  * @author estudiante
  */
-public class AdministradorDTO implements Serializable{
+public class AdministradorDTO extends PersonaDTO implements Serializable {
+
+    
     
     //-------------------------------------
     // Atributos---------------------------
@@ -21,7 +24,7 @@ public class AdministradorDTO implements Serializable{
      * Nivel que tiene un administrador, 
      * nivel = {1, 2, 3, 4, 5}
      */
-    private int nivel;
+    private Integer nivel;
     
     /**
      * Nombre del cargo del administrador.
@@ -44,11 +47,35 @@ public class AdministradorDTO implements Serializable{
     public AdministradorDTO() {
     }
 
+    /**
+     * Constructor que se usa para checkear la entidad
+     * del DTO
+     * @param entity != null
+     */
+    public AdministradorDTO( AdministradorEntity entity ){
+        if(entity != null) {
+            this.id = entity.id;
+        }
+    }
+    
+    /**
+     * Chequeo de la implementacion toEntity del DTO
+     * @return AdministradorEntity
+     */
+    public AdministradorEntity toEntity() {
+        AdministradorEntity entity = new AdministradorEntity();
+        entity.setBitacora(this.bitacora.toEntity());
+        entity.setDependencia(this.dependencia.toEntity()); 
+        entity.setNivel(this.nivel);
+        entity.setNombreCargo(this.nombreCargo);
+        entity.setId(this.id);
+        return entity;
+    }
     
     /**
      * @return the nivel
      */
-    public int getNivel() {
+    public Integer getNivel() {
         return nivel;
     }
 
@@ -88,17 +115,17 @@ public class AdministradorDTO implements Serializable{
     }
 
     /**
-     * @return the evento
+     * @return the bitacora
      */
-    public EventoDTO getEvento() {
+    public EventoDTO getBitacora() {
         return bitacora;
     }
 
     /**
-     * @param evento the evento to set
+     * @param bitacora the bitacora to set
      */
-    public void setEvento(EventoDTO evento) {
-        this.bitacora = evento;
+    public void setBitacora(EventoDTO bitacora) {
+        this.bitacora = bitacora;
     }
     
 }

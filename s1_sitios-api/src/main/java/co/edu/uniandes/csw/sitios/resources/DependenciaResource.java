@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.DependenciaDTO;
+import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -16,6 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -30,16 +32,21 @@ public class DependenciaResource {
 
         
         /**
-     * Permite dar un Dependencia segun su Id.
-     * @param id : Numero entero, id con
-     * el cual se identifica una Dependencia
-     * @return DependenciaDTO. 
-     */
-    @GET
-        @Path("{id: \\d+}")
-    public DependenciaDTO getDependencia( @PathParam("id") int id ){
-        return null;
-    }
+//     * Permite dar un Dependencia segun su Id.
+//     * @param id : Numero entero, id con
+//     * el cual se identifica una Dependencia
+//     * @return DependenciaDTO. 
+//     */
+//    @GET
+//        @Path("{id: \\d+}")
+//    public DependenciaDTO getDependencia( @PathParam("id") int id ){
+//        return null;
+////        DependenciaEntity entity = logic.getDependencia(id);
+////        if(entity == null) {
+////            throw new WebApplicationException("Dependencia with id: " + id + " does not exists", 404);
+////        }
+////        return null;
+//    }
     
     /**
      * Actualiza un Dependencia dado un id,
@@ -51,6 +58,7 @@ public class DependenciaResource {
     @PUT
         @Path("{id: \\d+}")
     public DependenciaDTO updateDependencia(  @PathParam("id") int id, DependenciaDTO dependencia ){
+        
         return null;
     }
     

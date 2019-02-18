@@ -3,18 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.sitios.dtos;
+package co.edu.uniandes.csw.sitios.entities;
 
-import co.edu.uniandes.csw.sitios.entities.TicketEntity;
-import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
 
 /**
- * TicketDTO implementa Serializable
+ *
  * @author estudiante
  */
-public class TicketDTO implements Serializable{
+@Entity
+public class TicketEntity extends BaseEntity{
 
+    /**
+     * @return the usuarioEntity
+     */
+    public UsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
+    /**
+     * @param usuarioEntity the usuarioEntity to set
+     */
+    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+        this.usuarioEntity = usuarioEntity;
+    }
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
@@ -37,34 +50,18 @@ public class TicketDTO implements Serializable{
     private Integer estado; //Solo 3 estados
     
     /**
-     * Constructor TicketDTO vacio
+     * 
      */
-    public TicketDTO() {
-    }
-    
+    @javax.persistence.ManyToOne(
+    )
+    private UsuarioEntity usuarioEntity;
+
     /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
-     * @param entity != null
+     * Constructor TicketEntity vacio
      */
-    public TicketDTO( TicketEntity entity ){
-        if(entity != null) {
-            this.descripcion = entity.getDescripcion();
-        }
+    public TicketEntity() {
     }
-    
-    /**
-     * Chequeo de la implementacion toEntity del DTO
-     * @return TicketEntity
-     */
-    public TicketEntity toEntity() {
-        TicketEntity entity = new TicketEntity();
-        entity.setDescripcion(this.descripcion);
-        entity.setEstado(this.estado);
-        entity.setFecha(this.fecha);
-        return entity;
-    }
-    
+
     /**
      * @return the descripcion
      */
@@ -103,8 +100,7 @@ public class TicketDTO implements Serializable{
     /**
      * @param estado the estado to set
      */
-    public void setEstado(int estado) {
+    public void setEstado(Integer estado) {
         this.estado = estado;
     }
-    
 }

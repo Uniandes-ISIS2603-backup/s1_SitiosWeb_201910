@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
 import java.io.Serializable;
 
 /**
@@ -20,7 +21,7 @@ public class DependenciaDTO implements Serializable{
     /**
      * id de la dependencia, id>0.
      */
-    private int id;
+    private Long id;
     
     /**
      * nombre de la dependencia.
@@ -35,7 +36,7 @@ public class DependenciaDTO implements Serializable{
     /**
      * telefono de la dependencia
      */
-    private int telefono;
+    private Integer telefono;
     
     /**
      * Persona a cargo de la dependencia
@@ -49,16 +50,40 @@ public class DependenciaDTO implements Serializable{
     }
 
     /**
+     * Constructor que se usa para checkear la entidad
+     * del DTO
+     * @param entity != null
+     */
+    public DependenciaDTO( DependenciaEntity entity ){
+        if(entity != null) {
+            this.id = entity.id;
+        }
+    }
+    
+    /**
+     * Chequeo de la implementacion toEntity del DTO
+     * @return DependenciaEntity
+     */
+    public DependenciaEntity toEntity() {
+        DependenciaEntity entity = new DependenciaEntity();
+        entity.setEmail(this.email);
+        entity.setId(this.id);
+        entity.setNombreDependencia(this.nombreDependencia);
+        entity.setTelefono(this.telefono);
+        return entity;
+    }
+    
+    /**
      * @return the id
      */
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -93,14 +118,14 @@ public class DependenciaDTO implements Serializable{
     /**
      * @return the telefono
      */
-    public int getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(int telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 
