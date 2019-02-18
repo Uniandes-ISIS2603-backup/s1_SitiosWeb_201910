@@ -6,10 +6,13 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.SitioWebDTO;
+import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -27,6 +30,8 @@ public class SitioWebResource {
     
     private static final Logger LOGGER = Logger.getLogger(SitioWebResource.class.getName());
     
+    @Inject
+    private SitioWebLogic sitelogic;
      /**
      * Crea un sitio web con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -41,10 +46,11 @@ public class SitioWebResource {
      */
     @POST
     public SitioWebDTO createWebSite(SitioWebDTO website)throws BusinessLogicException {
-    
         LOGGER.log(Level.INFO, "SitioWebResource createWebsite: input: {0}", website.toString());
-        SitioWebDTO nuevoSitio = null;
-        return website;
+        SitioWebEntity entity = website.toEntity();
+        SitioWebEntity nuevoSitioEntity = sitelogic.createWebSite(entity);
+        SitioWebDTO nuevoSitioDTO= new SitioWebDTO(entity);
+        return nuevoSitioDTO;
     }
     
 }
