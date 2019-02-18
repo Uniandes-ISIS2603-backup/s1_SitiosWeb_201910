@@ -24,7 +24,7 @@ public class SitioWebPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(SitioWebPersistence.class.getName());
     
-     @PersistenceContext(unitName = "sitesPU")
+    @PersistenceContext(unitName = "sitiosPU")
     protected EntityManager em;
      
     public SitioWebEntity create(SitioWebEntity editorialEntity) {

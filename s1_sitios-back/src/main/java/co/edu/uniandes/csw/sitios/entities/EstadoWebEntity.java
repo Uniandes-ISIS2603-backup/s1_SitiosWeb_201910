@@ -2,15 +2,14 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
 
+@Entity
 public class EstadoWebEntity extends BaseEntity implements Serializable {
     //__________________________________________________________________________
     // Atributos
     //__________________________________________________________________________
-    /**
-     * id de un estado web
-     */
-    private Long id;
+   
     /**
      * represnta el estado del sitio web
      */
@@ -26,16 +25,7 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
      */
     private Date fechaCambio;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+ 
     public String getDescripcion() {
         return descripcion;
     }

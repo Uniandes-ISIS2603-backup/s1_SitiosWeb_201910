@@ -14,11 +14,13 @@ import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
 
 /**
  *
  * @author estudiante
  */
+@Entity
 public class SitioWebEntity extends BaseEntity implements Serializable{
     
     

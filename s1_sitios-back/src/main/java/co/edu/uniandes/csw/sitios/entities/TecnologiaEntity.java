@@ -7,11 +7,13 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Entity;
 
 /**
  *
  * @author amezq
  */ 
+@Entity
 public class TecnologiaEntity extends BaseEntity implements Serializable{
 
        
@@ -42,7 +44,7 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     private List<SitioWebEntity> sitiosWebList;
     
     @javax.persistence.ManyToMany(
-        mappedBy = "tecnologiasDeDesorrollo",
+       // mappedBy = "tecnologiasDeDesorrollo",
         fetch = javax.persistence.FetchType.LAZY
     )
     private List<SitioWebEntity> sitiosWeb;

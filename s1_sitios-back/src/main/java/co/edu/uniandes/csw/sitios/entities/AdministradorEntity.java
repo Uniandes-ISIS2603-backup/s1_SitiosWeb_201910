@@ -45,13 +45,15 @@ public class AdministradorEntity extends PersonaEntity{
      * Collecion de notificaciones
      */
     @javax.persistence.OneToMany(
-        mappedBy = "administrador", //verificar.
+       // mappedBy = "administrador", //verificar.
         fetch = javax.persistence.FetchType.LAZY
     )
     private Collection<NotificacionEntity> notificaciones;
     
      @javax.persistence.ManyToOne(
     )
+     
+    
     private SitioWebEntity sitioWebEntity; //Verificar
     
     /**
