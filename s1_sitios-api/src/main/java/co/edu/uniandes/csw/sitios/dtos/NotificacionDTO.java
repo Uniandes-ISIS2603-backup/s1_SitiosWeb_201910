@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import java.io.Serializable;
 
 /**
@@ -17,13 +18,14 @@ public class NotificacionDTO  implements Serializable{
     /**
      * identificador unico de la notificacion dentro del sitio web
      */
-    private long id;
+    private Long id;
             
     /**
      * Persona a la cual se debe notificar
      */
     private PersonaDTO notificado;
-    
+
+   
     /**
      * nuevo estado al cual se cambio el sitio web
      */
@@ -34,12 +36,21 @@ public class NotificacionDTO  implements Serializable{
      */
     private SitioWebDTO sitioWeb;
     
-    public NotificacionDTO()
+    public NotificacionDTO(NotificacionEntity entity)
     {
+        if(entity!=null)
+        {
+        this.id=entity.getId();
+        }
     }
     
-    
-    public long getId() {
+    public NotificacionEntity toEntity()
+    {
+        NotificacionEntity entity= new NotificacionEntity();
+        entity.setId(this.id);
+        return entity;
+    }
+    public Long getId() {
         return id;
     }
 
@@ -62,6 +73,15 @@ public class NotificacionDTO  implements Serializable{
     public void setSitioWeb(SitioWebDTO sitioWeb) {
         this.sitioWeb = sitioWeb;
     }
+
+    public PersonaDTO getNotificado() {
+        return notificado;
+    }
+
+    public void setNotificado(PersonaDTO notificado) {
+        this.notificado = notificado;
+    }
+    
     
     
 }
