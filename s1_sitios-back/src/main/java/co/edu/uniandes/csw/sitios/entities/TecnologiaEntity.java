@@ -57,111 +57,59 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
         
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the version
-     */
     public String getVersion() {
         return version;
     }
 
-    /**
-     * @param version the version to set
-     */
     public void setVersion(String version) {
         this.version = version;
     }
 
-    /**
-     * @return the descripcion
-     */
-    public String getDescripcion() {
+    public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description the descripcion to set
-     */
     public void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     * @return the url
-     */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * @param url the url to set
-     */
     public void setUrl(String url) {
         this.url = url;
     }
 
-    /**
-     * @return the techCategory
-     */
-    public String getTipoDeTecnologia() {
+    public String getTechCategory() {
         return techCategory;
     }
 
-    /**
-     * @param techCategory the techCategory to set
-     */
-    public void setTipoDeTecnologia(String techCategory) {
+    public void setTechCategory(String techCategory) {
         this.techCategory = techCategory;
     }
-    
-    /**
-    *@return List of websites associated with this technology
-    */
-    public List<SitioWebEntity> getSitiosWeb()
-    {
+
+    public List<SitioWebEntity> getSitiosWebList() {
         return sitiosWebList;
     }
-    
-    /**
-    *@return the number of websites associated with this technology
-    */
-    public Integer getCantidadSitiosWeb()
-    {
-        return sitiosWebList.size();
+
+    public void setSitiosWebList(List<SitioWebEntity> sitiosWebList) {
+        this.sitiosWebList = sitiosWebList;
     }
-    
-    /**
-     * @param newSitioWeb: Website to be added
-     * @return true or false if the website was succesfully added.
-     */
-    
-    public boolean agregarSitioWeb(SitioWebEntity sitioWeb)
-    {
-        sitiosWebList.add(sitioWeb);
-        return true;
+
+    public List<SitioWebEntity> getSitiosWeb() {
+        return sitiosWeb;
     }
-    
-     /**
-     * @param deleteSitioWeb: Website to be deleted
-     * @return true or false if the website was succesfully deleted.
-     */
-    
-    public boolean borrarSitioWeb(SitioWebEntity deleteSitioWeb)
-    {
-        sitiosWebList.remove(deleteSitioWeb);
-        return true;
+
+    public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
     }
 }
