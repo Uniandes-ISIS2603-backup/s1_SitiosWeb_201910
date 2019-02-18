@@ -47,7 +47,6 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     public UsuarioEntity toEntity() {
         UsuarioEntity entity = new UsuarioEntity();
         entity.setTickets(tickets);
-        int a = 3;
         return entity;
     }
     
