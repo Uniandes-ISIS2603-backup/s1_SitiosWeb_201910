@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
+import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.NotificacionPersistence;
+
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -24,8 +27,29 @@ public class NotificacionLogic {
     
     
     
-    public NotificacionEntity createNotification(NotificacionEntity entity)
-    {
-        return entity;
+    public NotificacionEntity createNotification(NotificacionEntity entity)throws  BusinessLogicException{
+        if (entity.getNotificado() == null)
+        {
+            throw  new BusinessLogicException("Notificado no existente");
+        }
+
+        return persistence.create(entity);
     }
+
+    public NotificacionEntity getNotificacion(Long id) throws  BusinessLogicException{
+
+        NotificacionEntity entity = persistence.find(id);
+        if(entity==null)
+        {
+            throw  new BusinessLogicException("No encontrado");
+        }
+        return  entity;
+    }
+
+    public List<NotificacionEntity> getAll()throws  BusinessLogicException
+    {
+        List<NotificacionEntity> sites =persistence.findAll();
+        return sites;
+    }
+
 }

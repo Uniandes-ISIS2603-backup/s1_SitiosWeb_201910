@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.sitios.ejb;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.SitioWebPersistence;
+
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -29,8 +31,23 @@ public class SitioWebLogic {
            {
                throw new BusinessLogicException("Imagen invalida");
            }
-            persistence.create(entity);
-           return entity;
+           return persistence.create(entity);
+
        }
-    
+
+       public SitioWebEntity getWebSite(Long id) throws  BusinessLogicException
+       {
+           SitioWebEntity entity = persistence.find(id);
+           if(entity==null)
+           {
+               throw  new BusinessLogicException("No encontrado");
+           }
+           return  entity;
+
+       }
+
+    public List<SitioWebEntity> getSites() {
+           List<SitioWebEntity> sites =persistence.findAll();
+           return sites;
+    }
 }
