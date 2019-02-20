@@ -45,7 +45,6 @@ public class DateStrategy implements AttributeStrategy<Date> {
       try {
           r=SecureRandom.getInstanceStrong();
       } catch (NoSuchAlgorithmException e) {
-          e.printStackTrace();
       }
   }
 
