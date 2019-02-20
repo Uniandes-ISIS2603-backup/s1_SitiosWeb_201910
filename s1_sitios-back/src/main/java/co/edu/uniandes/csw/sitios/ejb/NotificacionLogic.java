@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.NotificacionPersistence;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -32,6 +33,14 @@ public class NotificacionLogic {
         {
             throw  new BusinessLogicException("Notificado no existente");
         }
+        if (entity.getCambioSitio()== null)
+        {
+            throw  new BusinessLogicException("Cambio no existente");
+        }
+        if (entity.getSitioWeb()==null)
+        {
+              throw  new BusinessLogicException("Sitio no existente");
+        }
 
         return persistence.create(entity);
     }
@@ -50,6 +59,20 @@ public class NotificacionLogic {
     {
         List<NotificacionEntity> sites =persistence.findAll();
         return sites;
+    }
+  
+  
+  public void deleteNotificacion(Long notID) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar La notificaion con id = {0}", notID);
+        persistence.delete(notID);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la notificacion con id = {0}", notID);
+    }
+  
+   public NotificacionEntity updateNotificacion(Long booksId, NotificacionEntity entity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el libro con id = {0}", booksId);
+        NotificacionEntity newEntity = persistence.update(entity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar el libro con id = {0}", entity.getId());
+        return newEntity;
     }
 
 }
