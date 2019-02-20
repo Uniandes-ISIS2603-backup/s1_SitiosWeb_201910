@@ -38,24 +38,12 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     */
     private String techCategory;
     
-    /*
-    *List of websites associated to this technology
-    */
-    private List<SitioWebEntity> sitiosWebList;
-    
     @javax.persistence.ManyToMany(
        // mappedBy = "tecnologiasDeDesorrollo",
         fetch = javax.persistence.FetchType.LAZY
     )
     private List<SitioWebEntity> sitiosWeb;
     
-    /*
-    *Constructor
-    */
-    public TecnologiaEntity()
-    {
-        
-    }
 
     public String getName() {
         return name;
@@ -95,14 +83,6 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
 
     public void setTechCategory(String techCategory) {
         this.techCategory = techCategory;
-    }
-
-    public List<SitioWebEntity> getSitiosWebList() {
-        return sitiosWebList;
-    }
-
-    public void setSitiosWebList(List<SitioWebEntity> sitiosWebList) {
-        this.sitiosWebList = sitiosWebList;
     }
 
     public List<SitioWebEntity> getSitiosWeb() {

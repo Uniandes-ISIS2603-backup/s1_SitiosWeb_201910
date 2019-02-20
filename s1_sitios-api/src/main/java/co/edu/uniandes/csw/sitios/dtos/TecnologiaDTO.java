@@ -33,11 +33,19 @@ public class TecnologiaDTO implements Serializable{
     /*
     *Technology Type
     */
-    private String techCategory;
+    private String techCategory;    
+    /*
+    *Technology Id
+    */
+    private Long id;
     
     /*
     *Constructor
     */
+    public TecnologiaDTO()
+    {
+        
+    }
     public TecnologiaDTO(TecnologiaEntity entity)
     {
       if(entity != null) {
@@ -112,5 +120,19 @@ public class TecnologiaDTO implements Serializable{
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

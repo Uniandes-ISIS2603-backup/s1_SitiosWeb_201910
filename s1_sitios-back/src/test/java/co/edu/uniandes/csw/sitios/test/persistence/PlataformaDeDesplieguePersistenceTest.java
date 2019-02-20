@@ -52,7 +52,7 @@ public class PlataformaDeDesplieguePersistenceTest {
     
     @Test
     public void createPlataformaDeDespliegueTest() {
-/*
+
         PodamFactory factory = new PodamFactoryImpl();
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
 
@@ -66,7 +66,7 @@ public class PlataformaDeDesplieguePersistenceTest {
         
         //El nombre aleatorio pp dado el metodo inject
         Assert.assertEquals(newEntity.getIp(), entity.getIp());
-*/
+
     }
 
 }

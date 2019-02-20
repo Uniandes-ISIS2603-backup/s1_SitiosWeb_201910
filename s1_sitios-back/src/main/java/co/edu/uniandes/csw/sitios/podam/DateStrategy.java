@@ -28,6 +28,8 @@ import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import uk.co.jemos.podam.common.AttributeStrategy;
 
 /**
@@ -40,12 +42,13 @@ public class DateStrategy implements AttributeStrategy<Date> {
 
     private Random r;
 
+      private static final Logger LOGGER = Logger.getLogger(DateStrategy.class.getName());
   public DateStrategy()
   {
       try {
           r=SecureRandom.getInstanceStrong();
       } catch (NoSuchAlgorithmException e) {
-          e.printStackTrace();
+          LOGGER.log(Level.WARNING,e.getMessage());
       }
   }
 
