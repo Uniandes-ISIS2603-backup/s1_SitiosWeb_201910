@@ -39,7 +39,7 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     private String techCategory;
     
     @javax.persistence.ManyToMany(
-       // mappedBy = "tecnologiasDeDesorrollo",
+        mappedBy = "tecnologiasDeDesorrollo",
         fetch = javax.persistence.FetchType.LAZY
     )
     private List<SitioWebEntity> sitiosWeb;

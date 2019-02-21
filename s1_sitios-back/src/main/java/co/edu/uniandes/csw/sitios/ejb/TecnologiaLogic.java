@@ -34,9 +34,9 @@ public class TecnologiaLogic {
      * @return Objeto de TecnologiaEntity con los datos nuevos y su ID.
      */
     public TecnologiaEntity createTechnology(TecnologiaEntity tecnologiaEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación del autor");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la tecnologia");
         TecnologiaEntity newTecnologiaEntity = persistence.create(tecnologiaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación del autor");
+        LOGGER.log(Level.INFO, "Termina proceso de creación de la tecnologia");
         return newTecnologiaEntity;
     }
 
@@ -89,12 +89,12 @@ public class TecnologiaLogic {
      * @throws BusinessLogicException si la tecnología tiene libros sitiosWeb asociados.
      */
     public void deleteTechnology(Long tecnologiaId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el autor con id = {0}", tecnologiaId);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la tecnologia con id = {0}", tecnologiaId);
         List<SitioWebEntity> sitios = getTechnology(tecnologiaId).getSitiosWeb();
         if (sitios != null && !sitios.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el autor con id = " + tecnologiaId + " porque tiene sitiosWeb asociados");
+            throw new BusinessLogicException("No se puede borrar la tecnologia con id = " + tecnologiaId + " porque tiene sitiosWeb asociados");
         }
         persistence.delete(tecnologiaId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", tecnologiaId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la tecnologia con id = {0}", tecnologiaId);
     }
 }
