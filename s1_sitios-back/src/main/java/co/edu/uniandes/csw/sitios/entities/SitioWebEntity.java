@@ -49,7 +49,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * fecha de publicacion del sitio web
 	 */
-    @Temporal(TemporalType.DATE)
+        @Temporal(TemporalType.DATE)
 	private Date fechaLanzamiento;
 
 	/**
@@ -67,44 +67,40 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * estado actual del sitio web
 	 */
 
-    @PodamExclude
-    @ManyToOne
+        @PodamExclude
+        @ManyToOne
 	private EstadoWebEntity EstadoActual;
 
 	/**
 	 * Lugar donde se encuentra desplegado el sitio web
 	 */
      //TODO asignar multiplicidad
-    @PodamExclude
-    @ManyToOne
+        @PodamExclude
+        @ManyToOne
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
     /**
      * Responsable del sitio web
      */
      //TODO asignar multiplicidad
-    @PodamExclude
-    @ManyToOne
+        @PodamExclude
+        @ManyToOne
     private AdministradorEntity responsable;
 
 
 	/**
 	 * historial completo de estados que ha tenido este sitio
 	 */
-    @PodamExclude
-    @ManyToMany
+        @PodamExclude
+        @ManyToMany
 	private List<EstadoWebEntity> historialDeEstados;
 
 
 	/**
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
-    @PodamExclude
-    @javax.persistence.ManyToMany(
-        mappedBy = "sitiosWeb",
-        fetch = javax.persistence.FetchType.LAZY
-    )
-	private List<TecnologiaEntity> tecnologiasDeDesarrollo;
+     @PodamExclude
+	private List<TecnologiaEntity> technologies;
 
     /**
      * Personas que solicitaron el sitio web
@@ -208,12 +204,12 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         this.plataformaDeDespliegue = plataformaDeDespliegue;
     }
 
-    public List<TecnologiaEntity> getTecnologiasDeDesarrollo() {
-        return tecnologiasDeDesarrollo;
+    public List<TecnologiaEntity> getTechnologies() {
+        return technologies;
     }
 
-    public void setTecnologiasDeDesarrollo(List<TecnologiaEntity> tecnologiasDeDesarrollo) {
-        this.tecnologiasDeDesarrollo = tecnologiasDeDesarrollo;
+    public void setTechnologies(List<TecnologiaEntity> technologies) {
+        this.technologies = technologies;
     }
 
     public List<AdministradorEntity> getSolicitantes() {
