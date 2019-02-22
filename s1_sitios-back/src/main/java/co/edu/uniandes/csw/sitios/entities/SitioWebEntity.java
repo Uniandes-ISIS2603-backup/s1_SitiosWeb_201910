@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -33,6 +34,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * descripcion del sitio
          */
+        @PodamExclude
 	private String descripcion;
 
 	/**
@@ -91,16 +93,16 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * historial completo de estados que ha tenido este sitio
 	 */
-        @PodamExclude
-        @ManyToMany
-	private List<EstadoWebEntity> historialDeEstados;
+    @PodamExclude
+    @ManyToMany
+    private List<EstadoWebEntity> historialDeEstados;
 
 
 	/**
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
-     @PodamExclude
-	private List<TecnologiaEntity> technologies;
+    @PodamExclude
+    private List<TecnologiaEntity> technologies;
 
     /**
      * Personas que solicitaron el sitio web
