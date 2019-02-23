@@ -16,6 +16,9 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
+import uk.co.jemos.podam.common.PodamLongValue;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -34,7 +37,8 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * descripcion del sitio
          */
-        @PodamExclude
+        
+        @PodamStringValue(length = 20)
 	private String descripcion;
 
 	/**
@@ -46,6 +50,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	/**
 	 * audiencia esperada del sitio web
 	 */
+        @PodamLongValue(minValue=0)
 	private long audienciaEsperada;
 
 	/**
@@ -253,10 +258,10 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
          */
         public enum Categoria
         {
-            Administrativo,
-            Informativo,
-            Academico,
-            Otros
+            administrativo,
+            informativo,
+            academico,
+            otros
         }
         
     
