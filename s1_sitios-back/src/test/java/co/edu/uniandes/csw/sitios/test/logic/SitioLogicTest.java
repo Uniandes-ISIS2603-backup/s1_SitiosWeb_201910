@@ -105,14 +105,17 @@ public class SitioLogicTest {
             tecsData.add(state);
         }
         for (int i = 0; i < 3; i++) {
-            SitioWebEntity entity = factory.manufacturePojo(SitioWebEntity.class);
-            entity.setSitiosRelacionados(data);
-            entity.setTechnologies(tecsData);
-            entity.setSoportes(peopleData);
-            entity.setSolicitantes(peopleData);
-            entity.setEstadoActual(stateData.get(0));
-            em.persist(entity);
-            data.add(entity);
+           SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+    newsite.setHistorialDeEstados(stateData);
+    newsite.setSitiosRelacionados(data);
+    newsite.setSolicitantes(peopleData);
+    newsite.setSoportes(peopleData);
+    newsite.setTechnologies(tecsData);
+    newsite.setEstadoActual(stateData.get(0));
+    newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+    newsite.setResponsable(peopleData.get(0));
+    em.persist(newsite);
+    data.add(newsite);
         }
     }
     
@@ -126,13 +129,23 @@ public class SitioLogicTest {
     newsite.setSoportes(peopleData);
     newsite.setTechnologies(tecsData);
     newsite.setEstadoActual(stateData.get(0));
-    try{
+    newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+    newsite.setResponsable(peopleData.get(0));
+    
+   try{
     SitioWebEntity entity=logic.createWebSite(newsite);
+    Assert.assertEquals(entity.getEstadoActual(),stateData.get((0)));
     }
     catch(BusinessLogicException e)
     {
         Assert.fail("no deberia generar error: "+e.getMessage());
     }
-         
+    catch(Exception e)
+    {   
+       
+        e.printStackTrace();
+        Assert.fail("no deberia generar error: "+e.getMessage());
+    }   
+        
     }
 }

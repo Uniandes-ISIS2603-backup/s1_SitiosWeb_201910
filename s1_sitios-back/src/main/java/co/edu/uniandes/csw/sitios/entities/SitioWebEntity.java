@@ -76,8 +76,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 */
 
 
-        @ManyToOne 
-        (cascade = CascadeType.PERSIST)
+        @ManyToOne
 	private EstadoWebEntity EstadoActual;
 
 	/**
@@ -85,8 +84,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 */
      //TODO asignar multiplicidad
         @PodamExclude
-        @ManyToOne
-        (cascade = CascadeType.PERSIST)
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
     /**
@@ -94,8 +91,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
      */
      //TODO asignar multiplicidad
         @PodamExclude
-        @ManyToOne 
-        (cascade = CascadeType.PERSIST)
     private AdministradorEntity responsable;
 
 
@@ -103,7 +98,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * historial completo de estados que ha tenido este sitio
 	 */
     @PodamExclude
-    @ManyToMany  (cascade = CascadeType.PERSIST)
     private List<EstadoWebEntity> historialDeEstados;
 
 
@@ -111,29 +105,33 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
     @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST)
+    @ManyToMany 
     private List<TecnologiaEntity> technologies;
 
     /**
      * Personas que solicitaron el sitio web
      */
     @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST)
+    @ManyToMany 
     private List<AdministradorEntity> solicitantes;
 
     /**
      * Sitios web que estan asociados a este
      */
     @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST)
+    @ManyToMany 
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**
      * Personas encargadas del soporte del sitio
      */
     @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST)
+    @ManyToMany 
     private List<AdministradorEntity> soportes;
+    
+    public SitioWebEntity()
+    {
+    }
 
 
     public String getNombre() {
