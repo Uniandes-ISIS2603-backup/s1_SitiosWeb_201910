@@ -9,7 +9,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -51,21 +50,21 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      * Persona a la cual se debe notificar
      */
     @PodamExclude
-    @OneToMany
+    @ManyToOne
     private PersonaEntity notificado;
     
     /**
      * nuevo estado al cual se cambio el sitio web
      */
     @PodamExclude
-    @OneToMany
+    @ManyToOne
     private EstadoWebEntity cambioSitio;
     
     /**
      * Sitio en el cual se presento el cambio
      */
     @PodamExclude
-    @ManyToOne
+    @OneToMany
     private SitioWebEntity sitioWeb;
    
 }

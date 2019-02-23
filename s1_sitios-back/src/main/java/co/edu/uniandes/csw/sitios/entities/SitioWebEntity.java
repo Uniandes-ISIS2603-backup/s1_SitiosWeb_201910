@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
@@ -86,6 +87,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 */
      //TODO asignar multiplicidad
         @PodamExclude
+        @ManyToOne
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
     /**
@@ -98,7 +100,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
     private AdministradorEntity responsable;
         
     @PodamExclude
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch=FetchType.LAZY)//(cascade = CascadeType.PERSIST)
     private NotificacionEntity notificacion;
 
     public NotificacionEntity getNotificacion() {
@@ -114,6 +116,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * historial completo de estados que ha tenido este sitio
 	 */
     @PodamExclude
+    @OneToMany
     private List<EstadoWebEntity> historialDeEstados;
 
 
