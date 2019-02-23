@@ -93,6 +93,8 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
      */
      //TODO asignar multiplicidad
         @PodamExclude
+        @ManyToOne 
+        (cascade = CascadeType.PERSIST)
     private AdministradorEntity responsable;
         
     @PodamExclude
