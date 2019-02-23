@@ -78,9 +78,10 @@ public class SitioLogicTest {
 
     private void clearData() {
         em.createQuery("delete from SitioWebEntity").executeUpdate();
+        em.createQuery("delete from TecnologiaEntity").executeUpdate();
         em.createQuery("delete from AdministradorEntity").executeUpdate();
         em.createQuery("delete from EstadoWebEntity").executeUpdate();
-        em.createQuery("delete from TecnologiaEntity").executeUpdate();
+        
     }
 
     /**
@@ -109,6 +110,7 @@ public class SitioLogicTest {
             entity.setTechnologies(tecsData);
             entity.setSoportes(peopleData);
             entity.setSolicitantes(peopleData);
+            entity.setEstadoActual(stateData.get(0));
             em.persist(entity);
             data.add(entity);
         }
@@ -123,6 +125,7 @@ public class SitioLogicTest {
     newsite.setSolicitantes(peopleData);
     newsite.setSoportes(peopleData);
     newsite.setTechnologies(tecsData);
+    newsite.setEstadoActual(stateData.get(0));
     try{
     SitioWebEntity entity=logic.createWebSite(newsite);
     }

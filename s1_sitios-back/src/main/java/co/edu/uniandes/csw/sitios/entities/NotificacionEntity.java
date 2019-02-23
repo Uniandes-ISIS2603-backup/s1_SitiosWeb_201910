@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 /**
@@ -51,21 +52,21 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      * Persona a la cual se debe notificar
      */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private PersonaEntity notificado;
     
     /**
      * nuevo estado al cual se cambio el sitio web
      */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private EstadoWebEntity cambioSitio;
     
     /**
      * Sitio en el cual se presento el cambio
      */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private SitioWebEntity sitioWeb;
    
 }

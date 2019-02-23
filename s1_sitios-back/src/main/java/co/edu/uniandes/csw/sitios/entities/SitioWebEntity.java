@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
@@ -74,8 +75,9 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * estado actual del sitio web
 	 */
 
-        @PodamExclude
-        @ManyToOne
+
+        @ManyToOne 
+        (cascade = CascadeType.PERSIST)
 	private EstadoWebEntity EstadoActual;
 
 	/**
@@ -84,6 +86,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
      //TODO asignar multiplicidad
         @PodamExclude
         @ManyToOne
+        (cascade = CascadeType.PERSIST)
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
     /**
@@ -91,7 +94,8 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
      */
      //TODO asignar multiplicidad
         @PodamExclude
-        @ManyToOne
+        @ManyToOne 
+        (cascade = CascadeType.PERSIST)
     private AdministradorEntity responsable;
 
 
@@ -99,7 +103,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * historial completo de estados que ha tenido este sitio
 	 */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany  (cascade = CascadeType.PERSIST)
     private List<EstadoWebEntity> historialDeEstados;
 
 
@@ -107,27 +111,28 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
     @PodamExclude
+    @ManyToMany (cascade = CascadeType.PERSIST)
     private List<TecnologiaEntity> technologies;
 
     /**
      * Personas que solicitaron el sitio web
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.PERSIST)
     private List<AdministradorEntity> solicitantes;
 
     /**
      * Sitios web que estan asociados a este
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.PERSIST)
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**
      * Personas encargadas del soporte del sitio
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.PERSIST)
     private List<AdministradorEntity> soportes;
 
 
@@ -250,12 +255,9 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
     public void setResponsable(AdministradorEntity responsable) {
         this.responsable = responsable;
     }
-
-
-    
-        /**
-         * Categoria que puede tener un sitio web
-         */
+      /**
+       * Categoria que puede tener un sitio web
+      */
         public enum Categoria
         {
             administrativo,
