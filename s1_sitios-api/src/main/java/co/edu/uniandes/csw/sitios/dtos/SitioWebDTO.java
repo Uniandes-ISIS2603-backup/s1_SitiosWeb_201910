@@ -78,6 +78,12 @@ public class SitioWebDTO  implements Serializable{
 	 */
 	private AdministradorDTO responsable;
     
+        
+          /*
+            * Relación a una notificacion
+            * dado que esta tiene cardinalidad 1.
+            */
+        private NotificacionDTO notificacion;
         /**
          * Categoria que puede tener un sitio web
          */
@@ -107,6 +113,10 @@ public class SitioWebDTO  implements Serializable{
                 this.proposito=entity.getProposito();
                 this.nombre=entity.getNombre();
                 this.fechaLanzamiento=entity.getFechaLanzamiento();
+                if(entity.getNotificacion()!=null)
+                {
+                    this.notificacion=new NotificacionDTO(entity.getNotificacion());
+                }
             }
         }
         
@@ -120,9 +130,22 @@ public class SitioWebDTO  implements Serializable{
             entity.setProposito(proposito);
             entity.setNombre(nombre);
             entity.setFechaLanzamiento(fechaLanzamiento);
+            entity.setNotificacion(notificacion.toEntity());
             return entity;
         }
 
+    public NotificacionDTO getNotificacion() {
+        return notificacion;
+    }
+
+    public void setNotificacion(NotificacionDTO notificacion) {
+        this.notificacion = notificacion;
+    }
+
+        
+        
+    
+        
     public Long getId() {
         return id;
     }

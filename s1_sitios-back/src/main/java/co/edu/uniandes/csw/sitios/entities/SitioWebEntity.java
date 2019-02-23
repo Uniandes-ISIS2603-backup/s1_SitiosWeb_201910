@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import uk.co.jemos.podam.common.PodamLongValue;
@@ -27,6 +28,7 @@ import uk.co.jemos.podam.common.PodamStringValue;
  */
 @Entity
 public class SitioWebEntity extends BaseEntity implements Serializable{
+    
     
     
     /**
@@ -92,6 +94,18 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
      //TODO asignar multiplicidad
         @PodamExclude
     private AdministradorEntity responsable;
+        
+    @PodamExclude
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private NotificacionEntity notificacion;
+
+    public NotificacionEntity getNotificacion() {
+        return notificacion;
+    }
+
+    public void setNotificacion(NotificacionEntity notificacion) {
+        this.notificacion = notificacion;
+    }
 
 
 	/**
