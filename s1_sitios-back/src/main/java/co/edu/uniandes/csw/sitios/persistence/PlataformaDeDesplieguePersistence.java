@@ -44,7 +44,7 @@ public class PlataformaDeDesplieguePersistence {
         LOGGER.log(Level.INFO, "Consultando todos las PlataformasDeDespliegue");
         
         Query q;
-            q = em.createQuery("select u from PlataformaDeDespliegue u");
+            q = em.createQuery("select u from PlataformaDeDespliegueEntity u");
         return q.getResultList();
     }
     
