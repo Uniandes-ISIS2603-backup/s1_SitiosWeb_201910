@@ -24,14 +24,14 @@ public class SitioWebPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(SitioWebPersistence.class.getName());
     
-     @PersistenceContext(unitName = "sitesPU")
+    @PersistenceContext(unitName = "sitiosPU")
     protected EntityManager em;
      
-    public SitioWebEntity create(SitioWebEntity editorialEntity) {
+    public SitioWebEntity create(SitioWebEntity websiteEntity) {
         LOGGER.log(Level.INFO, "Creando un nuevo sitio web");
-        em.persist(editorialEntity);
+        em.persist(websiteEntity);//error ocurriendo aca?
         LOGGER.log(Level.INFO, "Saliendo de crear un nuevo sitio web");
-        return editorialEntity;
+        return websiteEntity;
     }
 
     public List<SitioWebEntity> findAll()

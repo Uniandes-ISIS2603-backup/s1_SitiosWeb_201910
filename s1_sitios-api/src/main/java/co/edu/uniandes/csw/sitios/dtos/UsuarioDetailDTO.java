@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,7 +37,14 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     public UsuarioDetailDTO( UsuarioEntity entity ){
         super(entity);
         if( entity != null ){
-            setTickets(entity.getTickets()); 
+            if(entity.getTickets()!=null)
+            {
+                for(TicketEntity ticketEntity:entity.getTickets())
+                {
+                    tickets.add(new TicketDTO(ticketEntity));
+                }
+            }
+
         }
     }
     
@@ -46,24 +55,19 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     @Override
     public UsuarioEntity toEntity() {
         UsuarioEntity entity = new UsuarioEntity();
-        entity.setTickets(tickets);
+        if (tickets != null) {
+            List<TicketEntity> ticket = new ArrayList<>();
+            for (TicketDTO ticketDTO : tickets) {
+                ticket.add(ticketDTO.toEntity());
+
+                entity.setTickets(ticket);
+            }
+
+        }
         return entity;
     }
     
-    /**
-     * @return the tickets
-     */
-    public List<TicketDTO> getTickets() {
-        return tickets;
-    }
 
-    /**
-     * @param tickets the tickets to set
-     */
-    public void setTickets(List<TicketDTO> tickets) {
-        this.tickets = tickets;
-    }
-    
     
     
 }

@@ -6,11 +6,13 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import java.util.Collection;
+import javax.persistence.Entity;
 
 /**
  *
  * @author estudiante
  */
+@Entity
 public class UsuarioEntity extends PersonaEntity{
     //-------------------------------------
     // Atributos---------------------------
@@ -37,7 +39,7 @@ public class UsuarioEntity extends PersonaEntity{
      * Collecion de tickets
      */
     @javax.persistence.OneToMany(
-        mappedBy = "usuario", //verificar.
+      //  mappedBy = "usuario", //verificar.
         fetch = javax.persistence.FetchType.LAZY
     )
     private Collection<TicketEntity> tickets;

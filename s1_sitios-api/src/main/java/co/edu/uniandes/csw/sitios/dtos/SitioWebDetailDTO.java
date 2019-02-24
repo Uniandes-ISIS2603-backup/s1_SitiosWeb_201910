@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity;
 
@@ -33,9 +34,9 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
         super(entity);
         if(entity!=null)
         {
-            if(entity.getTecnologiasDeDesarrollo()!=null)
+            if(entity.getTechnologies()!=null)
             {
-                for(TecnologiaEntity tec :entity.getTecnologiasDeDesarrollo())
+                for(TecnologiaEntity tec :entity.getTechnologies())
                 {
                 tecnologiasDeDesarrollo.add(new TecnologiaDTO(tec));
                 }
@@ -76,7 +77,7 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
             {
                 tecEntity.add(tecs.toEntity());
             }
-            entity.setTecnologiasDeDesarrollo(tecEntity);
+            entity.setTechnologies(tecEntity);
         }
         if(solicitantes!=null)
         {
@@ -93,7 +94,7 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
         }
         if(soportes!=null)
         {
-            List<AdministradorEntity> suppEntity= new ArrayList<>();
+            List<AdministradorEntity> admEntity= new ArrayList<>();
             for(AdministradorDTO adms: soportes)
             {
                 admEntity.add(adms.toEntity());

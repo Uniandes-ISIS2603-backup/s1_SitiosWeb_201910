@@ -28,7 +28,12 @@ public class DependenciaEntity extends BaseEntity {
      * telefono de la dependencia
      */
     private int telefono;
-
+    
+    @javax.persistence.OneToOne(
+        mappedBy = "dependencia",
+        fetch = javax.persistence.FetchType.EAGER
+    )
+    AdministradorEntity administrador;
     /**
      * @return the nombreDependencia
      */

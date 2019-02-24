@@ -21,14 +21,12 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class TipoHostingPersistence {
     
-        private static final Logger LOGGER = Logger.getLogger(TipoHostingPersistence.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TipoHostingPersistence.class.getName());
     
     @PersistenceContext(unitName = "sitiosPU")
     protected EntityManager em;
 
     public TipoHostingEntity create(TipoHostingEntity tipoHostingEntity) {
-       
-        
         LOGGER.log(Level.INFO, "Creando un tipo hosting nuevo");
         em.persist(tipoHostingEntity);
         LOGGER.log(Level.INFO, "Tipo Hosting creado");
@@ -36,15 +34,12 @@ public class TipoHostingPersistence {
     }
 
     public TipoHostingEntity find(Long tipoHostingId) {
-        
-            LOGGER.log(Level.INFO, "Consultando el TipoHosting con id={0}", tipoHostingId);
+        LOGGER.log(Level.INFO, "Consultando el TipoHosting con id={0}", tipoHostingId);
         return em.find(TipoHostingEntity.class, tipoHostingId);
     }
 
     public List<TipoHostingEntity> findAll() {
-       
          LOGGER.log(Level.INFO, "Consultando todos los TipoHosting");
-        
         TypedQuery<TipoHostingEntity> query = em.createQuery("select u from TipoHostingEntity u", TipoHostingEntity.class);
         return query.getResultList();
     }

@@ -49,6 +49,7 @@ public class PlataformaDeDesplieguePersistenceTest {
     }
 
     // ep es entitypersistence
+    
     @Test
     public void createPlataformaDeDespliegueTest() {
 
@@ -65,6 +66,7 @@ public class PlataformaDeDesplieguePersistenceTest {
         
         //El nombre aleatorio pp dado el metodo inject
         Assert.assertEquals(newEntity.getIp(), entity.getIp());
+
     }
 
 }

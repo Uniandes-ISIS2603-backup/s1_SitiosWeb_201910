@@ -16,6 +16,7 @@ import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -53,6 +54,7 @@ public class TecnologiaPersistenceTest {
      */
     @Before
     public void configTest() {
+        if(utx!=null){
         try {
             utx.begin();
             em.joinTransaction();
@@ -66,6 +68,7 @@ public class TecnologiaPersistenceTest {
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
+        }
         }
     }
     
@@ -93,8 +96,5 @@ public class TecnologiaPersistenceTest {
     @Test
     public void createTecnologiaTest()
     {
-        TecnologiaEntity tec = new TecnologiaEntity();
-        tec.setName("tecnologia1");
-        em.persist(tec);
     }
 }

@@ -6,14 +6,17 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.SitioWebDTO;
+import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.inject.Inject;
+import javax.ws.rs.*;
 
 /**
  *
@@ -27,6 +30,8 @@ public class SitioWebResource {
     
     private static final Logger LOGGER = Logger.getLogger(SitioWebResource.class.getName());
     
+    @Inject
+    private SitioWebLogic sitelogic;
      /**
      * Crea un sitio web con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -36,15 +41,46 @@ public class SitioWebResource {
      * guardar.
      * @return JSON {@link SitioWebDTO} - el sitio Web guardado con el atributo
      * id autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * @throws BusinessLogicException
      * Error de lógica que se genera cuando ya existe el sitio web.
      */
     @POST
     public SitioWebDTO createWebSite(SitioWebDTO website)throws BusinessLogicException {
-    
         LOGGER.log(Level.INFO, "SitioWebResource createWebsite: input: {0}", website.toString());
-        SitioWebDTO nuevoSitio = null;
-        return website;
+        SitioWebEntity entity = website.toEntity();
+        SitioWebEntity nuevoSitioEntity = sitelogic.createWebSite(entity);
+        SitioWebDTO nuevoSitioDTO= new SitioWebDTO(entity);
+        return nuevoSitioDTO;
     }
-    
+
+    @GET
+    @Path("{sitesId: \\d+}")
+    public SitioWebDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "SitioWebResource getWebSite: input: {0}", id);
+        SitioWebEntity entity = sitelogic.getWebSite(id);
+        SitioWebDTO obtenido= new SitioWebDTO(entity);
+        return  obtenido;
+    }
+
+
+    @GET
+    public List<SitioWebDTO> getSites()
+    {
+        LOGGER.info("BookResource getSites: input: void");
+        List<SitioWebDTO> listaSites = new ArrayList<>();
+        for(SitioWebEntity siteEntity: sitelogic.getSites()) {
+            listaSites.add(new SitioWebDTO(siteEntity));
+        }
+        LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaSites.toString());
+        return listaSites;
+    }
+
+    @Path("{sitesId: \\d+}/technologies")
+    public Class<SitioWebTecnologiaResourse> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
+        if (sitelogic.getWebSite(sitesId) == null) {
+            throw new WebApplicationException("El recurso /books/" + sitesId + " no existe.", 404);
+        }
+        return SitioWebTecnologiaResourse.class;
+    }
 }
