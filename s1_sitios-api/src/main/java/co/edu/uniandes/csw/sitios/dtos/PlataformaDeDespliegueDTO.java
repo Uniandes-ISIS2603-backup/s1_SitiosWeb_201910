@@ -34,11 +34,6 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     private Double clock;
     
     /**
-     * El servicio de hosting que tiene la plataforma utilizada. 
-     */    
-    private String servicioDeHosting;
-    
-    /**
      * Estado de la plataforma utilizada, virtualizada o no virtualizada.
      */    
     private Boolean virtualizacion;
@@ -46,7 +41,18 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /*
     * Tipo de Hosting usado por la plataforma de despliegue.
     */
-    private TipoHostingDTO tipoHosting;
+    private TipoHosting tipoHosting;
+    
+     /**
+       * TipoHosting que puede ser una plataforma de despliegue
+      */
+        public enum TipoHosting
+        {
+            SaaS,
+            PaaS,
+            IaaS,
+            OnPremise
+        }
 
     
     /**
@@ -112,20 +118,6 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     }
 
     /**
-     * @return the servicioDeHosting
-     */
-    public String getServicioDeHosting() {
-        return servicioDeHosting;
-    }
-
-    /**
-     * @param servicioDeHosting the servicioDeHosting to set
-     */
-    public void setServicioDeHosting(String servicioDeHosting) {
-        this.servicioDeHosting = servicioDeHosting;
-    }
-
-    /**
      * @return the virtualizacion
      */
     public Boolean getVirtualizacion() {
@@ -142,14 +134,14 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * @return the tipoHosting
      */
-    public TipoHostingDTO getTipoHosting() {
+    public TipoHosting getTipoHosting() {
         return tipoHosting;
     }
 
     /**
      * @param tipoHosting the tipoHosting to set
      */
-    public void setTipoHosting(TipoHostingDTO tipoHosting) {
+    public void setTipoHosting(TipoHosting tipoHosting) {
         this.tipoHosting = tipoHosting;
     }
 

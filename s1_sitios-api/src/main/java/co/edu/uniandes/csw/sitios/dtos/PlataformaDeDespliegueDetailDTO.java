@@ -25,4 +25,18 @@ private ArrayList<SitioWebDTO> sitiosWeb;
 public PlataformaDeDespliegueDetailDTO(){
     
 }
+
+    /**
+     * @return the sitiosWeb
+     */
+    public ArrayList<SitioWebDTO> getSitiosWeb() {
+        return sitiosWeb;
+    }
+
+    /**
+     * @param sitiosWeb the sitiosWeb to set
+     */
+    public void setSitiosWeb(ArrayList<SitioWebDTO> sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
+    }
 }
