@@ -142,7 +142,8 @@ public class SitioLogicTest {
     }
     catch(Exception e)
     {   
-        //FIXME nunca deberia llegar aca , hay un error de compilacion si es asi
+        //nunca deberia llegar aca , hay un error de compilacion si es asi
+        //TODO uncomment if there its not java.lang.IllegalStateException on b
         //Assert.fail("no deberia generar error: "+e.getMessage());
     }   
         
