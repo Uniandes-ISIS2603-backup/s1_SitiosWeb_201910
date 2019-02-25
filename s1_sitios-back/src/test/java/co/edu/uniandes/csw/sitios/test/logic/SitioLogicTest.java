@@ -141,10 +141,11 @@ public class SitioLogicTest {
         Assert.fail("no deberia generar error: "+e.getMessage());
     }
     catch(Exception e)
-    {   
+    { 
+        e.printStackTrace();
         //nunca deberia llegar aca , hay un error de compilacion si es asi
         //TODO uncomment if there its not java.lang.IllegalStateException on b
-        //Assert.fail("no deberia generar error: "+e.getMessage());
+        Assert.fail("no deberia generar error: "+e.getMessage());
     }   
         
     }

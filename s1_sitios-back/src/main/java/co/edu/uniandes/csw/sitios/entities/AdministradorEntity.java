@@ -7,8 +7,10 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -67,15 +69,15 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
         mappedBy = "administrador", //verificar.
         fetch = javax.persistence.FetchType.LAZY
     )
-    private Collection<NotificacionEntity> notificaciones;
+    private List<NotificacionEntity> notificaciones;
     
      @javax.persistence.ManyToOne(
     )
      
+    @PodamExclude
+    @ManyToMany
+    private List<SitioWebEntity> sitioWebEntity; //Verificar
     
-    private SitioWebEntity sitioWebEntity; //Verificar
-    
->>>>>>> fd2de62e2879089b2be8f1ff2ac5239808b5d9f0
     /**
      * Constructor AdministradorEntity vacio
      */
@@ -129,29 +131,28 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * @return the notificaciones
      */
-    //public Collection<NotificacionEntity> getNotificaciones() {
-    //    return notificaciones;
-    //}
+    public List<NotificacionEntity> getNotificaciones() {
+        return notificaciones;
+    }
 
-    ///**
-     //* @param notificaciones the notificaciones to set
-    // */
-    //public void setNotificaciones(Collection<NotificacionEntity> notificaciones) {
-    //    this.notificaciones = notificaciones;
-    //}
+    /**
+     * @param notificaciones the notificaciones to set
+     */
+    public void setNotificaciones(List<NotificacionEntity> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
 
     /**
      * @return the sitioWebEntity
      */
-   // public SitioWebEntity getSitioWebEntity() {
-   //     return sitioWebEntity;
-    //}
+    public List<SitioWebEntity> getSitioWebEntity() {
+        return sitioWebEntity;
 
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
-    //public void setSitioWebEntity(SitioWebEntity sitioWebEntity) {
-    //    this.sitioWebEntity = sitioWebEntity;
-    //}
+    public void setSitioWebEntity(List<SitioWebEntity> sitioWebEntity) {
+        this.sitioWebEntity = sitioWebEntity;
+    }
 
 }
