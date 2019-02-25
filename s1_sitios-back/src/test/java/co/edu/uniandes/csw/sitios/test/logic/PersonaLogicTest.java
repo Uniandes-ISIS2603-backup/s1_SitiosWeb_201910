@@ -102,17 +102,8 @@ public class PersonaLogicTest {
             //entity.setBooks(new ArrayList<>());
             data.add(entity);
         }
-        PersonaEntity persona = data.get(2);
-        //BookEntity entity = factory.manufacturePojo(BookEntity.class);
-        //entity.getPersonas().add(persona);
-        //em.persist(entity);
-        //persona.getBooks().add(entity);
-
-        //PrizeEntity prize = factory.manufacturePojo(PrizeEntity.class);
-        //prize.setAuthor(data.get(1));
-        //em.persist(prize);
-        //data.get(1).getPrizes().add(prize);
     }
+
 
     /**
      * Prueba para crear un Persona.

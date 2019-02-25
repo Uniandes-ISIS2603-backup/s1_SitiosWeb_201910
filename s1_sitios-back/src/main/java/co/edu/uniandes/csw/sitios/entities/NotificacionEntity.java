@@ -52,7 +52,7 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      * Persona a la cual se debe notificar
      */
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private PersonaEntity notificado;
     
     /**

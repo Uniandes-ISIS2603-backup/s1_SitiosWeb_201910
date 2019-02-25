@@ -93,6 +93,7 @@ public class SitioLogicTest {
             AdministradorEntity persona = factory.manufacturePojo(AdministradorEntity.class);
             em.persist(persona);
             peopleData.add(persona);
+           
         }
         for (int i = 0; i < 3; i++) {
             EstadoWebEntity site = factory.manufacturePojo(EstadoWebEntity.class);

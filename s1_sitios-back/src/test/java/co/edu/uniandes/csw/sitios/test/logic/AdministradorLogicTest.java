@@ -86,9 +86,7 @@ public class AdministradorLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from PrizeEntity").executeUpdate();
-        em.createQuery("delete from BookEntity").executeUpdate();
-        em.createQuery("delete from AuthorEntity").executeUpdate();
+        em.createQuery("delete from AdministradorEntity").executeUpdate();
     }
 
     /**
@@ -98,20 +96,9 @@ public class AdministradorLogicTest {
     private void insertData() {
         for (int i = 0; i < 3; i++) {
             AdministradorEntity entity = factory.manufacturePojo(AdministradorEntity.class);
-            em.persist(entity);
-            //entity.setBooks(new ArrayList<>());
-            //data.add(entity);
+            em.persist(entity); //entity
+            data.add(entity);
         }
-        AdministradorEntity administrador = data.get(2);
-        //BookEntity entity = factory.manufacturePojo(BookEntity.class);
-        //entity.getAdministrador().add(administrador);
-        //em.persist(entity);
-        //administrador.getBooks().add(entity);
-
-        //PrizeEntity prize = factory.manufacturePojo(PrizeEntity.class);
-        //prize.setAuthor(data.get(1));
-        //em.persist(prize);
-        //data.get(1).getPrizes().add(prize);
     }
 
     /**
@@ -125,7 +112,6 @@ public class AdministradorLogicTest {
         AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-//        Assert.assertEquals(newEntity.getBirthDate(), entity.getBirthDate());
     }
 
     /**
@@ -172,7 +158,11 @@ public class AdministradorLogicTest {
         administradorLogic.updateAdministrador(pojoEntity.getId(), pojoEntity);
 
         AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getId());
-
+        if(resp==null)
+        {
+            Assert.fail("No encontrado");
+        } 
+        
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
         //Assert.assertEquals(pojoEntity.getBirthDate(), resp.getBirthDate());
