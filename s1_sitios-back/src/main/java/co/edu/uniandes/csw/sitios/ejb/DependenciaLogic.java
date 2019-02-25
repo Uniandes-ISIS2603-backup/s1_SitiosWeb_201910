@@ -42,23 +42,7 @@ public class DependenciaLogic {
         {
             throw new BusinessLogicException("Ya existe una dependencia con este ID");
         }
-        if(dependenciaEntity.getNombreDependencia()==null||dependenciaEntity.getNombreDependencia().equals(""))
-        {
-             throw new BusinessLogicException("El nombre no puede estar vacio");
-        }
-        if(dependenciaEntity.getEmail()==null||dependenciaEntity.getEmail().equals(""))
-        {
-             throw new BusinessLogicException("El email no puede estar vacio");
-        } 
-        if(!dependenciaEntity.getEmail().matches("^([\\w\\-\\.]+)@((\\[([0-9]{1,3}\\.){3}[0-9]{1,3}\\])|(([\\w\\-]+\\.)+)([a-zA-Z]{2,4}))$"))
-        {
-             throw new BusinessLogicException("Email invalido");
-        } 
-        int cantidadDigitos = ((Integer)dependenciaEntity.getTelefono()).toString().length();
-        if(cantidadDigitos<7||cantidadDigitos>11)
-        {
-             throw new BusinessLogicException("El numero de telefono no es valido");
-        }
+        verificarReglasDeNegocio(dependenciaEntity);
         DependenciaEntity newDependencyEntity = persistence.create(dependenciaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la dependencia");
         return newDependencyEntity;
@@ -107,23 +91,7 @@ public class DependenciaLogic {
         {
             throw new BusinessLogicException("Ya existe una dependencia con este ID");
         }
-        if(dependenciaEntity.getNombreDependencia()==null||dependenciaEntity.getNombreDependencia().equals(""))
-        {
-             throw new BusinessLogicException("El nombre no puede estar vacio");
-        }
-        if(dependenciaEntity.getEmail()==null||dependenciaEntity.getEmail().equals(""))
-        {
-             throw new BusinessLogicException("El email no puede estar vacio");
-        } 
-        if(!dependenciaEntity.getEmail().matches("^([\\w\\-\\.]+)@((\\[([0-9]{1,3}\\.){3}[0-9]{1,3}\\])|(([\\w\\-]+\\.)+)([a-zA-Z]{2,4}))$"))
-        {
-             throw new BusinessLogicException("Email invalido");
-        } 
-        int cantidadDigitos = ((Integer)dependenciaEntity.getTelefono()).toString().length();
-        if(cantidadDigitos<7||cantidadDigitos>11)
-        {
-             throw new BusinessLogicException("El numero de telefono no es valido");
-        }
+        verificarReglasDeNegocio(dependenciaEntity);
         DependenciaEntity newDependencyEntity = persistence.create(dependenciaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizacion de la dependencia con id = {0}", dependenciaID);
         return newDependencyEntity;
@@ -143,6 +111,26 @@ public class DependenciaLogic {
         }
         persistence.delete(dependenciaId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la dependencia con id = {0}", dependenciaId);
+    }
+    public void verificarReglasDeNegocio(DependenciaEntity dependenciaEntity) throws BusinessLogicException
+    {
+        if(dependenciaEntity.getNombreDependencia()==null||dependenciaEntity.getNombreDependencia().equals(""))
+        {
+             throw new BusinessLogicException("El nombre no puede estar vacio");
+        }
+        if(dependenciaEntity.getEmail()==null||dependenciaEntity.getEmail().equals(""))
+        {
+             throw new BusinessLogicException("El email no puede estar vacio");
+        } 
+        if(!dependenciaEntity.getEmail().matches("^([\\w\\-\\.]+)@((\\[([0-9]{1,3}\\.){3}[0-9]{1,3}\\])|(([\\w\\-]+\\.)+)([a-zA-Z]{2,4}))$"))
+        {
+             throw new BusinessLogicException("Email invalido");
+        } 
+        int cantidadDigitos = ((Integer)dependenciaEntity.getTelefono()).toString().length();
+        if(cantidadDigitos<7||cantidadDigitos>11)
+        {
+             throw new BusinessLogicException("El numero de telefono no es valido");
+        }
     }
 }
 
