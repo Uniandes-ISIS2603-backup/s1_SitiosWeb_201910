@@ -35,7 +35,7 @@ public class DependenciaLogic {
      * @return Objeto de DependenciaEntity con los datos nuevos y su ID.
      * @throws BusinessLogicException si se viola una regla de negocio.
      */
-    public DependenciaEntity createTechnology(DependenciaEntity dependenciaEntity)throws BusinessLogicException {
+    public DependenciaEntity createDependency(DependenciaEntity dependenciaEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la dependencia");
         DependenciaEntity existe = getDependency(dependenciaEntity.getId());
         if(existe!=null)
@@ -84,7 +84,7 @@ public class DependenciaLogic {
      * @return Instancia de DependenciaEntity con los datos actualizados.
      * @throws BusinessLogicException si se viola una regla de negocio.
      */
-    public DependenciaEntity updateTechnology(Long dependenciaID, DependenciaEntity dependenciaEntity) throws BusinessLogicException {
+    public DependenciaEntity updateDependency(Long dependenciaID, DependenciaEntity dependenciaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la dependencia con id = {0}", dependenciaID);
         DependenciaEntity existe = getDependency(dependenciaEntity.getId());
         if(existe!=null&&!Objects.equals(dependenciaID, existe.getId()))
@@ -103,7 +103,7 @@ public class DependenciaLogic {
      * @param dependenciaId Identificador de la instancia a eliminar.
      * @throws BusinessLogicException si la dependencia tiene un Administrador asociado.
      */
-    public void deleteTechnology(Long dependenciaId) throws BusinessLogicException {
+    public void deleteDependency(Long dependenciaId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la dependencia con id = {0}", dependenciaId);
         AdministradorEntity administrador = getDependency(dependenciaId).getAdministrador();
         if (administrador != null) {
