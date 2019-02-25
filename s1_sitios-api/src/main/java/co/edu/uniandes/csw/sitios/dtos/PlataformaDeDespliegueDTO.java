@@ -31,7 +31,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * Clock de la plataforma utilizada.
      */    
-    private Double clock;
+    private String clock;
     
     /**
      * Estado de la plataforma utilizada, virtualizada o no virtualizada.
@@ -106,14 +106,14 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * @return the clock
      */
-    public Double getClock() {
+    public String getClock() {
         return clock;
     }
 
     /**
      * @param clock the clock to set
      */
-    public void setClock(Double clock) {
+    public void setClock(String clock) {
         this.clock = clock;
     }
 

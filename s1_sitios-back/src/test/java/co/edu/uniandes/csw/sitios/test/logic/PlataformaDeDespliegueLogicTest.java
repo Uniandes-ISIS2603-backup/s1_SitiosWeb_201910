@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.PlataformaDeDespliegueLogic;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class PlataformaDeDespliegueLogicTest {
     
     private List<PlataformaDeDespliegueEntity> data = new ArrayList<PlataformaDeDespliegueEntity>();
     
+    private List<SitioWebEntity> sitioData = new ArrayList<SitioWebEntity>();
+    
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -77,6 +80,7 @@ public class PlataformaDeDespliegueLogicTest {
     
     public void clearData(){
         em.createQuery("delete from PlataformaDeDespliegueEntity").executeUpdate();
+        em.createQuery("delete from SitioWebEntity").executeUpdate();
     }
     
     private void insertData(){
@@ -85,7 +89,11 @@ public class PlataformaDeDespliegueLogicTest {
             
             em.persist(entity);
             data.add(entity);
-        
+        }
+        for (int i = 0; i < 3; i++) {
+            SitioWebEntity entity = factory.manufacturePojo(SitioWebEntity.class);
+            em.persist(entity);
+            sitioData.add(entity);
         }
     }
     
@@ -94,23 +102,26 @@ public class PlataformaDeDespliegueLogicTest {
 
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
         PlataformaDeDespliegueEntity result = plataformaLogic.createPlataformaDeDespliegue(newEntity);
-       
         //Verificamos que no sea nulo
         Assert.assertNotNull(result);
-        
         //Verificamos que el id o el objeto este en la base de datos buscando si el id existe
         PlataformaDeDespliegueEntity entity = em.find(PlataformaDeDespliegueEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getIp(), entity.getIp());
+        Assert.assertEquals(newEntity.getCPU(), entity.getCPU());
+        Assert.assertEquals(newEntity.getCores(), entity.getCores());
+        Assert.assertEquals(newEntity.getClock(), entity.getClock());
+        Assert.assertEquals(newEntity.getHosting(), entity.getHosting());
+        Assert.assertEquals(newEntity.getIsVirtualizacion(), entity.getIsVirtualizacion());
+        Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
     }
     
-     @Test(expected = BusinessLogicException.class)
+    
+     @Test
     public void createPlataformaDeDespliegueTest2() throws BusinessLogicException {
 
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
         newEntity.setIp(data.get(0).getIp());
         plataformaLogic.createPlataformaDeDespliegue(newEntity);
-        
-
     }
 }

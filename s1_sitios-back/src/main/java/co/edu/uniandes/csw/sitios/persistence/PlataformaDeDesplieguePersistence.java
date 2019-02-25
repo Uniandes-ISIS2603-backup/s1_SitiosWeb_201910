@@ -41,9 +41,9 @@ public class PlataformaDeDesplieguePersistence {
 
     // Busque en la tabla ----Entity un e(objeto o registro) donde el nombre es igual a una ip pasada por parametro
     public PlataformaDeDespliegueEntity findByIp(String ip){
-            TypedQuery<PlataformaDeDespliegueEntity> query = em.createQuery("Select e from PlataformaDeDespliegueEntity e where e.param = :param",PlataformaDeDespliegueEntity.class);
+            TypedQuery<PlataformaDeDespliegueEntity> query = em.createQuery("Select e from PlataformaDeDespliegueEntity e where e.name = :name",PlataformaDeDespliegueEntity.class);
             // Aca le asigno que significa param param=ip
-            query = query.setParameter("param", ip);
+            query = query.setParameter("name", ip);
             //Hago una lista que me devuelve la lista del resultado
             List<PlataformaDeDespliegueEntity> sameParam = query.getResultList();
            

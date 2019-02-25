@@ -40,7 +40,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     /**
      * Clock de la plataforma utilizada.
      */    
-    private Double clock;
+    private String clock;
     
     /**
      * El servicio de hosting que tiene la plataforma utilizada. 
@@ -119,14 +119,14 @@ private ArrayList<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
     /**
      * @return the clock
      */
-    public Double getClock() {
+    public String getClock() {
         return clock;
     }
 
     /**
      * @param clock the clock to set
      */
-    public void setClock(Double clock) {
+    public void setClock(String clock) {
         this.clock = clock;
     }
 
