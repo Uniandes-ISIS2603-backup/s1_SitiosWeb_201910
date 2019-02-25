@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -44,13 +47,14 @@ public class AdministradorEntity extends PersonaEntity{
         mappedBy = "administrador", //verificar.
         fetch = javax.persistence.FetchType.LAZY
     )
-    private Collection<NotificacionEntity> notificaciones;
+    private List<NotificacionEntity> notificaciones;
     
      @javax.persistence.ManyToOne(
     )
      
-    
-    private SitioWebEntity sitioWebEntity; //Verificar
+    @PodamExclude
+    @ManyToMany
+    private List<SitioWebEntity> sitioWebEntity; //Verificar
     
     /**
      * Constructor AdministradorEntity vacio
@@ -105,28 +109,28 @@ public class AdministradorEntity extends PersonaEntity{
     /**
      * @return the notificaciones
      */
-    public Collection<NotificacionEntity> getNotificaciones() {
+    public List<NotificacionEntity> getNotificaciones() {
         return notificaciones;
     }
 
     /**
      * @param notificaciones the notificaciones to set
      */
-    public void setNotificaciones(Collection<NotificacionEntity> notificaciones) {
+    public void setNotificaciones(List<NotificacionEntity> notificaciones) {
         this.notificaciones = notificaciones;
     }
 
     /**
      * @return the sitioWebEntity
      */
-    public SitioWebEntity getSitioWebEntity() {
+    public List<SitioWebEntity> getSitioWebEntity() {
         return sitioWebEntity;
     }
 
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
-    public void setSitioWebEntity(SitioWebEntity sitioWebEntity) {
+    public void setSitioWebEntity(List<SitioWebEntity> sitioWebEntity) {
         this.sitioWebEntity = sitioWebEntity;
     }
 

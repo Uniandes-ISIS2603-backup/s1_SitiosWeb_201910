@@ -287,9 +287,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         }
         
     
-    public String toString()
-    {
-    return nombre+':';
-    }
+   
     
 }

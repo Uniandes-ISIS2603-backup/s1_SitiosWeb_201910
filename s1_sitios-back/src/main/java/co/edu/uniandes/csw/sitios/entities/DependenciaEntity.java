@@ -34,6 +34,8 @@ public class DependenciaEntity extends BaseEntity {
         fetch = javax.persistence.FetchType.EAGER
     )
     private AdministradorEntity administrador;
+    
+    
     /**
      * @return the nombreDependencia
      */
