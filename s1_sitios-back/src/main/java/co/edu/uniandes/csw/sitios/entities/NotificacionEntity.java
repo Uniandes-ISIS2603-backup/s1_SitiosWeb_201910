@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 /**
@@ -20,13 +21,36 @@ import javax.persistence.Entity;
 @Entity
 public class NotificacionEntity extends BaseEntity implements Serializable {
 
-    public PersonaEntity getNotificado() {
-        return notificado;
-    }
+    /**
+     * Persona a la cual se debe notificar
+     */
+    //@PodamExclude
+    //@ManyToOne(
+      //  cascade = CascadeType.PERSIST
+    //)
+    //private AdministradorEntity notificado;
+    
+    /**
+     * nuevo estado al cual se cambio el sitio web
+     */
+    @PodamExclude
+    @ManyToOne
+    private EstadoWebEntity cambioSitio;
+    
+    /**
+     * Sitio en el cual se presento el cambio
+     */
+    @PodamExclude
+    @ManyToOne
+    private SitioWebEntity sitioWeb;
+    
+   // public AdministradorEntity getNotificado() {
+   //     return notificado;
+    //}
 
-    public void setNotificado(PersonaEntity notificado) {
-        this.notificado = notificado;
-    }
+    //public void setNotificado(AdministradorEntity notificado) {
+    //    this.notificado = notificado;
+    //}
 
     public EstadoWebEntity getCambioSitio() {
         return cambioSitio;
@@ -43,29 +67,5 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
     public void setSitioWeb(SitioWebEntity sitioWeb) {
         this.sitioWeb = sitioWeb;
     }
-    
-    
-  
-  
-    /**
-     * Persona a la cual se debe notificar
-     */
-    @PodamExclude
-    @ManyToOne
-    private PersonaEntity notificado;
-    
-    /**
-     * nuevo estado al cual se cambio el sitio web
-     */
-    @PodamExclude
-    @ManyToOne
-    private EstadoWebEntity cambioSitio;
-    
-    /**
-     * Sitio en el cual se presento el cambio
-     */
-    @PodamExclude
-    @ManyToOne
-    private SitioWebEntity sitioWeb;
    
 }

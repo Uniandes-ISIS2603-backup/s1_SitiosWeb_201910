@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.AdministradorDTO;
 import co.edu.uniandes.csw.sitios.dtos.UsuarioDTO;
+import co.edu.uniandes.csw.sitios.ejb.AdministradorLogic;
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -33,21 +35,17 @@ public class AdministradorResource {
 
     public final static Logger LOGGER = Logger.getLogger(AdministradorResource.class.getName());
 
-//    /**
-//     * Permite dar un administador segun su Id.
-//     *
-//     * @param id : Numero entero, id con el cual se identifica un admin
-//     * @return AdministradorDTO.
-//     */
-//    @GET
-//    @Path("{id: \\d+}")
-//    public AdministradorDTO getAdministrador(@PathParam("id") int id) {
-//        AdministradorEntity entity = logic.getAuthor(id);
-//        if (entity == null) {
-//            throw new WebApplicationException("Author with id: " + id + " does not exists", 404);
-//        }
-//        return new AdministradorDTO(entity);
-//    }
+    /**
+     * Permite dar un administador segun su Id.
+     *
+     * @param id : Numero entero, id con el cual se identifica un admin
+     * @return AdministradorDTO.
+     */
+    @GET
+   @Path("{id: \\d+}")
+    public AdministradorDTO getAdministrador(@PathParam("id") int id) {
+       return null;
+    }
 
     /**
      * Actualiza un administrador dado un id, y se cambia por el administrador
@@ -82,6 +80,9 @@ public class AdministradorResource {
      */
     @POST
     public AdministradorDTO createAdministrador(AdministradorDTO administrador) {
-        return null;
+        AdministradorDTO nuevoAdministradorDTO = new AdministradorDTO(administrador.toEntity());
+        LOGGER.log(Level.INFO, "AministradorResource createAministrador");
+        
+        return nuevoAdministradorDTO;
     }
 }

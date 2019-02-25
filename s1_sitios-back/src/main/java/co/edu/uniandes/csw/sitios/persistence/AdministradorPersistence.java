@@ -34,23 +34,12 @@ public class AdministradorPersistence {
      */
     public AdministradorEntity create(AdministradorEntity administradorEntity) {
         LOGGER.log(Level.INFO, "Creando un administrador nuevo");
+        //LOGGER.log("akjfñlakjdfñaksjdfñak---------------------------------------------------------");
+       // System.out.print(em+" HOLÑKLASDÑLKAJSDÑLKJASÑDLKJASÑLDKJASÑLD--------------------------------------------------------------");
         em.persist(administradorEntity);
         LOGGER.log(Level.INFO, "Administrador creado");
         
         return administradorEntity;
-    }
-
-    /**
-     * Devuelve todos los administradores de la base de datos.
-     *
-     * @return una lista con todos los libros que encuentre en la base de datos,
-     * "select u from AdministradorEntity u" es como un "select * from AdministradorEntity;" -
-     * "SELECT * FROM table_name" en SQL.
-     */
-    public List<AdministradorEntity> findAll() {
-        LOGGER.log(Level.INFO, "Consultando todos los administradores");
-        Query q = em.createQuery("select u from AdministradorEntity u");
-        return q.getResultList();
     }
 
     /**
@@ -62,6 +51,19 @@ public class AdministradorPersistence {
     public AdministradorEntity find(Long administradorId) {
         LOGGER.log(Level.INFO, "Consultando el administrador con id={0}", administradorId);
         return em.find(AdministradorEntity.class, administradorId);
+    }
+    
+    /**
+     * Devuelve todos los administradores de la base de datos.
+     *
+     * @return una lista con todos los libros que encuentre en la base de datos,
+     * "select u from AdministradorEntity u" es como un "select * from AdministradorEntity;" -
+     * "SELECT * FROM table_name" en SQL.
+     */
+    public List<AdministradorEntity> findAll() {
+        LOGGER.log(Level.INFO, "Consultando todos los administradores");
+        Query q = em.createQuery("select u from AdministradorEntity u");
+        return q.getResultList();
     }
 
     /**
@@ -96,21 +98,21 @@ public class AdministradorPersistence {
      * @return null si no existe ningun administrador con el id del argumento. Si
      * existe alguno devuelve el primero.
      */
-    public AdministradorEntity findByid(String id) {
-        LOGGER.log(Level.INFO, "Consultando administradores por id ", id);
-        // Se crea un query para buscar administradores con el id que recibe el método como argumento. ":id" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From AdministradorEntity e where e.id = :id", AdministradorEntity.class);
-        // Se remplaza el placeholder ":id" con el valor del argumento 
-        query = query.setParameter("id", id);
+    public AdministradorEntity findByName(String nombre) {
+        LOGGER.log(Level.INFO, "Consultando administradores por id ", nombre);
+        // Se crea un query para buscar administradores con el id que recibe el método como argumento. ":nombre" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From AdministradorEntity e where e.nombre = :nombre", AdministradorEntity.class);
+        // Se remplaza el placeholder ":nombre" con el valor del argumento 
+        query = query.setParameter("nombre", nombre);
         // Se invoca el query se obtiene la lista resultado
-        List<AdministradorEntity> sameID = query.getResultList();
+        List<AdministradorEntity> sameName = query.getResultList();
         AdministradorEntity result;
-        if (sameID == null) {
+        if (sameName == null) {
             result = null;
         } else {
-            result = sameID.get(0);
+            result = sameName.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar administradores por id ", id);
+        LOGGER.log(Level.INFO, "Saliendo de consultar administradores por nombre ", nombre);
         return result;
     }
 }

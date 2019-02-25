@@ -40,14 +40,14 @@ public class PersonaPersistence {
     }
     
     /**
-     * Devuelve todos loslibros de la base de datos.
+     * Devuelve todas las personas de la base de datos.
      *
-     * @return una lista con todos los libros que encuentre en la base de datos,
-     * "select u from BookEntity u" es como un "select * from BookEntity;" -
+     * @return una lista con todas las personas que encuentre en la base de datos,
+     * "select u from PersonaEntity u" es como un "select * from BookEntity;" -
      * "SELECT * FROM table_name" en SQL.
      */
     public List<PersonaEntity> findAll() {
-        LOGGER.log(Level.INFO, "Consultando todos los libros");
+        LOGGER.log(Level.INFO, "Consultando todos las personas");
         Query q = em.createQuery("select u from PersonaEntity u");
         return q.getResultList();
     }
@@ -55,24 +55,41 @@ public class PersonaPersistence {
     /**
      * Busca si hay algun lubro con el id que se envía de argumento
      *
-     * @param booksId: id correspondiente al libro buscado.
+     * @param id: id correspondiente de la persona buscado.
      * @return un libro.
      */
-    public PersonaEntity find(Long booksId) {
-        LOGGER.log(Level.INFO, "Consultando el libro con id={0}", booksId);
-        return em.find(PersonaEntity.class, booksId);
+    public PersonaEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando de la persona con id={0}", id);
+        return em.find(PersonaEntity.class, id);
     }
 
     /**
-     * Actualiza un libro.
+     * Actualiza una persona.
      *
-     * @param bookEntity: el libro que viene con los nuevos cambios. Por ejemplo
+     * @param personaEntity: la persona que viene con los nuevos cambios. Por ejemplo
      * el nombre pudo cambiar. En ese caso, se haria uso del método update.
-     * @return un libro con los cambios aplicados.
+     * @return la persona con los cambios aplicados.
      */
-    public PersonaEntity update(PersonaEntity bookEntity) {
-        LOGGER.log(Level.INFO, "Actualizando el libro con id={0}", bookEntity.getId());
-        return em.merge(bookEntity);
+    public PersonaEntity update(PersonaEntity personaEntity) {
+        LOGGER.log(Level.INFO, "Actualizando la persona con id={0}", personaEntity.getId());
+        return em.merge(personaEntity);
+    }
+    
+    /**
+     * Borra una persona de la base de datos recibiendo como argumento el id de
+     * la persona
+     *
+     * @param personaId: id correspondiente a la author a borrar.
+     */
+    public void delete(Long personaId) {
+
+        LOGGER.log(Level.INFO, "Borrando el persona con id={0}", personaId);
+        // Se hace uso de mismo método que esta explicado en public PersonaEntity find(Long id) para obtener la author a borrar.
+        PersonaEntity personaEntity = em.find(PersonaEntity.class, personaId);
+        /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
+        EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
+        Es similar a "delete from PersonaEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
+        em.remove(personaEntity);
     }
     
 }

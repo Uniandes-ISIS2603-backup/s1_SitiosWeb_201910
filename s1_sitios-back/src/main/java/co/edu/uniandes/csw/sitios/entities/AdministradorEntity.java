@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 /**
@@ -13,49 +15,46 @@ import javax.persistence.Entity;
  * @author estudiante
  */
 @Entity
-public class AdministradorEntity extends PersonaEntity{
-   
+public class AdministradorEntity extends PersonaEntity implements Serializable {
+
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
-    
     /**
-     * Nivel que tiene un administrador, 
-     * nivel = {1, 2, 3, 4, 5}
+     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
      */
     private Integer nivel;
-    
+
     /**
      * Nombre del cargo del administrador.
      */
-    private String nombreCargo; 
-    
+    private String nombreCargo;
+
     /**
      * Nombre de la dependencia.
      */
     private DependenciaEntity dependencia;
-    
+
     /**
      * Bitacora que se usa para guardar eventos.
      */
-    
     private EventoEntity bitacora;
-    
+
     /**
      * Collecion de notificaciones
      */
-    @javax.persistence.OneToMany(
-       // mappedBy = "administrador", //verificar.
-        fetch = javax.persistence.FetchType.LAZY
-    )
-    private Collection<NotificacionEntity> notificaciones;
-    
-     @javax.persistence.ManyToOne(
-    )
-     
-    
-    private SitioWebEntity sitioWebEntity; //Verificar
-    
+    //@javax.persistence.OneToMany(
+        //    mappedBy = "administrador", //verificar.
+      //      fetch = javax.persistence.FetchType.LAZY,
+    //        cascade = CascadeType.PERSIST,
+    //        orphanRemoval = true
+    //)
+    //private Collection<NotificacionEntity> notificaciones;
+
+    //@javax.persistence.ManyToOne()
+
+    //private SitioWebEntity sitioWebEntity; //Verificar
+
     /**
      * Constructor AdministradorEntity vacio
      */
@@ -121,29 +120,29 @@ public class AdministradorEntity extends PersonaEntity{
     /**
      * @return the notificaciones
      */
-    public Collection<NotificacionEntity> getNotificaciones() {
-        return notificaciones;
-    }
+    //public Collection<NotificacionEntity> getNotificaciones() {
+    //    return notificaciones;
+    //}
 
-    /**
-     * @param notificaciones the notificaciones to set
-     */
-    public void setNotificaciones(Collection<NotificacionEntity> notificaciones) {
-        this.notificaciones = notificaciones;
-    }
+    ///**
+     //* @param notificaciones the notificaciones to set
+    // */
+    //public void setNotificaciones(Collection<NotificacionEntity> notificaciones) {
+    //    this.notificaciones = notificaciones;
+    //}
 
     /**
      * @return the sitioWebEntity
      */
-    public SitioWebEntity getSitioWebEntity() {
-        return sitioWebEntity;
-    }
+   // public SitioWebEntity getSitioWebEntity() {
+   //     return sitioWebEntity;
+    //}
 
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
-    public void setSitioWebEntity(SitioWebEntity sitioWebEntity) {
-        this.sitioWebEntity = sitioWebEntity;
-    }
+    //public void setSitioWebEntity(SitioWebEntity sitioWebEntity) {
+    //    this.sitioWebEntity = sitioWebEntity;
+    //}
 
 }
