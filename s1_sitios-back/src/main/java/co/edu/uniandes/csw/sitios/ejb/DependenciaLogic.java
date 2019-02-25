@@ -13,12 +13,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author estudiante
  */
+@Stateless
 public class DependenciaLogic {
      
      private static final Logger LOGGER = Logger.getLogger(TecnologiaLogic.class.getName());

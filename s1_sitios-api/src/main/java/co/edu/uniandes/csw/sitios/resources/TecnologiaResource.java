@@ -98,13 +98,14 @@ public class TecnologiaResource {
      * debe ser una cadena de dígitos.
      * @param technology {@link TecnologiaDetailDTO} la tecnologia que se desea guardar.
      * @return JSON {@link TecnologiaDetailDTO} - La tecnologia guardada.
+     * @throws BusinessLogicException si se viola una regla de negocio.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la tecnologia a
      * actualizar.
      */
     @PUT
     @Path("{technologiesId: \\d+}")
-    public TecnologiaDetailDTO updateAuthor(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) {
+    public TecnologiaDetailDTO updateAuthor(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: input: technologysId: {0} , technology: {1}", new Object[]{technologyId, technology});
         technology.setId(technologyId);
         if (technologyLogic.getTechnology(technologyId) == null) {
