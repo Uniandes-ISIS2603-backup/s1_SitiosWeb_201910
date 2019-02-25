@@ -36,29 +36,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      * Nombre de la dependencia.
      */
     private DependenciaEntity dependencia;
-<<<<<<< HEAD
 
-    /**
-     * Bitacora que se usa para guardar eventos.
-     */
-    private EventoEntity bitacora;
-
-    /**
-     * Collecion de notificaciones
-     */
-    //@javax.persistence.OneToMany(
-        //    mappedBy = "administrador", //verificar.
-      //      fetch = javax.persistence.FetchType.LAZY,
-    //        cascade = CascadeType.PERSIST,
-    //        orphanRemoval = true
-    //)
-    //private Collection<NotificacionEntity> notificaciones;
-
-    //@javax.persistence.ManyToOne()
-
-    //private SitioWebEntity sitioWebEntity; //Verificar
-
-=======
     
    
     
@@ -147,7 +125,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      */
     public List<SitioWebEntity> getSitioWebEntity() {
         return sitioWebEntity;
-
+    }
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */

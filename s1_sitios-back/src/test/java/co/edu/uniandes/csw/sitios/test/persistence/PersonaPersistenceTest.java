@@ -172,6 +172,7 @@ public class PersonaPersistenceTest {
     public void deletePersonaTest() {
         PersonaEntity entity = data.get(0);
         personaPersistence.delete(entity.getId());
+       
         PersonaEntity deleted = em.find(PersonaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
