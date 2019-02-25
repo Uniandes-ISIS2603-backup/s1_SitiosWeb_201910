@@ -28,7 +28,12 @@ public class DependenciaEntity extends BaseEntity {
      * telefono de la dependencia
      */
     private int telefono;
-
+    
+    @javax.persistence.OneToOne(
+        mappedBy = "dependencia",
+        fetch = javax.persistence.FetchType.EAGER
+    )
+    private AdministradorEntity administrador;
     /**
      * @return the nombreDependencia
      */
@@ -69,6 +74,20 @@ public class DependenciaEntity extends BaseEntity {
      */
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public AdministradorEntity getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param administrador the administrador to set
+     */
+    public void setAdministrador(AdministradorEntity administrador) {
+        this.administrador = administrador;
     }
     
 }

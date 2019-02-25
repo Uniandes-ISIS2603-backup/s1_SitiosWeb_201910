@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity;
 import co.edu.uniandes.csw.sitios.persistence.TecnologiaPersistence;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -28,15 +29,54 @@ public class TecnologiaLogic {
     private TecnologiaPersistence persistence;
 
     /**
-     * Se encarga de crear un Author en la base de datos.
+     * Se encarga de crear una tecnologia en la base de datos.
      *
      * @param tecnologiaEntity Objeto de TecnologiaEntity con los datos nuevos
      * @return Objeto de TecnologiaEntity con los datos nuevos y su ID.
+     * @throws BusinessLogicException en caso de que se viole una regla de negocio.
      */
-    public TecnologiaEntity createTechnology(TecnologiaEntity tecnologiaEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación del autor");
+    public TecnologiaEntity createTechnology(TecnologiaEntity tecnologiaEntity)throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la tecnologia");
+        TecnologiaEntity existe = getTechnology(tecnologiaEntity.getId());
+        String category = tecnologiaEntity.getTechCategory();
+        if(existe!=null)
+        {
+            throw new BusinessLogicException("Ya existe una tecnología con este ID");
+        }
+        if(tecnologiaEntity.getDescription()==null||tecnologiaEntity.getDescription().equals(""))
+        {
+             throw new BusinessLogicException("La descripción no puede estar vacia");
+        }
+        if(tecnologiaEntity.getDescription().length()<20)
+        {
+             throw new BusinessLogicException("La descripción debe contener más de 20 caracteres");
+        }
+        if(tecnologiaEntity.getName()==null||tecnologiaEntity.getName().equals(""))
+        {
+             throw new BusinessLogicException("El nombre no puede estar vacio");
+        }
+        if(tecnologiaEntity.getUrl()==null||tecnologiaEntity.getUrl().equals(""))
+        {
+             throw new BusinessLogicException("La url no puede estar vacia");
+        } 
+        if(!tecnologiaEntity.getUrl().matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"))
+        {
+             throw new BusinessLogicException("Url invalida");
+        } 
+        if(tecnologiaEntity.getVersion()==null||tecnologiaEntity.getVersion().equals(""))
+        {
+             throw new BusinessLogicException("La version no puede estar vacia");
+        } 
+        if(category==null||category.equals(""))
+        {
+             throw new BusinessLogicException("La version no puede estar vacia");
+        } 
+        if(!category.equalsIgnoreCase("LenguajeDeProgramacion")&&!category.equalsIgnoreCase("FrameWork")&&!category.equalsIgnoreCase("ServidorDeAplicacion")&&!category.equalsIgnoreCase("Libreria"))
+        {
+             throw new BusinessLogicException("Categoria invalida");
+        } 
         TecnologiaEntity newTecnologiaEntity = persistence.create(tecnologiaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación del autor");
+        LOGGER.log(Level.INFO, "Termina proceso de creación de la tecnologia");
         return newTecnologiaEntity;
     }
 
@@ -60,12 +100,12 @@ public class TecnologiaLogic {
      */
     public TecnologiaEntity getTechnology(Long tecnologiaId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la tecnología con id = {0}", tecnologiaId);
-        TecnologiaEntity authorEntity = persistence.find(tecnologiaId);
-        if (authorEntity == null) {
+        TecnologiaEntity tecnologiaEntity = persistence.find(tecnologiaId);
+        if (tecnologiaEntity == null) {
             LOGGER.log(Level.SEVERE, "La tecnología con el id = {0} no existe", tecnologiaId);
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar tecnología con id = {0}", tecnologiaId);
-        return authorEntity;
+        return tecnologiaEntity;
     }
 
     /**
@@ -74,9 +114,48 @@ public class TecnologiaLogic {
      * @param tecnologiaId Identificador de la instancia a actualizar
      * @param tecnologiaEntity Instancia de TecnologiaEntity con los nuevos datos.
      * @return Instancia de TecnologiaEntity con los datos actualizados.
+     * @throws BusinessLogicException si se viola una regla de negocio.
      */
-    public TecnologiaEntity updateTechnology(Long tecnologiaId, TecnologiaEntity tecnologiaEntity) {
+    public TecnologiaEntity updateTechnology(Long tecnologiaId, TecnologiaEntity tecnologiaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la tecnología con id = {0}", tecnologiaId);
+        TecnologiaEntity existe = getTechnology(tecnologiaEntity.getId());
+        String category = tecnologiaEntity.getTechCategory();
+        if(existe!=null&&!Objects.equals(tecnologiaId, existe.getId()))
+        {
+            throw new BusinessLogicException("Ya existe una tecnología con este ID");
+        }
+        if(tecnologiaEntity.getDescription()==null||tecnologiaEntity.getDescription().equals(""))
+        {
+             throw new BusinessLogicException("La descripción no puede estar vacia");
+        }
+        if(tecnologiaEntity.getDescription().length()<20)
+        {
+             throw new BusinessLogicException("La descripción debe contener más de 20 caracteres");
+        }
+        if(tecnologiaEntity.getName()==null||tecnologiaEntity.getName().equals(""))
+        {
+             throw new BusinessLogicException("El nombre no puede estar vacio");
+        }
+        if(tecnologiaEntity.getUrl()==null||tecnologiaEntity.getUrl().equals(""))
+        {
+             throw new BusinessLogicException("La url no puede estar vacia");
+        } 
+        if(!tecnologiaEntity.getUrl().matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"))
+        {
+             throw new BusinessLogicException("Url invalida");
+        } 
+        if(tecnologiaEntity.getVersion()==null||tecnologiaEntity.getVersion().equals(""))
+        {
+             throw new BusinessLogicException("La version no puede estar vacia");
+        } 
+        if(category==null||category.equals(""))
+        {
+             throw new BusinessLogicException("La version no puede estar vacia");
+        } 
+        if(!category.equalsIgnoreCase("LenguajeDeProgramacion")&&!category.equalsIgnoreCase("FrameWork")&&!category.equalsIgnoreCase("ServidorDeAplicacion")&&!category.equalsIgnoreCase("Libreria"))
+        {
+             throw new BusinessLogicException("Categoria invalida");
+        } 
         TecnologiaEntity newTecnologiaEntity = persistence.update(tecnologiaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la tecnología con id = {0}", tecnologiaId);
         return newTecnologiaEntity;
@@ -89,12 +168,12 @@ public class TecnologiaLogic {
      * @throws BusinessLogicException si la tecnología tiene libros sitiosWeb asociados.
      */
     public void deleteTechnology(Long tecnologiaId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar el autor con id = {0}", tecnologiaId);
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la tecnologia con id = {0}", tecnologiaId);
         List<SitioWebEntity> sitios = getTechnology(tecnologiaId).getSitiosWeb();
         if (sitios != null && !sitios.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el autor con id = " + tecnologiaId + " porque tiene sitiosWeb asociados");
+            throw new BusinessLogicException("No se puede borrar la tecnologia con id = " + tecnologiaId + " porque tiene sitiosWeb asociados");
         }
         persistence.delete(tecnologiaId);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar el autor con id = {0}", tecnologiaId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la tecnologia con id = {0}", tecnologiaId);
     }
 }

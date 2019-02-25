@@ -35,17 +35,13 @@ public class AdministradorEntity extends PersonaEntity{
      */
     private DependenciaEntity dependencia;
     
-    /**
-     * Bitacora que se usa para guardar eventos.
-     */
-    
-    private EventoEntity bitacora;
+   
     
     /**
      * Collecion de notificaciones
      */
-    @javax.persistence.OneToMany(
-       // mappedBy = "administrador", //verificar.
+    @javax.persistence.OneToOne(
+        mappedBy = "administrador", //verificar.
         fetch = javax.persistence.FetchType.LAZY
     )
     private Collection<NotificacionEntity> notificaciones;
@@ -104,19 +100,7 @@ public class AdministradorEntity extends PersonaEntity{
         this.dependencia = dependencia;
     }
 
-    /**
-     * @return the bitacora
-     */
-    public EventoEntity getBitacora() {
-        return bitacora;
-    }
-
-    /**
-     * @param bitacora the bitacora to set
-     */
-    public void setBitacora(EventoEntity bitacora) {
-        this.bitacora = bitacora;
-    }
+   
 
     /**
      * @return the notificaciones

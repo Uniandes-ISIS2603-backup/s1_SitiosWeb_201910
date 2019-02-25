@@ -34,9 +34,9 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
         super(entity);
         if(entity!=null)
         {
-            if(entity.getTecnologiasDeDesarrollo()!=null)
+            if(entity.getTechnologies()!=null)
             {
-                for(TecnologiaEntity tec :entity.getTecnologiasDeDesarrollo())
+                for(TecnologiaEntity tec :entity.getTechnologies())
                 {
                 tecnologiasDeDesarrollo.add(new TecnologiaDTO(tec));
                 }
@@ -77,7 +77,7 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
             {
                 tecEntity.add(tecs.toEntity());
             }
-            entity.setTecnologiasDeDesarrollo(tecEntity);
+            entity.setTechnologies(tecEntity);
         }
         if(solicitantes!=null)
         {

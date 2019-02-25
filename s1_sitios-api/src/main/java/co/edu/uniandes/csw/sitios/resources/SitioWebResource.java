@@ -75,4 +75,12 @@ public class SitioWebResource {
         LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaSites.toString());
         return listaSites;
     }
+
+    @Path("{sitesId: \\d+}/technologies")
+    public Class<SitioWebTecnologiaResourse> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
+        if (sitelogic.getWebSite(sitesId) == null) {
+            throw new WebApplicationException("El recurso /books/" + sitesId + " no existe.", 404);
+        }
+        return SitioWebTecnologiaResourse.class;
+    }
 }

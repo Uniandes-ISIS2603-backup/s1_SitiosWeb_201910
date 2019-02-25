@@ -42,11 +42,39 @@ public class SitioWebLogic {
            }
            if(entity.getDescripcion().equals(""))
            {
-               throw new BusinessLogicException("Descripcion vacio");
+               throw new BusinessLogicException("Descripcion vacia");
            } 
            if(entity.getDescripcion().length()<20)
            {
                throw new BusinessLogicException("Descripcion demaciado corta");
+           }
+           if(entity.getAudienciaEsperada()>0)
+           {
+              throw new BusinessLogicException("Audiencia esperada no puede tener un valor negativo");
+           }
+           if(entity.getCategoriaSitio()==null)
+           {
+              throw new BusinessLogicException("Categoria de sitio no asignada");
+           }
+           if(entity.getSitiosRelacionados()==null)
+           {
+              throw new BusinessLogicException("Lista de sitios relacionados es inexistente");
+           }
+           if(entity.getEstadoActual()==null)
+           {
+               throw new BusinessLogicException("El estado actual no se encuentra asignado");
+           }
+           if(entity.getSolicitantes()==null)
+           {
+                throw new BusinessLogicException("La lista de solicitantes no se existe");
+           }
+           if(entity.getTechnologies()==null)
+           {
+               throw new BusinessLogicException("La lista de tecnologias de desarrollo no existe");
+           }
+           if(entity.getImagen().matches("(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)"))
+           {
+              throw new BusinessLogicException("La ruta de la imagen es incorrecta");
            }
            
            return persistence.create(entity);
@@ -66,8 +94,10 @@ public class SitioWebLogic {
        }
 
     public List<SitioWebEntity> getSites() {
-           List<SitioWebEntity> sites =persistence.findAll();
-           return sites;
+         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
+         List<SitioWebEntity> sites =persistence.findAll();
+         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
+         return sites;
     }
     
      public void deleteNotificacion(Long notID) {
@@ -77,7 +107,7 @@ public class SitioWebLogic {
     }
      
        
-   public SitioWebEntity updateSitio(Long booksId, SitioWebEntity siteEntity) throws BusinessLogicException {
+   public SitioWebEntity updateSitio(Long booksId, SitioWebEntity siteEntity){
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el sitio con id = {0}", booksId);
         SitioWebEntity newEntity = persistence.update(siteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el sitio con id = {0}", siteEntity.getId());
