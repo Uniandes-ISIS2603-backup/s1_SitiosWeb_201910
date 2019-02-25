@@ -33,7 +33,7 @@ public class DependenciaEntity extends BaseEntity {
         mappedBy = "dependencia",
         fetch = javax.persistence.FetchType.EAGER
     )
-    AdministradorEntity administrador;
+    private AdministradorEntity administrador;
     /**
      * @return the nombreDependencia
      */
@@ -74,6 +74,20 @@ public class DependenciaEntity extends BaseEntity {
      */
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public AdministradorEntity getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param administrador the administrador to set
+     */
+    public void setAdministrador(AdministradorEntity administrador) {
+        this.administrador = administrador;
     }
     
 }
