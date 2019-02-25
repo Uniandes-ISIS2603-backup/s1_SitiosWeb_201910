@@ -6,11 +6,16 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.NotificacionDTO;
+import co.edu.uniandes.csw.sitios.ejb.NotificacionLogic;
+import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,8 +33,9 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class NotificacionResourse {
       private static final Logger LOGGER = Logger.getLogger(NotificacionResourse.class.getName());
-      
-    
+
+    @Inject
+    private NotificacionLogic notilogic;
      /**
      * Crea una noticiacion con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -39,15 +45,16 @@ public class NotificacionResourse {
      * guardar.
      * @return JSON {@link NotificacionDTO} - el sitio Web guardado con el atributo
      * id autogenerado.
-     * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
+     * @throws BusinessLogicException
      * Error de lógica que se genera cuando ya existe la notificacion.
      */
     @POST
-    public NotificacionDTO createWebSite(NotificacionDTO notification)throws BusinessLogicException {
+    public NotificacionDTO createNotification(NotificacionDTO notification)throws BusinessLogicException {
     
         LOGGER.log(Level.INFO, "SitioWebResource createWebsite: input: {0}", notification.toString());
-        NotificacionDTO newNotification = null;
-        return notification;
+        NotificacionEntity nuevaNotificacion= notilogic.createNotification(notification.toEntity());
+        NotificacionDTO nuevaNotificacionDTO= new NotificacionDTO(nuevaNotificacion);
+        return  nuevaNotificacionDTO;
     }
     
      /**
@@ -57,9 +64,13 @@ public class NotificacionResourse {
      * @return NotificacionDTO. 
      */
     @GET
-        @Path("{id: \\d+}")
-    public NotificacionDTO getNotificacion( @PathParam("id") int id ){
-        return null;
+    @Path("{id: \\d+}")
+    public NotificacionDTO getNotificacion( @PathParam("id") Long id )throws BusinessLogicException {
+
+        LOGGER.log(Level.INFO, "SitioWebResource getWebSite: input: {0}", id);
+        NotificacionEntity entity = notilogic.getNotificacion(id);
+        NotificacionDTO obtenido= new NotificacionDTO(entity);
+        return  obtenido;
     }
     
     /**
@@ -67,9 +78,14 @@ public class NotificacionResourse {
      * @return lista con todas las notificaciones presentes en el sistema
      */
     @GET
-    public List<NotificacionDTO> getNotificacion()
-    {
-        return null;
+    public List<NotificacionDTO> getNotificacion()throws BusinessLogicException {
+        LOGGER.info("BookResource getNotifications: input: void");
+        List<NotificacionDTO> listaNotis = new ArrayList<>();
+        for(NotificacionEntity siteEntity: notilogic.getAll()) {
+            listaNotis.add(new NotificacionDTO(siteEntity));
+        }
+        LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaNotis.toString());
+        return listaNotis;
     }
     
 }

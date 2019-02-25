@@ -35,11 +35,7 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
      * Nombre de la dependencia.
      */
     private DependenciaDTO dependencia;
-    
-    /**
-     * Bitacora que se usa para guardar eventos.
-     */
-    private EventoDTO bitacora;
+
 
     /**
      * Constructor AdministradorDTO vacio
@@ -64,7 +60,6 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
      */
     public AdministradorEntity toEntity() {
         AdministradorEntity entity = new AdministradorEntity();
-        entity.setBitacora(this.bitacora.toEntity());
         entity.setDependencia(this.dependencia.toEntity()); 
         entity.setNivel(this.nivel);
         entity.setNombreCargo(this.nombreCargo);
@@ -114,18 +109,6 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
         this.dependencia = dependencia;
     }
 
-    /**
-     * @return the bitacora
-     */
-    public EventoDTO getBitacora() {
-        return bitacora;
-    }
-
-    /**
-     * @param bitacora the bitacora to set
-     */
-    public void setBitacora(EventoDTO bitacora) {
-        this.bitacora = bitacora;
-    }
+   
     
 }
