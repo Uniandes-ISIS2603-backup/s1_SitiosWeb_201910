@@ -36,7 +36,6 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
      */
     private DependenciaDTO dependencia;
 
-
     /**
      * Constructor AdministradorDTO vacio
      */
@@ -108,7 +107,5 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
     public void setDependencia(DependenciaDTO dependencia) {
         this.dependencia = dependencia;
     }
-
    
-    
 }
