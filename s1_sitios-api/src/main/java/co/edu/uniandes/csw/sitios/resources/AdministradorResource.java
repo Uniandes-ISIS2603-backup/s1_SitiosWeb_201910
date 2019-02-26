@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.AdministradorDTO;
 import co.edu.uniandes.csw.sitios.dtos.AdministradorDetailDTO;
-import co.edu.uniandes.csw.sitios.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.sitios.ejb.AdministradorLogic;
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
@@ -30,7 +29,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Recurso administrador
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi.
  */
 @Path("/admins")
 @Produces("application/json")
@@ -42,15 +41,16 @@ public class AdministradorResource {
 
     @Inject
     private AdministradorLogic administradorLogic;
-    
+
     /**
      * Crea un nuevo autor con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico con un id auto-generado por la
      * base de datos.
      *
-     * @param Administrador {@link AdministradorDTO} - EL Administrador que se desea guardar.
-     * @return JSON {@link AdministradorDTO} - El Administrador guardado con el atributo id
-     * autogenerado.
+     * @param Administrador {@link AdministradorDTO} - EL Administrador que se
+     * desea guardar.
+     * @return JSON {@link AdministradorDTO} - El Administrador guardado con el
+     * atributo id autogenerado.
      */
     @POST
     public AdministradorDTO createAdministrador(AdministradorDTO administrador) {
@@ -59,12 +59,12 @@ public class AdministradorResource {
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: output: {0}", administrador);
         return administradorDTO;
     }
-    
-     /**
+
+    /**
      * Busca y devuelve todos los Administradores que existen en la aplicacion.
      *
-     * @return JSONArray {@link AdministradorDetailDTO} - Los Administradores encontrados en la
-     * aplicación. Si no hay ninguno retorna una lista vacía.
+     * @return JSONArray {@link AdministradorDetailDTO} - Los Administradores
+     * encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
     public List<AdministradorDetailDTO> getAdministrador() {
@@ -77,8 +77,8 @@ public class AdministradorResource {
     /**
      * Busca el autor con el id asociado recibido en la URL y lo devuelve.
      *
-     * @param adminsId Identificador del Administrador que se esta buscando. Este debe
-     * ser una cadena de dígitos.
+     * @param adminsId Identificador del Administrador que se esta buscando.
+     * Este debe ser una cadena de dígitos.
      * @return JSON {@link AdministradorDetailDTO} - El Administrador buscado
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el Administrador.
@@ -95,14 +95,15 @@ public class AdministradorResource {
         LOGGER.log(Level.INFO, "AuthorResource getAuthor: output: {0}", detailDTO);
         return detailDTO;
     }
-    
+
     /**
      * Actualiza el autor con el id recibido en la URL con la información que se
      * recibe en el cuerpo de la petición.
      *
-     * @param adminsId Identificador del Administrador que se desea actualizar. Este
-     * debe ser una cadena de dígitos.
-     * @param administrador {@link AdministradorDetailDTO} El Administrador que se desea guardar.
+     * @param adminsId Identificador del Administrador que se desea actualizar.
+     * Este debe ser una cadena de dígitos.
+     * @param administrador {@link AdministradorDetailDTO} El Administrador que
+     * se desea guardar.
      * @return JSON {@link AdministradorDetailDTO} - El Administrador guardado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el Administrador a
@@ -124,8 +125,8 @@ public class AdministradorResource {
     /**
      * Borra el Administrador con el id asociado recibido en la URL.
      *
-     * @param adminsId Identificador del Administrador que se desea borrar. Este debe
-     * ser una cadena de dígitos.
+     * @param adminsId Identificador del Administrador que se desea borrar. Este
+     * debe ser una cadena de dígitos.
      * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
      * si el Administrador tiene notificaciones asociados
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
@@ -141,14 +142,14 @@ public class AdministradorResource {
         administradorLogic.deleteAdministrador(adminsId);
         LOGGER.info("AdministradorResource deleteAdministrador: output: void");
     }
-   
+
     /**
      * Conexión con el servicio de libros para un autor.
      * {@link AuthorBooksResource}
      *
      * Este método conecta la ruta de /admins con las rutas de /websites que
-     * dependen del administrador, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de los sitios web.
+     * dependen del administrador, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los sitios web.
      *
      * @param adminsId El ID del administrador con respecto al cual se accede al
      * servicio.
@@ -163,7 +164,8 @@ public class AdministradorResource {
     }
 
     /**
-     * Convierte una lista de AdministradorEntity a una lista de AdministradorDetailDTO.
+     * Convierte una lista de AdministradorEntity a una lista de
+     * AdministradorDetailDTO.
      *
      * @param entityList Lista de AdministradorEntity a convertir.
      * @return Lista de AdministradorDetailDTO convertida.
