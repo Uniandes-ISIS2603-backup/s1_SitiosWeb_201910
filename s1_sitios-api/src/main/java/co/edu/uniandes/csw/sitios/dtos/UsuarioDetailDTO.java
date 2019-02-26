@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ import java.util.List;
  * @author estudiante
  */
 public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
-    
+
     /**
      * Lista de tickets que puede tener un usuario.
      */
@@ -55,9 +54,9 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     @Override
     public UsuarioEntity toEntity() {
         UsuarioEntity entity = new UsuarioEntity();
-        if (tickets != null) {
+        if (getTickets() != null) {
             List<TicketEntity> ticket = new ArrayList<>();
-            for (TicketDTO ticketDTO : tickets) {
+            for (TicketDTO ticketDTO : getTickets()) {
                 ticket.add(ticketDTO.toEntity());
 
                 entity.setTickets(ticket);
@@ -65,6 +64,20 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
 
         }
         return entity;
+    }
+    
+    /**
+     * @return the tickets
+     */
+    public List<TicketDTO> getTickets() {
+        return tickets;
+    }
+
+    /**
+     * @param tickets the tickets to set
+     */
+    public void setTickets(List<TicketDTO> tickets) {
+        this.tickets = tickets;
     }
     
 
