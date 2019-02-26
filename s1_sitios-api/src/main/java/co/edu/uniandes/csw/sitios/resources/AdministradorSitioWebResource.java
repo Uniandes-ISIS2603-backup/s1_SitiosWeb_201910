@@ -7,8 +7,8 @@ package co.edu.uniandes.csw.sitios.resources;
 
 /**
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi.
  */
 public class AdministradorSitioWebResource {
-    
+
 }

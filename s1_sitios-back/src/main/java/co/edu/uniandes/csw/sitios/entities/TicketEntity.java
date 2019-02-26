@@ -13,47 +13,30 @@ import javax.persistence.Entity;
  * @author estudiante
  */
 @Entity
-public class TicketEntity extends BaseEntity{
+public class TicketEntity extends BaseEntity {
 
-    /**
-     * @return the usuarioEntity
-     */
-    public UsuarioEntity getUsuarioEntity() {
-        return usuarioEntity;
-    }
-
-    /**
-     * @param usuarioEntity the usuarioEntity to set
-     */
-    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-        this.usuarioEntity = usuarioEntity;
-    }
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
-    
     /**
-     * descripcion de por que se saco
-     * el ticket.
+     * descripcion de por que se saco el ticket.
      */
     private String descripcion;
-    
+
     /**
-     * fecha que se saco el ticket,
-     * diferente de null.
+     * fecha que se saco el ticket, diferente de null.
      */
     private Date fecha;
-    
+
     /**
      * estado del ticket, tiene 3: 0, 1, 2.
      */
     private Integer estado; //Solo 3 estados
-    
+
     /**
-     * 
+     *
      */
-    @javax.persistence.ManyToOne(
-    )
+    @javax.persistence.ManyToOne
     private UsuarioEntity usuarioEntity;
 
     /**
@@ -102,5 +85,19 @@ public class TicketEntity extends BaseEntity{
      */
     public void setEstado(Integer estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the usuarioEntity
+     */
+    public UsuarioEntity getUsuarioEntity() {
+        return usuarioEntity;
+    }
+
+    /**
+     * @param usuarioEntity the usuarioEntity to set
+     */
+    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
+        this.usuarioEntity = usuarioEntity;
     }
 }

@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**

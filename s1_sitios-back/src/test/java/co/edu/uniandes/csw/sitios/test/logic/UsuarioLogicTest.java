@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.UsuarioLogic;
+import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.UsuarioPersistence;
@@ -37,7 +38,7 @@ public class UsuarioLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private UsuarioLogic authorLogic;
+    private UsuarioLogic usuarioLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -86,8 +87,7 @@ public class UsuarioLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from PrizeEntity").executeUpdate();
-        em.createQuery("delete from BookEntity").executeUpdate();
+        em.createQuery("delete from TicketEntity").executeUpdate();
         em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
     
@@ -96,22 +96,11 @@ public class UsuarioLogicTest {
      * pruebas.
      */
     private void insertData() {
-//        for (int i = 0; i < 3; i++) {
-//            UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
-//            em.persist(entity);
-//            entity.setBooks(new ArrayList<>());
-//            data.add(entity);
-//        }
-//        UsuarioEntity author = data.get(2);
-//        BookEntity entity = factory.manufacturePojo(BookEntity.class);
-//        entity.getUsuarios().add(author);
-//        em.persist(entity);
-//        author.getBooks().add(entity);
-//
-//        PrizeEntity prize = factory.manufacturePojo(PrizeEntity.class);
-//        prize.setAuthor(data.get(1));
-//        em.persist(prize);
-//        data.get(1).getPrizes().add(prize);
+        for (int i = 0; i < 3; i++) {
+            UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
+            em.persist(entity); //entity
+            data.add(entity);
+        }
     }
     
     /**
@@ -120,12 +109,11 @@ public class UsuarioLogicTest {
     @Test
     public void createUsuarioTest() {
         UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
-        UsuarioEntity result = authorLogic.createUsuario(newEntity);
+        UsuarioEntity result = usuarioLogic.createUsuario(newEntity);
         Assert.assertNotNull(result);
         UsuarioEntity entity = em.find(UsuarioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-//        Assert.assertEquals(newEntity.getBirthDate(), entity.getBirthDate());
     }
     
      /**
@@ -133,7 +121,7 @@ public class UsuarioLogicTest {
      */
     @Test
     public void getUsuariosTest() {
-        List<UsuarioEntity> list = authorLogic.getUsuarios();
+        List<UsuarioEntity> list = usuarioLogic.getUsuarios();
         Assert.assertEquals(data.size(), list.size());
         for (UsuarioEntity entity : list) {
             boolean found = false;
@@ -152,11 +140,10 @@ public class UsuarioLogicTest {
     @Test
     public void getUsuarioTest() {
         UsuarioEntity entity = data.get(0);
-        UsuarioEntity resultEntity = authorLogic.getUsuario(entity.getId());
+        UsuarioEntity resultEntity = usuarioLogic.getUsuario(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
-//        Assert.assertEquals(entity.getBirthDate(), resultEntity.getBirthDate());
     }
     
     /**
@@ -169,13 +156,12 @@ public class UsuarioLogicTest {
 
         pojoEntity.setId(entity.getId());
 
-        authorLogic.updateUsuario(pojoEntity.getId(), pojoEntity);
+        usuarioLogic.updateUsuario(pojoEntity.getId(), pojoEntity);
 
         UsuarioEntity resp = em.find(UsuarioEntity.class, entity.getId());
 
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
-//        Assert.assertEquals(pojoEntity.getBirthDate(), resp.getBirthDate());
     }
     
     /**
@@ -186,7 +172,7 @@ public class UsuarioLogicTest {
     @Test
     public void deleteUsuarioTest() throws BusinessLogicException {
         UsuarioEntity entity = data.get(0);
-        authorLogic.deleteUsuario(entity.getId());
+        usuarioLogic.deleteUsuario(entity.getId());
         UsuarioEntity deleted = em.find(UsuarioEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
