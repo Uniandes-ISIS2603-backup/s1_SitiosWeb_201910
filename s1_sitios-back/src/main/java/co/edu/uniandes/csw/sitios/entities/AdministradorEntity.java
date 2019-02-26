@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -35,27 +37,21 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * Nombre de la dependencia.
      */
+    @PodamExclude
+    @OneToOne
     private DependenciaEntity dependencia;
 
-    
-   
-    
     /**
      * Collecion de notificaciones
      */
-    @javax.persistence.OneToOne(
-        mappedBy = "administrador", //verificar.
-        fetch = javax.persistence.FetchType.LAZY
-    )
+    @PodamExclude
+    @javax.persistence.OneToMany
     private List<NotificacionEntity> notificaciones;
-    
-     @javax.persistence.ManyToOne(
-    )
-     
+
     @PodamExclude
     @ManyToMany
     private List<SitioWebEntity> sitioWebEntity; //Verificar
-    
+
     /**
      * Constructor AdministradorEntity vacio
      */
@@ -104,8 +100,6 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
         this.dependencia = dependencia;
     }
 
-   
-
     /**
      * @return the notificaciones
      */
@@ -126,6 +120,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     public List<SitioWebEntity> getSitioWebEntity() {
         return sitioWebEntity;
     }
+
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
