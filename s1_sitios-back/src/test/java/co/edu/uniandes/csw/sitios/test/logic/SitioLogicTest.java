@@ -113,11 +113,9 @@ public class SitioLogicTest {
     newsite.setHistorialDeEstados(stateData);
     newsite.setSitiosRelacionados(data);
     newsite.setSolicitantes(peopleData);
-    newsite.setSoportes(peopleData);
     newsite.setTechnologies(tecsData);
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-    newsite.setResponsable(peopleData.get(0));
     newsite.setNotificacion(notData.get(0));
     em.persist(newsite);
     data.add(newsite);
@@ -131,11 +129,9 @@ public class SitioLogicTest {
     newsite.setHistorialDeEstados(stateData);
     newsite.setSitiosRelacionados(data);
     newsite.setSolicitantes(peopleData);
-    newsite.setSoportes(peopleData);
     newsite.setTechnologies(tecsData);
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-    newsite.setResponsable(peopleData.get(0));
     newsite.setNotificacion(notData.get(0));
     
    try{

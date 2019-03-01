@@ -71,12 +71,6 @@ public class SitioWebDTO  implements Serializable{
 	 */
 	private PlataformaDeDespliegueDTO plataformaDeDespliegue;
 
-
-
-	/**
-	 * Responsable del sitio web
-	 */
-	private AdministradorDTO responsable;
     
         
           /*
@@ -233,16 +227,6 @@ public class SitioWebDTO  implements Serializable{
     public void setPlataformaDeDespliegue(PlataformaDeDespliegueDTO plataformaDeDespliegue) {
         this.plataformaDeDespliegue = plataformaDeDespliegue;
     }
-
-
-    public AdministradorDTO getResponsable() {
-        return responsable;
-    }
-
-    public void setResponsable(AdministradorDTO responsable) {
-        this.responsable = responsable;
-    }
-
-        
+  
         
 }

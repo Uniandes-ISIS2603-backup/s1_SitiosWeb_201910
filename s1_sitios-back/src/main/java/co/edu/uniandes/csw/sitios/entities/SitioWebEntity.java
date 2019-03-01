@@ -16,8 +16,11 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
@@ -80,6 +83,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         /**
 	 * Categoria a la cual pertenece el sitio
 	 */
+        @Enumerated(EnumType.STRING)
 	private Categoria categoriaSitio;
 
         
@@ -92,16 +96,10 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 */
      //TODO asignar multiplicidad
         @PodamExclude
-        @OneToOne
+        @ManyToOne(fetch=FetchType.LAZY)
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
-    /**
-     * Responsable del sitio web
-     */
-     //TODO asignar multiplicidad
-    @PodamExclude
-    @OneToOne
-    private AdministradorEntity responsable;
+  
         
     @PodamExclude
     @OneToOne(cascade = CascadeType.PERSIST)//(targetEntity = NotificacionEntity.class)((fetch=FetchType.LAZY)
@@ -132,19 +130,14 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
     @ManyToMany 
     private List<SitioWebEntity> sitiosRelacionados;
 
-    /**
-     * Personas encargadas del soporte del sitio
-     */
-    @PodamExclude
-    @ManyToMany 
-    private List<AdministradorEntity> soportes;
+
     
     	/**
 	 * historial completo de estados que ha tenido este sitio
 	 */
     @PodamExclude
-    @OneToMany
-    @JoinColumn(name="ESTADOWEBENITY_ID")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="ID", nullable=false)
     private List<EstadoWebEntity> historialDeEstados;
 
     
@@ -264,21 +257,10 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         this.sitiosRelacionados = sitiosRelacionados;
     }
 
-    public List<AdministradorEntity> getSoportes() {
-        return soportes;
-    }
 
-    public void setSoportes(List<AdministradorEntity> soportes) {
-        this.soportes = soportes;
-    }
 
-    public AdministradorEntity getResponsable() {
-        return responsable;
-    }
 
-    public void setResponsable(AdministradorEntity responsable) {
-        this.responsable = responsable;
-    }
+
       /**
        * Categoria que puede tener un sitio web
       */
