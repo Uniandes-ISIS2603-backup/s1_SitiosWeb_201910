@@ -87,19 +87,9 @@ public class PersonaLogic {
      * Elimina una instancia de Persona de la base de datos.
      *
      * @param personasId Identificador de la instancia a eliminar.
-     * @throws BusinessLogicException si la persona //------------tiene libros
-     * asociados.
      */
     public void deletePersona(Long personasId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la persona con id = {0}", personasId);
-        //List<BookEntity> books = getAuthor(personasId).getBooks();
-        //if (books != null && !books.isEmpty()) {
-        //throw new BusinessLogicException("No se puede borrar la persona con id = " + personasId + " porque tiene books asociados");
-        //}
-        //List<PrizeEntity> prizes = getPersona(personasId).getPrizes();
-        //if (prizes != null && !prizes.isEmpty()) {
-        //throw new BusinessLogicException("No se puede borrar el autor con id = " + personasId + " porque tiene premios asociados");
-        //}
         persistence.delete(personasId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la persona con id = {0}", personasId);
     }

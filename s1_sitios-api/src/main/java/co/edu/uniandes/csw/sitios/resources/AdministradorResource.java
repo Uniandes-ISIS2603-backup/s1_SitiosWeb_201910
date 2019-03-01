@@ -67,11 +67,11 @@ public class AdministradorResource {
      * encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<AdministradorDetailDTO> getAdministrador() {
-        LOGGER.info("AuthorResource getAdministradores: input: void");
-        List<AdministradorDetailDTO> listaAuthors = listEntity2DTO(administradorLogic.getAdministradores());
-        LOGGER.log(Level.INFO, "AuthorResource getAuthors: output: {0}", listaAuthors);
-        return listaAuthors;
+    public List<AdministradorDetailDTO> getAdministradores() {
+        LOGGER.info("AdministradorResource getAdministradores: input: void");
+        List<AdministradorDetailDTO> listaAdministradores = listEntity2DTO(administradorLogic.getAdministradores());
+        LOGGER.log(Level.INFO, "AdministradorResource getAdministradores: output: {0}", listaAdministradores);
+        return listaAdministradores;
     }
 
     /**
@@ -92,7 +92,7 @@ public class AdministradorResource {
             throw new WebApplicationException("El recurso /authors/" + adminsId + " no existe.", 404);
         }
         AdministradorDetailDTO detailDTO = new AdministradorDetailDTO(administradorEntity);
-        LOGGER.log(Level.INFO, "AuthorResource getAuthor: output: {0}", detailDTO);
+        LOGGER.log(Level.INFO, "AdministradorResource getAdministrador: output: {0}", detailDTO);
         return detailDTO;
     }
 
@@ -155,12 +155,12 @@ public class AdministradorResource {
      * servicio.
      * @return El servicio de Sitios Web para ese administrador en paricular.
      */
-    @Path("{authorsId: \\d+}/websites")
-    public Class<AdministradorSitioWebResource> getAdministradorSitioWebResource(@PathParam("adminsId") Long adminsId) {
+    @Path("{adminsId: \\d+}/websites")
+    public Class<AdministradorSitiosWebResource> getAdministradorSitiosWebResource(@PathParam("adminsId") Long adminsId) {
         if (administradorLogic.getAdministrador(adminsId) == null) {
             throw new WebApplicationException("El recurso /admins/" + adminsId + " no existe.", 404);
         }
-        return AdministradorSitioWebResource.class;
+        return AdministradorSitiosWebResource.class;
     }
 
     /**

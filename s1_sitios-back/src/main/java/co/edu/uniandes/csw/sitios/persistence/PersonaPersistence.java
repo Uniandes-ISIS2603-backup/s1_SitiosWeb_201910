@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -21,11 +22,12 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class PersonaPersistence {
+
     private static final Logger LOGGER = Logger.getLogger(PersonaPersistence.class.getName());
-    
-     @PersistenceContext(unitName = "sitiosPU")
+
+    @PersistenceContext(unitName = "sitiosPU")
     protected EntityManager em;
-    
+
     /**
      * Método para persisitir la entidad en la base de datos.
      *
@@ -38,13 +40,13 @@ public class PersonaPersistence {
         LOGGER.log(Level.INFO, "Persona creada");
         return personaEntity;
     }
-    
+
     /**
      * Devuelve todas las personas de la base de datos.
      *
-     * @return una lista con todas las personas que encuentre en la base de datos,
-     * "select u from PersonaEntity u" es como un "select * from BookEntity;" -
-     * "SELECT * FROM table_name" en SQL.
+     * @return una lista con todas las personas que encuentre en la base de
+     * datos, "select u from PersonaEntity u" es como un "select * from
+     * BookEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<PersonaEntity> findAll() {
         LOGGER.log(Level.INFO, "Consultando todos las personas");
@@ -66,15 +68,16 @@ public class PersonaPersistence {
     /**
      * Actualiza una persona.
      *
-     * @param personaEntity: la persona que viene con los nuevos cambios. Por ejemplo
-     * el nombre pudo cambiar. En ese caso, se haria uso del método update.
+     * @param personaEntity: la persona que viene con los nuevos cambios. Por
+     * ejemplo el nombre pudo cambiar. En ese caso, se haria uso del método
+     * update.
      * @return la persona con los cambios aplicados.
      */
     public PersonaEntity update(PersonaEntity personaEntity) {
         LOGGER.log(Level.INFO, "Actualizando la persona con id={0}", personaEntity.getId());
         return em.merge(personaEntity);
     }
-    
+
     /**
      * Borra una persona de la base de datos recibiendo como argumento el id de
      * la persona
@@ -91,5 +94,5 @@ public class PersonaPersistence {
         Es similar a "delete from PersonaEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
         em.remove(personaEntity);
     }
-    
+
 }

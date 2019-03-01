@@ -32,8 +32,8 @@ public class UsuarioTicketLogic {
     /**
      * Asocia un Book existente a un Author
      *
-     * @param authorsId Identificador de la instancia de Author
-     * @param booksId Identificador de la instancia de Book
+     * @param usersId Identificador de la instancia de Author
+     * @param ticketsId Identificador de la instancia de Book
      * @return Instancia de BookEntity que fue asociada a Author
      */
     public TicketEntity addTicket(Long usersId, Long ticketsId) {
