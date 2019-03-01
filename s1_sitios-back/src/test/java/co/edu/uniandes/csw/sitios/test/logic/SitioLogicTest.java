@@ -1,12 +1,8 @@
 package co.edu.uniandes.csw.sitios.test.logic;
-
-import co.edu.uniandes.csw.sitios.ejb.NotificacionLogic;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.*;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.sitios.persistence.NotificacionPersistence;
 import co.edu.uniandes.csw.sitios.persistence.SitioWebPersistence;
-import com.gs.collections.impl.list.fixed.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -132,7 +128,6 @@ public class SitioLogicTest {
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
     newsite.setResponsable(peopleData.get(0));
-    
    try{
     SitioWebEntity entity=logic.createWebSite(newsite);
     Assert.assertEquals(entity.getEstadoActual(),stateData.get((0)));

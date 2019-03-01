@@ -32,10 +32,15 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class DependenciaResource {
+    
+    
+    
     public final static Logger LOGGER = Logger.getLogger(DependenciaResource.class.getName());
     
     @Inject
     private DependenciaLogic dependenciaLogic; 
+    
+    
         
     /**
      * Crea una Dependencia mediante una peticion POST
@@ -45,7 +50,7 @@ public class DependenciaResource {
     @POST
     public DependenciaDTO createDependencia(DependenciaDTO dependencia) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "DependenciaResource createDependencia: input: {0}", dependencia);
-        DependenciaDTO dependenciaDTO = new DependenciaDTO(dependenciaLogic.createTechnology(dependencia.toEntity()));
+        DependenciaDTO dependenciaDTO = new DependenciaDTO(dependenciaLogic.createDependency(dependencia.toEntity()));
         LOGGER.log(Level.INFO, "DependenciaResource createDependencia: output: {0}", dependenciaDTO);
         return dependenciaDTO;
     }
@@ -57,7 +62,7 @@ public class DependenciaResource {
      * @return DependenciaDTO. 
      */
     @GET
-        @Path("{id: \\d+}")
+    @Path("{id: \\d+}")
     public DependenciaDTO getDependencia( @PathParam("id") long id ){
         DependenciaEntity entity = dependenciaLogic.getDependency(id);
         if(entity == null) {
