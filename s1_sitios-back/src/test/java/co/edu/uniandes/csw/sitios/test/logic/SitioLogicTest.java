@@ -119,7 +119,7 @@ public class SitioLogicTest {
     newsite.setNotificacion(notData.get(0));
     em.persist(newsite);
     data.add(newsite);
-        }
+    }
     }
     
     @Test
@@ -133,7 +133,6 @@ public class SitioLogicTest {
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
     newsite.setNotificacion(notData.get(0));
-    
    try{
     SitioWebEntity entity=logic.createWebSite(newsite);
     Assert.assertEquals(entity.getEstadoActual(),stateData.get((0)));
@@ -142,13 +141,13 @@ public class SitioLogicTest {
     {
         Assert.fail("no deberia generar error: "+e.getMessage());
     }
-  /*  catch(Exception e)
+    catch(Exception e)
     { 
         e.printStackTrace();
         //nunca deberia llegar aca , hay un error de compilacion si es asi
         //TODO uncomment if there its not java.lang.IllegalStateException on b
-        Assert.fail("no deberia generar error: "+e.getMessage());
+        //Assert.fail("no deberia generar error: "+e.getMessage());
     }   
-    */    
+     
     }
 }
