@@ -10,27 +10,24 @@ import java.io.Serializable;
 
 /**
  * AdministradorDTO implementa Serializable
+ *
  * @author estudiante
  */
 public class AdministradorDTO extends PersonaDTO implements Serializable {
 
-    
-    
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
-    
     /**
-     * Nivel que tiene un administrador, 
-     * nivel = {1, 2, 3, 4, 5}
+     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
      */
     private Integer nivel;
-    
+
     /**
      * Nombre del cargo del administrador.
      */
     private String nombreCargo;
-    
+
     /**
      * Nombre de la dependencia.
      */
@@ -43,29 +40,37 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
     }
 
     /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
+     * Constructor que se usa para checkear la entidad del DTO
+     *
      * @param entity != null
      */
-    public AdministradorDTO( AdministradorEntity entity ){
-        if(entity != null) {
+    public AdministradorDTO(AdministradorEntity entity) {
+        if (entity != null) {
             this.id = entity.id;
+            this.nombreCargo = entity.getNombreCargo();
+            this.nivel = entity.getNivel();
+            if (entity.getDependencia() != null) {
+                this.dependencia = new DependenciaDTO(entity.getDependencia());
+            } else {
+                this.dependencia = null;
+            }
         }
     }
-    
+
     /**
      * Chequeo de la implementacion toEntity del DTO
+     *
      * @return AdministradorEntity
      */
     public AdministradorEntity toEntity() {
         AdministradorEntity entity = new AdministradorEntity();
-        entity.setDependencia(this.dependencia.toEntity()); 
-        entity.setNivel(this.nivel);
-        entity.setNombreCargo(this.nombreCargo);
+        entity.setDependencia(this.getDependencia().toEntity());
+        entity.setNivel(this.getNivel());
+        entity.setNombreCargo(this.getNombreCargo());
         entity.setId(this.id);
         return entity;
     }
-    
+
     /**
      * @return the nivel
      */
@@ -76,7 +81,7 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
     /**
      * @param nivel the nivel to set
      */
-    public void setNivel(int nivel) {
+    public void setNivel(Integer nivel) {
         this.nivel = nivel;
     }
 
@@ -107,5 +112,5 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
     public void setDependencia(DependenciaDTO dependencia) {
         this.dependencia = dependencia;
     }
-   
+
 }

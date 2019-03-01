@@ -50,7 +50,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
 
     @PodamExclude
     @ManyToMany
-    private List<SitioWebEntity> sitioWebEntity; //Verificar
+    private List<SitioWebEntity> sitiosWebEntity; 
 
     /**
      * Constructor AdministradorEntity vacio
@@ -117,15 +117,15 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * @return the sitioWebEntity
      */
-    public List<SitioWebEntity> getSitioWebEntity() {
-        return sitioWebEntity;
+    public List<SitioWebEntity> getSitiosWebEntity() {
+        return sitiosWebEntity;
     }
 
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
-    public void setSitioWebEntity(List<SitioWebEntity> sitioWebEntity) {
-        this.sitioWebEntity = sitioWebEntity;
+    public void setSitiosWebEntity(List<SitioWebEntity> sitiosWebEntity) {
+        this.sitiosWebEntity = sitiosWebEntity;
     }
 
 }

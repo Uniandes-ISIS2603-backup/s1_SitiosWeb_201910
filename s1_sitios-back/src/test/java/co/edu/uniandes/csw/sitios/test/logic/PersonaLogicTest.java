@@ -86,9 +86,7 @@ public class PersonaLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from PrizeEntity").executeUpdate();
-        em.createQuery("delete from BookEntity").executeUpdate();
-        em.createQuery("delete from AuthorEntity").executeUpdate();
+        em.createQuery("delete from PersonEntity").executeUpdate();
     }
 
     /**
@@ -99,7 +97,6 @@ public class PersonaLogicTest {
         for (int i = 0; i < 3; i++) {
             PersonaEntity entity = factory.manufacturePojo(PersonaEntity.class);
             em.persist(entity);
-            //entity.setBooks(new ArrayList<>());
             data.add(entity);
         }
     }
@@ -116,71 +113,19 @@ public class PersonaLogicTest {
         PersonaEntity entity = em.find(PersonaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-        //Assert.assertEquals(newEntity.getBirthDate(), entity.getBirthDate());
     }
 
-    /**
-     * Prueba para consultar la lista de Personas.
-     */
-    @Test
-    public void getPersonasTest() {
-        List<PersonaEntity> list = personaLogic.getPersonas();
-        Assert.assertEquals(data.size(), list.size());
-        for (PersonaEntity entity : list) {
-            boolean found = false;
-            for (PersonaEntity storedEntity : data) {
-                if (entity.getId().equals(storedEntity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
+//    /**
+//     * Prueba para eliminar un Persona
+//     *
+//     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+//     */
+//    @Test
+//    public void deletePersonaTest() throws BusinessLogicException {
+//        PersonaEntity entity = data.get(0);
+//        personaLogic.deletePersona(entity.getId());
+//        PersonaEntity deleted = em.find(PersonaEntity.class, entity.getId());
+//        Assert.assertNull(deleted);
+//    }
 
-    /**
-     * Prueba para consultar un Persona.
-     */
-    @Test
-    public void getPersonaTest() {
-        PersonaEntity entity = data.get(0);
-        PersonaEntity resultEntity = personaLogic.getPersona(entity.getId());
-        Assert.assertNotNull(resultEntity);
-        Assert.assertEquals(entity.getId(), resultEntity.getId());
-        Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
-        //Assert.assertEquals(entity.getBirthDate(), resultEntity.getBirthDate());
-    }
-
-    /**
-     * Prueba para actualizar un Persona.
-     */
-    @Test
-    public void updatePersonaTest() {
-        PersonaEntity entity = data.get(0);
-        PersonaEntity pojoEntity = factory.manufacturePojo(PersonaEntity.class);
-
-        pojoEntity.setId(entity.getId());
-
-        personaLogic.updatePersona(pojoEntity.getId(), pojoEntity);
-
-        PersonaEntity resp = em.find(PersonaEntity.class, entity.getId());
-
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
-        //Assert.assertEquals(pojoEntity.getBirthDate(), resp.getBirthDate());
-    }
-
-    /**
-     * Prueba para eliminar un Persona
-     *
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
-     */
-    @Test
-    public void deletePersonaTest() throws BusinessLogicException {
-        PersonaEntity entity = data.get(0);
-        personaLogic.deletePersona(entity.getId());
-        PersonaEntity deleted = em.find(PersonaEntity.class, entity.getId());
-        Assert.assertNull(deleted);
-    }
-
-    //Falta un metodo.
 }

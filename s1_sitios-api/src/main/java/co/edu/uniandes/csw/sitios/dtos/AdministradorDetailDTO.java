@@ -48,7 +48,7 @@ public class AdministradorDetailDTO extends AdministradorDTO{
                 notificaciones.add(new NotificacionDTO(entityNotificacion));
             }
             sitiosWeb = new ArrayList();
-            for (SitioWebEntity entitySitioWeb : administradorEntity.getSitioWebEntity()) {
+            for (SitioWebEntity entitySitioWeb : administradorEntity.getSitiosWebEntity()) {
                 sitiosWeb.add(new SitioWebDTO(entitySitioWeb));
             }
         }
@@ -76,7 +76,7 @@ public class AdministradorDetailDTO extends AdministradorDTO{
             for (SitioWebDTO dtoPrize : sitiosWeb) {
                 sitiosWebEntity.add(dtoPrize.toEntity());
             }
-            administradorEntity.setSitioWebEntity(sitiosWebEntity);
+            administradorEntity.setSitiosWebEntity(sitiosWebEntity);
         }
         return administradorEntity;
     }
