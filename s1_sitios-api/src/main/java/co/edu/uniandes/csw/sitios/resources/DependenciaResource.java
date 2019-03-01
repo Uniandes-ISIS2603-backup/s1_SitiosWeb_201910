@@ -6,9 +6,13 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.DependenciaDTO;
+import co.edu.uniandes.csw.sitios.ejb.DependenciaLogic;
 import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
+import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,24 +33,38 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class DependenciaResource {
     public final static Logger LOGGER = Logger.getLogger(DependenciaResource.class.getName());
-
+    
+    @Inject
+    private DependenciaLogic dependenciaLogic; 
         
-        /**
-//     * Permite dar un Dependencia segun su Id.
-//     * @param id : Numero entero, id con
-//     * el cual se identifica una Dependencia
-//     * @return DependenciaDTO. 
-//     */
-//    @GET
-//        @Path("{id: \\d+}")
-//    public DependenciaDTO getDependencia( @PathParam("id") int id ){
-//        return null;
-////        DependenciaEntity entity = logic.getDependencia(id);
-////        if(entity == null) {
-////            throw new WebApplicationException("Dependencia with id: " + id + " does not exists", 404);
-////        }
-////        return null;
-//    }
+    /**
+     * Crea una Dependencia mediante una peticion POST
+     * @param Dependencia != null, Dependencia a crear
+     * @return Retorna el DependenciaDTO creado
+     */
+    @POST
+    public DependenciaDTO createDependencia(DependenciaDTO dependencia) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "DependenciaResource createDependencia: input: {0}", dependencia);
+        DependenciaDTO dependenciaDTO = new DependenciaDTO(dependenciaLogic.createTechnology(dependencia.toEntity()));
+        LOGGER.log(Level.INFO, "DependenciaResource createDependencia: output: {0}", dependenciaDTO);
+        return dependenciaDTO;
+    }
+    
+     /**
+     * Permite dar un Dependencia segun su Id.
+     * @param id : Numero entero, id con
+     * el cual se identifica una Dependencia
+     * @return DependenciaDTO. 
+     */
+    @GET
+        @Path("{id: \\d+}")
+    public DependenciaDTO getDependencia( @PathParam("id") long id ){
+        DependenciaEntity entity = dependenciaLogic.getDependency(id);
+        if(entity == null) {
+            throw new WebApplicationException("Dependencia with id: " + id + " does not exists", 404);
+        }
+        return null;
+    }
     
     /**
      * Actualiza un Dependencia dado un id,
@@ -73,13 +91,4 @@ public class DependenciaResource {
         
     }
     
-    /**
-     * Crea una Dependencia mediante una peticion POST
-     * @param Dependencia != null, Dependencia a crear
-     * @return Retorna el DependenciaDTO creado
-     */
-    @POST
-    public DependenciaDTO createDependencia( DependenciaDTO dependencia ){
-        return dependencia;
-    }
 }

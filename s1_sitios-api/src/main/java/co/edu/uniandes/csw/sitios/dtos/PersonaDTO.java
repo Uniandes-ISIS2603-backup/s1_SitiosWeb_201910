@@ -12,36 +12,40 @@ import java.io.Serializable;
  *
  * @author Albert Molano
  */
-public class PersonaDTO implements Serializable{
-    
+public class PersonaDTO implements Serializable {
+
     protected Long id;
-    
+
     protected String nombre;
-    
+
     protected String email;
-    
+
     protected String password;
-    
+
     protected Long telefono;
 
-    public PersonaDTO()
-    {
-        
+    public PersonaDTO() {
+
     }
-    
+
     /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
+     * Constructor que se usa para checkear la entidad del DTO
+     *
      * @param entity != null
      */
-    public PersonaDTO( PersonaEntity entity ){
-        if(entity != null) {
+    public PersonaDTO(PersonaEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
             this.nombre = entity.getNombre();
+            this.email = entity.getEmail();
+            this.password = entity.getPassword();
+            this.telefono = entity.getTelefono();
         }
     }
-    
+
     /**
      * Chequeo de la implementacion toEntity del DTO
+     *
      * @return PersonaEntity
      */
     public PersonaEntity toEntity() {
@@ -53,7 +57,7 @@ public class PersonaDTO implements Serializable{
         entity.setTelefono(this.telefono);
         return entity;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -93,7 +97,5 @@ public class PersonaDTO implements Serializable{
     public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
-    
-    
-    
+
 }

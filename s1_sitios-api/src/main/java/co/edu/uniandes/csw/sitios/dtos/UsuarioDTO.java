@@ -42,6 +42,8 @@ public class UsuarioDTO extends PersonaDTO implements Serializable{
     public UsuarioDTO( UsuarioEntity entity ){
         if(entity != null) {
             this.id = entity.id;
+            this.userName = entity.getUserName();
+            this.numeroTickets = entity.getNumeroTickets();
         }
     }
     
