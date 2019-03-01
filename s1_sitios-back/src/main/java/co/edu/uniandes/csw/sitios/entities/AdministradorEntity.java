@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -43,7 +44,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      * Collecion de notificaciones
      */
     @PodamExclude
-    @javax.persistence.OneToMany
+    @OneToMany
     private List<NotificacionEntity> notificaciones;
 
     @PodamExclude

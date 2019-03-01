@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -39,7 +40,7 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     */
     private String techCategory;
     
-    @javax.persistence.ManyToMany(
+    @ManyToMany(
         mappedBy = "technologies",
         fetch = javax.persistence.FetchType.LAZY
     )

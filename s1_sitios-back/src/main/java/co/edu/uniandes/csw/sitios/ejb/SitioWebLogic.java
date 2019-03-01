@@ -64,7 +64,7 @@ public class SitioWebLogic {
            {
                throw new BusinessLogicException("El estado actual no se encuentra asignado");
            }
-           if(entity.getSolicitantes()==null)
+           if(entity.getAdministradores()==null)
            {
                 throw new BusinessLogicException("La lista de solicitantes no se existe");
            }

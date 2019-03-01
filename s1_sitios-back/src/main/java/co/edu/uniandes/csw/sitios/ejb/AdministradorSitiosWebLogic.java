@@ -41,7 +41,7 @@ public class AdministradorSitiosWebLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un sitio web al admin con id = {0}", adminsId);
         AdministradorEntity adminEntity = adminPersistence.find(adminsId);
         SitioWebEntity sitioWebEntity = sitioWebPersistence.find(sitiosWebId);
-        sitioWebEntity.getSolicitantes().add(adminEntity);
+        sitioWebEntity.getAdministradores().add(adminEntity);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle un sitio web al admin con id = {0}", adminsId);
         return sitioWebPersistence.find(sitiosWebId);
     }
@@ -96,10 +96,10 @@ public class AdministradorSitiosWebLogic {
         List<SitioWebEntity> swel = sitioWebPersistence.findAll();
         for (SitioWebEntity sitio : swel) {
             if (sitiosWeb.contains(sitio)) {
-                if (!sitio.getSolicitantes().contains(ae)) {
-                    sitio.getSolicitantes().add(ae);
+                if (!sitio.getAdministradores().contains(ae)) {
+                    sitio.getAdministradores().add(ae);
                 } else {
-                    sitio.getSolicitantes().remove(ae);
+                    sitio.getAdministradores().remove(ae);
                 }
 
             }

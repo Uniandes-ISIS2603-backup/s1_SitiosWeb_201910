@@ -112,7 +112,7 @@ public class SitioLogicTest {
            SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
     newsite.setHistorialDeEstados(stateData);
     newsite.setSitiosRelacionados(data);
-    newsite.setSolicitantes(peopleData);
+    newsite.setAdministradores(peopleData);
     newsite.setTechnologies(tecsData);
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
@@ -128,7 +128,7 @@ public class SitioLogicTest {
     SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
     newsite.setHistorialDeEstados(stateData);
     newsite.setSitiosRelacionados(data);
-    newsite.setSolicitantes(peopleData);
+    newsite.setAdministradores(peopleData);
     newsite.setTechnologies(tecsData);
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());

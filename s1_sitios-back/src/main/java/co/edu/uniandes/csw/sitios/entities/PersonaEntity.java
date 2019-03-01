@@ -17,10 +17,7 @@ public abstract class PersonaEntity extends BaseEntity {
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
-    /**
-     * Atributo de id de la persona
-     */
-    protected Long id;
+   
 
     /**
      * Atributo de nombre de la persona

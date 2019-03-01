@@ -36,9 +36,9 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
                 tecnologiasDeDesarrollo.add(new TecnologiaDTO(tec));
                 }
             }
-            if(entity.getSolicitantes()!=null)
+            if(entity.getAdministradores()!=null)
             {
-                for(AdministradorEntity adm: entity.getSolicitantes())
+                for(AdministradorEntity adm: entity.getAdministradores())
                 {
                     administradores.add(new AdministradorDTO(adm));
                 }
@@ -75,7 +75,7 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
             {
                 admEntity.add(adms.toEntity());
             }
-            entity.setSolicitantes(admEntity);
+            entity.setAdministradores(admEntity);
         }
         if(sitiosRelacionados!=null)
         {
