@@ -36,13 +36,15 @@ public class SitioLogicTest {
     private UserTransaction utx;
 
 
-    private List<SitioWebEntity> data= new ArrayList<SitioWebEntity>();
+    private List<SitioWebEntity> data= new ArrayList<>();
 
-    private List<AdministradorEntity> peopleData= new ArrayList<AdministradorEntity>();
+    private List<AdministradorEntity> peopleData= new ArrayList<>();
 
-    private List<EstadoWebEntity> stateData= new ArrayList<EstadoWebEntity>();
+    private List<EstadoWebEntity> stateData= new ArrayList<>();
 
-    private ArrayList<TecnologiaEntity> tecsData= new ArrayList<TecnologiaEntity>();
+    private List<TecnologiaEntity> tecsData= new ArrayList<>();
+    
+    private List<NotificacionEntity> notData= new ArrayList<>();
 
 
     @Deployment
@@ -73,10 +75,11 @@ public class SitioLogicTest {
     }
 
     private void clearData() {
-        em.createQuery("delete from SitioWebEntity").executeUpdate();
-        em.createQuery("delete from TecnologiaEntity").executeUpdate();
         em.createQuery("delete from AdministradorEntity").executeUpdate();
+        em.createQuery("delete from TecnologiaEntity").executeUpdate();
         em.createQuery("delete from EstadoWebEntity").executeUpdate();
+        em.createQuery("delete from NotificacionEntity").executeUpdate();         
+        em.createQuery("delete from SitioWebEntity").executeUpdate(); 
         
     }
 
@@ -89,7 +92,6 @@ public class SitioLogicTest {
             AdministradorEntity persona = factory.manufacturePojo(AdministradorEntity.class);
             em.persist(persona);
             peopleData.add(persona);
-           
         }
         for (int i = 0; i < 3; i++) {
             EstadoWebEntity site = factory.manufacturePojo(EstadoWebEntity.class);
@@ -102,6 +104,11 @@ public class SitioLogicTest {
             tecsData.add(state);
         }
         for (int i = 0; i < 3; i++) {
+            NotificacionEntity not = factory.manufacturePojo(NotificacionEntity.class);
+            em.persist(not);
+            notData.add(not);
+        }
+        for (int i = 0; i < 3; i++) {
            SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
     newsite.setHistorialDeEstados(stateData);
     newsite.setSitiosRelacionados(data);
@@ -111,6 +118,7 @@ public class SitioLogicTest {
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
     newsite.setResponsable(peopleData.get(0));
+    newsite.setNotificacion(notData.get(0));
     em.persist(newsite);
     data.add(newsite);
         }
@@ -128,6 +136,8 @@ public class SitioLogicTest {
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
     newsite.setResponsable(peopleData.get(0));
+    newsite.setNotificacion(notData.get(0));
+    
    try{
     SitioWebEntity entity=logic.createWebSite(newsite);
     Assert.assertEquals(entity.getEstadoActual(),stateData.get((0)));
@@ -136,13 +146,13 @@ public class SitioLogicTest {
     {
         Assert.fail("no deberia generar error: "+e.getMessage());
     }
-    catch(Exception e)
+  /*  catch(Exception e)
     { 
         e.printStackTrace();
         //nunca deberia llegar aca , hay un error de compilacion si es asi
         //TODO uncomment if there its not java.lang.IllegalStateException on b
         Assert.fail("no deberia generar error: "+e.getMessage());
     }   
-        
+    */    
     }
 }

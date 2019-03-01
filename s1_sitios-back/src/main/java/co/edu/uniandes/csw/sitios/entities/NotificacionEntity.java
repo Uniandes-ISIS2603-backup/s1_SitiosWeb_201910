@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -52,7 +53,7 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      * Persona a la cual se debe notificar
      */
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     private PersonaEntity notificado;
     
     /**

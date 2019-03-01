@@ -17,6 +17,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
@@ -81,7 +82,9 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 */
 	private Categoria categoriaSitio;
 
-        @ManyToOne (cascade = CascadeType.PERSIST) 
+        
+        @OneToOne
+        @PodamExclude
 	private EstadoWebEntity EstadoActual;
 
 	/**
@@ -89,7 +92,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 */
      //TODO asignar multiplicidad
         @PodamExclude
-        @OneToOne (cascade = CascadeType.PERSIST) 
+        @OneToOne
 	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
     /**
@@ -101,17 +104,10 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
     private AdministradorEntity responsable;
         
     @PodamExclude
-    @OneToOne //(targetEntity = NotificacionEntity.class)//(cascade = CascadeType.PERSIST)(fetch=FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.PERSIST)//(targetEntity = NotificacionEntity.class)((fetch=FetchType.LAZY)
     private NotificacionEntity notificacion;
 
-    public NotificacionEntity getNotificacion() {
-        return notificacion;
-    }
-
-    public void setNotificacion(NotificacionEntity notificacion) {
-        this.notificacion = notificacion;
-    }
-
+   
 
 
 
@@ -119,35 +115,36 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
 	 * Tecnologias usadas en el desarrollo del sitio
 	 */
     @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST) 
+    @ManyToMany 
     private List<TecnologiaEntity> technologies;
 
     /**
      * Personas que solicitaron el sitio web
      */
     @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST) 
+    @ManyToMany 
     private List<AdministradorEntity> solicitantes;
 
     /**
      * Sitios web que estan asociados a este
      */
     @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST) 
+    @ManyToMany 
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**
      * Personas encargadas del soporte del sitio
      */
     @PodamExclude
-    @ManyToMany(cascade = CascadeType.PERSIST) 
+    @ManyToMany 
     private List<AdministradorEntity> soportes;
     
     	/**
 	 * historial completo de estados que ha tenido este sitio
 	 */
     @PodamExclude
-    @OneToMany(cascade = CascadeType.PERSIST) 
+    @OneToMany
+    @JoinColumn(name="ESTADOWEBENITY_ID")
     private List<EstadoWebEntity> historialDeEstados;
 
     
@@ -155,6 +152,13 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
     {
     }
 
+ public NotificacionEntity getNotificacion() {
+        return notificacion;
+    }
+
+    public void setNotificacion(NotificacionEntity notificacion) {
+        this.notificacion = notificacion;
+    }
 
     public String getNombre() {
         return nombre;
@@ -280,10 +284,10 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
       */
         public enum Categoria
         {
-            administrativo,
-            informativo,
-            academico,
-            otros
+            ADMINISTRATIVO,
+            INFORMATIVO,
+            ACADEMICO,
+            OTRO
         }
         
     

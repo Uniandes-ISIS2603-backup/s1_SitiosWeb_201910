@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -42,6 +43,7 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
         mappedBy = "technologies",
         fetch = javax.persistence.FetchType.LAZY
     )
+    @PodamExclude
     private List<SitioWebEntity> sitiosWeb;
     
 
