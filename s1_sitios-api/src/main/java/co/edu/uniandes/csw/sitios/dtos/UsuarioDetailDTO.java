@@ -9,55 +9,54 @@ import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
  * UsuarioDetailDTO implementa UsuarioDTO
+ *
  * @author estudiante
  */
-public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
-    
+public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
+
     /**
      * Lista de tickets que puede tener un usuario.
      */
     private List<TicketDTO> tickets;
 
     /**
-     *Constructor de UsuarioDetailDTO vacio
+     * Constructor de UsuarioDetailDTO vacio
      */
     public UsuarioDetailDTO() {
     }
-    
+
     /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
+     * Constructor que se usa para checkear la entidad del DTO
+     *
      * @param entity != null
      */
-    public UsuarioDetailDTO( UsuarioEntity entity ){
+    public UsuarioDetailDTO(UsuarioEntity entity) {
         super(entity);
-        if( entity != null ){
-            if(entity.getTickets()!=null)
-            {
-                for(TicketEntity ticketEntity:entity.getTickets())
-                {
+        if (entity != null) {
+            if (entity.getTickets() != null) {
+                for (TicketEntity ticketEntity : entity.getTickets()) {
                     tickets.add(new TicketDTO(ticketEntity));
                 }
             }
 
         }
     }
-    
+
     /**
      * Chequeo de la implementacion toEntity del DTO
+     *
      * @return UsuarioEntity
      */
     @Override
     public UsuarioEntity toEntity() {
         UsuarioEntity entity = new UsuarioEntity();
-        if (tickets != null) {
+        if (getTickets() != null) {
             List<TicketEntity> ticket = new ArrayList<>();
-            for (TicketDTO ticketDTO : tickets) {
+            for (TicketDTO ticketDTO : getTickets()) {
                 ticket.add(ticketDTO.toEntity());
 
                 entity.setTickets(ticket);
@@ -66,8 +65,19 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
         }
         return entity;
     }
-    
 
-    
-    
+    /**
+     * @return the tickets
+     */
+    public List<TicketDTO> getTickets() {
+        return tickets;
+    }
+
+    /**
+     * @param tickets the tickets to set
+     */
+    public void setTickets(List<TicketDTO> tickets) {
+        this.tickets = tickets;
+    }
+
 }
