@@ -72,8 +72,41 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
 */
 @PodamExclude
 @OneToMany(mappedBy = "plataformaDeDespliegue")
-private ArrayList<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
+private List<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
+
+    public String getServicioDeHosting() {
+        return servicioDeHosting;
+    }
+
+    public void setServicioDeHosting(String servicioDeHosting) {
+        this.servicioDeHosting = servicioDeHosting;
+    }
+
+    public Boolean getVirtualizacion() {
+        return virtualizacion;
+    }
+
+    public void setVirtualizacion(Boolean virtualizacion) {
+        this.virtualizacion = virtualizacion;
+    }
+
+    public TipoHostingEntity getTipoHosting() {
+        return tipoHosting;
+    }
+
+    public void setTipoHosting(TipoHostingEntity tipoHosting) {
+        this.tipoHosting = tipoHosting;
+    }
+
+    public List<SitioWebEntity> getSitiosWeb() {
+        return sitiosWeb;
+    }
+
+    public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
+    }
    
+
     /**
      * @return the ip
      */

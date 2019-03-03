@@ -126,7 +126,7 @@ public class NotificacionLogicTest {
     }
     
      @Test
-    public void createNotificationTest() throws BusinessLogicException {
+    public void createNotificationTest(){
         try{
         NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
         newEntity.setNotificado(peopleData.get(0));
@@ -140,8 +140,9 @@ public class NotificacionLogicTest {
         Assert.assertEquals(newEntity.getNotificado(), entity.getNotificado());
         Assert.assertEquals(newEntity.getSitioWeb() , entity.getSitioWeb());
         }
-        catch(Exception e)
+        catch(BusinessLogicException e)
         {
+          Assert.fail("no deberia generar error");
         }
     }
     
