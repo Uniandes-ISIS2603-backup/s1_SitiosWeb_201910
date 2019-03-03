@@ -114,7 +114,6 @@ public class SitioLogicTest {
     newsite.setSitiosRelacionados(data);
     newsite.setAdministradores(peopleData);
     newsite.setTechnologies(tecsData);
-    newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
     newsite.setNotificacion(notData.get(0));
     em.persist(newsite);
@@ -130,12 +129,10 @@ public class SitioLogicTest {
     newsite.setSitiosRelacionados(data);
     newsite.setAdministradores(peopleData);
     newsite.setTechnologies(tecsData);
-    newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
     newsite.setNotificacion(notData.get(0));
    try{
     SitioWebEntity entity=logic.createWebSite(newsite);
-    Assert.assertEquals(entity.getEstadoActual(),stateData.get((0)));
     }
     catch(BusinessLogicException e)
     {
