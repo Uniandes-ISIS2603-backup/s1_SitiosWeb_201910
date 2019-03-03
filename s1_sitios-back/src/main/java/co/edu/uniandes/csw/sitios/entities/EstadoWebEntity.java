@@ -3,8 +3,14 @@ package co.edu.uniandes.csw.sitios.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * Clase que representa la entidad de un estado web que va a permitir ser
@@ -26,6 +32,7 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
     /**
      * represnta el estado del sitio web
      */
+      @Enumerated(EnumType.STRING)
     private estado estado;
 
     /**
@@ -39,6 +46,9 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaCambio;
 
+    @OneToOne
+    @PodamExclude
+    private SitioWebEntity asociado;
     //__________________________________________________________________________
     // Metodos
     //__________________________________________________________________________
@@ -51,6 +61,16 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
     public void setEstado(estado estado) {
         this.estado = estado;
     }
+
+    public SitioWebEntity getAsociado() {
+        return asociado;
+    }
+
+    public void setAsociado(SitioWebEntity asociado) {
+        this.asociado = asociado;
+    }
+    
+    
     
     /**
      * devuelve el tipo de estado del estado web

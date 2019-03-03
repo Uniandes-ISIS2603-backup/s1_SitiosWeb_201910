@@ -66,7 +66,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
 * plataforma de Despliegue    
 */
 @PodamExclude
-@OneToMany(mappedBy = "plataformaDeDespliegue", cascade = CascadeType.PERSIST,orphanRemoval = false)
+@OneToMany(mappedBy = "plataformaDeDespliegue")
 private ArrayList<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
    
     /**

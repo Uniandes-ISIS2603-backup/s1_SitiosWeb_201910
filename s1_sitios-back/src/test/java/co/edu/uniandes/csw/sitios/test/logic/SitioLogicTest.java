@@ -1,12 +1,8 @@
 package co.edu.uniandes.csw.sitios.test.logic;
-
-import co.edu.uniandes.csw.sitios.ejb.NotificacionLogic;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.*;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.sitios.persistence.NotificacionPersistence;
 import co.edu.uniandes.csw.sitios.persistence.SitioWebPersistence;
-import com.gs.collections.impl.list.fixed.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -40,13 +36,15 @@ public class SitioLogicTest {
     private UserTransaction utx;
 
 
-    private List<SitioWebEntity> data= new ArrayList<SitioWebEntity>();
+    private List<SitioWebEntity> data= new ArrayList<>();
 
-    private List<AdministradorEntity> peopleData= new ArrayList<AdministradorEntity>();
+    private List<AdministradorEntity> peopleData= new ArrayList<>();
 
-    private List<EstadoWebEntity> stateData= new ArrayList<EstadoWebEntity>();
+    private List<EstadoWebEntity> stateData= new ArrayList<>();
 
-    private ArrayList<TecnologiaEntity> tecsData= new ArrayList<TecnologiaEntity>();
+    private List<TecnologiaEntity> tecsData= new ArrayList<>();
+    
+    private List<NotificacionEntity> notData= new ArrayList<>();
 
 
     @Deployment
@@ -77,10 +75,11 @@ public class SitioLogicTest {
     }
 
     private void clearData() {
-        em.createQuery("delete from SitioWebEntity").executeUpdate();
-        em.createQuery("delete from TecnologiaEntity").executeUpdate();
         em.createQuery("delete from AdministradorEntity").executeUpdate();
+        em.createQuery("delete from TecnologiaEntity").executeUpdate();
         em.createQuery("delete from EstadoWebEntity").executeUpdate();
+        em.createQuery("delete from NotificacionEntity").executeUpdate();         
+        em.createQuery("delete from SitioWebEntity").executeUpdate(); 
         
     }
 
@@ -105,18 +104,22 @@ public class SitioLogicTest {
             tecsData.add(state);
         }
         for (int i = 0; i < 3; i++) {
+            NotificacionEntity not = factory.manufacturePojo(NotificacionEntity.class);
+            em.persist(not);
+            notData.add(not);
+        }
+        for (int i = 0; i < 3; i++) {
            SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
     newsite.setHistorialDeEstados(stateData);
     newsite.setSitiosRelacionados(data);
-    newsite.setSolicitantes(peopleData);
-    newsite.setSoportes(peopleData);
+    newsite.setAdministradores(peopleData);
     newsite.setTechnologies(tecsData);
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-    newsite.setResponsable(peopleData.get(0));
+    newsite.setNotificacion(notData.get(0));
     em.persist(newsite);
     data.add(newsite);
-        }
+    }
     }
     
     @Test
@@ -125,13 +128,11 @@ public class SitioLogicTest {
     SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
     newsite.setHistorialDeEstados(stateData);
     newsite.setSitiosRelacionados(data);
-    newsite.setSolicitantes(peopleData);
-    newsite.setSoportes(peopleData);
+    newsite.setAdministradores(peopleData);
     newsite.setTechnologies(tecsData);
     newsite.setEstadoActual(stateData.get(0));
     newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-    newsite.setResponsable(peopleData.get(0));
-    
+    newsite.setNotificacion(notData.get(0));
    try{
     SitioWebEntity entity=logic.createWebSite(newsite);
     Assert.assertEquals(entity.getEstadoActual(),stateData.get((0)));
@@ -141,11 +142,12 @@ public class SitioLogicTest {
         Assert.fail("no deberia generar error: "+e.getMessage());
     }
     catch(Exception e)
-    {   
+    { 
+        e.printStackTrace();
         //nunca deberia llegar aca , hay un error de compilacion si es asi
         //TODO uncomment if there its not java.lang.IllegalStateException on b
         //Assert.fail("no deberia generar error: "+e.getMessage());
     }   
-        
+     
     }
 }

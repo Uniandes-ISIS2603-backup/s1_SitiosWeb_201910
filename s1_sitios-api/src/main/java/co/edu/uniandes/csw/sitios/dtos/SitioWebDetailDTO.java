@@ -17,18 +17,13 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
     /**
      * Personas que solicitaron el sitio web
      */
-    private List<AdministradorDTO> solicitantes;
+    private List<AdministradorDTO> administradores;
 
     /**
      * Sitios web que estan asociados a este
      */
     private List<SitioWebDTO> sitiosRelacionados;
-
-    /**
-     * Personas encargadas del soporte del sitio
-     */
-    private List<AdministradorDTO> soportes;
-
+    
     public SitioWebDetailDTO(SitioWebEntity entity)
     {
         super(entity);
@@ -41,11 +36,11 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
                 tecnologiasDeDesarrollo.add(new TecnologiaDTO(tec));
                 }
             }
-            if(entity.getSolicitantes()!=null)
+            if(entity.getAdministradores()!=null)
             {
-                for(AdministradorEntity adm: entity.getSolicitantes())
+                for(AdministradorEntity adm: entity.getAdministradores())
                 {
-                    solicitantes.add(new AdministradorDTO(adm));
+                    administradores.add(new AdministradorDTO(adm));
                 }
             }
             if(entity.getSitiosRelacionados()!=null)
@@ -56,13 +51,7 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
                 }
 
             }
-            if(entity.getSoportes()!=null)
-            {
-                for(AdministradorEntity supp: entity.getSoportes())
-                {
-                    soportes.add(new AdministradorDTO(supp));
-                }
-            }
+           
         }
     }
 
@@ -79,29 +68,20 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
             }
             entity.setTechnologies(tecEntity);
         }
-        if(solicitantes!=null)
+        if(administradores!=null)
         {
             List<AdministradorEntity> admEntity= new ArrayList<>();
-            for(AdministradorDTO adms: solicitantes)
+            for(AdministradorDTO adms: administradores)
             {
                 admEntity.add(adms.toEntity());
             }
-            entity.setSolicitantes(admEntity);
+            entity.setAdministradores(admEntity);
         }
         if(sitiosRelacionados!=null)
         {
 
         }
-        if(soportes!=null)
-        {
-            List<AdministradorEntity> admEntity= new ArrayList<>();
-            for(AdministradorDTO adms: soportes)
-            {
-                admEntity.add(adms.toEntity());
-            }
-            entity.setSoportes(admEntity);
-
-        }
+        
         return entity;
     }
 
@@ -114,12 +94,12 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
     }
 
     public List<AdministradorDTO> getSolicitantes() {
-        return solicitantes;
+        return administradores;
     }
 
     public void setSolicitantes(List<AdministradorDTO> solicitantes) {
 
-        this.solicitantes = solicitantes;
+        this.administradores = solicitantes;
     }
 
     public List<SitioWebDTO> getSitiosRelacionados() {
@@ -131,14 +111,11 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
         this.sitiosRelacionados = sitiosRelacionados;
     }
 
-    public List<AdministradorDTO> getSoportes() {
 
-        return soportes;
-    }
 
     public void setSoportes(List<AdministradorDTO> soportes) {
 
-        this.soportes = soportes;
+        this.administradores = soportes;
     }
 
 }

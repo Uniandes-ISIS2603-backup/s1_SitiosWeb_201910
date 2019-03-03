@@ -5,53 +5,52 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author estudiante
  */
 @Entity
-public class AdministradorEntity extends PersonaEntity{
-   
+public class AdministradorEntity extends PersonaEntity implements Serializable {
+
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
-    
     /**
-     * Nivel que tiene un administrador, 
-     * nivel = {1, 2, 3, 4, 5}
+     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
      */
     private Integer nivel;
-    
+
     /**
      * Nombre del cargo del administrador.
      */
-    private String nombreCargo; 
-    
+    private String nombreCargo;
+
     /**
      * Nombre de la dependencia.
      */
+    @PodamExclude
+    @OneToOne
     private DependenciaEntity dependencia;
-    
-   
-    
+
     /**
      * Collecion de notificaciones
      */
-    @javax.persistence.OneToOne(
-        mappedBy = "administrador", //verificar.
-        fetch = javax.persistence.FetchType.LAZY
-    )
-    private Collection<NotificacionEntity> notificaciones;
-    
-     @javax.persistence.ManyToOne(
-    )
-     
-    
-    private SitioWebEntity sitioWebEntity; //Verificar
-    
+    @PodamExclude
+    @OneToMany
+    private List<NotificacionEntity> notificaciones;
+
+    @PodamExclude
+    @ManyToMany
+    private List<SitioWebEntity> sitiosWebEntity; 
+
     /**
      * Constructor AdministradorEntity vacio
      */
@@ -100,34 +99,32 @@ public class AdministradorEntity extends PersonaEntity{
         this.dependencia = dependencia;
     }
 
-   
-
     /**
      * @return the notificaciones
      */
-    public Collection<NotificacionEntity> getNotificaciones() {
+    public List<NotificacionEntity> getNotificaciones() {
         return notificaciones;
     }
 
     /**
      * @param notificaciones the notificaciones to set
      */
-    public void setNotificaciones(Collection<NotificacionEntity> notificaciones) {
+    public void setNotificaciones(List<NotificacionEntity> notificaciones) {
         this.notificaciones = notificaciones;
     }
 
     /**
      * @return the sitioWebEntity
      */
-    public SitioWebEntity getSitioWebEntity() {
-        return sitioWebEntity;
+    public List<SitioWebEntity> getSitiosWebEntity() {
+        return sitiosWebEntity;
     }
 
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
-    public void setSitioWebEntity(SitioWebEntity sitioWebEntity) {
-        this.sitioWebEntity = sitioWebEntity;
+    public void setSitiosWebEntity(List<SitioWebEntity> sitiosWebEntity) {
+        this.sitiosWebEntity = sitiosWebEntity;
     }
 
 }
