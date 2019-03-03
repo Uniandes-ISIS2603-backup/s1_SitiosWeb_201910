@@ -21,7 +21,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializable {
-    
+ 
     /**
      * Codigo ip correspondiente a la plataforma utilizada.
      */    
@@ -40,26 +40,31 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     /**
      * Clock de la plataforma utilizada.
      */    
-    private Double clock;
+    private String clock;
     
     /**
      * El servicio de hosting que tiene la plataforma utilizada. 
      */    
-    private String servicioDeHosting;
+    private TipoHosting hosting;
     
     /**
      * Estado de la plataforma utilizada, virtualizada o no virtualizada.
      */    
-    private Boolean virtualizacion;
+    private Boolean isVirtualizacion;
+    
+      /**
+       * TipoHosting que puede ser una plataforma de despliegue
+      */
+        public enum TipoHosting
+        {
+            SaaS,
+            PaaS,
+            IaaS,
+            OnPremise
+        }
     
     public PlataformaDeDespliegueEntity(){
     }
-    /*
-    * Tipo de Hosting usado por la plataforma de despliegue.
-    */
-   @PodamExclude
-   @OneToOne(mappedBy = "plataformaDeDespliegue", fetch=FetchType.EAGER)
-    private TipoHostingEntity tipoHosting;
 
    /*
 * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
@@ -114,43 +119,57 @@ private ArrayList<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
     /**
      * @return the clock
      */
-    public Double getClock() {
+    public String getClock() {
         return clock;
     }
 
     /**
      * @param clock the clock to set
      */
-    public void setClock(Double clock) {
+    public void setClock(String clock) {
         this.clock = clock;
     }
-
-    /**
-     * @return the servicioDeHosting
-     */
-    //public String getServicioDeHosting() {
-      //  return servicioDeHosting;
-    //}
-
-    /**
-     * @param servicioDeHosting the servicioDeHosting to set
-     */
-    //public void setServicioDeHosting(String servicioDeHosting) {
-      //  this.servicioDeHosting = servicioDeHosting;
-    //}
 
     /**
      * @return the virtualizacion
      */
     public Boolean getIsVirtualizacion() {
-        return virtualizacion;
+        return isVirtualizacion;
     }
 
     /**
      * @param virtualizacion the virtualizacion to set
      */
     public void setIsVirtualizacion(Boolean virtualizacion) {
-        this.virtualizacion = virtualizacion;
+        this.isVirtualizacion = virtualizacion;
     }
 
+    /**
+     * @return the hosting
+     */
+    public TipoHosting getHosting() {
+        return hosting;
+    }
+
+    /**
+     * @param hosting the hosting to set
+     */
+    public void setHosting(TipoHosting hosting) {
+        this.hosting = hosting;
+    }
+
+     /**
+     * @return the sitiosWeb
+     */
+    public ArrayList<SitioWebEntity> getSitiosWeb() {
+        return sitiosWeb;
+    }
+
+    /**
+     * @param sitiosWeb the sitiosWeb to set
+     */
+    public void setSitiosWeb(ArrayList<SitioWebEntity> sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
+    }
+   
 }
