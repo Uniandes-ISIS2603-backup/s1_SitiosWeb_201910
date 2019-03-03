@@ -77,9 +77,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Categoria categoriaSitio;
 
-    @OneToOne
-    @PodamExclude
-    private EstadoWebEntity EstadoActual;
 
     /**
      * Lugar donde se encuentra desplegado el sitio web
@@ -118,8 +115,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
      * historial completo de estados que ha tenido este sitio
      */
     @PodamExclude
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ID", nullable = false)
+    @ManyToMany
     private List<EstadoWebEntity> historialDeEstados;
 
     public SitioWebEntity() {
@@ -189,13 +185,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         this.imagen = imagen;
     }
 
-    public EstadoWebEntity getEstadoActual() {
-        return EstadoActual;
-    }
-
-    public void setEstadoActual(EstadoWebEntity EstadoActual) {
-        this.EstadoActual = EstadoActual;
-    }
+ 
 
     public List<EstadoWebEntity> getHistorialDeEstados() {
         return historialDeEstados;

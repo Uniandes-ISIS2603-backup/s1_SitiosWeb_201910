@@ -55,11 +55,6 @@ public class SitioWebDTO  implements Serializable{
 	
 	private String imagen;
 
-	/**
-	 * estado actual del sitio web
-	 */
-	
-	private EstadoWebDTO EstadoActual;
 
 	/**
 	 * historial completo de estados que ha tenido este sitio
@@ -204,13 +199,6 @@ public class SitioWebDTO  implements Serializable{
         this.imagen = imagen;
     }
 
-    public EstadoWebDTO getEstadoActual() {
-        return EstadoActual;
-    }
-
-    public void setEstadoActual(EstadoWebDTO EstadoActual) {
-        this.EstadoActual = EstadoActual;
-    }
 
     public List<EstadoWebDTO> getHistorialDeEstados() {
         return historialDeEstados;
