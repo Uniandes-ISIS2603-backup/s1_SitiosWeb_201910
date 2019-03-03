@@ -2,10 +2,12 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -20,6 +22,11 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class EstadoWebEntity extends BaseEntity implements Serializable {
+
+    
+    @ManyToMany
+    @PodamExclude
+    private List<SitioWebEntity> asociados;
     //__________________________________________________________________________
     // Atributos
     //__________________________________________________________________________
@@ -46,9 +53,6 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaCambio;
 
-    @OneToOne
-    @PodamExclude
-    private SitioWebEntity asociado;
     //__________________________________________________________________________
     // Metodos
     //__________________________________________________________________________
@@ -62,12 +66,12 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
         this.estado = estado;
     }
 
-    public SitioWebEntity getAsociado() {
-        return asociado;
+    public List<SitioWebEntity> getAsociados() {
+        return asociados;
     }
 
-    public void setAsociado(SitioWebEntity asociado) {
-        this.asociado = asociado;
+    public void setAsociados(List<SitioWebEntity> asociados) {
+        this.asociados = asociados;
     }
     
     

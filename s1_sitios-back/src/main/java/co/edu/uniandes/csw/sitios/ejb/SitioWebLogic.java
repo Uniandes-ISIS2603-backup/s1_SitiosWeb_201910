@@ -60,10 +60,7 @@ public class SitioWebLogic {
            {
               throw new BusinessLogicException("Lista de sitios relacionados es inexistente");
            }
-           if(entity.getEstadoActual()==null)
-           {
-               throw new BusinessLogicException("El estado actual no se encuentra asignado");
-           }
+           
            if(entity.getAdministradores()==null)
            {
                 throw new BusinessLogicException("La lista de solicitantes no se existe");
