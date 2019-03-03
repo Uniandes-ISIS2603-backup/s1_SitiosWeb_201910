@@ -12,32 +12,32 @@ import javax.persistence.Entity;
  * @author estudiante
  */
 @Entity
-public abstract class PersonaEntity extends BaseEntity {
-
+public class PersonaEntity extends BaseEntity {
+    
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
-   
-
+    
+    
     /**
      * Atributo de nombre de la persona
      */
     protected String nombre;
-
+    
     /**
      * Atributo de email de la persona
      */
-    protected String email;
-
+    private String email;
+    
     /**
      * Atributo de la contrasenia de la persona
      */
     protected String password;
-
+    
     /**
      * Atributo del telefono de la persona
      */
-    protected String telefono;
+    protected Long telefono;
 
     /**
      * Constructor PersonaEntity vacio
@@ -90,23 +90,16 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * @return the telefono
      */
-    public String getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(String telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
+    
 }

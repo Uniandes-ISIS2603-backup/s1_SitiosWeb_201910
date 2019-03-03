@@ -57,15 +57,6 @@ public class DependenciaDTO implements Serializable{
     public DependenciaDTO( DependenciaEntity entity ){
         if(entity != null) {
             this.id = entity.id;
-            this.email = entity.getEmail();
-            this.nombreDependencia = entity.getNombreDependencia();
-            this.telefono = entity.getTelefono();
-            if( entity.getEncargadoDependencia() != null ){
-                this.encargadoDependencia = new AdministradorDTO(entity.getEncargadoDependencia());
-            }
-            else{
-                encargadoDependencia = null;
-            }
         }
     }
     

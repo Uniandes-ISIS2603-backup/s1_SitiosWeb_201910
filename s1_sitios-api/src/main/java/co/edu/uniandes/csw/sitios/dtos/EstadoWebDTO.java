@@ -5,8 +5,6 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
-import co.edu.uniandes.csw.sitios.entities.EstadoWebEntity;
-import co.edu.uniandes.csw.sitios.entities.EstadoWebEntity.estado;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -26,11 +24,10 @@ public class EstadoWebDTO implements Serializable{
      * id de un estado web
      */
     private Long id;
-    
     /**
      * represnta el estado del sitio web
      */
-    private estado estado;
+    //private Estado estado;
     
     /**
      * descripcion general del estado del sitio
@@ -58,19 +55,18 @@ public class EstadoWebDTO implements Serializable{
      * la entidad que viene de argumento.
      *
      * @param pEstadoWebEntity: Es la entidad que se va a convertir a DTO
-     */
+     
     public EstadoWebDTO(EstadoWebEntity pEstadoWebEntity) 
     {
-        if (pEstadoWebEntity != null) 
-        {
+        if (pEstadoWebEntity != null) {
             this.id = pEstadoWebEntity.getId();
-            this.estado = pEstadoWebEntity.getEstado();
+            //this.estado = pEstadoWebEntity.getEstado();
             this.descripcion = pEstadoWebEntity.getDescripcion();
             this.fechaCambio = pEstadoWebEntity.getFechaCambio();
             
         }
     }
-    
+    */
     
     //__________________________________________________________________________
     // Metodos
@@ -97,10 +93,10 @@ public class EstadoWebDTO implements Serializable{
 
     /**
      * Devuelve el estado correspondiente al Sitio web.
-     * 
-     * @return estado
-     */
-    public estado getEstado() 
+     *
+     * @return the name
+     
+    public Estado getEstado() 
     {
         return estado;
     }
@@ -109,12 +105,12 @@ public class EstadoWebDTO implements Serializable{
      * Modifica el estado corrrespondiente al sitio web.
      *
      * @param estado the estado to set
-     */
-    public void setEstado(estado estado) 
+     
+    public void setEstado(Estado estado) 
     {
         this.estado = estado;
     }
-   
+    */
     
     /**
      * Devuelve la descripcion correspondiente al estado del Sitio web.
@@ -156,25 +152,6 @@ public class EstadoWebDTO implements Serializable{
         this.fechaCambio = fechaCambio;
     }
 
-    /**
-     * convierte el objeto DTO a entity
-     * @return un estadoWebEntity con los valores del DTO
-     */
-    public EstadoWebEntity toEntity()
-    {
-        EstadoWebEntity retorno = new EstadoWebEntity();
-        retorno.setId(this.id);
-        retorno.setEstado(this.estado);
-        retorno.setDescripcion(this.descripcion);
-        retorno.setFechaCambio(this.fechaCambio);
-        return retorno;
-    }
-    
-    /**
-     * se sobreescribe el to string
-     * 
-     * @return 
-     */
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

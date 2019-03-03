@@ -23,7 +23,7 @@ public class NotificacionDTO  implements Serializable{
     /**
      * Persona a la cual se debe notificar
      */
-    private AdministradorDTO notificado;
+    private PersonaDTO notificado;
 
    
     /**
@@ -74,11 +74,11 @@ public class NotificacionDTO  implements Serializable{
         this.sitioWeb = sitioWeb;
     }
 
-    public AdministradorDTO getNotificado() {
+    public PersonaDTO getNotificado() {
         return notificado;
     }
 
-    public void setNotificado(AdministradorDTO notificado) {
+    public void setNotificado(PersonaDTO notificado) {
         this.notificado = notificado;
     }
     

@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
-import java.lang.annotation.Target;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -39,16 +38,15 @@ public class PlataformaDeDespliegueLogic {
             throw new BusinessLogicException("La secuencia es nula");
         }
         //ip = no puede ser vacío
-        if(ip.equals("")){
+        if(ip==""){
             throw new BusinessLogicException("La secuencia es vacia");
         }
-        
-        //ip = cumplir con la estructura #.#.#.# 
+        /*
+        // ip = cumplir con la estructura #.#.#.# 
+        if(ip.codePointAt(3)!=('.')||ip.codePointAt(7)!=('.')||ip.codePointAt(11)!=('.')){
+            throw new BusinessLogicException("No hay congruencia en la cantidad de puntos que separan una ip: #.#.#.#");
        
-       /*if(ip.codePointAt(3)!=('.')||ip.codePointAt(7)!=('.')||ip.codePointAt(11)!=('.')){
-         //   throw new BusinessLogicException("No hay congruencia en la cantidad de puntos que separan una ip: #.#.#.#");
-       
-        //}
+        }
         //ip = el numero minimo es 0.0.0.0 y el máximo es 255.255.255.255
         if(ips.length!=3){
             throw new BusinessLogicException("La secuencia esta incompleta");
@@ -67,22 +65,22 @@ public class PlataformaDeDespliegueLogic {
         catch(IndexOutOfBoundsException ie){
             throw new BusinessLogicException("La secuencia supera el numero de enteros permitidos");
         }
-        */
-       /*
+*/
+        /*
         //cpu = no puede ser nulo
         String cpu = plataforma.getCPU();
         if(cpu==null){
             throw new BusinessLogicException("La cpu es nula");
         }
         //cpu = no puede ser vacío
-        if(cpu.equals("")){
+        if(cpu==""){
             throw new BusinessLogicException("La cpu es vacia");
         }
-        
+        */
         //clock = mayor a 0
         String clock = plataforma.getClock();
         String[] unidades = {"Hz","Hertz","KHz", "Kilo Hertz", "Mega Hertz", "GigaHertz", "Tera Hertz","Peta Hertz", "Hexa Hertz", "Zetta Hertz", "Yotta Hertz", "MHz", "THz","GHz","PHz","HHz","ZHz"};
-     
+  /*      
             Boolean encontrado = false;
             String str2 =null;
             String str3 =null;
@@ -111,17 +109,21 @@ public class PlataformaDeDespliegueLogic {
             }
             }
             
-        
+    */    
         //clock = uso de unidades(GHz,MHz, etc)
-        */
+        
         
         
         TipoHosting host = plataforma.getHosting();
         if(host!=null){
-        
+        /*
         //hosting = hosting contenido en las enumeraciones
-        if(!host.equals(TipoHosting.IaaS)&&!host.equals(TipoHosting.OnPremise)&&!host.equals(TipoHosting.PaaS)&&!host.equals(TipoHosting.SaaS)){
+        if(host.equals("Iaas")||host.equals("OnPremise")||host.equals("Paas")||host.equals("Saas")){
+            
+        }
+        else{
             throw new BusinessLogicException("No pertenece a los tipo hosting permitidos");
+        }
         }
         //hosting = no puede ser nulo
         if(host==null){
@@ -132,7 +134,7 @@ public class PlataformaDeDespliegueLogic {
             throw new BusinessLogicException("El hosting no puede ser vacio");
         }
         //sitiosWeb = no puede ser null
-        
+        */
         //Invoco a la persistencia para crear a la plataforma
         }
         persistence.create(plataforma);
@@ -140,4 +142,3 @@ public class PlataformaDeDespliegueLogic {
         }
         
 }
-

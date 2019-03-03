@@ -50,8 +50,6 @@ public class TicketDTO implements Serializable{
     public TicketDTO( TicketEntity entity ){
         if(entity != null) {
             this.descripcion = entity.getDescripcion();
-            this.estado = entity.getEstado();
-            this.fecha = entity.getFecha();
         }
     }
     

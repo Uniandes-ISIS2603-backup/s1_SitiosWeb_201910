@@ -55,6 +55,11 @@ public class SitioWebDTO  implements Serializable{
 	
 	private String imagen;
 
+	/**
+	 * estado actual del sitio web
+	 */
+	
+	private EstadoWebDTO EstadoActual;
 
 	/**
 	 * historial completo de estados que ha tenido este sitio
@@ -66,6 +71,12 @@ public class SitioWebDTO  implements Serializable{
 	 */
 	private PlataformaDeDespliegueDTO plataformaDeDespliegue;
 
+
+
+	/**
+	 * Responsable del sitio web
+	 */
+	private AdministradorDTO responsable;
     
         
           /*
@@ -199,6 +210,13 @@ public class SitioWebDTO  implements Serializable{
         this.imagen = imagen;
     }
 
+    public EstadoWebDTO getEstadoActual() {
+        return EstadoActual;
+    }
+
+    public void setEstadoActual(EstadoWebDTO EstadoActual) {
+        this.EstadoActual = EstadoActual;
+    }
 
     public List<EstadoWebDTO> getHistorialDeEstados() {
         return historialDeEstados;
@@ -215,6 +233,16 @@ public class SitioWebDTO  implements Serializable{
     public void setPlataformaDeDespliegue(PlataformaDeDespliegueDTO plataformaDeDespliegue) {
         this.plataformaDeDespliegue = plataformaDeDespliegue;
     }
-  
+
+
+    public AdministradorDTO getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(AdministradorDTO responsable) {
+        this.responsable = responsable;
+    }
+
+        
         
 }

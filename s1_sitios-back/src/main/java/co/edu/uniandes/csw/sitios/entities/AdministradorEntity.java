@@ -5,52 +5,53 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author estudiante
  */
 @Entity
-public class AdministradorEntity extends PersonaEntity implements Serializable {
-
+public class AdministradorEntity extends PersonaEntity{
+   
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
+    
     /**
-     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
+     * Nivel que tiene un administrador, 
+     * nivel = {1, 2, 3, 4, 5}
      */
     private Integer nivel;
-
+    
     /**
      * Nombre del cargo del administrador.
      */
-    private String nombreCargo;
-
+    private String nombreCargo; 
+    
     /**
      * Nombre de la dependencia.
      */
-    @PodamExclude
-    @OneToOne
     private DependenciaEntity dependencia;
-
+    
+   
+    
     /**
      * Collecion de notificaciones
      */
-    @PodamExclude
-    @OneToMany
-    private List<NotificacionEntity> notificaciones;
-
-    @PodamExclude
-    @ManyToMany
-    private List<SitioWebEntity> sitiosWebEntity; 
-
+    @javax.persistence.OneToOne(
+        mappedBy = "administrador", //verificar.
+        fetch = javax.persistence.FetchType.LAZY
+    )
+    private Collection<NotificacionEntity> notificaciones;
+    
+     @javax.persistence.ManyToOne(
+    )
+     
+    
+    private SitioWebEntity sitioWebEntity; //Verificar
+    
     /**
      * Constructor AdministradorEntity vacio
      */
@@ -99,32 +100,34 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
         this.dependencia = dependencia;
     }
 
+   
+
     /**
      * @return the notificaciones
      */
-    public List<NotificacionEntity> getNotificaciones() {
+    public Collection<NotificacionEntity> getNotificaciones() {
         return notificaciones;
     }
 
     /**
      * @param notificaciones the notificaciones to set
      */
-    public void setNotificaciones(List<NotificacionEntity> notificaciones) {
+    public void setNotificaciones(Collection<NotificacionEntity> notificaciones) {
         this.notificaciones = notificaciones;
     }
 
     /**
      * @return the sitioWebEntity
      */
-    public List<SitioWebEntity> getSitiosWebEntity() {
-        return sitiosWebEntity;
+    public SitioWebEntity getSitioWebEntity() {
+        return sitioWebEntity;
     }
 
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
-    public void setSitiosWebEntity(List<SitioWebEntity> sitiosWebEntity) {
-        this.sitiosWebEntity = sitiosWebEntity;
+    public void setSitioWebEntity(SitioWebEntity sitioWebEntity) {
+        this.sitioWebEntity = sitioWebEntity;
     }
 
 }

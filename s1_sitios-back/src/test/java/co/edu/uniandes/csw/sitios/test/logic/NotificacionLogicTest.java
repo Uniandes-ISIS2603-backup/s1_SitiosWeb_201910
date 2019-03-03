@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.NotificacionLogic;
-import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.EstadoWebEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.entities.PersonaEntity;
@@ -51,13 +50,13 @@ public class NotificacionLogicTest {
     @Inject
     private UserTransaction utx;
     
-    private List<NotificacionEntity> data = new ArrayList<>();
+    private List<NotificacionEntity> data = new ArrayList<NotificacionEntity>();
     
-    private List<SitioWebEntity> sitesData= new ArrayList<>();
+    private List<SitioWebEntity> sitesData= new ArrayList<SitioWebEntity>();
     
-    private List<AdministradorEntity> peopleData= new ArrayList<>();
+    private List<PersonaEntity> peopleData= new ArrayList<PersonaEntity>();
     
-    private List<EstadoWebEntity> stateData= new ArrayList<>();
+    private List<EstadoWebEntity> stateData= new ArrayList<EstadoWebEntity>();
     
     
     
@@ -90,7 +89,7 @@ public class NotificacionLogicTest {
     
     private void clearData() {
         em.createQuery("delete from NotificacionEntity").executeUpdate();
-        em.createQuery("delete from AdministradorEntity").executeUpdate();
+        em.createQuery("delete from PersonaEntity").executeUpdate();
         em.createQuery("delete from SitioWebEntity").executeUpdate();
         em.createQuery("delete from EstadoWebEntity").executeUpdate();
     }
@@ -101,7 +100,7 @@ public class NotificacionLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            AdministradorEntity persona = factory.manufacturePojo(AdministradorEntity.class);
+            PersonaEntity persona = factory.manufacturePojo(PersonaEntity.class);
             em.persist(persona);
             peopleData.add(persona);
         }
@@ -127,7 +126,6 @@ public class NotificacionLogicTest {
     
      @Test
     public void createNotificationTest() throws BusinessLogicException {
-        try{
         NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
         newEntity.setNotificado(peopleData.get(0));
         newEntity.setSitioWeb(sitesData.get(0));
@@ -139,15 +137,11 @@ public class NotificacionLogicTest {
         Assert.assertEquals(newEntity.getCambioSitio(), entity.getCambioSitio());
         Assert.assertEquals(newEntity.getNotificado(), entity.getNotificado());
         Assert.assertEquals(newEntity.getSitioWeb() , entity.getSitioWeb());
-        }
-        catch(Exception e)
-        {
-        }
     }
     
     
     @Test
-    public void getNotificationsTest() {
+    public void getBooksTest() {
         try{
         List<NotificacionEntity> list = logic.getAll();
         Assert.assertEquals(data.size(), list.size());

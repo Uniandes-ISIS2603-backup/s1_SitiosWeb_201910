@@ -44,10 +44,9 @@ public class TecnologiaResource {
     * Creates a new website technology.
     * @param tecnologia to be created. tecnologia!=null.
     * @return added technology. 
-    * @throws BusinessLogicException
     */
     @POST
-    public TecnologiaDTO createTechnology(TecnologiaDTO tecnologia) throws BusinessLogicException
+    public TecnologiaDTO createTechnology(TecnologiaDTO tecnologia)
     {
         LOGGER.log(Level.INFO, "TecnologiaResource createTechnology: input: {0}", tecnologia);
         TecnologiaDTO tecnologiaDTO = new TecnologiaDTO(technologyLogic.createTechnology(tecnologia.toEntity()));
@@ -55,10 +54,10 @@ public class TecnologiaResource {
         return tecnologiaDTO;
     }
     /**
-     * Busca y devuelve todas las tecnologias que existen en la aplicacion.
+     * Busca y devuelve todos los autores que existen en la aplicacion.
      *
-     * @return JSONArray {@link TecnologiaDetailDTO} - Las tecnologias encontradas en la
-     * aplicación. Si no hay ninguna retorna una lista vacía.
+     * @return JSONArray {@link AuthorDetailDTO} - Los autores encontrados en la
+     * aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
     public List<TecnologiaDetailDTO> getTechnologies() {
@@ -69,13 +68,13 @@ public class TecnologiaResource {
     }
 
     /**
-     * Busca la tecnologia con el id asociado recibido en la URL y lo devuelve.
+     * Busca el autor con el id asociado recibido en la URL y lo devuelve.
      *
-     * @param technologyId Identificador de la tecnologia que se esta buscando. Este debe
+     * @param authorsId Identificador del autor que se esta buscando. Este debe
      * ser una cadena de dígitos.
-     * @return JSON {@link TecnologiaDetailDTO} - La tecnologia buscada
+     * @return JSON {@link AuthorDetailDTO} - El autor buscado
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la tecnologia.
+     * Error de lógica que se genera cuando no se encuentra el autor.
      */
     @GET
     @Path("{technologiesId: \\d+}")
@@ -91,21 +90,20 @@ public class TecnologiaResource {
     }
 
     /**
-     * Actualiza la tecnologia con el id recibido en la URL con la información que se
+     * Actualiza el autor con el id recibido en la URL con la información que se
      * recibe en el cuerpo de la petición.
      *
-     * @param technologyId Identificador de la tecnologia que se desea actualizar. Este
+     * @param authorsId Identificador del autor que se desea actualizar. Este
      * debe ser una cadena de dígitos.
-     * @param technology {@link TecnologiaDetailDTO} la tecnologia que se desea guardar.
-     * @return JSON {@link TecnologiaDetailDTO} - La tecnologia guardada.
-     * @throws BusinessLogicException si se viola una regla de negocio.
+     * @param author {@link AuthorDetailDTO} El autor que se desea guardar.
+     * @return JSON {@link AuthorDetailDTO} - El autor guardado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la tecnologia a
+     * Error de lógica que se genera cuando no se encuentra el autor a
      * actualizar.
      */
     @PUT
     @Path("{technologiesId: \\d+}")
-    public TecnologiaDetailDTO updateAuthor(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) throws BusinessLogicException {
+    public TecnologiaDetailDTO updateAuthor(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) {
         LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: input: technologysId: {0} , technology: {1}", new Object[]{technologyId, technology});
         technology.setId(technologyId);
         if (technologyLogic.getTechnology(technologyId) == null) {
@@ -117,13 +115,14 @@ public class TecnologiaResource {
     }
 
     /**
-     * Borra la tecnologia con el id asociado recibido en la URL.
+     * Borra el autor con el id asociado recibido en la URL.
      *
-     * @param technologyId Identificador del autor que se desea borrar. Este debe
+     * @param authorsId Identificador del autor que se desea borrar. Este debe
      * ser una cadena de dígitos.
-     * @throws BusinessLogicException si el autor tiene libros asociados
+     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * si el autor tiene libros asociados
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
-     * Error de lógica que se genera cuando no se encuentra la tecnologia a borrar.
+     * Error de lógica que se genera cuando no se encuentra el autor a borrar.
      */
     @DELETE
     @Path("{technologiesId: \\d+}")
@@ -137,10 +136,10 @@ public class TecnologiaResource {
     }
 
     /**
-     * Convierte una lista de TecnologiaEntity a una lista de TecnologiaDetailDTO.
+     * Convierte una lista de AuthorEntity a una lista de AuthorDetailDTO.
      *
-     * @param entityList Lista de TecnologiaEntity a convertir.
-     * @return Lista de TecnologiaDetailDTO convertida.
+     * @param entityList Lista de AuthorEntity a convertir.
+     * @return Lista de AuthorDetailDTO convertida.
      */
     private List<TecnologiaDetailDTO> listEntity2DTO(List<TecnologiaEntity> entityList) {
         List<TecnologiaDetailDTO> list = new ArrayList<>();
