@@ -10,32 +10,53 @@ import java.io.Serializable;
 
 /**
  * AdministradorDTO implementa Serializable
+ *
  * @author estudiante
  */
-public class AdministradorDTO extends PersonaDTO implements Serializable {
+public class AdministradorDTO implements Serializable {
 
-    
-    
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
-    
     /**
-     * Nivel que tiene un administrador, 
-     * nivel = {1, 2, 3, 4, 5}
+     * Id del usuario
+     */
+    private Long id;
+
+    /**
+     * Nombre del usuario
+     */
+    private String nombre;
+
+    /**
+     * Email del usuario
+     */
+    private String email;
+
+    /**
+     * Contraseñ¡nia del usuario
+     */
+    private String password;
+
+    /**
+     * Telefono del usuario
+     */
+    private String telefono;
+
+    /**
+     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
      */
     private Integer nivel;
-    
+
     /**
      * Nombre del cargo del administrador.
      */
     private String nombreCargo;
-    
+
     /**
      * Nombre de la dependencia.
      */
     private DependenciaDTO dependencia;
-
 
     /**
      * Constructor AdministradorDTO vacio
@@ -44,29 +65,45 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
     }
 
     /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
+     * Constructor que se usa para checkear la entidad del DTO
+     *
      * @param entity != null
      */
-    public AdministradorDTO( AdministradorEntity entity ){
-        if(entity != null) {
-            this.id = entity.id;
+    public AdministradorDTO(AdministradorEntity entity) {
+        if (entity != null) {
+            this.id = entity.getId();
+            this.nombreCargo = entity.getNombreCargo();
+            this.nivel = entity.getNivel();
+            this.email = entity.getEmail();
+            this.nombre = entity.getNombre();
+            this.password = entity.getPassword();
+            this.telefono = entity.getTelefono();
+            if (entity.getDependencia() != null) {
+                this.dependencia = new DependenciaDTO(entity.getDependencia());
+            } else {
+                this.dependencia = null;
+            }
         }
     }
-    
+
     /**
      * Chequeo de la implementacion toEntity del DTO
+     *
      * @return AdministradorEntity
      */
     public AdministradorEntity toEntity() {
         AdministradorEntity entity = new AdministradorEntity();
-        entity.setDependencia(this.dependencia.toEntity()); 
-        entity.setNivel(this.nivel);
-        entity.setNombreCargo(this.nombreCargo);
-        entity.setId(this.id);
+        entity.setDependencia(this.getDependencia().toEntity());
+        entity.setNivel(this.getNivel());
+        entity.setNombreCargo(this.getNombreCargo());
+        entity.setId(this.getId());
+        entity.setEmail(this.getEmail());
+        entity.setNombre(this.getNombre());
+        entity.setPassword(this.getPassword());
+        entity.setTelefono(this.getTelefono());
         return entity;
     }
-    
+
     /**
      * @return the nivel
      */
@@ -77,7 +114,7 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
     /**
      * @param nivel the nivel to set
      */
-    public void setNivel(int nivel) {
+    public void setNivel(Integer nivel) {
         this.nivel = nivel;
     }
 
@@ -109,6 +146,74 @@ public class AdministradorDTO extends PersonaDTO implements Serializable {
         this.dependencia = dependencia;
     }
 
-   
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
+    }
+
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     
 }

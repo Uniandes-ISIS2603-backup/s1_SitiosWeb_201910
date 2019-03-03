@@ -16,7 +16,11 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
@@ -29,80 +33,93 @@ import uk.co.jemos.podam.common.PodamStringValue;
  * @author estudiante
  */
 @Entity
-public class SitioWebEntity extends BaseEntity implements Serializable{
-    
-    
-    
-    /**
-	 * nombre del sitio web
-         * nomre != "" && nombre !=null
-	 */
-	private String nombre;
-
-	/**
-	 * descripcion del sitio
-         */
-        
-        @PodamStringValue(length = 20)
-	private String descripcion;
-
-	/**
-	 * proposito del sitio
-	 */
-	
-	private String proposito;
-
-	/**
-	 * audiencia esperada del sitio web
-	 */
-        @PodamLongValue(minValue=0)
-	private long audienciaEsperada;
-
-	/**
-	 * fecha de publicacion del sitio web
-	 */
-        @Temporal(TemporalType.DATE)
-	private Date fechaLanzamiento;
-
-	
-
-	/**
-	 * ruta a la imagen representativa del sitio
-	 */
-	
-	private String imagen;
-
-	/**
-	 * estado actual del sitio web
-	 */
-
-        /**
-	 * Categoria a la cual pertenece el sitio
-	 */
-	private Categoria categoriaSitio;
-
-        @ManyToOne (cascade = CascadeType.PERSIST) 
-	private EstadoWebEntity EstadoActual;
-
-	/**
-	 * Lugar donde se encuentra desplegado el sitio web
-	 */
-     //TODO asignar multiplicidad
-        @PodamExclude
-        @OneToOne (cascade = CascadeType.PERSIST) 
-	private PlataformaDeDespliegueEntity plataformaDeDespliegue;
+public class SitioWebEntity extends BaseEntity implements Serializable {
 
     /**
-     * Responsable del sitio web
+     * nombre del sitio web nomre != "" && nombre !=null
      */
-     //TODO asignar multiplicidad
+    private String nombre;
+
+    /**
+     * descripcion del sitio
+     */
+    @PodamStringValue(length = 20)
+    private String descripcion;
+
+    /**
+     * proposito del sitio
+     */
+    private String proposito;
+
+    /**
+     * audiencia esperada del sitio web
+     */
+    @PodamLongValue(minValue = 0)
+    private long audienciaEsperada;
+
+    /**
+     * fecha de publicacion del sitio web
+     */
+    @Temporal(TemporalType.DATE)
+    private Date fechaLanzamiento;
+
+    /**
+     * ruta a la imagen representativa del sitio
+     */
+    private String imagen;
+
+    /**
+     * estado actual del sitio web
+     */
+    /**
+     * Categoria a la cual pertenece el sitio
+     */
+    @Enumerated(EnumType.STRING)
+    private Categoria categoriaSitio;
+
+
+    /**
+     * Lugar donde se encuentra desplegado el sitio web
+     */
+    //TODO asignar multiplicidad
     @PodamExclude
-    @OneToOne
-    private AdministradorEntity responsable;
-        
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PlataformaDeDespliegueEntity plataformaDeDespliegue;
+
     @PodamExclude
-    @OneToOne //(targetEntity = NotificacionEntity.class)//(cascade = CascadeType.PERSIST)(fetch=FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.PERSIST)//(targetEntity = NotificacionEntity.class)((fetch=FetchType.LAZY)
     private NotificacionEntity notificacion;
+
+    /**
+     * Tecnologias usadas en el desarrollo del sitio
+     */
+    @PodamExclude
+    @ManyToMany
+    private List<TecnologiaEntity> technologies;
+
+    /**
+     * Personas que solicitaron el sitio web
+     */
+    @PodamExclude
+    @ManyToMany
+    private List<AdministradorEntity> administradores;
+
+    /**
+     * Sitios web que estan asociados a este
+     */
+    @PodamExclude
+    @ManyToMany
+    private List<SitioWebEntity> sitiosRelacionados;
+
+    /**
+     * historial completo de estados que ha tenido este sitio
+     */
+    @PodamExclude
+    @ManyToMany
+    private List<EstadoWebEntity> historialDeEstados;
+
+    public SitioWebEntity() {
+    }
 
     public NotificacionEntity getNotificacion() {
         return notificacion;
@@ -111,50 +128,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
     public void setNotificacion(NotificacionEntity notificacion) {
         this.notificacion = notificacion;
     }
-
-
-
-
-	/**
-	 * Tecnologias usadas en el desarrollo del sitio
-	 */
-    @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST) 
-    private List<TecnologiaEntity> technologies;
-
-    /**
-     * Personas que solicitaron el sitio web
-     */
-    @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST) 
-    private List<AdministradorEntity> solicitantes;
-
-    /**
-     * Sitios web que estan asociados a este
-     */
-    @PodamExclude
-    @ManyToMany (cascade = CascadeType.PERSIST) 
-    private List<SitioWebEntity> sitiosRelacionados;
-
-    /**
-     * Personas encargadas del soporte del sitio
-     */
-    @PodamExclude
-    @ManyToMany(cascade = CascadeType.PERSIST) 
-    private List<AdministradorEntity> soportes;
-    
-    	/**
-	 * historial completo de estados que ha tenido este sitio
-	 */
-    @PodamExclude
-    @OneToMany(cascade = CascadeType.PERSIST) 
-    private List<EstadoWebEntity> historialDeEstados;
-
-    
-    public SitioWebEntity()
-    {
-    }
-
 
     public String getNombre() {
         return nombre;
@@ -212,13 +185,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         this.imagen = imagen;
     }
 
-    public EstadoWebEntity getEstadoActual() {
-        return EstadoActual;
-    }
-
-    public void setEstadoActual(EstadoWebEntity EstadoActual) {
-        this.EstadoActual = EstadoActual;
-    }
+ 
 
     public List<EstadoWebEntity> getHistorialDeEstados() {
         return historialDeEstados;
@@ -244,12 +211,12 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         this.technologies = technologies;
     }
 
-    public List<AdministradorEntity> getSolicitantes() {
-        return solicitantes;
+    public List<AdministradorEntity> getAdministradores() {
+        return administradores;
     }
 
-    public void setSolicitantes(List<AdministradorEntity> solicitantes) {
-        this.solicitantes = solicitantes;
+    public void setAdministradores(List<AdministradorEntity> administradores) {
+        this.administradores = administradores;
     }
 
     public List<SitioWebEntity> getSitiosRelacionados() {
@@ -260,36 +227,14 @@ public class SitioWebEntity extends BaseEntity implements Serializable{
         this.sitiosRelacionados = sitiosRelacionados;
     }
 
-    public List<AdministradorEntity> getSoportes() {
-        return soportes;
+    /**
+     * Categoria que puede tener un sitio web
+     */
+    public enum Categoria {
+        ADMINISTRATIVO,
+        INFORMATIVO,
+        ACADEMICO,
+        OTRO
     }
 
-    public void setSoportes(List<AdministradorEntity> soportes) {
-        this.soportes = soportes;
-    }
-
-    public AdministradorEntity getResponsable() {
-        return responsable;
-    }
-
-    public void setResponsable(AdministradorEntity responsable) {
-        this.responsable = responsable;
-    }
-      /**
-       * Categoria que puede tener un sitio web
-      */
-        public enum Categoria
-        {
-            administrativo,
-            informativo,
-            academico,
-            otros
-        }
-        
-    
-    public String toString()
-    {
-    return nombre+':';
-    }
-    
 }

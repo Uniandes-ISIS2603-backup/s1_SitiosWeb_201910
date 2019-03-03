@@ -91,29 +91,5 @@ public class TicketPersistence {
         em.remove(ticketEntity);
     }
     
-    /**
-     * Busca si hay algun ticket con el id que se envía de argumento
-     *
-     * @param id: id de la ticket que se está buscando
-     * @return null si no existe ningun ticket con el id del argumento. Si
-     * existe alguno devuelve el primero.
-     */
-    public TicketEntity findByid(String id) {
-        LOGGER.log(Level.INFO, "Consultando usuario por id ", id);
-        // Se crea un query para buscar usuarios con el id que recibe el método como argumento. ":id" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.id = :id", TicketEntity.class);
-        // Se remplaza el placeholder ":id" con el valor del argumento 
-        query = query.setParameter("id", id);
-        // Se invoca el query se obtiene la lista resultado
-        List<TicketEntity> sameID = query.getResultList();
-        TicketEntity result;
-        if (sameID == null) {
-            result = null;
-        } else {
-            result = sameID.get(0);
-        }
-        LOGGER.log(Level.INFO, "Saliendo de consultar usuarios por id ", id);
-        return result;
-    }
 
 }
