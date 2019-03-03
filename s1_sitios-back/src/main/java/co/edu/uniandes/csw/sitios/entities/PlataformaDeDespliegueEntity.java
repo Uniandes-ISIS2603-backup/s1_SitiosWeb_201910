@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -45,6 +47,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     /**
      * El servicio de hosting que tiene la plataforma utilizada. 
      */    
+    @Enumerated(EnumType.STRING)
     private TipoHosting hosting;
     
     /**
@@ -57,10 +60,10 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
       */
         public enum TipoHosting
         {
-            SaaS,
-            PaaS,
-            IaaS,
-            OnPremise
+            SAAS,
+            PAAS,
+            IAAS,
+            ONPREMISE
         }
     
     public PlataformaDeDespliegueEntity(){
@@ -74,28 +77,52 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
 @OneToMany(mappedBy = "plataformaDeDespliegue")
 private List<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
 
-    public String getServicioDeHosting() {
-        return servicioDeHosting;
+    public String getIp() {
+        return ip;
     }
 
-    public void setServicioDeHosting(String servicioDeHosting) {
-        this.servicioDeHosting = servicioDeHosting;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
-    public Boolean getVirtualizacion() {
-        return virtualizacion;
+    public String getCPU() {
+        return CPU;
     }
 
-    public void setVirtualizacion(Boolean virtualizacion) {
-        this.virtualizacion = virtualizacion;
+    public void setCPU(String CPU) {
+        this.CPU = CPU;
     }
 
-    public TipoHostingEntity getTipoHosting() {
-        return tipoHosting;
+    public Integer getCores() {
+        return cores;
     }
 
-    public void setTipoHosting(TipoHostingEntity tipoHosting) {
-        this.tipoHosting = tipoHosting;
+    public void setCores(Integer cores) {
+        this.cores = cores;
+    }
+
+    public String getClock() {
+        return clock;
+    }
+
+    public void setClock(String clock) {
+        this.clock = clock;
+    }
+
+    public TipoHosting getHosting() {
+        return hosting;
+    }
+
+    public void setHosting(TipoHosting hosting) {
+        this.hosting = hosting;
+    }
+
+    public Boolean getIsVirtualizacion() {
+        return isVirtualizacion;
+    }
+
+    public void setIsVirtualizacion(Boolean isVirtualizacion) {
+        this.isVirtualizacion = isVirtualizacion;
     }
 
     public List<SitioWebEntity> getSitiosWeb() {
@@ -105,104 +132,6 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
     public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
         this.sitiosWeb = sitiosWeb;
     }
-   
 
-    /**
-     * @return the ip
-     */
-    public String getIp() {
-        return ip;
-    }
-
-    /**
-     * @param ip the ip to set
-     */
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    /**
-     * @return the CPU
-     */
-    public String getCPU() {
-        return CPU;
-    }
-
-    /**
-     * @param CPU the CPU to set
-     */
-    public void setCPU(String CPU) {
-        this.CPU = CPU;
-    }
-
-    /**
-     * @return the cores
-     */
-    public Integer getCores() {
-        return cores;
-    }
-
-    /**
-     * @param cores the cores to set
-     */
-    public void setCores(Integer cores) {
-        this.cores = cores;
-    }
-
-    /**
-     * @return the clock
-     */
-    public String getClock() {
-        return clock;
-    }
-
-    /**
-     * @param clock the clock to set
-     */
-    public void setClock(String clock) {
-        this.clock = clock;
-    }
-
-    /**
-     * @return the virtualizacion
-     */
-    public Boolean getIsVirtualizacion() {
-        return isVirtualizacion;
-    }
-
-    /**
-     * @param virtualizacion the virtualizacion to set
-     */
-    public void setIsVirtualizacion(Boolean virtualizacion) {
-        this.isVirtualizacion = virtualizacion;
-    }
-
-    /**
-     * @return the hosting
-     */
-    public TipoHosting getHosting() {
-        return hosting;
-    }
-
-    /**
-     * @param hosting the hosting to set
-     */
-    public void setHosting(TipoHosting hosting) {
-        this.hosting = hosting;
-    }
-
-     /**
-     * @return the sitiosWeb
-     */
-    public ArrayList<SitioWebEntity> getSitiosWeb() {
-        return sitiosWeb;
-    }
-
-    /**
-     * @param sitiosWeb the sitiosWeb to set
-     */
-    public void setSitiosWeb(ArrayList<SitioWebEntity> sitiosWeb) {
-        this.sitiosWeb = sitiosWeb;
-    }
    
 }
