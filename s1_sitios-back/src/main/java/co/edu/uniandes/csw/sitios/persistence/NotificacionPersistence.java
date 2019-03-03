@@ -27,7 +27,7 @@ public class NotificacionPersistence {
      protected EntityManager em;
 
 
-        public NotificacionEntity create(NotificacionEntity editorialEntity) {
+    public NotificacionEntity create(NotificacionEntity editorialEntity) {
         LOGGER.log(Level.INFO, "Creando un nuevo notificacion");
         em.persist(editorialEntity);
         LOGGER.log(Level.INFO, "Saliendo de crear un nuevo notificacion");
