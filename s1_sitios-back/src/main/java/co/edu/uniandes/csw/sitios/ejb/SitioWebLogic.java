@@ -44,10 +44,6 @@ public class SitioWebLogic {
            {
                throw new BusinessLogicException("Descripcion inexistente");
            }
-           if(entity.getDescripcion().equals(""))
-           {
-               throw new BusinessLogicException("Descripcion vacia");
-           } 
            if(entity.getDescripcion().length()<20)
            {
                throw new BusinessLogicException("Descripcion demaciado corta");

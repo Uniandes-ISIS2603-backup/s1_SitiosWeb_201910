@@ -65,7 +65,7 @@ public class EstadoWebLogic {
         {
             throw new BusinessLogicException("no puede crear un estado Web sin descripcion \"" );
         }
-        if (!pEstadoWebEntity.getEstado().equals("")) 
+        if (pEstadoWebEntity.getEstado()==null) 
         {
             throw new BusinessLogicException("no puede crear un estado Web sin un tipo de estado valido o vacio \"" );
         }
