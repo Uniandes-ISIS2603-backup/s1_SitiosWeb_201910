@@ -117,7 +117,6 @@ public class SitioLogicTest {
            newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
            newsite.setNotificacion(notData.get(0));
            em.persist(newsite);
-           
            data.add(newsite);
         }
           
@@ -137,8 +136,11 @@ public class SitioLogicTest {
              newsite.setNotificacion(notData.get(0));
             //em.persist(newsite);
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
+             System.out.println("imagen:"+newsite.getImagen());
+
              data.add(newsite);
         } catch (BusinessLogicException e) {
+            Assert.fail("no deberia generar error: "+e.getMessage());
         }
    
            

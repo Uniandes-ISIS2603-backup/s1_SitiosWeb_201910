@@ -69,10 +69,10 @@ public class SitioWebLogic {
            {
                throw new BusinessLogicException("La lista de tecnologias de desarrollo no existe");
            }
-           //if(entity.getImagen().matches("(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)"))
-           //{
-           //   throw new BusinessLogicException("La ruta de la imagen es incorrecta");
-           //}
+           if(!entity.getImagen().matches("(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)"))
+            {
+              throw new BusinessLogicException("La ruta de la imagen es incorrecta");
+            }
            
            return persistence.create(entity);
 
