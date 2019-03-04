@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
-import java.lang.annotation.Target;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -70,9 +69,9 @@ public class PlataformaDeDespliegueLogic {
             throw new BusinessLogicException("La secuencia supera el numero de enteros permitidos");
         }
         */
-       /*
+       
         //cpu = no puede ser nulo
-        String cpu = plataforma.getCPU();
+        String cpu = plataforma.getCpu();
         if(cpu==null){
             throw new BusinessLogicException("La cpu es nula");
         }
@@ -80,7 +79,7 @@ public class PlataformaDeDespliegueLogic {
         if(cpu.equals("")){
             throw new BusinessLogicException("La cpu es vacia");
         }
-        
+        /*
         //clock = mayor a 0
         String clock = plataforma.getClock();
         String[] unidades = {"Hz","Hertz","KHz", "Kilo Hertz", "Mega Hertz", "GigaHertz", "Tera Hertz","Peta Hertz", "Hexa Hertz", "Zetta Hertz", "Yotta Hertz", "MHz", "THz","GHz","PHz","HHz","ZHz"};
