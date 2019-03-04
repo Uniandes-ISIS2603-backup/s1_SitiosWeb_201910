@@ -205,8 +205,46 @@ public class NotificacionLogicTest {
         catch(BusinessLogicException e)
         {
         }
-               
+    }
+    
+    
+    @Test (expected = BusinessLogicException.class)
+    public void getTestFail() throws BusinessLogicException
+    {
+        NotificacionEntity test = logic.getNotificacion(Long.MAX_VALUE);
+    }
+    
+    @Test
+    public void deleteNotificationtest()
+    {
+        try {
+        NotificacionEntity aPrueba= logic.getNotificacion(data.get(0).getId());
+        logic.deleteNotificacion(aPrueba.getId());
+        logic.getNotificacion(aPrueba.getId());
+        } catch (BusinessLogicException e) {
+            Assert.assertEquals("No encontrado", e.getMessage());
+        }
         
     }
     
+    @Test 
+    public void updateNotificationTest()
+    {
+       try{
+        NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
+        newEntity.setNotificado(peopleData.get(0));
+        newEntity.setSitioWeb(sitesData.get(0));
+        newEntity.setCambioSitio(stateData.get(0));
+        NotificacionEntity result = logic.updateNotificacion(data.get(0).getId(),newEntity);
+        Assert.assertNotNull(result);
+        NotificacionEntity entity = em.find(NotificacionEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getCambioSitio(), entity.getCambioSitio());
+        Assert.assertEquals(newEntity.getNotificado(), entity.getNotificado());
+        Assert.assertEquals(newEntity.getSitioWeb() , entity.getSitioWeb());
+        }
+        catch(BusinessLogicException e)
+        {
+          Assert.fail("no deberia generar error");
+        }
+    }
 }
