@@ -48,7 +48,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     private List<NotificacionEntity> notificaciones;
 
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(mappedBy = "administradores")
     private List<SitioWebEntity> sitiosWebEntity; 
 
     /**

@@ -110,41 +110,37 @@ public class SitioLogicTest {
         }
         for (int i = 0; i < 3; i++) {
            SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-    newsite.setHistorialDeEstados(stateData);
-    newsite.setSitiosRelacionados(data);
-    newsite.setAdministradores(peopleData);
-    newsite.setTechnologies(tecsData);
-    newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-    newsite.setNotificacion(notData.get(0));
-    em.persist(newsite);
-    data.add(newsite);
-    }
+           newsite.setHistorialDeEstados(stateData);
+           newsite.setSitiosRelacionados(data);
+           newsite.setAdministradores(peopleData);
+           newsite.setTechnologies(tecsData);
+           newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+           newsite.setNotificacion(notData.get(0));
+           em.persist(newsite);
+           
+           data.add(newsite);
+        }
+          
+           
     }
     
     @Test
     public void createSiteTestOK()
     {
-    SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-    newsite.setHistorialDeEstados(stateData);
-    newsite.setSitiosRelacionados(data);
-    newsite.setAdministradores(peopleData);
-    newsite.setTechnologies(tecsData);
-    newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-    newsite.setNotificacion(notData.get(0));
-   try{
-    SitioWebEntity entity=logic.createWebSite(newsite);
-    }
-    catch(BusinessLogicException e)
-    {
-        Assert.fail("no deberia generar error: "+e.getMessage());
-    }
-    catch(Exception e)
-    { 
-        e.printStackTrace();
-        //nunca deberia llegar aca , hay un error de compilacion si es asi
-        //TODO uncomment if there its not java.lang.IllegalStateException on b
-        //Assert.fail("no deberia generar error: "+e.getMessage());
-    }   
-     
+        try {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+            //em.persist(newsite);
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+             data.add(newsite);
+        } catch (BusinessLogicException e) {
+        }
+   
+           
     }
 }
