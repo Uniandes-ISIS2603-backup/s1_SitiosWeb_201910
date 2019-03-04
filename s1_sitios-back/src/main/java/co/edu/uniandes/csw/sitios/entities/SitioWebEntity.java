@@ -20,6 +20,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Pattern;
 import uk.co.jemos.podam.common.PodamLongValue;
 import uk.co.jemos.podam.common.PodamStringValue;
 
@@ -61,6 +62,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     /**
      * ruta a la imagen representativa del sitio
      */
+    @PodamStringValue(strValue = "http://www.test.com/test/test.png")
     private String imagen;
 
     /**

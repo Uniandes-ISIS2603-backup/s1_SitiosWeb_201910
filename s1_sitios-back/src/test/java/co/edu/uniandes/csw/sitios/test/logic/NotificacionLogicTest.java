@@ -126,7 +126,7 @@ public class NotificacionLogicTest {
     }
     
      @Test
-    public void createNotificationTest(){
+    public void createNotificationOKTest(){
         try{
         NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
         newEntity.setNotificado(peopleData.get(0));
@@ -145,10 +145,38 @@ public class NotificacionLogicTest {
           Assert.fail("no deberia generar error");
         }
     }
+    @Test (expected = BusinessLogicException.class)
+    public void createNotificationError1Test()throws BusinessLogicException {
+        NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
+        newEntity.setNotificado(null);
+        newEntity.setSitioWeb(sitesData.get(0));
+        newEntity.setCambioSitio(stateData.get(0));
+        NotificacionEntity result = logic.createNotification(newEntity);
+        Assert.fail("Deberia generar error");
+    }
+     @Test (expected = BusinessLogicException.class)
+    public void createNotificationError2Test()throws BusinessLogicException {
+        NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
+        newEntity.setNotificado(peopleData.get(0));
+        newEntity.setSitioWeb(null);
+        newEntity.setCambioSitio(stateData.get(0));
+        NotificacionEntity result = logic.createNotification(newEntity);
+        Assert.fail("Deberia generar error");
+    }
+     @Test (expected = BusinessLogicException.class)
+    public void createNotificationError3Test()throws BusinessLogicException {
+        NotificacionEntity newEntity = factory.manufacturePojo(NotificacionEntity.class);
+        newEntity.setNotificado(peopleData.get(0));
+        newEntity.setSitioWeb(sitesData.get(0));
+        newEntity.setCambioSitio(null);
+        NotificacionEntity result = logic.createNotification(newEntity);
+        Assert.fail("Deberia generar error");
+    }
+    
     
     
     @Test
-    public void getNotificationsTest() {
+    public void getAllNotificationsTest() {
         try{
         List<NotificacionEntity> list = logic.getAll();
         Assert.assertEquals(data.size(), list.size());
@@ -167,5 +195,18 @@ public class NotificacionLogicTest {
     e.printStackTrace();
     }
     }  
+    
+    @Test 
+    public void getTest()
+    {
+        try{
+        NotificacionEntity test = logic.getNotificacion(data.get(0).getId());
+        }
+        catch(BusinessLogicException e)
+        {
+        }
+               
+        
+    }
     
 }
