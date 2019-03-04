@@ -47,7 +47,7 @@ public class AdministradorResource {
      * petición y se regresa un objeto identico con un id auto-generado por la
      * base de datos.
      *
-     * @param Administrador {@link AdministradorDTO} - EL Administrador que se
+     * @param administrador {@link AdministradorDTO} - EL Administrador que se
      * desea guardar.
      * @return JSON {@link AdministradorDTO} - El Administrador guardado con el
      * atributo id autogenerado.

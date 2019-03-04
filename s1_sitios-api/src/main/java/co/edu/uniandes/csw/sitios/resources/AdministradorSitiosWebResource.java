@@ -78,7 +78,7 @@ public class AdministradorSitiosWebResource {
         LOGGER.log(Level.INFO, "AdministradorSitiosWebResource getSitiosWeb: output: {0}", lista);
         return lista;
     }
-    
+
     /**
      * Busca y devuelve el sitio web con el ID recibido en la URL, relativo a un
      * admin.
@@ -102,14 +102,14 @@ public class AdministradorSitiosWebResource {
         LOGGER.log(Level.INFO, "AdministradorSitiosWebResource getSitioWeb: output: {0}", detailDTO);
         return detailDTO;
     }
-    
+
     /**
-     * Actualiza la lista de sitios web de un admin con la lista que se recibe en el
-     * cuerpo
+     * Actualiza la lista de sitios web de un admin con la lista que se recibe
+     * en el cuerpo
      *
      * @param adminsId El ID del autor al cual se le va a asociar el libro
-     * @param websites JSONArray {@link SitioWebDetailDTO} - La lista de sitios web que se
-     * desea guardar.
+     * @param websites JSONArray {@link SitioWebDetailDTO} - La lista de sitios
+     * web que se desea guardar.
      * @return JSONArray {@link SitioWebDetailDTO} - La lista actualizada.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el sitio web.
@@ -126,12 +126,14 @@ public class AdministradorSitiosWebResource {
         LOGGER.log(Level.INFO, "AdministradorSitiosWebResource replaceSitiosWeb: output: {0}", lista);
         return lista;
     }
-    
+
     /**
      * Elimina la conexión entre el sitio web y el admin recibidos en la URL.
      *
-     * @param adminsId El ID del admin al cual se le va a desasociar el sitio web
+     * @param adminsId El ID del admin al cual se le va a desasociar el sitio
+     * web
      * @param websitesId El ID del sitio web que se desasocia
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el sitio web.
      */
@@ -145,8 +147,6 @@ public class AdministradorSitiosWebResource {
         administradorSitiosWebLogic.removeSitioWeb(adminsId, websitesId);
         LOGGER.info("AdministradorSitiosWebResource deleteSitioWeb: output: void");
     }
-    
-    
 
     //----------------------------------------------------
     // Metodos utiles ------------------------------------

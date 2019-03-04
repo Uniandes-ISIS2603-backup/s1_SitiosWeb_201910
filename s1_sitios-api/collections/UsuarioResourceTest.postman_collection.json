@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "c0a4af50-f19e-417d-b21a-ff6c4d5982f4",
+		"name": "UsuarioResourceTest",
+		"description": "Usuario Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/users/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06e90511-1e60-4898-89d1-b45ac0ec0031",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/users/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/users/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72a4c5dc-c61e-4402-979b-56f54d3c8aa2",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/users/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/users/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06e90511-1e60-4898-89d1-b45ac0ec0031",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"usuarioDetailDTO\",\n        \"email\": \"ar.asdf@uniandes.edu.co\",\n        \"id\": 4,\n        \"nombre\": \"asdf\",\n        \"numeroTickets\": 0,\n        \"password\": \"1Zsasdf@\",\n        \"telefono\": \"4323412\",\n        \"userName\": \"ar.asdf\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/users/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "nada",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06e90511-1e60-4898-89d1-b45ac0ec0031",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"type\": \"usuarioDetailDTO\",\n        \"email\": \"ar.asdf@uniandes.edu.co\",\n        \"id\": 4,\n        \"nombre\": \"asdf\",\n        \"numeroTickets\": 0,\n        \"password\": \"1Zsasdf@\",\n        \"telefono\": \"4323412\",\n        \"userName\": \"ar.asdf\"\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/users/7",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"users",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
