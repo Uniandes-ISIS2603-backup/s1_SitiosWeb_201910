@@ -5,7 +5,8 @@
  */
 package co.edu.uniandes.csw.sitios.resources;
 
-import co.edu.uniandes.csw.sitios.dtos.SitioWebDetailDTO;
+import co.edu.uniandes.csw.sitios.dtos.SitioWebDTO;
+import co.edu.uniandes.csw.sitios.dtos.TecnologiaDTO;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.ejb.TecnologiaSitioLogic;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
