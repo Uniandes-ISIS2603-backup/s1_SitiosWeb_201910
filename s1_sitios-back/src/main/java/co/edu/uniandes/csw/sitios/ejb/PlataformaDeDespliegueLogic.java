@@ -33,11 +33,13 @@ public class PlataformaDeDespliegueLogic {
         
         
         String ip = plataforma.getIp();
-        String[] ips = ip.split(".");
+        
         //ip = no puede ser null
         if(ip==null){
             throw new BusinessLogicException("La secuencia es nula");
         }
+        
+        String[] ips = ip.split(".");
         //ip = no puede ser vacío
         if(ip.equals("")){
             throw new BusinessLogicException("La secuencia es vacia");
@@ -114,23 +116,20 @@ public class PlataformaDeDespliegueLogic {
         
         //clock = uso de unidades(GHz,MHz, etc)
         */
-        
+
         
         TipoHosting host = plataforma.getHosting();
+        //hosting = no puede ser nulo
+        if(host==null){
+            throw new BusinessLogicException("El hosting no puede ser nulo");
+        }
         if(host!=null){
         
         //hosting = hosting contenido en las enumeraciones
         if(!host.equals(TipoHosting.IaaS)&&!host.equals(TipoHosting.OnPremise)&&!host.equals(TipoHosting.PaaS)&&!host.equals(TipoHosting.SaaS)){
             throw new BusinessLogicException("No pertenece a los tipo hosting permitidos");
         }
-        //hosting = no puede ser nulo
-        if(host==null){
-            throw new BusinessLogicException("El hosting no puede ser nulo");
-        }
-        //hosting = no puede ser vacío
-        if(host.equals("")){
-            throw new BusinessLogicException("El hosting no puede ser vacio");
-        }
+        
         //sitiosWeb = no puede ser null
         
         //Invoco a la persistencia para crear a la plataforma

@@ -71,7 +71,8 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
 * plataforma de Despliegue    
 */
 @PodamExclude
-@OneToMany(mappedBy = "plataformaDeDespliegue")
+@OneToMany(mappedBy = "plataformaDeDespliegue",
+        fetch = javax.persistence.FetchType.LAZY)
 private ArrayList<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
    
     /**
@@ -85,6 +86,7 @@ private ArrayList<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
      * @param ip the ip to set
      */
     public void setIp(String ip) {
+        
         this.ip = ip;
     }
 
