@@ -21,7 +21,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * Codigo de la CPU correspondiente a la plataforma utilizada.
      */    
-    private String CPU;
+    private String cpu;
     
     /**
      * Numero de cores la plataforma utilizada.
@@ -48,10 +48,10 @@ public class PlataformaDeDespliegueDTO implements Serializable {
       */
         public enum TipoHosting
         {
-            SaaS,
-            PaaS,
-            IaaS,
-            OnPremise
+            SAAS,
+            PAAS,
+            IAAS,
+            ONPREMISE
         }
 
     
@@ -78,15 +78,15 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * @return the CPU
      */
-    public String getCPU() {
-        return CPU;
+    public String getCpu() {
+        return cpu;
     }
 
     /**
-     * @param CPU the CPU to set
+     * @param cpu the CPU to set
      */
-    public void setCPU(String CPU) {
-        this.CPU = CPU;
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
     }
 
     /**

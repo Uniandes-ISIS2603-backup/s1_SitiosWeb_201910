@@ -108,7 +108,7 @@ public class PlataformaDeDespliegueLogicTest {
         PlataformaDeDespliegueEntity entity = em.find(PlataformaDeDespliegueEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getIp(), entity.getIp());
-        Assert.assertEquals(newEntity.getCPU(), entity.getCPU());
+        Assert.assertEquals(newEntity.getCpu(), entity.getCpu());
         Assert.assertEquals(newEntity.getCores(), entity.getCores());
         Assert.assertEquals(newEntity.getClock(), entity.getClock());
         Assert.assertEquals(newEntity.getHosting(), entity.getHosting());

@@ -32,7 +32,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     /**
      * Codigo de la CPU correspondiente a la plataforma utilizada.
      */    
-    private String CPU;
+    private String cpu;
     
     /**
      * Numero de cores la plataforma utilizada.
@@ -86,12 +86,12 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
         this.ip = ip;
     }
 
-    public String getCPU() {
-        return CPU;
+    public String getCpu() {
+        return cpu;
     }
 
-    public void setCPU(String CPU) {
-        this.CPU = CPU;
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
     }
 
     public Integer getCores() {
