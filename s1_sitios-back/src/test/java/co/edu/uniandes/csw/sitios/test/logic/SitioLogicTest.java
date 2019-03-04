@@ -3,12 +3,18 @@ import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.*;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.SitioWebPersistence;
+import com.gs.collections.impl.list.fixed.ArrayAdapter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import javax.validation.constraints.AssertTrue;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -76,10 +82,10 @@ public class SitioLogicTest {
 
     private void clearData() {
         em.createQuery("delete from AdministradorEntity").executeUpdate();
-        em.createQuery("delete from TecnologiaEntity").executeUpdate();
-        em.createQuery("delete from EstadoWebEntity").executeUpdate();
-        em.createQuery("delete from NotificacionEntity").executeUpdate();         
         em.createQuery("delete from SitioWebEntity").executeUpdate(); 
+        em.createQuery("delete from TecnologiaEntity").executeUpdate();
+        em.createQuery("delete from NotificacionEntity").executeUpdate();         
+        em.createQuery("delete from EstadoWebEntity").executeUpdate();
         
     }
 
@@ -141,8 +147,191 @@ public class SitioLogicTest {
              data.add(newsite);
         } catch (BusinessLogicException e) {
             Assert.fail("no deberia generar error: "+e.getMessage());
+        }  
+    }
+     @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail1() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(null);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+     @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail2() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(null);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail3() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(null);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail4() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(null);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail5() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(null);
+             newsite.setNotificacion(notData.get(0));
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail6() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             long value=-20;
+             newsite.setAudienciaEsperada(value);
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail8() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             newsite.setNombre("");
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail7() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             newsite.setDescripcion(null);
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail9() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             newsite.setDescripcion("");
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+       @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail10() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             newsite.setCategoriaSitio(null);
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+      @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail11() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             newsite.setImagen("wrong format");
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
+    
+    @Test
+    public void getWebSiteOKTest()
+    {
+        try {
+            SitioWebEntity sitioWebEntity = logic.getWebSite(data.get(0).getId());
+            Assert.assertEquals(sitioWebEntity, data.get(0));
+        } catch (BusinessLogicException e) {
         }
-   
-           
+     
+    }
+    
+    @Test (expected = BusinessLogicException.class)
+    public void getWebSiteFailTest() throws BusinessLogicException
+    {
+         logic.getWebSite(Long.MAX_VALUE);
+    }
+    
+    @Test public void getAllSitesTest()
+    {
+        List<SitioWebEntity> sites = logic.getSites();
+        Assert.assertEquals(sites.size(),data.size());
+    }
+    
+    @Test //(expected = BusinessLogicException.class)
+    public void deleteSiteTest() throws BusinessLogicException
+    {
+       
+       try {SitioWebEntity newsite= factory.manufacturePojo(SitioWebEntity.class);
+       Long id= newsite.getId();
+       newsite.setHistorialDeEstados(new ArrayList<EstadoWebEntity>());
+       newsite.setSitiosRelacionados(new ArrayList<SitioWebEntity>());
+       newsite.setAdministradores(new ArrayList<AdministradorEntity>());
+       newsite.setTechnologies(new ArrayList<TecnologiaEntity>());
+       newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+       newsite.setNotificacion(new NotificacionEntity());
+       logic.createWebSite(newsite);
+       SitioWebEntity sitioWebEntity =logic.createWebSite(newsite);
+       logic.deleteSite(id);
+       logic.getWebSite(id);
+       }
+       catch(Exception e)
+       {
+       }
     }
 }
+

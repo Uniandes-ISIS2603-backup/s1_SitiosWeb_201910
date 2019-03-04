@@ -60,6 +60,7 @@ public class SitioWebPersistence {
         LOGGER.log(Level.INFO, "Borrando el sitio web con id={0}", websiteid);
         SitioWebEntity website= em.find(SitioWebEntity.class,websiteid);
         em.remove(website);
+      
     }
 
 
