@@ -120,7 +120,7 @@ public class PlataformaDeDespliegueLogic {
         if(host!=null){
         
         //hosting = hosting contenido en las enumeraciones
-        if(!host.equals(TipoHosting.IaaS)&&!host.equals(TipoHosting.OnPremise)&&!host.equals(TipoHosting.PaaS)&&!host.equals(TipoHosting.SaaS)){
+        if(!host.equals(TipoHosting.IAAS)&&!host.equals(TipoHosting.ONPREMISE)&&!host.equals(TipoHosting.PAAS)&&!host.equals(TipoHosting.SAAS)){
             throw new BusinessLogicException("No pertenece a los tipo hosting permitidos");
         }
         //hosting = no puede ser nulo
