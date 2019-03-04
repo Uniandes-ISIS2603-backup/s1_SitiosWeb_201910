@@ -28,6 +28,10 @@ public class SitioWebLogic {
        
        public SitioWebEntity createWebSite(SitioWebEntity entity) throws BusinessLogicException
        {
+           if(entity.getHistorialDeEstados()==null)
+           {
+               throw new BusinessLogicException("Historial inexistente");
+           }
            if(entity.getNombre()==null)
            {
                throw new BusinessLogicException("Nombre inexistente");
@@ -48,7 +52,7 @@ public class SitioWebLogic {
            {
                throw new BusinessLogicException("Descripcion demaciado corta");
            }
-           if(entity.getAudienciaEsperada()>0)
+           if(entity.getAudienciaEsperada()<0)
            {
               throw new BusinessLogicException("Audiencia esperada no puede tener un valor negativo");
            }
@@ -73,6 +77,10 @@ public class SitioWebLogic {
             {
               throw new BusinessLogicException("La ruta de la imagen es incorrecta");
             }
+           if(entity.getPlataformaDeDespliegue()==null)
+           {
+            throw new BusinessLogicException("No hay plataforma de despliegue asignada");
+           }
            
            return persistence.create(entity);
 
@@ -98,7 +106,7 @@ public class SitioWebLogic {
          return sites;
     }
     
-     public void deleteNotificacion(Long notID) {
+     public void deleteSite(Long notID) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el sitio con id = {0}", notID);
         persistence.delete(notID);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el sitio con id = {0}", notID);
