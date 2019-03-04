@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.ejb.TicketLogic;
+import co.edu.uniandes.csw.sitios.ejb.UsuarioLogic;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -25,7 +26,7 @@ public class UsuarioTicketResource {
     private static final Logger LOGGER = Logger.getLogger(UsuarioTicketResource.class.getName());
 
     @Inject
-    private UsuarioTicketResource authorBookLogic;
+    private UsuarioLogic usuarioLogic;
 
     @Inject
     private TicketLogic ticketLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
