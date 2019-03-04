@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import java.io.Serializable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 /**
  *
@@ -59,6 +62,22 @@ public class PlataformaDeDespliegueDTO implements Serializable {
      * Constructor PlataformaDeDespliegueDTO vacio
      */
     public PlataformaDeDespliegueDTO() {
+    }
+    
+     public PlataformaDeDespliegueDTO(PlataformaDeDespliegueEntity entidad) {
+         setClock(entidad.getClock());
+         setCores(entidad.getCores());
+         setCpu(entidad.getCpu());
+         setIp(entidad.getIp());
+      }
+    
+    public PlataformaDeDespliegueEntity toEntity(){
+        PlataformaDeDespliegueEntity entidad = new PlataformaDeDespliegueEntity();
+        entidad.setClock(this.getClock());
+        entidad.setCores(this.getCores());
+        entidad.setCpu(this.getCpu());
+        entidad.setIp(this.getIp());
+        return entidad;
     }
     
     /**
