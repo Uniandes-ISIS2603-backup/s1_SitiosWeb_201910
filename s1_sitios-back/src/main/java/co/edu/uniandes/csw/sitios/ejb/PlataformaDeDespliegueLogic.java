@@ -122,7 +122,6 @@ public class PlataformaDeDespliegueLogic {
         if(host==null){
             throw new BusinessLogicException("El hosting no puede ser nulo");
         }
-        if(host!=null){
         
         //hosting = hosting contenido en las enumeraciones
         if(!host.equals(TipoHosting.IAAS)&&!host.equals(TipoHosting.ONPREMISE)&&!host.equals(TipoHosting.PAAS)&&!host.equals(TipoHosting.SAAS)){
@@ -132,7 +131,7 @@ public class PlataformaDeDespliegueLogic {
         //sitiosWeb = no puede ser null
         
         //Invoco a la persistencia para crear a la plataforma
-        }
+        
         persistence.create(plataforma);
         return plataforma;
         }
