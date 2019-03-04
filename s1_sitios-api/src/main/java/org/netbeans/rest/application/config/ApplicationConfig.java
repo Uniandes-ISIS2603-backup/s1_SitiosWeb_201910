@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(TecnologiaSitioWebResourse.class);
         resources.add(co.edu.uniandes.csw.sitios.filters.CORSFilter.class);
         resources.add(co.edu.uniandes.csw.sitios.mappers.BusinessLogicExceptionMapper.class);
         resources.add(co.edu.uniandes.csw.sitios.mappers.ExceptionMapperA.class);
