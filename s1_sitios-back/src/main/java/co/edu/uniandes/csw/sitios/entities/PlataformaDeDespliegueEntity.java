@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -21,7 +23,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializable {
-    
+ 
     /**
      * Codigo ip correspondiente a la plataforma utilizada.
      */    
@@ -30,7 +32,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     /**
      * Codigo de la CPU correspondiente a la plataforma utilizada.
      */    
-    private String CPU;
+    private String cpu;
     
     /**
      * Numero de cores la plataforma utilizada.
@@ -40,26 +42,32 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     /**
      * Clock de la plataforma utilizada.
      */    
-    private Double clock;
+    private String clock;
     
     /**
      * El servicio de hosting que tiene la plataforma utilizada. 
      */    
-    private String servicioDeHosting;
+    @Enumerated(EnumType.STRING)
+    private TipoHosting hosting;
     
     /**
      * Estado de la plataforma utilizada, virtualizada o no virtualizada.
      */    
-    private Boolean virtualizacion;
+    private Boolean isVirtualizacion;
+    
+      /**
+       * TipoHosting que puede ser una plataforma de despliegue
+      */
+        public enum TipoHosting
+        {
+            SAAS,
+            PAAS,
+            IAAS,
+            ONPREMISE
+        }
     
     public PlataformaDeDespliegueEntity(){
     }
-    /*
-    * Tipo de Hosting usado por la plataforma de despliegue.
-    */
-   @PodamExclude
-   @OneToOne(mappedBy = "plataformaDeDespliegue", fetch=FetchType.EAGER)
-    private TipoHostingEntity tipoHosting;
 
    /*
 * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
@@ -67,90 +75,64 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
 */
 @PodamExclude
 @OneToMany(mappedBy = "plataformaDeDespliegue")
-private ArrayList<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
-   
-    /**
-     * @return the ip
-     */
+private List<SitioWebEntity> sitiosWeb = new ArrayList<SitioWebEntity>();
+
     public String getIp() {
         return ip;
     }
 
-    /**
-     * @param ip the ip to set
-     */
     public void setIp(String ip) {
+        
         this.ip = ip;
     }
 
-    /**
-     * @return the CPU
-     */
-    public String getCPU() {
-        return CPU;
+    public String getCpu() {
+        return cpu;
     }
 
-    /**
-     * @param CPU the CPU to set
-     */
-    public void setCPU(String CPU) {
-        this.CPU = CPU;
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
     }
 
-    /**
-     * @return the cores
-     */
     public Integer getCores() {
         return cores;
     }
 
-    /**
-     * @param cores the cores to set
-     */
     public void setCores(Integer cores) {
         this.cores = cores;
     }
 
-    /**
-     * @return the clock
-     */
-    public Double getClock() {
+    public String getClock() {
         return clock;
     }
 
-    /**
-     * @param clock the clock to set
-     */
-    public void setClock(Double clock) {
+    public void setClock(String clock) {
         this.clock = clock;
     }
 
-    /**
-     * @return the servicioDeHosting
-     */
-    //public String getServicioDeHosting() {
-      //  return servicioDeHosting;
-    //}
+    public TipoHosting getHosting() {
+        return hosting;
+    }
 
-    /**
-     * @param servicioDeHosting the servicioDeHosting to set
-     */
-    //public void setServicioDeHosting(String servicioDeHosting) {
-      //  this.servicioDeHosting = servicioDeHosting;
-    //}
+    public void setHosting(TipoHosting hosting) {
+        this.hosting = hosting;
+    }
 
-    /**
-     * @return the virtualizacion
-     */
     public Boolean getIsVirtualizacion() {
-        return virtualizacion;
+        return isVirtualizacion;
     }
 
-    /**
-     * @param virtualizacion the virtualizacion to set
-     */
-    public void setIsVirtualizacion(Boolean virtualizacion) {
-        this.virtualizacion = virtualizacion;
+    public void setIsVirtualizacion(Boolean isVirtualizacion) {
+        this.isVirtualizacion = isVirtualizacion;
     }
 
+    public List<SitioWebEntity> getSitiosWeb() {
+        return sitiosWeb;
+    }
+
+    public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
+    }
+
+   
 }

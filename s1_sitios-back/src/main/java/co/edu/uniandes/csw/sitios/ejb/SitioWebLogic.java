@@ -60,10 +60,7 @@ public class SitioWebLogic {
            {
               throw new BusinessLogicException("Lista de sitios relacionados es inexistente");
            }
-           if(entity.getEstadoActual()==null)
-           {
-               throw new BusinessLogicException("El estado actual no se encuentra asignado");
-           }
+           
            if(entity.getAdministradores()==null)
            {
                 throw new BusinessLogicException("La lista de solicitantes no se existe");
@@ -72,10 +69,10 @@ public class SitioWebLogic {
            {
                throw new BusinessLogicException("La lista de tecnologias de desarrollo no existe");
            }
-           if(entity.getImagen().matches("(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)"))
-           {
-              throw new BusinessLogicException("La ruta de la imagen es incorrecta");
-           }
+           //if(entity.getImagen().matches("(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)"))
+           //{
+           //   throw new BusinessLogicException("La ruta de la imagen es incorrecta");
+           //}
            
            return persistence.create(entity);
 

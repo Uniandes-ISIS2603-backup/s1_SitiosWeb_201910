@@ -39,7 +39,7 @@ public class NotificacionLogic {
         }
         if (entity.getSitioWeb()==null)
         {
-              throw  new BusinessLogicException("Sitio no existente");
+            throw  new BusinessLogicException("Sitio no existente");
         }
 
         return persistence.create(entity);

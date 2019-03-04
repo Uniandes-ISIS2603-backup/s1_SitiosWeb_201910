@@ -21,7 +21,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * Codigo de la CPU correspondiente a la plataforma utilizada.
      */    
-    private String CPU;
+    private String cpu;
     
     /**
      * Numero de cores la plataforma utilizada.
@@ -31,12 +31,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * Clock de la plataforma utilizada.
      */    
-    private Double clock;
-    
-    /**
-     * El servicio de hosting que tiene la plataforma utilizada. 
-     */    
-    private String servicioDeHosting;
+    private String clock;
     
     /**
      * Estado de la plataforma utilizada, virtualizada o no virtualizada.
@@ -46,7 +41,18 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /*
     * Tipo de Hosting usado por la plataforma de despliegue.
     */
-    private TipoHostingDTO tipoHosting;
+    private TipoHosting tipoHosting;
+    
+     /**
+       * TipoHosting que puede ser una plataforma de despliegue
+      */
+        public enum TipoHosting
+        {
+            SAAS,
+            PAAS,
+            IAAS,
+            ONPREMISE
+        }
 
     
     /**
@@ -72,15 +78,15 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * @return the CPU
      */
-    public String getCPU() {
-        return CPU;
+    public String getCpu() {
+        return cpu;
     }
 
     /**
-     * @param CPU the CPU to set
+     * @param cpu the CPU to set
      */
-    public void setCPU(String CPU) {
-        this.CPU = CPU;
+    public void setCpu(String cpu) {
+        this.cpu = cpu;
     }
 
     /**
@@ -100,29 +106,15 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * @return the clock
      */
-    public Double getClock() {
+    public String getClock() {
         return clock;
     }
 
     /**
      * @param clock the clock to set
      */
-    public void setClock(Double clock) {
+    public void setClock(String clock) {
         this.clock = clock;
-    }
-
-    /**
-     * @return the servicioDeHosting
-     */
-    public String getServicioDeHosting() {
-        return servicioDeHosting;
-    }
-
-    /**
-     * @param servicioDeHosting the servicioDeHosting to set
-     */
-    public void setServicioDeHosting(String servicioDeHosting) {
-        this.servicioDeHosting = servicioDeHosting;
     }
 
     /**
@@ -142,14 +134,14 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     /**
      * @return the tipoHosting
      */
-    public TipoHostingDTO getTipoHosting() {
+    public TipoHosting getTipoHosting() {
         return tipoHosting;
     }
 
     /**
      * @param tipoHosting the tipoHosting to set
      */
-    public void setTipoHosting(TipoHostingDTO tipoHosting) {
+    public void setTipoHosting(TipoHosting tipoHosting) {
         this.tipoHosting = tipoHosting;
     }
 

@@ -19,12 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Pattern;
-import org.hibernate.validator.constraints.Length;
 import uk.co.jemos.podam.common.PodamLongValue;
 import uk.co.jemos.podam.common.PodamStringValue;
 
@@ -77,16 +72,13 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Categoria categoriaSitio;
 
-    @OneToOne
-    @PodamExclude
-    private EstadoWebEntity EstadoActual;
 
     /**
      * Lugar donde se encuentra desplegado el sitio web
      */
     //TODO asignar multiplicidad
     @PodamExclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
     @PodamExclude
@@ -97,29 +89,28 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
      * Tecnologias usadas en el desarrollo del sitio
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<TecnologiaEntity> technologies;
 
     /**
      * Personas que solicitaron el sitio web
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<AdministradorEntity> administradores;
 
     /**
      * Sitios web que estan asociados a este
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY )
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**
      * historial completo de estados que ha tenido este sitio
      */
     @PodamExclude
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ID", nullable = false)
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<EstadoWebEntity> historialDeEstados;
 
     public SitioWebEntity() {
@@ -189,13 +180,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         this.imagen = imagen;
     }
 
-    public EstadoWebEntity getEstadoActual() {
-        return EstadoActual;
-    }
-
-    public void setEstadoActual(EstadoWebEntity EstadoActual) {
-        this.EstadoActual = EstadoActual;
-    }
+ 
 
     public List<EstadoWebEntity> getHistorialDeEstados() {
         return historialDeEstados;
