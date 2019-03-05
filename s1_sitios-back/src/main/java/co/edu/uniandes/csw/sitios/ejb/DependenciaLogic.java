@@ -126,7 +126,7 @@ public class DependenciaLogic {
         {
              throw new BusinessLogicException("Email invalido");
         } 
-        int cantidadDigitos = ((Integer)dependenciaEntity.getTelefono()).toString().length();
+        int cantidadDigitos = dependenciaEntity.getTelefono().length();
         if(cantidadDigitos<7||cantidadDigitos>11)
         {
              throw new BusinessLogicException("El numero de telefono no es valido");
