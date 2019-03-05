@@ -5,13 +5,14 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author s.ballesteros
  */
-public class PlataformaDeDespliegueDetailDTO extends PlataformaDeDespliegueDTO {
+public class PlataformaDeDespliegueDetailDTO extends PlataformaDeDespliegueDTO implements Serializable{
     
 /*
 * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
