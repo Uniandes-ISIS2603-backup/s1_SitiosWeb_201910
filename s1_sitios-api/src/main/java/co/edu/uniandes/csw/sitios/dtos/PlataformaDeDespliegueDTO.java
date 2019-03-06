@@ -7,8 +7,6 @@ package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import java.io.Serializable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 /**
  *

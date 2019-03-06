@@ -35,14 +35,12 @@ public PlataformaDeDespliegueDetailDTO(){
 */
 public PlataformaDeDespliegueDetailDTO(PlataformaDeDespliegueEntity plataformaEntity){
    super(plataformaEntity);
-   if(plataformaEntity != null){
-       if(plataformaEntity.getSitiosWeb()!= null){
+       if(plataformaEntity.getSitiosWeb()!= null && plataformaEntity != null){
            sitiosWeb = new ArrayList<>();
            for(SitioWebEntity entitySitio : plataformaEntity.getSitiosWeb()){
                sitiosWeb.add(new SitioWebDTO(entitySitio));
            }
        }
-   }
 }
 
     /**
