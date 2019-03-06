@@ -9,12 +9,14 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Random;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 import javax.validation.constraints.AssertTrue;
+import org.apache.commons.lang.RandomStringUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -236,6 +238,19 @@ public class SitioLogicTest {
              newsite.setNombre("");
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
+       @Test (expected = BusinessLogicException.class)
+    public void createSiteTestFail12() throws BusinessLogicException
+    {
+             SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
+             newsite.setHistorialDeEstados(stateData);
+             newsite.setSitiosRelacionados(data);
+             newsite.setAdministradores(peopleData);
+             newsite.setTechnologies(tecsData);
+             newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
+             newsite.setNotificacion(notData.get(0));
+             newsite.setNombre(null);
+             SitioWebEntity createWebSite = logic.createWebSite(newsite);
+    }
       @Test (expected = BusinessLogicException.class)
     public void createSiteTestFail7() throws BusinessLogicException
     {
@@ -259,7 +274,7 @@ public class SitioLogicTest {
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
              newsite.setNotificacion(notData.get(0));
-             newsite.setDescripcion("");
+             newsite.setDescripcion(RandomStringUtils.randomAlphabetic(19));
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
        @Test (expected = BusinessLogicException.class)
@@ -312,26 +327,40 @@ public class SitioLogicTest {
         Assert.assertEquals(sites.size(),data.size());
     }
     
-    @Test //(expected = BusinessLogicException.class)
+    @Test (expected = BusinessLogicException.class)
     public void deleteSiteTest() throws BusinessLogicException
     {
        
-       try {SitioWebEntity newsite= factory.manufacturePojo(SitioWebEntity.class);
-       Long id= newsite.getId();
+       SitioWebEntity newsite= factory.manufacturePojo(SitioWebEntity.class);
+     
        newsite.setHistorialDeEstados(new ArrayList<EstadoWebEntity>());
        newsite.setSitiosRelacionados(new ArrayList<SitioWebEntity>());
        newsite.setAdministradores(new ArrayList<AdministradorEntity>());
        newsite.setTechnologies(new ArrayList<TecnologiaEntity>());
        newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
        newsite.setNotificacion(new NotificacionEntity());
-       logic.createWebSite(newsite);
+      
        SitioWebEntity sitioWebEntity =logic.createWebSite(newsite);
+       Long id= sitioWebEntity.getId();
        logic.deleteSite(id);
        logic.getWebSite(id);
-       }
-       catch(Exception e)
-       {
-       }
+    }
+    
+    @Test
+    public void updateSiteTest()
+    {
+        try {
+            
+        SitioWebEntity entity = logic.getWebSite(data.get(0).getId());
+        int value = new Random().nextInt()+1;
+        entity.setAudienciaEsperada(value);
+        logic.updateSitio(entity.getId(), entity);
+        SitioWebEntity entity2 = logic.getWebSite(data.get(0).getId());
+        Assert.assertEquals(entity2.getAudienciaEsperada(), value);
+        
+        } catch (BusinessLogicException e) {
+            Assert.fail();
+        }
     }
 }
 

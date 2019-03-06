@@ -38,37 +38,20 @@ public class PlataformaDeDespliegueLogic {
             throw new BusinessLogicException("La secuencia es nula");
         }
         
-        String[] ips = ip.split(".");
         //ip = no puede ser vacío
         if(ip.equals("")){
             throw new BusinessLogicException("La secuencia es vacia");
         }
         
+        
         //ip = cumplir con la estructura #.#.#.# 
        
-       /*if(ip.codePointAt(3)!=('.')||ip.codePointAt(7)!=('.')||ip.codePointAt(11)!=('.')){
-         //   throw new BusinessLogicException("No hay congruencia en la cantidad de puntos que separan una ip: #.#.#.#");
-       
-        //}
-        //ip = el numero minimo es 0.0.0.0 y el máximo es 255.255.255.255
-        if(ips.length!=3){
-            throw new BusinessLogicException("La secuencia esta incompleta");
+       if(ip.codePointAt(3)!=('.')||ip.codePointAt(7)!=('.')||ip.codePointAt(11)!=('.')){
+         throw new BusinessLogicException("No hay congruencia en la cantidad de puntos que separan una ip: #.#.#.#");
         }
-        try {
-            Integer int1 = Integer.parseInt(ips[0]);
-            Integer int2 = Integer.parseInt(ips[1]);
-            Integer int3 = Integer.parseInt(ips[2]);
-    } catch (NumberFormatException | NullPointerException nfe) {
-        throw new BusinessLogicException("La secuencia esta incompleta");
-    }
+        
         //ip = la longitud del numero no debe ser mayor a 12
-        try{
-            char int1 = ip.charAt(15);
-        }
-        catch(IndexOutOfBoundsException ie){
-            throw new BusinessLogicException("La secuencia supera el numero de enteros permitidos");
-        }
-        */
+        // regla futura
        
         //cpu = no puede ser nulo
         String cpu = plataforma.getCpu();
@@ -79,43 +62,20 @@ public class PlataformaDeDespliegueLogic {
         if(cpu.equals("")){
             throw new BusinessLogicException("La cpu es vacia");
         }
-        /*
-        //clock = mayor a 0
-        String clock = plataforma.getClock();
-        String[] unidades = {"Hz","Hertz","KHz", "Kilo Hertz", "Mega Hertz", "GigaHertz", "Tera Hertz","Peta Hertz", "Hexa Hertz", "Zetta Hertz", "Yotta Hertz", "MHz", "THz","GHz","PHz","HHz","ZHz"};
-     
-            Boolean encontrado = false;
-            String str2 =null;
-            String str3 =null;
-            double actual = 0;
-            for(int i = 0;i<clock.length()&&(encontrado==false);i++){
-               char caracter = clock.charAt(i);
-            String str1 = new StringBuilder().append(caracter).toString();
-            try{
-                    actual = Double.parseDouble(str1);
-                    str2 += str1;
-            }
-            catch(NumberFormatException | NullPointerException nfe){
-              str3 += str1;  
-            }
-            
-            }
-            if(actual<=0){
-                throw new BusinessLogicException("El numero de clock es incorrecto");
-            }
-            for(int i = 0; i<unidades.length&&encontrado==false;i++){
-               if(clock.endsWith(unidades[i])){
-                   encontrado = true;
-               } 
-               else if((i++)==(unidades.length)){
-                throw new BusinessLogicException("Las unidades no son adecuadas");
-            }
-            }
-            
         
-        //clock = uso de unidades(GHz,MHz, etc)
-        */
-
+        //cpu = no puede ser nulo
+        String clock = plataforma.getClock();
+        if(clock==null){
+            throw new BusinessLogicException("El clock es nula");
+        }
+        //cpu = no puede ser vacío
+        if(clock.equals("")){
+            throw new BusinessLogicException("El clock es vacia");
+        }
+        //clock = mayor a 0 {"Hz","Hertz","KHz", "Kilo Hertz", "Mega Hertz", "GigaHertz", "Tera Hertz","Peta Hertz", "Hexa Hertz", "Zetta Hertz", "Yotta Hertz", "MHz", "THz","GHz","PHz","HHz","ZHz"};
+        
+        
+        
         
         TipoHosting host = plataforma.getHosting();
         //hosting = no puede ser nulo
@@ -129,12 +89,27 @@ public class PlataformaDeDespliegueLogic {
         }
         
         //sitiosWeb = no puede ser null
+        if(plataforma.getSitiosWeb()==null)
+           {
+            throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
+           }
         
         //Invoco a la persistencia para crear a la plataforma
-        
         persistence.create(plataforma);
         return plataforma;
         }
         
+    
+     public PlataformaDeDespliegueEntity getPlataformaDeDespliegue(Long id) throws  BusinessLogicException
+       {
+           PlataformaDeDespliegueEntity entity = persistence.find(id);
+           if(entity==null)
+           {
+               throw  new BusinessLogicException("la PlatafromaDeDespliegue no encontrado");
+           }
+           
+           return  entity;
+
+       }
 }
 

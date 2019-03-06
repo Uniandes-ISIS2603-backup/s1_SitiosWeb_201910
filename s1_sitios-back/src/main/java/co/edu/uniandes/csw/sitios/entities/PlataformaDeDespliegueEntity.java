@@ -13,6 +13,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -24,6 +25,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     /**
      * Codigo ip correspondiente a la plataforma utilizada.
      */    
+    @PodamStringValue(strValue = "000.000.000.000", length = 15)
     private String ip;
 
     /**
@@ -38,7 +40,8 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     
     /**
      * Clock de la plataforma utilizada.
-     */    
+     */
+    @PodamStringValue(strValue = "15 GHz")
     private String clock;
     
     /**
@@ -71,7 +74,8 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
 * plataforma de Despliegue    
 */
 @PodamExclude
-@OneToMany(mappedBy = "plataformaDeDespliegue")
+@OneToMany(mappedBy = "plataformaDeDespliegue",
+                         fetch = javax.persistence.FetchType.LAZY)
 private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
 
     public String getIp() {
