@@ -9,8 +9,6 @@ import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
-import java.util.List;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -75,9 +73,9 @@ public class PlataformaDeDespliegueLogic {
             throw new BusinessLogicException("El clock es vacia");
         }
         //clock = mayor a 0 {"Hz","Hertz","KHz", "Kilo Hertz", "Mega Hertz", "GigaHertz", "Tera Hertz","Peta Hertz", "Hexa Hertz", "Zetta Hertz", "Yotta Hertz", "MHz", "THz","GHz","PHz","HHz","ZHz"};
-        if(Integer.parseInt(clock)<=0){
-                throw new BusinessLogicException("El numero de clock es incorrecto");
-            }  
+        
+        
+        
         
         TipoHosting host = plataforma.getHosting();
         //hosting = no puede ser nulo
