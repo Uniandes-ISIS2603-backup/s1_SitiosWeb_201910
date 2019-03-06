@@ -27,7 +27,7 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * telefono de la dependencia
      */
-    private int telefono;
+    private String telefono;
     
     @javax.persistence.OneToOne(
         mappedBy = "dependencia",
@@ -67,14 +67,14 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * @return the telefono
      */
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
