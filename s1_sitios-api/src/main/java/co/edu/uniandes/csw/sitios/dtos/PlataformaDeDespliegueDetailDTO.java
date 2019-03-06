@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +27,22 @@ private List<SitioWebDTO> sitiosWeb;
 * Constructor vacio de plataformaDeDespliegueDetailDTO
 */
 public PlataformaDeDespliegueDetailDTO(){
-    
+   super();
+}
+
+/*
+* Constructor vacio de plataformaDeDespliegueDetailDTO
+*/
+public PlataformaDeDespliegueDetailDTO(PlataformaDeDespliegueEntity plataformaEntity){
+   super(plataformaEntity);
+   if(plataformaEntity != null){
+       if(plataformaEntity.getSitiosWeb()!= null){
+           sitiosWeb = new ArrayList<>();
+           for(SitioWebEntity entitySitio : plataformaEntity.getSitiosWeb()){
+               sitiosWeb.add(new SitioWebDTO(entitySitio));
+           }
+       }
+   }
 }
 
     /**
