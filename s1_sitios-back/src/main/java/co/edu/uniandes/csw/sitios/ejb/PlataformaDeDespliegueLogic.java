@@ -9,8 +9,6 @@ import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
-import java.util.List;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -40,7 +38,6 @@ public class PlataformaDeDespliegueLogic {
             throw new BusinessLogicException("La secuencia es nula");
         }
         
-        String[] ips = ip.split(".");
         //ip = no puede ser vacío
         if(ip.equals("")){
             throw new BusinessLogicException("La secuencia es vacia");
@@ -52,23 +49,9 @@ public class PlataformaDeDespliegueLogic {
        if(ip.codePointAt(3)!=('.')||ip.codePointAt(7)!=('.')||ip.codePointAt(11)!=('.')){
          throw new BusinessLogicException("No hay congruencia en la cantidad de puntos que separan una ip: #.#.#.#");
         }
-        //ip = la ip debe ser un numero
-        /*
-        try {
-            Integer int1 = Integer.parseInt(ips[0);
-            Integer int2 = Integer.parseInt(ips[1]);
-            Integer int3 = Integer.parseInt(ips[2]);
-    } catch (NumberFormatException | NullPointerException nfe) {
-        throw new BusinessLogicException("La secuencia esta incompleta");
-    }
-        */
+        
         //ip = la longitud del numero no debe ser mayor a 12
-        try{
-            char int1 = ip.charAt(14);
-        }
-        catch(IndexOutOfBoundsException ie){
-            throw new BusinessLogicException("La secuencia supera el numero de enteros permitidos");
-        }
+        // regla futura
        
         //cpu = no puede ser nulo
         String cpu = plataforma.getCpu();
@@ -89,28 +72,10 @@ public class PlataformaDeDespliegueLogic {
         if(clock.equals("")){
             throw new BusinessLogicException("El clock es vacia");
         }
-        //clock = mayor a 0
-        /*
-        String[] unidades = {"Hz","Hertz","KHz", "Kilo Hertz", "Mega Hertz", "GigaHertz", "Tera Hertz","Peta Hertz", "Hexa Hertz", "Zetta Hertz", "Yotta Hertz", "MHz", "THz","GHz","PHz","HHz","ZHz"};
-            if(Integer.parseInt(clock)<=0){
-                throw new BusinessLogicException("El numero de clock es incorrecto");
-            }
-            Boolean encontrado=false;
-            for(int i = 0; i<unidades.length&&encontrado==false;i++){
-                String str = unidades[i];
-               if(clock.endsWith(str)){
-                   encontrado = true;
-                   clock.split(str);
-               } 
-               else if((i++)==(unidades.length)){
-                throw new BusinessLogicException("Las unidades no son adecuadas");
-            }
-            }
-            
-        */
-        //clock = uso de unidades(GHz,MHz, etc)
+        //clock = mayor a 0 {"Hz","Hertz","KHz", "Kilo Hertz", "Mega Hertz", "GigaHertz", "Tera Hertz","Peta Hertz", "Hexa Hertz", "Zetta Hertz", "Yotta Hertz", "MHz", "THz","GHz","PHz","HHz","ZHz"};
         
-
+        
+        
         
         TipoHosting host = plataforma.getHosting();
         //hosting = no puede ser nulo
@@ -146,27 +111,5 @@ public class PlataformaDeDespliegueLogic {
            return  entity;
 
        }
-/*
-    public List<PlataformaDeDespliegueEntity> getPlataformaDeDespliegue() {
-         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
-         List<PlataformaDeDespliegueEntity> sites =persistence.findAll();
-         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
-         return sites;
-    }
-    
-     public void deletePlataformaDeDespliegue(Long notID) {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la PlatafromaDeDespliegueo con id = {0}", notID);
-        persistence.delete(notID);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la PlatafromaDeDespliegue con id = {0}", notID);
-    }
-     
-       
-   public PlataformaDeDespliegueEntity updatPlataformaDeDespliegue(Long platsId, PlataformaDeDespliegueEntity plataformaEntity){
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la PlatafromaDeDespliegue con id = {0}", platsId);
-        PlataformaDeDespliegueEntity newEntity = persistence.update(plataformaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la PlatafromaDeDespliegue con id = {0}", plataformaEntity.getId());
-        return newEntity;
-    }
-*/
 }
 

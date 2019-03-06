@@ -60,11 +60,12 @@ public class CambioLogic {
         if(idAsociado==null){
             throw new BusinessLogicException("El idAsociado es nulo");
         }
-        //cpu = no puede ser vacío
-        if(idAsociado.equals("")){
+        /*
+        //idAsociado != ""
+        if(idAsociado==0){
             throw new BusinessLogicException("El idAsociado es vacia");
         }
-        
+        */
         Date fechaCambio = cambioEntidad.getFechaCambio();
         
         //9.fechaCambio != null
@@ -112,26 +113,4 @@ public class CambioLogic {
            return  entity;
 
        }
-/*
-    public List<CambioEntity> getCambio() {
-         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
-         List<CambioEntity> sites =persistence.findAll();
-         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
-         return sites;
-    }
-    
-     public void deleteCambio(Long notID) {
-        LOGGER.log(Level.INFO, "Inicia proceso de borrar la PlatafromaDeDespliegueo con id = {0}", notID);
-        persistence.delete(notID);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la PlatafromaDeDespliegue con id = {0}", notID);
-    }
-     
-       
-   public CambioEntity updateCambio(Long platsId, CambioEntity cambioEntity){
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el Cambio con id = {0}", platsId);
-        CambioEntity newEntity = persistence.update(cambioEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el Cambio con id = {0}", cambioEntity.getId());
-        return newEntity;
-    }
-    */
 }
