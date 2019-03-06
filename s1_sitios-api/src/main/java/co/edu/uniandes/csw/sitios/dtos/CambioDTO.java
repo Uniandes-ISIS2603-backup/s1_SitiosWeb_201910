@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
-import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import java.io.Serializable;
 import java.util.Date;
 

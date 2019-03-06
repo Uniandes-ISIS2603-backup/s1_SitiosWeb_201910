@@ -30,8 +30,6 @@ public class CambioResource {
     @Inject
     private CambioLogic logica;
     
-    private static final Logger LOGGER = Logger.getLogger(PlataformaDeDespliegueResource.class.getName());
-    
     @POST
     public CambioDTO createPlataformaDeDespliegue(CambioDTO cambioDto)throws BusinessLogicException{
         
