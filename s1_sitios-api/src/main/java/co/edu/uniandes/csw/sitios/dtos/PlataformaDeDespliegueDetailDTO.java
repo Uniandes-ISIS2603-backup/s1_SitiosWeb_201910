@@ -27,7 +27,7 @@ private List<SitioWebDTO> sitiosWeb;
 * Constructor vacio de plataformaDeDespliegueDetailDTO
 */
 public PlataformaDeDespliegueDetailDTO(){
-   super();
+   //Como se necesitan futuros constructores se deja uno vacio para evitar errores
 }
 
 /*
@@ -35,7 +35,7 @@ public PlataformaDeDespliegueDetailDTO(){
 */
 public PlataformaDeDespliegueDetailDTO(PlataformaDeDespliegueEntity plataformaEntity){
    super(plataformaEntity);
-       if(plataformaEntity.getSitiosWeb()!= null && plataformaEntity != null){
+       if(plataformaEntity != null && plataformaEntity.getSitiosWeb()!= null ){
            sitiosWeb = new ArrayList<>();
            for(SitioWebEntity entitySitio : plataformaEntity.getSitiosWeb()){
                sitiosWeb.add(new SitioWebDTO(entitySitio));

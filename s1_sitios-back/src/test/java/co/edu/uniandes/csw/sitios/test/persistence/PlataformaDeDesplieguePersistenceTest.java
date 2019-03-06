@@ -65,7 +65,7 @@ public class PlataformaDeDesplieguePersistenceTest {
         PlataformaDeDespliegueEntity entity = em.find(PlataformaDeDespliegueEntity.class, ep.getId());
         
         //El nombre aleatorio pp dado el metodo inject
-  //      Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getIp(), entity.getIp());
         Assert.assertEquals(newEntity.getCpu(), entity.getCpu());
         Assert.assertEquals(newEntity.getCores(), entity.getCores());

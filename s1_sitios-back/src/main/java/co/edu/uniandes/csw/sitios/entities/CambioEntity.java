@@ -55,14 +55,18 @@ public class CambioEntity extends BaseEntity implements Serializable  {
     private Long idAsociado;
     
        /*
-* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
-* plataforma de Despliegue    
-*/
-@PodamExclude
-@OneToOne(mappedBy = "change",
-         fetch = javax.persistence.FetchType.LAZY)
-private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
+    * La lista de sitiosWeb indica cuales sitios web pertenecen a una unico
+    * Cambio    
+    */
+    @PodamExclude
+    @OneToOne(mappedBy = "changes",
+              fetch = javax.persistence.FetchType.LAZY)
+    private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
 
+    public CambioEntity(){
+        //Como se necesitan futuros constructores se deja uno vacio para evitar errores
+    }
+    
     /**
      * @return the lugarCambio
      */

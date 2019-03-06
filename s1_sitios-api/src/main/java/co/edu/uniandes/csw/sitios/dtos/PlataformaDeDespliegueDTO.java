@@ -60,6 +60,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
      * Constructor PlataformaDeDespliegueDTO vacio
      */
     public PlataformaDeDespliegueDTO() {
+        //Como se necesitan futuros constructores se deja uno vacio para evitar errores
     }
     
      public PlataformaDeDespliegueDTO(PlataformaDeDespliegueEntity entidad) {
@@ -67,6 +68,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
          setCores(entidad.getCores());
          setCpu(entidad.getCpu());
          setIp(entidad.getIp());
+         setVirtualizacion(entidad.getIsVirtualizacion());
       }
     
     public PlataformaDeDespliegueEntity toEntity(){
@@ -75,6 +77,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
         entidad.setCores(this.getCores());
         entidad.setCpu(this.getCpu());
         entidad.setIp(this.getIp());
+        entidad.setIsVirtualizacion(this.virtualizacion);
         return entidad;
     }
     
