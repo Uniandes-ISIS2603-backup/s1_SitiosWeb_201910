@@ -36,7 +36,7 @@ public class DependenciaDTO implements Serializable{
     /**
      * telefono de la dependencia
      */
-    private Integer telefono;
+    private String telefono;
     
     /**
      * Persona a cargo de la dependencia
@@ -127,14 +127,14 @@ public class DependenciaDTO implements Serializable{
     /**
      * @return the telefono
      */
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
     /**
      * @param telefono the telefono to set
      */
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

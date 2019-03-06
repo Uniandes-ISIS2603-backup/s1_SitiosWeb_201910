@@ -6,9 +6,12 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.PlataformaDeDespliegueDTO;
+import co.edu.uniandes.csw.sitios.dtos.PlataformaDeDespliegueDetailDTO;
 import co.edu.uniandes.csw.sitios.ejb.PlataformaDeDespliegueLogic;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,6 +23,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -31,6 +35,8 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class PlataformaDeDespliegueResource {
+    
+    
     
     @Inject
     private PlataformaDeDespliegueLogic logica;
@@ -45,4 +51,6 @@ public class PlataformaDeDespliegueResource {
         
         return new PlataformaDeDespliegueDTO(plataformaEntity);
     }
+    
+    
 }

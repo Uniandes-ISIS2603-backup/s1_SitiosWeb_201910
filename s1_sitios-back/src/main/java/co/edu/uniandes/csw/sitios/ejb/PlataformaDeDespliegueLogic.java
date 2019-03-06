@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
+import java.util.List;
+import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -80,11 +82,11 @@ public class PlataformaDeDespliegueLogic {
         
         //cpu = no puede ser nulo
         String clock = plataforma.getClock();
-        if(cpu==null){
+        if(clock==null){
             throw new BusinessLogicException("El clock es nula");
         }
         //cpu = no puede ser vacío
-        if(cpu.equals("")){
+        if(clock.equals("")){
             throw new BusinessLogicException("El clock es vacia");
         }
         //clock = mayor a 0
@@ -122,12 +124,49 @@ public class PlataformaDeDespliegueLogic {
         }
         
         //sitiosWeb = no puede ser null
+        if(plataforma.getSitiosWeb()==null)
+           {
+            throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
+           }
         
         //Invoco a la persistencia para crear a la plataforma
-        
         persistence.create(plataforma);
         return plataforma;
         }
         
+    
+     public PlataformaDeDespliegueEntity getPlataformaDeDespliegue(Long id) throws  BusinessLogicException
+       {
+           PlataformaDeDespliegueEntity entity = persistence.find(id);
+           if(entity==null)
+           {
+               throw  new BusinessLogicException("la PlatafromaDeDespliegue no encontrado");
+           }
+           
+           return  entity;
+
+       }
+/*
+    public List<PlataformaDeDespliegueEntity> getPlataformaDeDespliegue() {
+         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
+         List<PlataformaDeDespliegueEntity> sites =persistence.findAll();
+         LOGGER.log(Level.INFO, "Inicia proceso de obtencion de lista de sitios");
+         return sites;
+    }
+    
+     public void deletePlataformaDeDespliegue(Long notID) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la PlatafromaDeDespliegueo con id = {0}", notID);
+        persistence.delete(notID);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la PlatafromaDeDespliegue con id = {0}", notID);
+    }
+     
+       
+   public PlataformaDeDespliegueEntity updatPlataformaDeDespliegue(Long platsId, PlataformaDeDespliegueEntity plataformaEntity){
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la PlatafromaDeDespliegue con id = {0}", platsId);
+        PlataformaDeDespliegueEntity newEntity = persistence.update(plataformaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la PlatafromaDeDespliegue con id = {0}", plataformaEntity.getId());
+        return newEntity;
+    }
+*/
 }
 
