@@ -84,8 +84,8 @@ public class AdministradorSitiosWebLogic {
     /**
      * Remplaza las instancias de Book asociadas a una instancia de Author
      *
-     * @param adminsId Identificador de la instancia de administrador
-     * @param websites Colección de instancias de SitioWebEntity a asociar a
+     * @param adminId Identificador de la instancia de administrador
+     * @param sitiosWeb Colección de instancias de SitioWebEntity a asociar a
      * instancia de administrador
      * @return Nueva colección de SitioWebEntity asociada a la instancia de
      * Admin

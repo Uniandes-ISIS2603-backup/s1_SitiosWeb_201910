@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
@@ -18,7 +19,6 @@ public abstract class PersonaEntity extends BaseEntity {
     // Atributos---------------------------
     //-------------------------------------
    
-
     /**
      * Atributo de nombre de la persona
      */
@@ -101,10 +101,20 @@ public abstract class PersonaEntity extends BaseEntity {
         this.telefono = telefono;
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

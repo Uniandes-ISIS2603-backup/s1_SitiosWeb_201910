@@ -34,8 +34,6 @@ public class AdministradorPersistence {
      */
     public AdministradorEntity create(AdministradorEntity administradorEntity) {
         LOGGER.log(Level.INFO, "Creando un administrador nuevo");
-        //LOGGER.log("akjfñlakjdfñaksjdfñak---------------------------------------------------------");
-       // System.out.print(em+" HOLÑKLASDÑLKAJSDÑLKJASÑDLKJASÑLDKJASÑLD--------------------------------------------------------------");
         em.persist(administradorEntity);
         LOGGER.log(Level.INFO, "Administrador creado");
         
@@ -83,36 +81,12 @@ public class AdministradorPersistence {
      * Borra un administrador de la base de datos recibiendo como argumento el id del
      * administrador
      *
-     * @param booksId: id correspondiente al administrador a borrar.
+     * @param administradorId: id correspondiente al administrador a borrar.
      */
     public void delete(Long administradorId) {
         LOGGER.log(Level.INFO, "Borrando el administrador con id={0}", administradorId);
         AdministradorEntity administradorEntity = em.find(AdministradorEntity.class, administradorId);
         em.remove(administradorEntity);
     }
-
-    /**
-     * Busca si hay algun administrador con el id que se envía de argumento
-     *
-     * @param id: id de la editorial que se está buscando
-     * @return null si no existe ningun administrador con el id del argumento. Si
-     * existe alguno devuelve el primero.
-     */
-    public AdministradorEntity findByName(String nombre) {
-        LOGGER.log(Level.INFO, "Consultando administradores por id ", nombre);
-        // Se crea un query para buscar administradores con el id que recibe el método como argumento. ":nombre" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select e From AdministradorEntity e where e.nombre = :nombre", AdministradorEntity.class);
-        // Se remplaza el placeholder ":nombre" con el valor del argumento 
-        query = query.setParameter("nombre", nombre);
-        // Se invoca el query se obtiene la lista resultado
-        List<AdministradorEntity> sameName = query.getResultList();
-        AdministradorEntity result;
-        if (sameName == null) {
-            result = null;
-        } else {
-            result = sameName.get(0);
-        }
-        LOGGER.log(Level.INFO, "Saliendo de consultar administradores por nombre ", nombre);
-        return result;
-    }
+    
 }

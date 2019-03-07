@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi
  */
 @Entity
 public class AdministradorEntity extends PersonaEntity implements Serializable {
@@ -40,6 +40,10 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     @OneToOne
     private DependenciaEntity dependencia;
 
+    @PodamExclude
+    @OneToOne
+    private EstadoWebEntity estadoWeb;
+
     /**
      * Collecion de notificaciones
      */
@@ -48,8 +52,8 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     private List<NotificacionEntity> notificaciones;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "administradores")
-    private List<SitioWebEntity> sitiosWebEntity; 
+    @ManyToMany
+    private List<SitioWebEntity> sitiosWebEntity;
 
     /**
      * Constructor AdministradorEntity vacio
@@ -121,10 +125,23 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     }
 
     /**
-     * @param sitioWebEntity the sitioWebEntity to set
+     * @param sitiosWebEntity the sitioWebEntity to set
      */
     public void setSitiosWebEntity(List<SitioWebEntity> sitiosWebEntity) {
         this.sitiosWebEntity = sitiosWebEntity;
     }
 
+    /**
+     * @return the estadoWeb
+     */
+    public EstadoWebEntity getEstadoWeb() {
+        return estadoWeb;
+    }
+
+    /**
+     * @param estadoWeb the estadoWeb to set
+     */
+    public void setEstadoWeb(EstadoWebEntity estadoWeb) {
+        this.estadoWeb = estadoWeb;
+    }
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * AdministradorDTO implementa Serializable
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi.
  */
 public class AdministradorDTO implements Serializable {
 
@@ -59,6 +59,11 @@ public class AdministradorDTO implements Serializable {
     private DependenciaDTO dependencia;
 
     /**
+     * Estado web.
+     */
+    private EstadoWebDTO estadoWeb;
+
+    /**
      * Constructor AdministradorDTO vacio
      */
     public AdministradorDTO() {
@@ -78,6 +83,12 @@ public class AdministradorDTO implements Serializable {
             this.nombre = entity.getNombre();
             this.password = entity.getPassword();
             this.telefono = entity.getTelefono();
+            if(entity.getEstadoWeb() != null){
+                this.estadoWeb = new EstadoWebDTO(entity.getEstadoWeb());
+            }
+            else{
+                this.estadoWeb = null;
+            }
             if (entity.getDependencia() != null) {
                 this.dependencia = new DependenciaDTO(entity.getDependencia());
             } else {
@@ -94,6 +105,7 @@ public class AdministradorDTO implements Serializable {
     public AdministradorEntity toEntity() {
         AdministradorEntity entity = new AdministradorEntity();
         entity.setDependencia(this.getDependencia().toEntity());
+        entity.setEstadoWeb(this.getEstadoWeb().toEntity());
         entity.setNivel(this.getNivel());
         entity.setNombreCargo(this.getNombreCargo());
         entity.setId(this.getId());
@@ -215,5 +227,19 @@ public class AdministradorDTO implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
+    /**
+     * @return the estadoWeb
+     */
+    public EstadoWebDTO getEstadoWeb() {
+        return estadoWeb;
+    }
+
+    /**
+     * @param estadoWeb the estadoWeb to set
+     */
+    public void setEstadoWeb(EstadoWebDTO estadoWeb) {
+        this.estadoWeb = estadoWeb;
+    }
+
 }
