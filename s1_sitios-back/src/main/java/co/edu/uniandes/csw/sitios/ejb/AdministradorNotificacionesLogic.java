@@ -31,6 +31,12 @@ public class AdministradorNotificacionesLogic {
     @Inject
     private NotificacionPersistence notificacionPersistence;
 
+    /**
+     * 
+     * @param adminsId
+     * @param notificationsId
+     * @return 
+     */
     public NotificacionEntity addNotificacion(Long adminsId, Long notificationsId) {
         AdministradorEntity ae = adminPersistence.find(adminsId);
         NotificacionEntity ne = notificacionPersistence.find(notificationsId);
@@ -58,7 +64,7 @@ public class AdministradorNotificacionesLogic {
      * @param adminsId Identificador de la instancia de Administrador
      * @param notificationsId Identificador de la instancia de Notificacion
      * @return La entidadd de Libro del autor
-     * @throws BusinessLogicException Si el libro no está asociado al autor
+     * @throws BusinessLogicException Si la notificacion no está asociado al admin
      */
     public NotificacionEntity getNotificacion(Long adminsId, Long notificationsId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Empieza proceso de consultar la notificacion con id = {0} del admin con id = " + adminsId, notificationsId);
@@ -100,7 +106,8 @@ public class AdministradorNotificacionesLogic {
         AdministradorEntity adminEntity = adminPersistence.find(adminId);
         NotificacionEntity notiEntity = notificacionPersistence.find(notiId);
         adminEntity.getNotificaciones().remove(notiEntity);
-        //notificacionPersistence.remove(notiEntity.getId());TODO checkear
+        //notificacionPersistence.remove(notiEntity.getId());
+        //TODO checkear si deberia eliminar eso.
         LOGGER.log(Level.INFO, "Termina proceso de borrar una notificacion del administrador con id = {0}", adminId);
     }
 

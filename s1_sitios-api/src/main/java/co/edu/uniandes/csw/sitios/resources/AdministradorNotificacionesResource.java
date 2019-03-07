@@ -30,13 +30,13 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Allan Roy Corinaldi.
  */
-@Path("admins/{adminsId: \\d+}/notification")
+@Path("admins/{adminsId: \\d+}/notifications")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class AdministradorNotificacionesResource {
 
-    private static final Logger LOGGER = Logger.getLogger(AdministradorSitiosWebResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AdministradorNotificacionesResource.class.getName());
 
     @Inject
     private AdministradorNotificacionesLogic administradorNotificacionesLogic;

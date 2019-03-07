@@ -59,9 +59,9 @@ public class AdministradorDTO implements Serializable {
     private DependenciaDTO dependencia;
 
     /**
-     * Estado web.
+     * Sitio web.
      */
-    private EstadoWebDTO estadoWeb;
+    private SitioWebDTO sitioWeb;
 
     /**
      * Constructor AdministradorDTO vacio
@@ -83,16 +83,15 @@ public class AdministradorDTO implements Serializable {
             this.nombre = entity.getNombre();
             this.password = entity.getPassword();
             this.telefono = entity.getTelefono();
-            if(entity.getEstadoWeb() != null){
-                this.estadoWeb = new EstadoWebDTO(entity.getEstadoWeb());
-            }
-            else{
-                this.estadoWeb = null;
-            }
             if (entity.getDependencia() != null) {
                 this.dependencia = new DependenciaDTO(entity.getDependencia());
             } else {
                 this.dependencia = null;
+            }
+            if(entity.getSitioWeb() != null){
+                this.sitioWeb = new SitioWebDTO(entity.getSitioWeb());
+            } else {
+                this.sitioWeb = null;
             }
         }
     }
@@ -105,7 +104,7 @@ public class AdministradorDTO implements Serializable {
     public AdministradorEntity toEntity() {
         AdministradorEntity entity = new AdministradorEntity();
         entity.setDependencia(this.getDependencia().toEntity());
-        entity.setEstadoWeb(this.getEstadoWeb().toEntity());
+        entity.setSitioWeb(this.getSitioWeb().toEntity());
         entity.setNivel(this.getNivel());
         entity.setNombreCargo(this.getNombreCargo());
         entity.setId(this.getId());
@@ -229,17 +228,17 @@ public class AdministradorDTO implements Serializable {
     }
 
     /**
-     * @return the estadoWeb
+     * @return the sitioWeb
      */
-    public EstadoWebDTO getEstadoWeb() {
-        return estadoWeb;
+    public SitioWebDTO getSitioWeb() {
+        return sitioWeb;
     }
 
     /**
-     * @param estadoWeb the estadoWeb to set
+     * @param sitioWeb the sitioWeb to set
      */
-    public void setEstadoWeb(EstadoWebDTO estadoWeb) {
-        this.estadoWeb = estadoWeb;
+    public void setSitioWeb(SitioWebDTO sitioWeb) {
+        this.sitioWeb = sitioWeb;
     }
 
 }
