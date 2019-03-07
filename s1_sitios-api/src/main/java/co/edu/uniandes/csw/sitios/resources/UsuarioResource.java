@@ -29,7 +29,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Recurso Usuario
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi.
  */
 @Path("users")
 @Produces("application/json")
