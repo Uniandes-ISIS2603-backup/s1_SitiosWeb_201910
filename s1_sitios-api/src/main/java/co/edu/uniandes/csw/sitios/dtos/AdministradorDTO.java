@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * AdministradorDTO implementa Serializable
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi.
  */
 public class AdministradorDTO implements Serializable {
 
@@ -59,6 +59,11 @@ public class AdministradorDTO implements Serializable {
     private DependenciaDTO dependencia;
 
     /**
+     * Sitio web.
+     */
+    private SitioWebDTO sitioWeb;
+
+    /**
      * Constructor AdministradorDTO vacio
      */
     public AdministradorDTO() {
@@ -83,6 +88,11 @@ public class AdministradorDTO implements Serializable {
             } else {
                 this.dependencia = null;
             }
+            if(entity.getSitioWeb() != null){
+                this.sitioWeb = new SitioWebDTO(entity.getSitioWeb());
+            } else {
+                this.sitioWeb = null;
+            }
         }
     }
 
@@ -94,6 +104,7 @@ public class AdministradorDTO implements Serializable {
     public AdministradorEntity toEntity() {
         AdministradorEntity entity = new AdministradorEntity();
         entity.setDependencia(this.getDependencia().toEntity());
+        entity.setSitioWeb(this.getSitioWeb().toEntity());
         entity.setNivel(this.getNivel());
         entity.setNombreCargo(this.getNombreCargo());
         entity.setId(this.getId());
@@ -215,5 +226,19 @@ public class AdministradorDTO implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
+    /**
+     * @return the sitioWeb
+     */
+    public SitioWebDTO getSitioWeb() {
+        return sitioWeb;
+    }
+
+    /**
+     * @param sitioWeb the sitioWeb to set
+     */
+    public void setSitioWeb(SitioWebDTO sitioWeb) {
+        this.sitioWeb = sitioWeb;
+    }
+
 }
