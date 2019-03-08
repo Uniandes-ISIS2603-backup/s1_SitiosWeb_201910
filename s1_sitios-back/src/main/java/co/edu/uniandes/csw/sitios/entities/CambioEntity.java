@@ -57,8 +57,7 @@ public class CambioEntity extends BaseEntity implements Serializable  {
     * Cambio    
     */
     @PodamExclude
-    @OneToOne(mappedBy = "changes",
-              fetch = javax.persistence.FetchType.LAZY)
+    @OneToOne
     private SitioWebEntity sitiosWeb;
 
     public CambioEntity(){
