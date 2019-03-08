@@ -154,11 +154,11 @@ public class UsuarioResource {
      * @return El servicio de tickets para ese usuario en paricular.
      */
     @Path("{usersId: \\d+}/tickets")
-    public Class<UsuarioTicketResource> getUsuarioTicketResource(@PathParam("usersId") Long usersId) {
+    public Class<UsuarioTicketsResource> getUsuarioTicketResource(@PathParam("usersId") Long usersId) {
         if (usuarioLogic.getUsuario(usersId) == null) {
             throw new WebApplicationException("El recurso /users/" + usersId + " no existe.", 404);
         }
-        return UsuarioTicketResource.class;
+        return UsuarioTicketsResource.class;
     }
 
     /**
