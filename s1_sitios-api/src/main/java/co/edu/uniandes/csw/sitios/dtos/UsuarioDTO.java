@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * UsuarioDTO implementa Serializable
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi
  */
 public class UsuarioDTO implements Serializable {
 

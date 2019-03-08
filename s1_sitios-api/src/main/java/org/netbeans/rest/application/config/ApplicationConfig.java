@@ -33,8 +33,9 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.uniandes.csw.sitios.mappers.BusinessLogicExceptionMapper.class);
         resources.add(co.edu.uniandes.csw.sitios.mappers.ExceptionMapperA.class);
         resources.add(co.edu.uniandes.csw.sitios.mappers.WebApplicationExceptionMapper.class);
+        resources.add(co.edu.uniandes.csw.sitios.resources.AdministradorNotificacionesResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.AdministradorResource.class);
-        resources.add(co.edu.uniandes.csw.sitios.resources.AdministradorSitiosWebResource.class);
+        resources.add(co.edu.uniandes.csw.sitios.resources.CambioResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.DependenciaResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.EstadoWebResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.NotificacionResourse.class);
@@ -45,6 +46,7 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.uniandes.csw.sitios.resources.TecnologiaSitioWebResourse.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.TicketResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.UsuarioResource.class);
+        resources.add(co.edu.uniandes.csw.sitios.resources.UsuarioTicketResource.class);
     }
     
 }
