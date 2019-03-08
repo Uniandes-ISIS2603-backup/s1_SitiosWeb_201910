@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.sitios.test.logic;
+package co.edu.uniandes.csw.sitios.ejb;
 
 /**
  *
- * @author estudiante
+ * @author s.ballesteros
  */
-public class PlataformaDeDespliegueSitioWebLogicTest {
+public class CambioSititoWebLogic {
     
 }
