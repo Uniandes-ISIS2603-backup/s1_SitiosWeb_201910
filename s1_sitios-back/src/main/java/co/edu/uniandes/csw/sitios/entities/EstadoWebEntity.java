@@ -24,13 +24,15 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class EstadoWebEntity extends BaseEntity implements Serializable {
 
     
-    @ManyToMany
-    @PodamExclude
-    private List<SitioWebEntity> asociados;
+
     //__________________________________________________________________________
     // Atributos
     //__________________________________________________________________________
     
+    /**
+     * enumerador correspondiente a los tipos de estado mas 
+     * comunes para un sitio web
+     */
     public enum estado
     {
         ACTIVO, INACTIVO, ENFALLA, OTROS
@@ -53,6 +55,12 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaCambio;
 
+    /**
+     * sitio al que corresponde el estado web
+     */
+    @ManyToOne
+    @PodamExclude
+    private SitioWebEntity sitioAsociado;
     //__________________________________________________________________________
     // Metodos
     //__________________________________________________________________________
@@ -64,16 +72,7 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
      */
     public void setEstado(estado estado) {
         this.estado = estado;
-    }
-
-    public List<SitioWebEntity> getAsociados() {
-        return asociados;
-    }
-
-    public void setAsociados(List<SitioWebEntity> asociados) {
-        this.asociados = asociados;
-    }
-    
+    }   
     
     
     /**
@@ -119,6 +118,23 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
      */
     public void setFechaCambio(Date fechaCambio) {
         this.fechaCambio = fechaCambio;
+    }
+    
+    /**
+     * devuelve el sitio asociado al estado Web
+     * 
+     * @return sitioAsociado
+     */
+    public SitioWebEntity getSitioAsociado() {
+        return sitioAsociado;
+    }
+
+    /**
+     * modifica el sitio asociado a un estado web
+     * @param asociado  the sitioAsociado to set
+     */
+    public void setSitioAsociado( SitioWebEntity asociado) {
+        this.sitioAsociado = asociado;
     }
 
     

@@ -118,7 +118,7 @@ public class SitioLogicTest {
         }
         for (int i = 0; i < 3; i++) {
            SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-           newsite.setHistorialDeEstados(stateData);
+           newsite.setEstadosWeb(stateData);
            newsite.setSitiosRelacionados(data);
            newsite.setAdministradores(peopleData);
            newsite.setTechnologies(tecsData);
@@ -136,7 +136,7 @@ public class SitioLogicTest {
     {
         try {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -155,7 +155,7 @@ public class SitioLogicTest {
     public void createSiteTestFail1() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(null);
+             newsite.setEstadosWeb(null);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -167,7 +167,7 @@ public class SitioLogicTest {
     public void createSiteTestFail2() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(null);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -179,7 +179,7 @@ public class SitioLogicTest {
     public void createSiteTestFail3() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(null);
              newsite.setTechnologies(tecsData);
@@ -191,7 +191,7 @@ public class SitioLogicTest {
     public void createSiteTestFail4() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(null);
@@ -203,7 +203,7 @@ public class SitioLogicTest {
     public void createSiteTestFail5() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -215,7 +215,7 @@ public class SitioLogicTest {
     public void createSiteTestFail6() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -229,7 +229,7 @@ public class SitioLogicTest {
     public void createSiteTestFail8() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -242,7 +242,7 @@ public class SitioLogicTest {
     public void createSiteTestFail12() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -255,7 +255,7 @@ public class SitioLogicTest {
     public void createSiteTestFail7() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -268,7 +268,7 @@ public class SitioLogicTest {
     public void createSiteTestFail9() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -281,7 +281,7 @@ public class SitioLogicTest {
     public void createSiteTestFail10() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -294,7 +294,7 @@ public class SitioLogicTest {
     public void createSiteTestFail11() throws BusinessLogicException
     {
              SitioWebEntity newsite = factory.manufacturePojo(SitioWebEntity.class);
-             newsite.setHistorialDeEstados(stateData);
+             newsite.setEstadosWeb(stateData);
              newsite.setSitiosRelacionados(data);
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
@@ -333,7 +333,7 @@ public class SitioLogicTest {
        
        SitioWebEntity newsite= factory.manufacturePojo(SitioWebEntity.class);
      
-       newsite.setHistorialDeEstados(new ArrayList<EstadoWebEntity>());
+       newsite.setEstadosWeb(new ArrayList<EstadoWebEntity>());
        newsite.setSitiosRelacionados(new ArrayList<SitioWebEntity>());
        newsite.setAdministradores(new ArrayList<AdministradorEntity>());
        newsite.setTechnologies(new ArrayList<TecnologiaEntity>());

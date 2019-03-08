@@ -117,7 +117,7 @@ public class TicketLogic {
      * @param pTicket: ticket con los cambios para ser actualizada en la DB
      * @return un ticket con los cambios actualizados en la base de datos.
      */
-    public TicketEntity updateEstadoWeb(Long ticketId, TicketEntity pTicket) 
+    public TicketEntity updateTicket(Long ticketId, TicketEntity pTicket) 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar un ticket con id = {0}", ticketId);
         TicketEntity updateEntity = DB.update(pTicket);
@@ -130,7 +130,7 @@ public class TicketLogic {
      *
      * @param ticketId: id del ticket a eliminar
      */
-    public void deleteEstadoWeb(Long ticketId) 
+    public void deleteTicket(Long ticketId) 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un ticket con id = {0}", ticketId);
         DB.delete(ticketId);

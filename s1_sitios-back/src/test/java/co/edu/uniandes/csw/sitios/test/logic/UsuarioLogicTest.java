@@ -107,7 +107,7 @@ public class UsuarioLogicTest {
      * Prueba para crear un Usuario.
      */
     @Test
-    public void createUsuarioTest() {
+    public void createUsuarioTest() throws BusinessLogicException {
         UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
         UsuarioEntity result = usuarioLogic.createUsuario(newEntity);
         Assert.assertNotNull(result);
@@ -150,7 +150,7 @@ public class UsuarioLogicTest {
      * Prueba para actualizar un Usuario.
      */
     @Test
-    public void updateUsuarioTest() {
+    public void updateUsuarioTest() throws BusinessLogicException {
         UsuarioEntity entity = data.get(0);
         UsuarioEntity pojoEntity = factory.manufacturePojo(UsuarioEntity.class);
 

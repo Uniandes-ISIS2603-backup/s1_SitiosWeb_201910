@@ -53,7 +53,7 @@ public class AdministradorResource {
      * atributo id autogenerado.
      */
     @POST
-    public AdministradorDTO createAdministrador(AdministradorDTO administrador) {
+    public AdministradorDTO createAdministrador(AdministradorDTO administrador) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: input: {0}", administrador);
         AdministradorDTO administradorDTO = new AdministradorDTO(administradorLogic.createAdministrador(administrador.toEntity()));
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: output: {0}", administrador);
@@ -111,7 +111,7 @@ public class AdministradorResource {
      */
     @PUT
     @Path("{adminsId: \\d+}")
-    public AdministradorDetailDTO updateAdministrador(@PathParam("adminsId") Long adminsId, AdministradorDetailDTO administrador) {
+    public AdministradorDetailDTO updateAdministrador(@PathParam("adminsId") Long adminsId, AdministradorDetailDTO administrador) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "adminsIdResource updateAdministrador: input: adminsId: {0} , administrador: {1}", new Object[]{adminsId, administrador});
         administrador.setId(adminsId);
         if (administradorLogic.getAdministrador(adminsId) == null) {

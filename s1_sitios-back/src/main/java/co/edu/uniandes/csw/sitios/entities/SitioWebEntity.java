@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
 import uk.co.jemos.podam.common.PodamLongValue;
@@ -109,11 +110,23 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**
-     * historial completo de estados que ha tenido este sitio
+     * historial completo de estados que ha tenido este sitio.
+     * @auhtor Daniel Preciado
+     * 
      */
     @PodamExclude
-    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
-    private List<EstadoWebEntity> historialDeEstados;
+    @OneToMany(mappedBy = "sitioWeb",cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<EstadoWebEntity> estadosWeb;
+    
+     /**
+     * historial completo de estados que ha tenido este sitio.
+     * @auhtor Daniel Preciado
+     * 
+     */
+    @PodamExclude
+    @OneToMany(mappedBy = "sitioWeb",cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<TicketEntity> ticketsSitio;
+
 
     public SitioWebEntity() {
     }
@@ -184,12 +197,40 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
 
  
 
-    public List<EstadoWebEntity> getHistorialDeEstados() {
-        return historialDeEstados;
+    /**
+     * devuelve los estados web que ha tenido  un sitio
+     * @return 
+     */
+    public List<EstadoWebEntity> getEstadosWeb() 
+    {
+        return estadosWeb;
     }
 
-    public void setHistorialDeEstados(List<EstadoWebEntity> historialDeEstados) {
-        this.historialDeEstados = historialDeEstados;
+    /**
+     * modifica los estados web de un sitio
+     * @param estadosWeb 
+     */
+    public void setEstadosWeb(List<EstadoWebEntity> estadosWeb)
+    {
+        this.estadosWeb = estadosWeb;
+    }
+    
+    /**
+     * devuelve los ticket generados para el sitio
+     * @return 
+     */
+    public List<TicketEntity> getTicketsSitio() 
+    {
+        return ticketsSitio;
+    }
+
+    /**
+     * modifica los ticket asignados a un sitio
+     * @param ticketsSitio 
+     */
+    public void setTicketsSitio(List<TicketEntity> ticketsSitio) 
+    {
+        this.ticketsSitio = ticketsSitio;
     }
 
     public PlataformaDeDespliegueEntity getPlataformaDeDespliegue() {
