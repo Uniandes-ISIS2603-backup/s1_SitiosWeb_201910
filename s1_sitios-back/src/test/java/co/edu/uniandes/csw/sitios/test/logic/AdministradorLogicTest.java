@@ -27,7 +27,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Pruebas de logica de Authors
+ * Pruebas de logica de Admins
  *
  * @author Allan Roy Corinaldi
  */
@@ -105,13 +105,16 @@ public class AdministradorLogicTest {
      * Prueba para crear un Administrador.
      */
     @Test
-    public void createAdministradorTest() {
+    public void createAdministradorTest() throws BusinessLogicException {
         AdministradorEntity newEntity = factory.manufacturePojo(AdministradorEntity.class);
         AdministradorEntity result = administradorLogic.createAdministrador(newEntity);
         Assert.assertNotNull(result);
         AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getEmail(), entity.getEmail());
+        Assert.assertEquals(newEntity.getPassword(), entity.getPassword());
+        Assert.assertEquals(newEntity.getTelefono(), entity.getTelefono());
     }
 
     /**
@@ -142,14 +145,18 @@ public class AdministradorLogicTest {
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
-        //Assert.assertEquals(entity.getBirthDate(), resultEntity.getBirthDate());
+        Assert.assertEquals(entity.getEmail(), resultEntity.getEmail());
+        Assert.assertEquals(entity.getPassword(), resultEntity.getPassword());
+        Assert.assertEquals(entity.getNivel(), resultEntity.getNivel());
+        Assert.assertEquals(entity.getNombreCargo(), resultEntity.getNombreCargo());
+        Assert.assertEquals(entity.getTelefono(), resultEntity.getTelefono());
     }
 
     /**
      * Prueba para actualizar un Administrador.
      */
     @Test
-    public void updateAdministradorTest() {
+    public void updateAdministradorTest() throws BusinessLogicException {
         AdministradorEntity entity = data.get(0);
         AdministradorEntity pojoEntity = factory.manufacturePojo(AdministradorEntity.class);
 
@@ -158,14 +165,12 @@ public class AdministradorLogicTest {
         administradorLogic.updateAdministrador(pojoEntity.getId(), pojoEntity);
 
         AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getId());
-        if(resp==null)
-        {
+        if (resp == null) {
             Assert.fail("No encontrado");
-        } 
-        
+        }
+
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
-        //Assert.assertEquals(pojoEntity.getBirthDate(), resp.getBirthDate());
     }
 
     /**

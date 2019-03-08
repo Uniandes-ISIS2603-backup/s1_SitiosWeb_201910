@@ -25,6 +25,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -79,6 +80,7 @@ public class TecnologiaResource {
      */
     @GET
     @Path("{technologiesId: \\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
     public TecnologiaDetailDTO getTechnology(@PathParam("technologiesId") Long technologyId) {
         LOGGER.log(Level.INFO, "TecnologiaResource getTechnology: input: {0}", technologyId);
         TecnologiaEntity tecnologiaEntity = technologyLogic.getTechnology(technologyId);

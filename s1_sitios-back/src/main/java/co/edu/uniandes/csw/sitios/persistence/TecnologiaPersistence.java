@@ -56,7 +56,7 @@ public class TecnologiaPersistence {
      * @return un libro.
      */
     public TecnologiaEntity find(Long technologysId) {
-        LOGGER.log(Level.INFO, "Consultando la tecnologóa con id={0}", technologysId);
+        LOGGER.log(Level.INFO, "Consultando la tecnología con id={0}", technologysId);
         return em.find(TecnologiaEntity.class, technologysId);
     }
 
