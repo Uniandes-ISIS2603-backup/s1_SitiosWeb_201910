@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.sitios.dtos.CambioDTO;
 import co.edu.uniandes.csw.sitios.ejb.CambioLogic;
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
