@@ -83,12 +83,12 @@ public class PlataformaDeDespliegueResource {
     
     @DELETE
     @Path("{organizationsId: \\d+}")
-    public void deleteOrganization(@PathParam("organizationsId") Long organizationsId) throws BusinessLogicException {
+    public void deletePlataforma(@PathParam("organizationsId") Long organizationsId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "OrganizationResource deleteOrganization: input: {0}", organizationsId);
         if (plataformaLogic.getPlataformaDeDespliegue(organizationsId) == null) {
             throw new WebApplicationException("El recurso /organizations/" + organizationsId + " no existe.", 404);
         }
-        plataformaLogic.deleteOrganization(organizationsId);
+        plataformaLogic.deletePlataforma(organizationsId);
         LOGGER.info("OrganizationResource deleteOrganization: output: void");
     }
 
