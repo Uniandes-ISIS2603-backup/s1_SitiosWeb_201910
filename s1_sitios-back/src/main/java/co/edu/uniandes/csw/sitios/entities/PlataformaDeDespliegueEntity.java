@@ -72,7 +72,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
     * plataforma de Despliegue    
     */
     @PodamExclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     
 public PlataformaDeDespliegueEntity(){
