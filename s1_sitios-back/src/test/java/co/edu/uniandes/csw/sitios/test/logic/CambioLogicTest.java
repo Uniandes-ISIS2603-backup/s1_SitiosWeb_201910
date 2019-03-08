@@ -118,7 +118,7 @@ public class CambioLogicTest {
     
     
      @Test
-    public void createPlataformaDeDespliegueTest2() throws BusinessLogicException {
+    public void createCambioTest2() throws BusinessLogicException {
 
         CambioEntity newEntity = factory.manufacturePojo(CambioEntity.class);
         newEntity.setDescripcion(data.get(0).getDescripcion());
