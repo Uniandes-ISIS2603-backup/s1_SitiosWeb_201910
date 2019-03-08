@@ -16,7 +16,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author estudiante
+ * @author s.ballesteros
  */
 @Stateless
 public class CambioPersistence {
@@ -39,10 +39,10 @@ public class CambioPersistence {
     }
 
     // Busque en la tabla ----Entity un e(objeto o registro) donde el nombre es igual a una ip pasada por parametro
-    public CambioEntity findByIp(String ip){
+    public CambioEntity findByName(String name){
             TypedQuery<CambioEntity> query = em.createQuery("Select e from CambioEntity e where e.name = :name",CambioEntity.class);
             // Aca le asigno que significa param param=ip
-            query = query.setParameter("name", ip);
+            query = query.setParameter("name", name);
             //Hago una lista que me devuelve la lista del resultado
             List<CambioEntity> sameParam = query.getResultList();
            
