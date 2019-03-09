@@ -69,9 +69,15 @@ public class EstadoWebLogic {
         {
             throw new BusinessLogicException("no puede crear un estado Web sin un tipo de estado valido o vacio \"" );
         }
-        if (pEstadoWebEntity.getFechaCambio() != null) 
+        
+        if (pEstadoWebEntity.getFechaCambio() == null) 
         {
             throw new BusinessLogicException("no puede crear un estado Web sin fecha \"" );
+        }
+        
+        if (pEstadoWebEntity.getSitioAsociado()== null) 
+        {
+            throw new BusinessLogicException("no puede crear un estado Web sin asociarlo a un sitio \"" );
         }
         // Invoca la DB para crear un estado Web
         DB.create(pEstadoWebEntity);

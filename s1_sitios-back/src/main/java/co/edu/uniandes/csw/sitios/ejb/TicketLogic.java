@@ -69,10 +69,16 @@ public class TicketLogic {
         {
             throw new BusinessLogicException("no puede crear un ticket sin un tipo de estado valido o vacio \"" );
         }
-        if (pTicket.getFecha() != null) 
+        if (pTicket.getFecha() == null) 
         {
             throw new BusinessLogicException("no puede crear un ticket sin fecha \"" );
         }
+        
+         if (pTicket.getSitioAsociado()== null) 
+        {
+            throw new BusinessLogicException("no puede crear un ticket sin asociarlo a algun sitio \"" );
+        }
+        
         // Invoca la DB para crear un ticket
         DB.create(pTicket);
         LOGGER.log(Level.INFO, "Termina proceso de creación de un ticket");

@@ -5,11 +5,11 @@
  */
 package co.edu.uniandes.csw.sitios.test.logic;
 
-import co.edu.uniandes.csw.sitios.ejb.EstadoWebLogic;
-import co.edu.uniandes.csw.sitios.entities.EstadoWebEntity;
+import co.edu.uniandes.csw.sitios.ejb.TicketLogic;
+import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.sitios.persistence.EstadoWebPersistence;
+import co.edu.uniandes.csw.sitios.persistence.TicketPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -28,12 +28,12 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Pruebas de logica diseñadas para la clase EstadoWebLogic
+ * Pruebas de logica diseñadas para la clase TicketLogic
  * 
  * @author Daniel PReciado
  */
 @RunWith(Arquillian.class)
-public class EstadoWebLogicTest {
+public class TicketLogicTest {
     
     //__________________________________________________________________________
     // Atributos
@@ -46,10 +46,10 @@ public class EstadoWebLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
 
     /**
-     * Inyeccion de dependencias a la logica de un EstadoWeb
+     * Inyeccion de dependencias a la logica de un Ticket
      */
     @Inject
-    private EstadoWebLogic estadoWebLogic;
+    private TicketLogic ticketLogic;
 
     /**
      * Contexto de Persistencia que se va a utilizar para acceder a la DB
@@ -69,7 +69,7 @@ public class EstadoWebLogicTest {
     /**
      * list de data para las pruebas
      */
-    private List<EstadoWebEntity> data = new ArrayList<EstadoWebEntity>();
+    private List<TicketEntity> data = new ArrayList<TicketEntity>();
     
     /**
      * list de data para las pruebas
@@ -77,7 +77,7 @@ public class EstadoWebLogicTest {
     private List<SitioWebEntity> auxData = new ArrayList<SitioWebEntity>();
     
     //__________________________________________________________________________
-    // Atributos
+    // Metodos
     //__________________________________________________________________________
 
     /**
@@ -89,9 +89,9 @@ public class EstadoWebLogicTest {
     public static JavaArchive createDeployment() 
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(EstadoWebEntity.class.getPackage())
-                .addPackage(EstadoWebLogic.class.getPackage())
-                .addPackage(EstadoWebPersistence.class.getPackage())
+                .addPackage(TicketEntity.class.getPackage())
+                .addPackage(TicketLogic.class.getPackage())
+                .addPackage(TicketPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -128,7 +128,7 @@ public class EstadoWebLogicTest {
      */
     private void clearData() 
     {
-        em.createQuery("delete from EstadoWebEntity").executeUpdate();
+        em.createQuery("delete from TicketEntity").executeUpdate();
         em.createQuery("delete from SitioWebEntity").executeUpdate();
     }
 
@@ -149,7 +149,7 @@ public class EstadoWebLogicTest {
         
         for (int i = 0; i < 3; i++)
         {
-            EstadoWebEntity entity = factory.manufacturePojo(EstadoWebEntity.class);
+            TicketEntity entity = factory.manufacturePojo(TicketEntity.class);
             entity.setSitioAsociado(auxData.get(0));
 
             em.persist(entity);
@@ -158,20 +158,20 @@ public class EstadoWebLogicTest {
     }
 
     /**
-     * Prueba para crear un EstadoWeb.
+     * Prueba para crear un Ticket.
      *
      */
      
     @Test
-    public void createEstadoWebTest()  
+    public void createTicketTest()  
     {
-        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
         newEntity.setSitioAsociado(auxData.get(0));
         try
         {
-            EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+            TicketEntity result = ticketLogic.createTicket(newEntity);
             Assert.assertNotNull(result);
-            EstadoWebEntity entity = em.find(EstadoWebEntity.class, result.getId());
+            TicketEntity entity = em.find(TicketEntity.class, result.getId());
             Assert.assertEquals(newEntity.getId(), entity.getId());
             Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
             Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
@@ -184,92 +184,92 @@ public class EstadoWebLogicTest {
     }
     
     /**
-     * Prueba para crear un EstadoWeb.
+     * Prueba para crear un Ticket.
      * 
-     * en esta prueba se intenta crear un estado web que incumple con las 
+     * en esta prueba se intenta crear un ticket que incumple con las 
      * reglas de negocio
-     * caso 1: no se le asigna un sitio al estado web
+     * caso 1: no se le asigna un sitio al ticket
      * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
      
     @Test (expected = BusinessLogicException.class)
-    public void createEstadoWebTestFail1()  throws BusinessLogicException
+    public void createTicketTestFail1()  throws BusinessLogicException
     {
-        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
-        EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
+        TicketEntity result = ticketLogic.createTicket(newEntity);
  
     }
     
     /**
-     * Prueba para crear un EstadoWeb.
+     * Prueba para crear un Ticket.
      * 
-     * en esta prueba se intenta crear un estado web que incumple con las 
+     * en esta prueba se intenta crear un ticket que incumple con las 
      * reglas de negocio
      * caso 2: se envia una descripcion vacia
      * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
      
     @Test (expected = BusinessLogicException.class)
-    public void createEstadoWebTestFail2()  throws BusinessLogicException
+    public void createTicketTestFail2()  throws BusinessLogicException
     {
-        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
         newEntity.setSitioAsociado(auxData.get(0));
         newEntity.setDescripcion("");
-        EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+        TicketEntity result = ticketLogic.createTicket(newEntity);
 
     }
     
     /**
-     * Prueba para crear un EstadoWeb.
+     * Prueba para crear un Ticket.
      * 
-     * en esta prueba se intenta crear un estado web que incumple con las 
+     * en esta prueba se intenta crear un ticket que incumple con las 
      * reglas de negocio
-     * caso 3: se intenta crear el estadoWeb sin un estado
+     * caso 3: se intenta crear el ticket sin un estado
      * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
      
     @Test (expected = BusinessLogicException.class)
-    public void createEstadoWebTestFail3()  throws BusinessLogicException
+    public void createTicketTestFail3()  throws BusinessLogicException
     {
-        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
         newEntity.setSitioAsociado(auxData.get(0));
         newEntity.setEstado(null);
-        EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+        TicketEntity result = ticketLogic.createTicket(newEntity);
 
     }
     
     /**
-     * Prueba para crear un EstadoWeb.
+     * Prueba para crear un Ticket.
      * 
-     * en esta prueba se intenta crear un estado web que incumple con las 
+     * en esta prueba se intenta crear un ticket que incumple con las 
      * reglas de negocio
-     * caso 4: se intenta crear el estadoWeb sin una fecha
+     * caso 4: se intenta crear el ticket sin una fecha
      * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
      
     @Test (expected = BusinessLogicException.class)
-    public void createEstadoWebTestFail4()  throws BusinessLogicException
+    public void createTicketTestFail4()  throws BusinessLogicException
     {
-        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
         newEntity.setSitioAsociado(auxData.get(0));
-        newEntity.setFechaCambio(null);
-        EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+        newEntity.setFecha(null);
+        TicketEntity result = ticketLogic.createTicket(newEntity);
 
     }
     
    
     /**
-     * Prueba para consultar la lista de todos los EstadosWeb.
+     * Prueba para consultar la lista de todos los Tickets.
      */
     @Test
-    public void getEstadosWebTest() 
+    public void getTicketsTest() 
     {
-        List<EstadoWebEntity> list = estadoWebLogic.getEstadosWeb();
+        List<TicketEntity> list = ticketLogic.getTickets();
         Assert.assertEquals(data.size(), list.size());
-        for (EstadoWebEntity entity : list) 
+        for (TicketEntity entity : list) 
         {
             boolean found = false;
-            for (EstadoWebEntity storedEntity : data) 
+            for (TicketEntity storedEntity : data) 
             {
                 if (entity.getId().equals(storedEntity.getId())) 
                 {
@@ -281,13 +281,13 @@ public class EstadoWebLogicTest {
     }
 
     /**
-     * Prueba para consultar un EstadoWeb.
+     * Prueba para consultar un Ticket.
      */
     @Test
-    public void getEstadoWebTest() 
+    public void getTicketTest() 
     {
-        EstadoWebEntity entity = data.get(0);
-        EstadoWebEntity resultEntity = estadoWebLogic.getEstadoWeb(entity.getId());
+        TicketEntity entity = data.get(0);
+        TicketEntity resultEntity = ticketLogic.getTicket(entity.getId());
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getDescripcion(), resultEntity.getDescripcion());
@@ -295,21 +295,21 @@ public class EstadoWebLogicTest {
     }
 
     /**
-     * Prueba para actualizar un EstadoWeb.
+     * Prueba para actualizar un Ticket.
      */
     @Test
-    public void updateEstadoWebTest()
+    public void updateTicketTest()
     {
         try
         {
-            EstadoWebEntity entity = data.get(0);
-            EstadoWebEntity pojoEntity = factory.manufacturePojo(EstadoWebEntity.class);
+            TicketEntity entity = data.get(0);
+            TicketEntity pojoEntity = factory.manufacturePojo(TicketEntity.class);
 
             pojoEntity.setId(entity.getId());
 
-            estadoWebLogic.updateEstadoWeb(pojoEntity.getId(), pojoEntity);
+            ticketLogic.updateTicket(pojoEntity.getId(), pojoEntity);
             
-            EstadoWebEntity resp = em.find(EstadoWebEntity.class, entity.getId());
+            TicketEntity resp = em.find(TicketEntity.class, entity.getId());
 
             Assert.assertEquals(pojoEntity.getId(), resp.getId());
             Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
@@ -322,15 +322,16 @@ public class EstadoWebLogicTest {
     }
 
     /**
-     * Prueba para eliminar un EstadoWeb.
+     * Prueba para eliminar un Ticket.
      */
     @Test
-    public void deleteEstadoWebTest() 
+    public void deleteTicketTest() 
     {
-        EstadoWebEntity entity = data.get(0);
-        estadoWebLogic.deleteEstadoWeb(entity.getId());
-        EstadoWebEntity deleted = em.find(EstadoWebEntity.class, entity.getId());
+        TicketEntity entity = data.get(0);
+        ticketLogic.deleteTicket(entity.getId());
+        TicketEntity deleted = em.find(TicketEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
     
 }
+
