@@ -5,7 +5,12 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamIntValue;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -27,11 +32,13 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * telefono de la dependencia
      */
+    @PodamStringValue(length = 9)
     private String telefono;
     
+    
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @javax.persistence.OneToOne(
-        mappedBy = "dependencia",
-        fetch = javax.persistence.FetchType.EAGER
+        mappedBy = "dependencia"
     )
     private AdministradorEntity encargadoDependencia;
     
