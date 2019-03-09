@@ -6,6 +6,10 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
+import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
+import java.io.Serializable;
+import java.util.ArrayList;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -13,29 +17,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class CambioDetailDTO {
+public class CambioDetailDTO extends CambioDTO implements Serializable{
     
       private SitioWebDTO sitioWeb;
 
-    public CambioDetailDTO() {
-        super();
-
-    }
-
-    /**
-     * Crea un objeto OrganizationDetailDTO a partir de un objeto
-     * OrganizationEntity incluyendo los atributos de OrganizationDTO.
-     *
-     * @param organizationEntity Entidad OrganizationEntity desde la cual se va
-     * a crear el nuevo objeto.
-     *
-     */
-    public CambioDetailDTO(CambioEntity cambioEntity) {
-        super(cambioEntity);
-        if (cambioEntity.getSitiosWeb() != null) {
-            this.sitioWeb = new SitioWebDTO(cambioEntity.getSitiosWeb());
-        }
-    }
+    public CambioDetailDTO(CambioEntity cambioEntity){
+   super(cambioEntity);
+       if(cambioEntity != null && cambioEntity.getSitiosWeb()!= null ){
+           sitioWeb = new SitioWebDTO();
+       }
+}
 
     /**
      * Convierte un objeto OrganizationDetailDTO a OrganizationEntity incluyendo
@@ -48,7 +39,7 @@ public class CambioDetailDTO {
     public CambioEntity toEntity() {
         CambioEntity entity = super.toEntity();
         if (getSitioWeb() != null) {
-            entity.getSitiosWeb(getSitioWeb().toEntity());
+            entity.setSitiosWeb(getSitioWeb().toEntity());
         }
         return entity;
     }

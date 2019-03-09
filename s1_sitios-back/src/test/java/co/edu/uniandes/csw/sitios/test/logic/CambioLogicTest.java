@@ -43,7 +43,7 @@ public class CambioLogicTest {
     
      @PersistenceContext
     private EntityManager em;
-     
+    
     private PodamFactory factory = new PodamFactoryImpl();
     
     private List<CambioEntity> data = new ArrayList<CambioEntity>();
