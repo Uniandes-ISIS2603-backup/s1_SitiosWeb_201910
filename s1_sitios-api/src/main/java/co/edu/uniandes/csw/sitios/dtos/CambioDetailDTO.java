@@ -5,9 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
-
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
-import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -15,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
-public class CambioDetailDTO implements Serializable{
+public class CambioDetailDTO {
     
       private SitioWebDTO sitioWeb;
 
@@ -24,18 +22,33 @@ public class CambioDetailDTO implements Serializable{
 
     }
 
-  
+    /**
+     * Crea un objeto OrganizationDetailDTO a partir de un objeto
+     * OrganizationEntity incluyendo los atributos de OrganizationDTO.
+     *
+     * @param organizationEntity Entidad OrganizationEntity desde la cual se va
+     * a crear el nuevo objeto.
+     *
+     */
     public CambioDetailDTO(CambioEntity cambioEntity) {
+        super(cambioEntity);
         if (cambioEntity.getSitiosWeb() != null) {
             this.sitioWeb = new SitioWebDTO(cambioEntity.getSitiosWeb());
         }
     }
 
-
+    /**
+     * Convierte un objeto OrganizationDetailDTO a OrganizationEntity incluyendo
+     * los atributos de OrganizationDTO.
+     *
+     * @return Nueva objeto OrganizationEntity.
+     *
+     */
+    @Override
     public CambioEntity toEntity() {
-        CambioEntity entity = new CambioEntity();
+        CambioEntity entity = super.toEntity();
         if (getSitioWeb() != null) {
-            entity.setSitiosWeb(getSitioWeb().toEntity());
+            entity.getSitiosWeb(getSitioWeb().toEntity());
         }
         return entity;
     }

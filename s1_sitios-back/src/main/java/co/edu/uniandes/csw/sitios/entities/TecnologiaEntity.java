@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -18,10 +19,21 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class TecnologiaEntity extends BaseEntity implements Serializable{
 
+    /*
+    * Tipos de tecnología
+    */
+    public enum TipoDeTecnologia
+    {
+        LENGUAJEDEPROGRAMACION,
+        FRAMEWORK,
+        SERVIDORDEAPLICACION,
+        LIBRERIA
+    }
        
     /*
     *Name of the technology
     */
+    @PodamStringValue()
     private String name;
     /*
     *Version of the technology
@@ -30,6 +42,7 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     /*
     *Technology description
     */
+    @PodamStringValue(length = 21)
     private String description;
     /*
     *Technology official website
@@ -38,7 +51,7 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
     /*
      *Technology Type
     */
-    private String techCategory;
+    private TipoDeTecnologia techCategory;
     
     @ManyToMany(mappedBy = "technologies")
     @PodamExclude
@@ -77,11 +90,11 @@ public class TecnologiaEntity extends BaseEntity implements Serializable{
         this.url = url;
     }
 
-    public String getTechCategory() {
+    public TipoDeTecnologia getTechCategory() {
         return techCategory;
     }
 
-    public void setTechCategory(String techCategory) {
+    public void setTechCategory(TipoDeTecnologia techCategory) {
         this.techCategory = techCategory;
     }
 

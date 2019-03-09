@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.ejb;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity;
+import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity.TipoDeTecnologia;
 import co.edu.uniandes.csw.sitios.persistence.TecnologiaPersistence;
 import java.util.List;
 import java.util.Objects;
@@ -87,7 +88,6 @@ public class TecnologiaLogic {
     public TecnologiaEntity updateTechnology(Long tecnologiaId, TecnologiaEntity tecnologiaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la tecnología con id = {0}", tecnologiaId);
         TecnologiaEntity existe = getTechnology(tecnologiaEntity.getId());
-        String category = tecnologiaEntity.getTechCategory();
         if(existe!=null&&!Objects.equals(tecnologiaId, existe.getId()))
         {
             throw new BusinessLogicException("Ya existe una tecnología con este ID");
@@ -115,7 +115,7 @@ public class TecnologiaLogic {
     }
     private void verificarReglasDeNegocio(TecnologiaEntity tecnologiaEntity) throws BusinessLogicException
     {
-        String category = tecnologiaEntity.getTechCategory();
+        TipoDeTecnologia category = tecnologiaEntity.getTechCategory();
          if(tecnologiaEntity.getDescription()==null||tecnologiaEntity.getDescription().equals(""))
         {
              throw new BusinessLogicException("La descripción no puede estar vacia");
@@ -140,13 +140,9 @@ public class TecnologiaLogic {
         {
              throw new BusinessLogicException("La version no puede estar vacia");
         } 
-        if(category==null||category.equals(""))
+        if(category==null)
         {
              throw new BusinessLogicException("La version no puede estar vacia");
         } 
-        if(!category.equalsIgnoreCase("LenguajeDeProgramacion")&&!category.equalsIgnoreCase("FrameWork")&&!category.equalsIgnoreCase("ServidorDeAplicacion")&&!category.equalsIgnoreCase("Libreria"))
-        {
-             throw new BusinessLogicException("Categoria invalida");
-        }
     }
 }
