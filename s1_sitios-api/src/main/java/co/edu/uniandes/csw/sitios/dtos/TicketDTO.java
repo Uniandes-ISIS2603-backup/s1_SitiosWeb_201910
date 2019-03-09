@@ -11,102 +11,188 @@ import java.util.Date;
 
 /**
  * TicketDTO implementa Serializable
- * @author estudiante
+ * @author  Daniel Preciado /Allan Corinaldi 
  */
 public class TicketDTO implements Serializable{
 
-    //-------------------------------------
-    // Atributos---------------------------
-    //-------------------------------------
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
     
     /**
-     * descripcion de por que se saco
-     * el ticket.
+     * id de un ticket.
+     */
+    private Long id;
+    
+    /**
+     * descripcion del ticket.
      */
     private String descripcion;
     
     /**
-     * fecha que se saco el ticket,
-     * diferente de null.
+     * fecha en la que se genero el ticket.
      */
     private Date fecha;
     
     /**
-     * estado del ticket, tiene 3: 0, 1, 2.
+     * estado del ticket, tiene 3: 1, 2, 3.
      */
-    private Integer estado; //Solo 3 estados
+    private Integer estado;
     
     /**
-     * Constructor TicketDTO vacio
+     * Relación a un sitioWeb  
+     * dado que esta tiene cardinalidad 1.
      */
-    public TicketDTO() {
+    private SitioWebDTO sitioAsociado;
+
+    
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
+    
+    /**
+     * Constructor TicketDTO vacio.
+     */
+    public TicketDTO()
+    {
+        
     }
     
     /**
-     * Constructor que se usa para checkear la entidad
-     * del DTO
-     * @param entity != null
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param entity: Es la entidad que se va a convertir a DTO
      */
-    public TicketDTO( TicketEntity entity ){
-        if(entity != null) {
+    public TicketDTO( TicketEntity entity )
+    {
+        if(entity != null) 
+        {
+            this.id = entity.getId();
             this.descripcion = entity.getDescripcion();
             this.estado = entity.getEstado();
             this.fecha = entity.getFecha();
+            
+            if (entity.getSitioAsociado()!= null) 
+            {
+                this.sitioAsociado = new SitioWebDTO(entity.getSitioAsociado());
+            } else 
+            {
+                this.sitioAsociado = null;
+            }
         }
     }
     
     /**
-     * Chequeo de la implementacion toEntity del DTO
-     * @return TicketEntity
+     * obtiene el id de u  ticket
+     * @return id 
      */
-    public TicketEntity toEntity() {
-        TicketEntity entity = new TicketEntity();
-        entity.setDescripcion(this.descripcion);
-        entity.setEstado(this.estado);
-        entity.setFecha(this.fecha);
-        return entity;
+    public Long getId() 
+    {
+        return id;
+    }
+
+    /**
+     * asigna el id de un ticket
+     * @param id id to set
+     */
+    public void setId(Long id) 
+    {
+        this.id = id;
     }
     
     /**
+     * obtiene la descripcion de un ticket
      * @return the descripcion
      */
-    public String getDescripcion() {
+    public String getDescripcion() 
+    {
         return descripcion;
     }
 
     /**
+     * asigna la descripcion a un ticket
      * @param descripcion the descripcion to set
      */
-    public void setDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) 
+    {
         this.descripcion = descripcion;
     }
 
     /**
+     * obtiene la fecha de un ticket
      * @return the fecha
      */
-    public Date getFecha() {
+    public Date getFecha()
+    {
         return fecha;
     }
 
     /**
+     * asigna la fecha de un ticket
      * @param fecha the fecha to set
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(Date fecha) 
+    {
         this.fecha = fecha;
     }
 
     /**
+     * obtiene el estado de un ticket
      * @return the estado
      */
-    public Integer getEstado() {
+    public Integer getEstado() 
+    {
         return estado;
     }
 
     /**
+     * asigna el estado de un ticket
      * @param estado the estado to set
      */
-    public void setEstado(int estado) {
+    public void setEstado(int estado)
+    {
         this.estado = estado;
     }
+    
+    /**
+     * obtiene el sitio al cual esta asociado el ticket
+     * @return the sitioAsociado
+     */
+    public SitioWebDTO getSitioAsociado()
+    {
+        return sitioAsociado;
+    }
+
+    /**
+     * asigna el sitio al cual se asocia el ticket
+     * @param sitioAsociado the sitioAsociado to set
+     */
+    public void setSitioAsociado(SitioWebDTO sitioAsociado) 
+    {
+        this.sitioAsociado = sitioAsociado;
+    }
+    
+    /**
+     * Convierte un DTO a Entity
+     * 
+     * @return TicketEntity con los valores del DTO
+     */
+    public TicketEntity toEntity() 
+    {
+        TicketEntity entity = new TicketEntity();
+        entity.setId(this.id);
+        entity.setDescripcion(this.descripcion);
+        entity.setEstado(this.estado);
+        entity.setFecha(this.fecha);
+        
+        if (this.sitioAsociado != null) 
+        {
+            entity.setSitioAsociado(this.sitioAsociado.toEntity());
+        }
+        return entity;
+    }
+    
     
 }

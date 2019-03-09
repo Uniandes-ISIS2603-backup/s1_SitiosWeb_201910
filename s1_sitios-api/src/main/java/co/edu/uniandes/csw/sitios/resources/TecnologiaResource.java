@@ -25,7 +25,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
 
 /**
  *
@@ -80,7 +79,6 @@ public class TecnologiaResource {
      */
     @GET
     @Path("{technologiesId: \\d+}")
-    @Produces(MediaType.APPLICATION_JSON)
     public TecnologiaDetailDTO getTechnology(@PathParam("technologiesId") Long technologyId) {
         LOGGER.log(Level.INFO, "TecnologiaResource getTechnology: input: {0}", technologyId);
         TecnologiaEntity tecnologiaEntity = technologyLogic.getTechnology(technologyId);
@@ -107,11 +105,11 @@ public class TecnologiaResource {
      */
     @PUT
     @Path("{technologiesId: \\d+}")
-    public TecnologiaDetailDTO updateTechnology(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) throws BusinessLogicException {
+    public TecnologiaDetailDTO updateAuthor(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: input: technologysId: {0} , technology: {1}", new Object[]{technologyId, technology});
         technology.setId(technologyId);
         if (technologyLogic.getTechnology(technologyId) == null) {
-            throw new WebApplicationException("El recurso /technologies/" + technologyId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /authors/" + technologyId + " no existe.", 404);
         }
         TecnologiaDetailDTO detailDTO = new TecnologiaDetailDTO(technologyLogic.updateTechnology(technologyId, technology.toEntity()));
         LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: output: {0}", detailDTO);
@@ -129,7 +127,7 @@ public class TecnologiaResource {
      */
     @DELETE
     @Path("{technologiesId: \\d+}")
-    public void deleteTechnology(@PathParam("technologiesId") Long technologyId) throws BusinessLogicException {
+    public void deleteAuthor(@PathParam("technologiesId") Long technologyId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "TecnologiaResource deleteTechnology: input: {0}", technologyId);
         if (technologyLogic.getTechnology(technologyId) == null) {
             throw new WebApplicationException("El recurso /technologies/" + technologyId + " no existe.", 404);

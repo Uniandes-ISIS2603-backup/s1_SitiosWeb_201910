@@ -113,20 +113,18 @@ public class AdministradorNotificacionesLogicTest {
      * pruebas.
      */
     private void insertData() {
-        sitio = factory.manufacturePojo(SitioWebEntity.class);
-        em.persist(sitio);
-        
-        estado = factory.manufacturePojo(EstadoWebEntity.class);
-        em.persist(estado);
-        
-        notificado = factory.manufacturePojo(AdministradorEntity.class);
-        em.persist(notificado);
+        for (int i = 0; i < 3; i++) {
+            sitio = factory.manufacturePojo(SitioWebEntity.class);
+            em.persist(sitio);
+            estado = factory.manufacturePojo(EstadoWebEntity.class);
+            em.persist(estado);
+            notificado = factory.manufacturePojo(AdministradorEntity.class);
+            em.persist(notificado);
 
+        }
         admin = factory.manufacturePojo(AdministradorEntity.class);
-        admin.setId(1L);
         admin.setNotificaciones(data);
         em.persist(admin);
-        LOGGER.log(Level.INFO, "PRUEBA DENTRO DE INSERT_DATA id = {0}", admin.getId());
 
     }
 
@@ -164,7 +162,7 @@ public class AdministradorNotificacionesLogicTest {
      */
     @Test
     public void getNotificacionesTest() {
-        LOGGER.log(Level.INFO, "Empieza proceso de consultar la notificacion con id = {0}", admin.getId());
+        LOGGER.log(Level.INFO, "Empieza proceso de consultar la notificacion con id = {0}", admin);
         List<NotificacionEntity> notiEntities = administradorNotificacionesLogic.getNotificaciones(admin.getId());
 
         Assert.assertEquals(data.size(), notiEntities.size());

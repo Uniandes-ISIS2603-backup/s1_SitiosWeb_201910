@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity;
-import co.edu.uniandes.csw.sitios.entities.TecnologiaEntity.TipoDeTecnologia;
 import java.io.Serializable;
 
 /**
@@ -34,7 +33,7 @@ public class TecnologiaDTO implements Serializable{
     /*
     *Technology Type
     */
-    private TipoDeTecnologia techCategory;    
+    private String techCategory;    
     /*
     *Technology Id
     */
@@ -64,7 +63,7 @@ public class TecnologiaDTO implements Serializable{
         entity.setVersion(version);
         entity.setDescription(descripcion);
         entity.setUrl(url);
-        entity.setTechCategory(getTechCategory());
+        entity.setTechCategory(techCategory);
         return entity;
     }
     /**
@@ -135,19 +134,5 @@ public class TecnologiaDTO implements Serializable{
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return the techCategory
-     */
-    public TipoDeTecnologia getTechCategory() {
-        return techCategory;
-    }
-
-    /**
-     * @param techCategory the techCategory to set
-     */
-    public void setTechCategory(TipoDeTecnologia techCategory) {
-        this.techCategory = techCategory;
     }
 }

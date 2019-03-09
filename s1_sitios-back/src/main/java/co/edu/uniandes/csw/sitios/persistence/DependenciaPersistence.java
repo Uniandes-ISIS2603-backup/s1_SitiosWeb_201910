@@ -51,13 +51,10 @@ public class DependenciaPersistence {
      * DependenciaEntity;" - "SELECT * FROM table_name" en SQL.
      */
     public List<DependenciaEntity> findAll() {
-//        LOGGER.log(Level.INFO, "Consultando todas las dependencias");
-//        // Se crea un query para buscar todas las dependencias en la base de datos.
-//        TypedQuery<DependenciaEntity> query = em.createQuery("select u from DependenciaEntity u left join FETCH u.administrador p", DependenciaEntity.class);
-//        // Note que en el query se hace uso del método getResultList() que obtiene una lista de dependencias.
-//        return query.getResultList();
-        LOGGER.log(Level.INFO, "Consultando todos los sitios web");
-        TypedQuery query = em.createQuery("select u from DependenciaEntity u",DependenciaEntity.class);
+        LOGGER.log(Level.INFO, "Consultando todas las dependencias");
+        // Se crea un query para buscar todas las dependencias en la base de datos.
+        TypedQuery<DependenciaEntity> query = em.createQuery("select u from DependenciaEntity u left join FETCH u.administrador p", DependenciaEntity.class);
+        // Note que en el query se hace uso del método getResultList() que obtiene una lista de dependencias.
         return query.getResultList();
     }
 
@@ -69,22 +66,20 @@ public class DependenciaPersistence {
      * @return una dependencia.
      */
     public DependenciaEntity find(Long dependenciaID) {
-//        LOGGER.log(Level.INFO, "Consultando dependencia con id={0}", dependenciaID);
-//        /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
-//        el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
-//        Suponga que es algo similar a "select * from DependenciaEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
-//         */
-//        TypedQuery<DependenciaEntity> query = em.createQuery("select u from DependenciaEntity u left join FETCH u.admninistrador p where u.id =:id", DependenciaEntity.class);
-//        query = query.setParameter("id", dependenciaID);
-//        List<DependenciaEntity> dependencias = query.getResultList();
-//        DependenciaEntity result = null;
-//        if (!(dependencias == null || dependencias.isEmpty())) {
-//            result = dependencias.get(0);
-//        }
-//        return result;
-        LOGGER.log(Level.INFO, "Consultando el sitioweb con id={0}", dependenciaID);
-        return em.find(DependenciaEntity.class,dependenciaID);
+        LOGGER.log(Level.INFO, "Consultando dependencia con id={0}", dependenciaID);
+        /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
+        el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
+        Suponga que es algo similar a "select * from DependenciaEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
+         */
+        TypedQuery<DependenciaEntity> query = em.createQuery("select u from DependenciaEntity u left join FETCH u.admninistrador p where u.id =:id", DependenciaEntity.class);
+        query = query.setParameter("id", dependenciaID);
+        List<DependenciaEntity> dependencias = query.getResultList();
+        DependenciaEntity result = null;
+        if (!(dependencias == null || dependencias.isEmpty())) {
+            result = dependencias.get(0);
         }
+        return result;
+    }
 
     /**
      * Actualiza una dependencia.

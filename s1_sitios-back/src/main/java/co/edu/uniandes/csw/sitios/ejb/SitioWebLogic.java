@@ -28,7 +28,7 @@ public class SitioWebLogic {
        
        public SitioWebEntity createWebSite(SitioWebEntity entity) throws BusinessLogicException
        {
-           if(entity.getHistorialDeEstados()==null)
+           if(entity.getEstadosWeb()==null)
            {
                throw new BusinessLogicException("Historial inexistente");
            }

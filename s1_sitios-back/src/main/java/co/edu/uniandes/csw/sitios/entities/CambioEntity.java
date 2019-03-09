@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import co.edu.uniandes.csw.sitios.podam.DateStrategy;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -53,17 +55,14 @@ public class CambioEntity extends BaseEntity implements Serializable  {
     private Long idAsociado;
     
        /*
-    * La lista de sitiosWeb indica cuales sitios web pertenecen a una unico
-    * Cambio    
-    */
-    @PodamExclude
-    @OneToOne
-    private SitioWebEntity sitiosWeb;
+* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
+* plataforma de Despliegue    
+*/
+@PodamExclude
+@OneToOne(mappedBy = "change",
+         fetch = javax.persistence.FetchType.LAZY)
+private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
 
-    public CambioEntity(){
-        //Como se necesitan futuros constructores se deja uno vacio para evitar errores
-    }
-    
     /**
      * @return the lugarCambio
      */
@@ -135,6 +134,20 @@ public class CambioEntity extends BaseEntity implements Serializable  {
     }
 
     /**
+     * @return the sitiosWeb
+     */
+    public List<SitioWebEntity> getSitiosWeb() {
+        return sitiosWeb;
+    }
+
+    /**
+     * @param sitiosWeb the sitiosWeb to set
+     */
+    public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
+    }
+
+    /**
      * @return the idAsociado
      */
     public Long getIdAsociado() {
@@ -147,20 +160,4 @@ public class CambioEntity extends BaseEntity implements Serializable  {
     public void setIdAsociado(Long idAsociado) {
         this.idAsociado = idAsociado;
     }
-
-    /**
-     * @return the sitiosWeb
-     */
-    public SitioWebEntity getSitiosWeb() {
-        return sitiosWeb;
-    }
-
-    /**
-     * @param sitiosWeb the sitiosWeb to set
-     */
-    public void setSitiosWeb(SitioWebEntity sitiosWeb) {
-        this.sitiosWeb = sitiosWeb;
-    }
-    
-    
 }

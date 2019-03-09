@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.EstadoWebDTO;
 import co.edu.uniandes.csw.sitios.ejb.EstadoWebLogic;
+import co.edu.uniandes.csw.sitios.ejb.EstadoWebSitioWebLogic;
+import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.EstadoWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -43,8 +45,8 @@ public class EstadoWebResource {
     /**
      * constante empleada para dejar registro, una especie de huella
      */
-    
     private static final Logger LOGGER = Logger.getLogger(EstadoWebResource.class.getName());
+    
     //__________________________________________________________________________
     // Atributos
     //__________________________________________________________________________
@@ -55,6 +57,20 @@ public class EstadoWebResource {
      */
     @Inject
     EstadoWebLogic estadoWebLogic;
+    
+    /**
+     * variable empleada para acceder a la logica de un SitioWeb, esto se logra
+     * mediante inyeccion de dependencias
+     */
+    @Inject
+    SitioWebLogic sitioWebLogic;
+    
+    /**
+     * variable empleada para acceder a la logica de un TicketSitioWebLogic, esto se logra
+     * mediante inyeccion de dependencias
+     */
+    @Inject
+    EstadoWebSitioWebLogic estadoWebSitioWebLogic;
     
       
     
@@ -169,6 +185,7 @@ public class EstadoWebResource {
         {
             throw new WebApplicationException("El recurso /estadosWeb/" + estadosWebId + " no existe.", 404);
         }
+        estadoWebSitioWebLogic.removeSitioWeb(estadosWebId);
         estadoWebLogic.deleteEstadoWeb(estadosWebId);
         LOGGER.info("EstadoWebResource deleteEstadoWeb: output: void");
     }

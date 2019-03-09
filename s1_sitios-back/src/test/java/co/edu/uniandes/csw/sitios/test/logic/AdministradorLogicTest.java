@@ -27,7 +27,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Pruebas de logica de Admins
+ * Pruebas de logica de Authors
  *
  * @author Allan Roy Corinaldi
  */
@@ -112,9 +112,6 @@ public class AdministradorLogicTest {
         AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-        Assert.assertEquals(newEntity.getEmail(), entity.getEmail());
-        Assert.assertEquals(newEntity.getPassword(), entity.getPassword());
-        Assert.assertEquals(newEntity.getTelefono(), entity.getTelefono());
     }
 
     /**
@@ -145,11 +142,7 @@ public class AdministradorLogicTest {
         Assert.assertNotNull(resultEntity);
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
-        Assert.assertEquals(entity.getEmail(), resultEntity.getEmail());
-        Assert.assertEquals(entity.getPassword(), resultEntity.getPassword());
-        Assert.assertEquals(entity.getNivel(), resultEntity.getNivel());
-        Assert.assertEquals(entity.getNombreCargo(), resultEntity.getNombreCargo());
-        Assert.assertEquals(entity.getTelefono(), resultEntity.getTelefono());
+        //Assert.assertEquals(entity.getBirthDate(), resultEntity.getBirthDate());
     }
 
     /**
@@ -165,12 +158,14 @@ public class AdministradorLogicTest {
         administradorLogic.updateAdministrador(pojoEntity.getId(), pojoEntity);
 
         AdministradorEntity resp = em.find(AdministradorEntity.class, entity.getId());
-        if (resp == null) {
+        if(resp==null)
+        {
             Assert.fail("No encontrado");
-        }
-
+        } 
+        
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getNombre(), resp.getNombre());
+        //Assert.assertEquals(pojoEntity.getBirthDate(), resp.getBirthDate());
     }
 
     /**

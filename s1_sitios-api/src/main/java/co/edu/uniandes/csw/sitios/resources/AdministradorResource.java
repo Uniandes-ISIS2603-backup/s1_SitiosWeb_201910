@@ -127,6 +127,8 @@ public class AdministradorResource {
      *
      * @param adminsId Identificador del Administrador que se desea borrar. Este
      * debe ser una cadena de dígitos.
+     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * si el Administrador tiene notificaciones asociados
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el autor a borrar.
      */

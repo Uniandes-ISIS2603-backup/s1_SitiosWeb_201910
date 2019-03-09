@@ -11,8 +11,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStringValue;
@@ -67,17 +65,18 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
             IAAS,
             ONPREMISE
         }
-    /*
-    * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
-    * plataforma de Despliegue    
-    */
-    @PodamExclude
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     
-public PlataformaDeDespliegueEntity(){
-        //Como se necesitan futuros constructores se deja uno vacio para evitar errores
+    public PlataformaDeDespliegueEntity(){
     }
+
+   /*
+* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
+* plataforma de Despliegue    
+*/
+@PodamExclude
+@OneToMany(mappedBy = "plataformaDeDespliegue",
+                         fetch = javax.persistence.FetchType.LAZY)
+private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
 
     public String getIp() {
         return ip;

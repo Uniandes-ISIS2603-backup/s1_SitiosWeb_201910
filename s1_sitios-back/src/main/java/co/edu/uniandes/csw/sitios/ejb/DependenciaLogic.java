@@ -92,7 +92,7 @@ public class DependenciaLogic {
             throw new BusinessLogicException("Ya existe una dependencia con este ID");
         }
         verificarReglasDeNegocio(dependenciaEntity);
-        DependenciaEntity newDependencyEntity = persistence.update(dependenciaEntity);
+        DependenciaEntity newDependencyEntity = persistence.create(dependenciaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizacion de la dependencia con id = {0}", dependenciaID);
         return newDependencyEntity;
     }

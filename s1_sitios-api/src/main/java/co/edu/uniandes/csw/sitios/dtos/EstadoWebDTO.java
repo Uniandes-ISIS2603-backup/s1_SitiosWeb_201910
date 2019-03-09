@@ -42,6 +42,14 @@ public class EstadoWebDTO implements Serializable{
      */
     private Date fechaCambio;
     
+    /**
+     * Relación a un sitioWeb  
+     * dado que esta tiene cardinalidad 1.
+     */
+    private SitioWebDTO sitioAsociado;
+    
+    
+    
     //__________________________________________________________________________
     // Constructores
     //__________________________________________________________________________
@@ -67,6 +75,14 @@ public class EstadoWebDTO implements Serializable{
             this.estado = pEstadoWebEntity.getEstado();
             this.descripcion = pEstadoWebEntity.getDescripcion();
             this.fechaCambio = pEstadoWebEntity.getFechaCambio();
+            
+            if (pEstadoWebEntity.getSitioAsociado()!= null) 
+            {
+                this.sitioAsociado = new SitioWebDTO(pEstadoWebEntity.getSitioAsociado());
+            } else 
+            {
+                this.sitioAsociado = null;
+            }
             
         }
     }
@@ -155,6 +171,24 @@ public class EstadoWebDTO implements Serializable{
     {
         this.fechaCambio = fechaCambio;
     }
+    
+    /**
+     * obtiene el sitio al cual esta asociado el ticket
+     * @return the sitioAsociado
+     */
+    public SitioWebDTO getSitioAsociado()
+    {
+        return sitioAsociado;
+    }
+
+    /**
+     * asigna el sitio al cual se asocia el ticket
+     * @param sitioAsociado the sitioAsociado to set
+     */
+    public void setSitioAsociado(SitioWebDTO sitioAsociado) 
+    {
+        this.sitioAsociado = sitioAsociado;
+    }
 
     /**
      * convierte el objeto DTO a entity
@@ -167,6 +201,11 @@ public class EstadoWebDTO implements Serializable{
         retorno.setEstado(this.estado);
         retorno.setDescripcion(this.descripcion);
         retorno.setFechaCambio(this.fechaCambio);
+        
+        if (this.sitioAsociado != null) 
+        {
+            retorno.setSitioAsociado(this.sitioAsociado.toEntity());
+        }
         return retorno;
     }
     

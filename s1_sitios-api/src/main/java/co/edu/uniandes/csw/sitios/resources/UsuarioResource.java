@@ -47,10 +47,10 @@ public class UsuarioResource {
      * Crea un nuevo Usuario con la informacion que se recibe en el cuerpo de la
      * petición y se regresa un objeto identico con un id auto-generado por la
      * base de datos.
-     * @param usuario {@link UsuarioDTO} - EL Usuario que se desea guardar.
+     *
+     * @param Usuario {@link UsuarioDTO} - EL Usuario que se desea guardar.
      * @return JSON {@link UsuarioDTO} - El Usuario guardado con el atributo id
      * autogenerado.
-     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
     @POST
     public UsuarioDTO createUsuario(UsuarioDTO usuario) throws BusinessLogicException {
@@ -102,7 +102,7 @@ public class UsuarioResource {
      *
      * @param usersId Identificador del Usuario que se desea actualizar. Este
      * debe ser una cadena de dígitos.
-     * @param usuario {@link UsuarioDetailDTO} El Usuario que se desea guardar.
+     * @param Usuario {@link UsuarioDetailDTO} El Usuario que se desea guardar.
      * @return JSON {@link UsuarioDetailDTO} - El Usuario guardado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el Usuario a
@@ -126,7 +126,8 @@ public class UsuarioResource {
      *
      * @param usersId Identificador del autor que se desea borrar. Este debe ser
      * una cadena de dígitos.
-     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * si el Usuario tiene tickets asociados
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el Usuario a borrar.
      */
@@ -154,11 +155,11 @@ public class UsuarioResource {
      * @return El servicio de tickets para ese usuario en paricular.
      */
     @Path("{usersId: \\d+}/tickets")
-    public Class<UsuarioTicketsResource> getUsuarioTicketResource(@PathParam("usersId") Long usersId) {
+    public Class<UsuarioTicketResource> getUsuarioTicketResource(@PathParam("usersId") Long usersId) {
         if (usuarioLogic.getUsuario(usersId) == null) {
             throw new WebApplicationException("El recurso /users/" + usersId + " no existe.", 404);
         }
-        return UsuarioTicketsResource.class;
+        return UsuarioTicketResource.class;
     }
 
     /**

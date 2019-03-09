@@ -8,8 +8,6 @@ package co.edu.uniandes.csw.sitios.dtos;
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import java.io.Serializable;
 import java.util.Date;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -133,9 +131,4 @@ public class CambioDTO implements Serializable{
     }
     
     
-    
-        @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
 }

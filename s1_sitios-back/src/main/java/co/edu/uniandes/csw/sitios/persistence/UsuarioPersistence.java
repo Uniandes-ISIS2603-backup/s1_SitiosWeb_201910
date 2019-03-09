@@ -68,7 +68,7 @@ public class UsuarioPersistence {
     /**
      * Actualiza un usuario.
      *
-     * @param usuarioEntity: el usuario que viene con los nuevos cambios. Por
+     * @param UsuarioEntity: el usuario que viene con los nuevos cambios. Por
      * ejemplo el nombre pudo cambiar. En ese caso, se haria uso del método
      * update.
      * @return un usuario con los cambios aplicados.
@@ -83,7 +83,7 @@ public class UsuarioPersistence {
      * Borra un usuario de la base de datos recibiendo como argumento el id del
      * usuario
      *
-     * @param usuarioId: id correspondiente al usuario a borrar.
+     * @param booksId: id correspondiente al usuario a borrar.
      */
     public void delete(Long usuarioId) {
         LOGGER.log(Level.INFO, "Borrando el usuario con id={0}", usuarioId);

@@ -7,11 +7,8 @@ package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
-import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
-import java.util.List;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -114,36 +111,5 @@ public class PlataformaDeDespliegueLogic {
            return  entity;
 
        }
-    
-     public void deletePlataformaDeDespliegue(Long id) {
-       
-        persistence.delete(id);
-    }
-     
-       
-   public PlataformaDeDespliegueEntity updatePlataforma(Long Id, PlataformaDeDespliegueEntity plataformaEntity){
-        
-        PlataformaDeDespliegueEntity newEntity = persistence.update(plataformaEntity);
-        
-        return newEntity;
-    }
-   
-    public List<PlataformaDeDespliegueEntity> getPlataformas() {
-        
-        List<PlataformaDeDespliegueEntity> editorials = persistence.findAll();
-        
-        return editorials;
-    }
-    
-    public void deletePlataforma(Long editorialsId) throws BusinessLogicException {
-        
-        List<SitioWebEntity> books = getPlataformaDeDespliegue(editorialsId).getSitiosWeb();
-        if (books != null && !books.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar la editorial con id = " + editorialsId + " porque tiene books asociados");
-        }
-        persistence.delete(editorialsId);
-        
-    }
-   
 }
 

@@ -6,11 +6,9 @@
 package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
-import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.CambioPersistence;
 import java.util.Date;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -113,17 +111,4 @@ public class CambioLogic {
            return  entity;
 
        }
-    
-     public void deleteCambio(Long id) {
-       
-        persistence.delete(id);
-    }
-     
-       
-   public CambioEntity updateSitio(Long Id, CambioEntity cambioEntity){
-        
-        CambioEntity newEntity = persistence.update(cambioEntity);
-        
-        return newEntity;
-    }
 }
