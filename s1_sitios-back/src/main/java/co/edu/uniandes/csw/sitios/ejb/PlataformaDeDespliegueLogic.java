@@ -92,6 +92,7 @@ public class PlataformaDeDespliegueLogic {
         }
         
         //sitiosWeb = no puede ser null
+        SitioWebEntity sitios =(SitioWebEntity) plataforma.getSitiosWeb() ;
         if(plataforma.getSitiosWeb()==null)
            {
             throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
