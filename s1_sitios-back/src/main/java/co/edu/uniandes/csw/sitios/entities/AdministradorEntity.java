@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
@@ -27,6 +28,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
      */
+    @PodamIntValue(minValue = 1,maxValue = 5)
     private Integer nivel;
 
     /**

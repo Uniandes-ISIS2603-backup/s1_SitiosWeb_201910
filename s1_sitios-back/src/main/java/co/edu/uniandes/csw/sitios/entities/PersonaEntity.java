@@ -6,13 +6,14 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
  * @author estudiante
  */
-@Entity
+@MappedSuperclass
 public abstract class PersonaEntity extends BaseEntity {
 
     //-------------------------------------
@@ -27,6 +28,7 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * Atributo de email de la persona
      */
+    @PodamStringValue(strValue = "example@mail.com")
     protected String email;
 
     /**

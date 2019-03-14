@@ -128,8 +128,8 @@ public class TicketLogicTest {
      */
     private void clearData() 
     {
-        em.createQuery("delete from TicketEntity").executeUpdate();
         em.createQuery("delete from SitioWebEntity").executeUpdate();
+        em.createQuery("delete from TicketEntity").executeUpdate();
     }
 
     /**
@@ -178,7 +178,7 @@ public class TicketLogicTest {
         }
         catch(BusinessLogicException e)
         {
-            Assert.fail();
+            Assert.fail(e.getMessage());
         }
 
     }
@@ -317,7 +317,8 @@ public class TicketLogicTest {
         } 
         catch (Exception e) 
         {
-            Assert.fail();
+            e.printStackTrace();
+            Assert.fail(e.getMessage());
         }
     }
 

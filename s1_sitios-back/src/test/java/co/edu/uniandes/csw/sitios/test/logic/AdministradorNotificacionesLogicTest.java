@@ -10,7 +10,7 @@ import co.edu.uniandes.csw.sitios.ejb.NotificacionLogic;
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.EstadoWebEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
-import co.edu.uniandes.csw.sitios.entities.PersonaEntity;
+import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.AdministradorPersistence;
@@ -59,7 +59,7 @@ public class AdministradorNotificacionesLogicTest {
     private AdministradorEntity admin = new AdministradorEntity();
     private EstadoWebEntity estado = new EstadoWebEntity();
     private SitioWebEntity sitio = new SitioWebEntity();
-    private PersonaEntity notificado = new AdministradorEntity();
+    private AdministradorEntity notificado = new AdministradorEntity();
     private List<NotificacionEntity> data = new ArrayList<>();
 
     /**
@@ -102,10 +102,10 @@ public class AdministradorNotificacionesLogicTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from AdministradorEntity").executeUpdate();
         em.createQuery("delete from NotificacionEntity").executeUpdate();
-        em.createQuery("delete from EstadoWebEntity").executeUpdate();
         em.createQuery("delete from SitioWebEntity").executeUpdate();
+        em.createQuery("delete from AdministradorEntity").executeUpdate();
+        em.createQuery("delete from EstadoWebEntity").executeUpdate();
     }
 
     /**
@@ -162,7 +162,7 @@ public class AdministradorNotificacionesLogicTest {
      */
     @Test
     public void getNotificacionesTest() {
-        LOGGER.log(Level.INFO, "Empieza proceso de consultar la notificacion con id = {0}", admin);
+        LOGGER.log(Level.INFO, "Empieza proceso de consultar la notificacion con id = {0}", admin.getId());
         List<NotificacionEntity> notiEntities = administradorNotificacionesLogic.getNotificaciones(admin.getId());
 
         Assert.assertEquals(data.size(), notiEntities.size());

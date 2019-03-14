@@ -65,7 +65,7 @@ public class TicketLogic {
         {
             throw new BusinessLogicException("no puede crear un ticket sin descripcion \"" );
         }
-        if (pTicket.getEstado() != 1 | pTicket.getEstado() != 2  | pTicket.getEstado() != 3) 
+        if (pTicket.getEstado()>3||pTicket.getEstado()<1) 
         {
             throw new BusinessLogicException("no puede crear un ticket sin un tipo de estado valido o vacio \"" );
         }

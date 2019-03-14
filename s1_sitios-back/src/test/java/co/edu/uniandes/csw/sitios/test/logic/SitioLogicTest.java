@@ -123,7 +123,7 @@ public class SitioLogicTest {
            newsite.setAdministradores(peopleData);
            newsite.setTechnologies(tecsData);
            newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-           newsite.setNotificacion(notData.get(0));
+         
            em.persist(newsite);
            data.add(newsite);
         }
@@ -141,7 +141,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
             //em.persist(newsite);
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
              System.out.println("imagen:"+newsite.getImagen());
@@ -160,7 +160,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
      @Test (expected = BusinessLogicException.class)
@@ -172,7 +172,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
       @Test (expected = BusinessLogicException.class)
@@ -184,7 +184,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(null);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
       @Test (expected = BusinessLogicException.class)
@@ -196,7 +196,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(null);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
       @Test (expected = BusinessLogicException.class)
@@ -208,7 +208,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(null);
-             newsite.setNotificacion(notData.get(0));
+           
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
       @Test (expected = BusinessLogicException.class)
@@ -220,7 +220,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              long value=-20;
              newsite.setAudienciaEsperada(value);
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
@@ -234,7 +234,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              newsite.setNombre("");
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
@@ -247,7 +247,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              newsite.setNombre(null);
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
@@ -260,7 +260,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              newsite.setDescripcion(null);
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
@@ -273,7 +273,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              newsite.setDescripcion(RandomStringUtils.randomAlphabetic(19));
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
@@ -286,7 +286,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              newsite.setCategoriaSitio(null);
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
@@ -299,7 +299,7 @@ public class SitioLogicTest {
              newsite.setAdministradores(peopleData);
              newsite.setTechnologies(tecsData);
              newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-             newsite.setNotificacion(notData.get(0));
+           
              newsite.setImagen("wrong format");
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
     }
@@ -338,7 +338,6 @@ public class SitioLogicTest {
        newsite.setAdministradores(new ArrayList<AdministradorEntity>());
        newsite.setTechnologies(new ArrayList<TecnologiaEntity>());
        newsite.setPlataformaDeDespliegue(new PlataformaDeDespliegueEntity());
-       newsite.setNotificacion(new NotificacionEntity());
       
        SitioWebEntity sitioWebEntity =logic.createWebSite(newsite);
        Long id= sitioWebEntity.getId();

@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  * Clase que representa la entidad de un ticket que va a permitir ser
@@ -38,8 +39,9 @@ public class TicketEntity extends BaseEntity  implements Serializable{
     private Date fecha;
 
     /**
-     * estado del ticket, tiene 3: 0, 1, 2.
+     * estado del ticket, tiene 3: 1, 2, 3
      */
+    @PodamIntValue(minValue = 1,maxValue = 3)
     private Integer estado; //Solo 3 estados
 
     /**

@@ -22,11 +22,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class NotificacionEntity extends BaseEntity implements Serializable {
 
-    public PersonaEntity getNotificado() {
+    public AdministradorEntity getNotificado() {
         return notificado;
     }
 
-    public void setNotificado(PersonaEntity notificado) {
+    public void setNotificado(AdministradorEntity notificado) {
         this.notificado = notificado;
     }
 
@@ -53,21 +53,21 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      * Persona a la cual se debe notificar
      */
     @PodamExclude
-    @ManyToOne(fetch=FetchType.LAZY)
-    private PersonaEntity notificado;
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
+    private AdministradorEntity notificado;
     
     /**
      * nuevo estado al cual se cambio el sitio web
      */
     @PodamExclude
-    @OneToOne 
+    @OneToOne(cascade = CascadeType.PERSIST) 
     private EstadoWebEntity cambioSitio;
     
     /**
      * Sitio en el cual se presento el cambio
      */
     @PodamExclude
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private SitioWebEntity sitioWeb;
    
 }

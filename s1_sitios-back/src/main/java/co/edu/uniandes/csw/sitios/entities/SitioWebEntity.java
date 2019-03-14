@@ -84,9 +84,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
-    @PodamExclude
-    @OneToOne(cascade = CascadeType.PERSIST)//(targetEntity = NotificacionEntity.class)((fetch=FetchType.LAZY)
-    private NotificacionEntity notificacion;
 
     /**
      * Tecnologias usadas en el desarrollo del sitio
@@ -131,13 +128,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     public SitioWebEntity() {
     }
 
-    public NotificacionEntity getNotificacion() {
-        return notificacion;
-    }
-
-    public void setNotificacion(NotificacionEntity notificacion) {
-        this.notificacion = notificacion;
-    }
+ 
 
     public String getNombre() {
         return nombre;
