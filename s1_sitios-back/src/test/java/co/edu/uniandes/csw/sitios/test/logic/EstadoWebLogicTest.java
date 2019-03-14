@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.EstadoWebLogic;
 import co.edu.uniandes.csw.sitios.entities.EstadoWebEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.EstadoWebPersistence;
 import java.util.ArrayList;
@@ -70,6 +71,11 @@ public class EstadoWebLogicTest {
      */
     private List<EstadoWebEntity> data = new ArrayList<EstadoWebEntity>();
     
+    /**
+     * list de data para las pruebas
+     */
+    private List<SitioWebEntity> auxData = new ArrayList<SitioWebEntity>();
+    
     //__________________________________________________________________________
     // Atributos
     //__________________________________________________________________________
@@ -123,6 +129,7 @@ public class EstadoWebLogicTest {
     private void clearData() 
     {
         em.createQuery("delete from EstadoWebEntity").executeUpdate();
+        em.createQuery("delete from SitioWebEntity").executeUpdate();
     }
 
     /**
@@ -132,9 +139,18 @@ public class EstadoWebLogicTest {
      */
     private void insertData() 
     {
+        for (int i = 0; i < 3; i++) 
+        {
+           SitioWebEntity newSitio=  factory.manufacturePojo(SitioWebEntity.class);
+        
+           em.persist(newSitio);
+           auxData.add(newSitio);
+        }
+        
         for (int i = 0; i < 3; i++)
         {
             EstadoWebEntity entity = factory.manufacturePojo(EstadoWebEntity.class);
+            entity.setSitioAsociado(auxData.get(0));
 
             em.persist(entity);
             data.add(entity);
@@ -142,29 +158,111 @@ public class EstadoWebLogicTest {
     }
 
     /**
-     * Prueba para crear un EstadoWeb
+     * Prueba para crear un EstadoWeb.
      *
-     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
      
     @Test
-    public void createEstadoWebTest() throws BusinessLogicException 
+    public void createEstadoWebTest()  
+    {
+        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        newEntity.setSitioAsociado(auxData.get(0));
+        try
+        {
+            EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+            Assert.assertNotNull(result);
+            EstadoWebEntity entity = em.find(EstadoWebEntity.class, result.getId());
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+            Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+            Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
+        }
+        catch(BusinessLogicException e)
+        {
+            Assert.fail();
+        }
+
+    }
+    
+    /**
+     * Prueba para crear un EstadoWeb.
+     * 
+     * en esta prueba se intenta crear un estado web que incumple con las 
+     * reglas de negocio
+     * caso 1: no se le asigna un sitio al estado web
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test (expected = BusinessLogicException.class)
+    public void createEstadoWebTestFail1()  throws BusinessLogicException
     {
         EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
         EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
-        Assert.assertNotNull(result);
-        EstadoWebEntity entity = em.find(EstadoWebEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
-        Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
+ 
     }
-    * */
-   
+    
+    /**
+     * Prueba para crear un EstadoWeb.
+     * 
+     * en esta prueba se intenta crear un estado web que incumple con las 
+     * reglas de negocio
+     * caso 2: se envia una descripcion vacia
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test (expected = BusinessLogicException.class)
+    public void createEstadoWebTestFail2()  throws BusinessLogicException
+    {
+        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        newEntity.setSitioAsociado(auxData.get(0));
+        newEntity.setDescripcion("");
+        EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
 
+    }
+    
+    /**
+     * Prueba para crear un EstadoWeb.
+     * 
+     * en esta prueba se intenta crear un estado web que incumple con las 
+     * reglas de negocio
+     * caso 3: se intenta crear el estadoWeb sin un estado
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test (expected = BusinessLogicException.class)
+    public void createEstadoWebTestFail3()  throws BusinessLogicException
+    {
+        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        newEntity.setSitioAsociado(auxData.get(0));
+        newEntity.setEstado(null);
+        EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+
+    }
+    
+    /**
+     * Prueba para crear un EstadoWeb.
+     * 
+     * en esta prueba se intenta crear un estado web que incumple con las 
+     * reglas de negocio
+     * caso 4: se intenta crear el estadoWeb sin una fecha
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test (expected = BusinessLogicException.class)
+    public void createEstadoWebTestFail4()  throws BusinessLogicException
+    {
+        EstadoWebEntity newEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        newEntity.setSitioAsociado(auxData.get(0));
+        newEntity.setFechaCambio(null);
+        EstadoWebEntity result = estadoWebLogic.createEstadoWeb(newEntity);
+
+    }
+    
+   
     /**
      * Prueba para consultar la lista de todos los EstadosWeb.
      */
     @Test
-    public void getEstadoWebsTest() 
+    public void getEstadosWebTest() 
     {
         List<EstadoWebEntity> list = estadoWebLogic.getEstadosWeb();
         Assert.assertEquals(data.size(), list.size());
@@ -186,7 +284,8 @@ public class EstadoWebLogicTest {
      * Prueba para consultar un EstadoWeb.
      */
     @Test
-    public void getEstadoWebTest() {
+    public void getEstadoWebTest() 
+    {
         EstadoWebEntity entity = data.get(0);
         EstadoWebEntity resultEntity = estadoWebLogic.getEstadoWeb(entity.getId());
         Assert.assertNotNull(resultEntity);
@@ -201,18 +300,25 @@ public class EstadoWebLogicTest {
     @Test
     public void updateEstadoWebTest()
     {
-        EstadoWebEntity entity = data.get(0);
-        EstadoWebEntity pojoEntity = factory.manufacturePojo(EstadoWebEntity.class);
+        try
+        {
+            EstadoWebEntity entity = data.get(0);
+            EstadoWebEntity pojoEntity = factory.manufacturePojo(EstadoWebEntity.class);
 
-        pojoEntity.setId(entity.getId());
+            pojoEntity.setId(entity.getId());
 
-        estadoWebLogic.updateEstadoWeb(pojoEntity.getId(), pojoEntity);
+            estadoWebLogic.updateEstadoWeb(pojoEntity.getId(), pojoEntity);
+            
+            EstadoWebEntity resp = em.find(EstadoWebEntity.class, entity.getId());
 
-        EstadoWebEntity resp = em.find(EstadoWebEntity.class, entity.getId());
-
-        Assert.assertEquals(pojoEntity.getId(), resp.getId());
-        Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
-        Assert.assertEquals(pojoEntity.getEstado(), resp.getEstado());
+            Assert.assertEquals(pojoEntity.getId(), resp.getId());
+            Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
+            Assert.assertEquals(pojoEntity.getEstado(), resp.getEstado());
+        } 
+        catch (Exception e) 
+        {
+            Assert.fail();
+        }
     }
 
     /**

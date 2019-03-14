@@ -9,13 +9,15 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamIntValue;
 
 /**
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi
  */
 @Entity
 public class AdministradorEntity extends PersonaEntity implements Serializable {
@@ -26,6 +28,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
      */
+    @PodamIntValue(minValue = 1,maxValue = 5)
     private Integer nivel;
 
     /**
@@ -41,6 +44,13 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     private DependenciaEntity dependencia;
 
     /**
+     * Colleccion de cambios.
+     */
+    @PodamExclude
+    @OneToMany
+    private List<CambioEntity> cambios;
+
+    /**
      * Collecion de notificaciones
      */
     @PodamExclude
@@ -48,8 +58,8 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     private List<NotificacionEntity> notificaciones;
 
     @PodamExclude
-    @ManyToMany(mappedBy = "administradores")
-    private List<SitioWebEntity> sitiosWebEntity; 
+    @ManyToOne
+    private SitioWebEntity sitioWeb;
 
     /**
      * Constructor AdministradorEntity vacio
@@ -114,17 +124,30 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     }
 
     /**
+     * @return the cambios
+     */
+    public List<CambioEntity> getCambios() {
+        return cambios;
+    }
+
+    /**
+     * @param cambios the cambios to set
+     */
+    public void setCambios(List<CambioEntity> cambios) {
+        this.cambios = cambios;
+    }
+
+    /**
      * @return the sitioWebEntity
      */
-    public List<SitioWebEntity> getSitiosWebEntity() {
-        return sitiosWebEntity;
+    public SitioWebEntity getSitioWeb() {
+        return sitioWeb;
     }
 
     /**
      * @param sitioWebEntity the sitioWebEntity to set
      */
-    public void setSitiosWebEntity(List<SitioWebEntity> sitiosWebEntity) {
-        this.sitiosWebEntity = sitiosWebEntity;
+    public void setSitioWeb(SitioWebEntity sitioWebEntity) {
+        this.sitioWeb = sitioWebEntity;
     }
-
 }

@@ -53,7 +53,7 @@ public class AdministradorResource {
      * atributo id autogenerado.
      */
     @POST
-    public AdministradorDTO createAdministrador(AdministradorDTO administrador) {
+    public AdministradorDTO createAdministrador(AdministradorDTO administrador) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: input: {0}", administrador);
         AdministradorDTO administradorDTO = new AdministradorDTO(administradorLogic.createAdministrador(administrador.toEntity()));
         LOGGER.log(Level.INFO, "AdministradorResource createAdministrador: output: {0}", administrador);
@@ -111,7 +111,7 @@ public class AdministradorResource {
      */
     @PUT
     @Path("{adminsId: \\d+}")
-    public AdministradorDetailDTO updateAdministrador(@PathParam("adminsId") Long adminsId, AdministradorDetailDTO administrador) {
+    public AdministradorDetailDTO updateAdministrador(@PathParam("adminsId") Long adminsId, AdministradorDetailDTO administrador) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "adminsIdResource updateAdministrador: input: adminsId: {0} , administrador: {1}", new Object[]{adminsId, administrador});
         administrador.setId(adminsId);
         if (administradorLogic.getAdministrador(adminsId) == null) {
@@ -144,25 +144,45 @@ public class AdministradorResource {
     }
 
     /**
-     * Conexión con el servicio de libros para un autor.
-     * {@link AuthorBooksResource}
+     * Conexión con el servicio de notificaciones para un admin.
+     * {@link AdministradorNotificacionesResource}
      *
-     * Este método conecta la ruta de /admins con las rutas de /websites que
-     * dependen del administrador, es una redirección al servicio que maneja el
-     * segmento de la URL que se encarga de los sitios web.
+     * Este método conecta la ruta de /admins con las rutas de /notifications que
+     * dependen del admin, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las notificaciones.
      *
-     * @param adminsId El ID del administrador con respecto al cual se accede al
+     * @param adminId El ID del admin con respecto al cual se accede al
      * servicio.
-     * @return El servicio de Sitios Web para ese administrador en paricular.
+     * @return El servicio de Notificacion para ese admin en paricular.
      */
-    @Path("{adminsId: \\d+}/websites")
-    public Class<AdministradorSitiosWebResource> getAdministradorSitiosWebResource(@PathParam("adminsId") Long adminsId) {
-        if (administradorLogic.getAdministrador(adminsId) == null) {
-            throw new WebApplicationException("El recurso /admins/" + adminsId + " no existe.", 404);
+    @Path("{adminId: \\d+}/notifications")
+    public Class<AdministradorNotificacionesResource> getAdministradorNotificacionesResource(@PathParam("adminId") Long adminId) {
+        if (administradorLogic.getAdministrador(adminId) == null) {
+            throw new WebApplicationException("El recurso /admins/" + adminId + " no existe.", 404);
         }
-        return AdministradorSitiosWebResource.class;
+        return AdministradorNotificacionesResource.class;
     }
-
+    
+    /**
+     * Conexión con el servicio de cambios para un admin.
+     * {@link AdministradorCambiosResource}
+     *
+     * Este método conecta la ruta de /admins con las rutas de /changes que
+     * dependen del admin, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las cambios.
+     *
+     * @param adminId El ID del admin con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de cambio para ese admin en paricular.
+     */
+    @Path("{adminId: \\d+}/changes")
+    public Class<AdministradorCambiosResource> getAdministradorCambiosResource(@PathParam("adminId") Long adminId) {
+        if (administradorLogic.getAdministrador(adminId) == null) {
+            throw new WebApplicationException("El recurso /admins/" + adminId + " no existe.", 404);
+        }
+        return AdministradorCambiosResource.class;
+    }
+    
     /**
      * Convierte una lista de AdministradorEntity a una lista de
      * AdministradorDetailDTO.

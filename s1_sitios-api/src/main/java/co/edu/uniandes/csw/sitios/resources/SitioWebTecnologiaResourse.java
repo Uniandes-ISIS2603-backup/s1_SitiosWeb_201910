@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author estudiante
  */
-@Path("sites/{technologieID: \\d+}/technologie")
+@Path("sites/{siteID: \\d+}/technologie")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class SitioWebTecnologiaResourse {

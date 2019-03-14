@@ -6,9 +6,10 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
+import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
-import co.edu.uniandes.csw.sitios.entities.TicketEntity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,28 +17,28 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class AdministradorDetailDTO extends AdministradorDTO{
-    
+public class AdministradorDetailDTO extends AdministradorDTO implements Serializable {
+
     /**
      * Notificaciones.
      */
     private List<NotificacionDTO> notificaciones;
-    
+
     /**
-     * Sitios web.
+     * Cambios
      */
-    private List<SitioWebDTO> sitiosWeb;
+    private List<CambioDTO> cambios;
 
     public AdministradorDetailDTO() {
         super();
     }
-    
-     /**
-     * Crea un objeto AdministradorDetailDTO a partir de un objeto AdministradorEntity
-     * incluyendo los atributos de AdministradorDTO.
+
+    /**
+     * Crea un objeto AdministradorDetailDTO a partir de un objeto
+     * AdministradorEntity incluyendo los atributos de AdministradorDTO.
      *
-     * @param administradorEntity Entidad AdministradorEntity desde la cual se va a crear el
-     * nuevo objeto.
+     * @param administradorEntity Entidad AdministradorEntity desde la cual se
+     * va a crear el nuevo objeto.
      *
      */
     public AdministradorDetailDTO(AdministradorEntity administradorEntity) {
@@ -47,16 +48,16 @@ public class AdministradorDetailDTO extends AdministradorDTO{
             for (NotificacionEntity entityNotificacion : administradorEntity.getNotificaciones()) {
                 notificaciones.add(new NotificacionDTO(entityNotificacion));
             }
-            sitiosWeb = new ArrayList();
-            for (SitioWebEntity entitySitioWeb : administradorEntity.getSitiosWebEntity()) {
-                sitiosWeb.add(new SitioWebDTO(entitySitioWeb));
+            cambios = new ArrayList<>();
+            for (CambioEntity cambio : administradorEntity.getCambios()) {
+                cambios.add(new CambioDTO(cambio));
             }
         }
     }
-    
+
     /**
-     * Convierte un objeto AdministradorDetailDTO a AdministradorEntity incluyendo los
-     * atributos de AdministradorDTO.
+     * Convierte un objeto AdministradorDetailDTO a AdministradorEntity
+     * incluyendo los atributos de AdministradorDTO.
      *
      * @return Nueva objeto AdministradorEntity.
      *
@@ -71,12 +72,12 @@ public class AdministradorDetailDTO extends AdministradorDTO{
             }
             administradorEntity.setNotificaciones(notificacionEntity);
         }
-        if (sitiosWeb != null) {
-            List<SitioWebEntity> sitiosWebEntity = new ArrayList<>();
-            for (SitioWebDTO dtoPrize : sitiosWeb) {
-                sitiosWebEntity.add(dtoPrize.toEntity());
+        if (cambios != null) {
+            List<CambioEntity> cambiosEntity = new ArrayList<>();
+            for (CambioDTO cambioDTO : cambios) {
+                cambiosEntity.add(cambioDTO.toEntity());
             }
-            administradorEntity.setSitiosWebEntity(sitiosWebEntity);
+            administradorEntity.setCambios(cambiosEntity);
         }
         return administradorEntity;
     }
@@ -96,18 +97,17 @@ public class AdministradorDetailDTO extends AdministradorDTO{
     }
 
     /**
-     * @return the sitiosWeb
+     * @return the cambios
      */
-    public List<SitioWebDTO> getSitiosWeb() {
-        return sitiosWeb;
+    public List<CambioDTO> getCambios() {
+        return cambios;
     }
 
     /**
-     * @param sitiosWeb the sitiosWeb to set
+     * @param cambios the cambios to set
      */
-    public void setSitiosWeb(List<SitioWebDTO> sitiosWeb) {
-        this.sitiosWeb = sitiosWeb;
+    public void setCambios(List<CambioDTO> cambios) {
+        this.cambios = cambios;
     }
-    
-    
+
 }

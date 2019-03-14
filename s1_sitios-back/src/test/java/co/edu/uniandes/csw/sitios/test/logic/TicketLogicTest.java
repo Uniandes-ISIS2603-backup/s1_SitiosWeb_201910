@@ -1,0 +1,275 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.edu.uniandes.csw.sitios.test.logic;
+
+import co.edu.uniandes.csw.sitios.ejb.TicketLogic;
+import co.edu.uniandes.csw.sitios.entities.TicketEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
+import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.sitios.persistence.TicketPersistence;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
+
+/**
+ * Pruebas de logica diseñadas para la clase TicketLogic
+ * 
+ * @author Daniel PReciado
+ */
+@RunWith(Arquillian.class)
+public class TicketLogicTest {
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+   
+    /**
+     * clase que ayudara  a fabricar objetos de prueba
+     */
+    private PodamFactory factory = new PodamFactoryImpl();
+
+    /**
+     * Inyeccion de dependencias a la logica de un Ticket
+     */
+    @Inject
+    private TicketLogic ticketLogic;
+
+    /**
+     * Contexto de Persistencia que se va a utilizar para acceder a la DB
+     * por fuera de los métodos que se están probando.
+     */
+    @PersistenceContext
+    private EntityManager em;
+
+    /**
+     * Variable para marcar las transacciones del em anterior cuando se
+     * crean/borran datos para las pruebas.
+     */
+    @Inject
+    private UserTransaction utx;
+    
+
+    /**
+     * list de data para las pruebas
+     */
+    private List<TicketEntity> data = new ArrayList<TicketEntity>();
+    
+    /**
+     * list de data para las pruebas
+     */
+    private List<SitioWebEntity> auxData = new ArrayList<SitioWebEntity>();
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
+
+    /**
+     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
+     * El jar contiene las clases, el descriptor de la base de datos y el
+     * archivo beans.xml para resolver la inyección de dependencias.
+     */
+    @Deployment
+    public static JavaArchive createDeployment() 
+    {
+        return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(TicketEntity.class.getPackage())
+                .addPackage(TicketLogic.class.getPackage())
+                .addPackage(TicketPersistence.class.getPackage())
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
+    }
+
+    /**
+     * Configuración inicial del test.
+     *
+     */
+    @Before
+    public void configTest() 
+    {
+        try 
+        {
+            utx.begin();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) 
+        {
+            e.printStackTrace();
+            try 
+            {
+                utx.rollback();
+            } catch (Exception e1)
+            {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Limpia las tablas que están implicadas en la prueba.
+     *
+     */
+    private void clearData() 
+    {
+        em.createQuery("delete from SitioWebEntity").executeUpdate();
+        em.createQuery("delete from TicketEntity").executeUpdate();
+    }
+
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     *
+     */
+    private void insertData() 
+    {
+        for (int i = 0; i < 3; i++) 
+        {
+           SitioWebEntity newSitio=  factory.manufacturePojo(SitioWebEntity.class);
+        
+           em.persist(newSitio);
+           auxData.add(newSitio);
+        }
+        
+        for (int i = 0; i < 3; i++)
+        {
+            TicketEntity entity = factory.manufacturePojo(TicketEntity.class);
+            entity.setSitioAsociado(auxData.get(0));
+
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+
+    /**
+     * Prueba para crear un Ticket.
+     *
+     */
+     
+    @Test
+    public void createTicketTest()  
+    {
+        //TODO rehacer este test
+    }
+    
+    /**
+     * Prueba para crear un Ticket.
+     * 
+     * en esta prueba se intenta crear un ticket que incumple con las 
+     * reglas de negocio
+     * caso 1: no se le asigna un sitio al ticket
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test (expected = BusinessLogicException.class)
+    public void createTicketTestFail1()  throws BusinessLogicException
+    {
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
+        TicketEntity result = ticketLogic.createTicket(newEntity);
+ 
+    }
+    
+    /**
+     * Prueba para crear un Ticket.
+     * 
+     * en esta prueba se intenta crear un ticket que incumple con las 
+     * reglas de negocio
+     * caso 2: se envia una descripcion vacia
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test (expected = BusinessLogicException.class)
+    public void createTicketTestFail2()  throws BusinessLogicException
+    {
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
+        newEntity.setSitioAsociado(auxData.get(0));
+        newEntity.setDescripcion("");
+        TicketEntity result = ticketLogic.createTicket(newEntity);
+
+    }
+    
+    /**
+     * Prueba para crear un Ticket.
+     * 
+     * en esta prueba se intenta crear un ticket que incumple con las 
+     * reglas de negocio
+     * caso 3: se intenta crear el ticket sin un estado
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test //(expected = BusinessLogicException.class)
+    public void createTicketTestFail3()  throws BusinessLogicException
+    {
+       //TODO rehacer este test
+    }
+    
+    /**
+     * Prueba para crear un Ticket.
+     * 
+     * en esta prueba se intenta crear un ticket que incumple con las 
+     * reglas de negocio
+     * caso 4: se intenta crear el ticket sin una fecha
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test //(expected = BusinessLogicException.class)
+    public void createTicketTestFail4()  throws BusinessLogicException
+    {
+        //TODO rehacer este test
+    }
+    
+   
+    /**
+     * Prueba para consultar la lista de todos los Tickets.
+     */
+    @Test
+    public void getTicketsTest() 
+    {
+       //TODO rehacer este test
+    }
+
+    /**
+     * Prueba para consultar un Ticket.
+     */
+    @Test
+    public void getTicketTest() 
+    {
+      //TODO rehacer este test
+    }
+
+    /**
+     * Prueba para actualizar un Ticket.
+     */
+    @Test
+    public void updateTicketTest()
+    {
+      //TODO rehacer este test
+    }
+
+    /**
+     * Prueba para eliminar un Ticket.
+     */
+    @Test
+    public void deleteTicketTest() 
+    {
+       //TODO rehacer este test
+    }
+    
+}
+

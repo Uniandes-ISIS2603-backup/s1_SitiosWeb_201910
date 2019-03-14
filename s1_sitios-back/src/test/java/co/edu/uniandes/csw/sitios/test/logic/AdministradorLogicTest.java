@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.AdministradorLogic;
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
+import co.edu.uniandes.csw.sitios.entities.CambioEntity;
+import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.AdministradorPersistence;
 import java.util.ArrayList;
@@ -105,8 +107,10 @@ public class AdministradorLogicTest {
      * Prueba para crear un Administrador.
      */
     @Test
-    public void createAdministradorTest() {
+    public void createAdministradorTest() throws BusinessLogicException {
         AdministradorEntity newEntity = factory.manufacturePojo(AdministradorEntity.class);
+        newEntity.setCambios(new ArrayList<CambioEntity>());
+        newEntity.setNotificaciones(new ArrayList<NotificacionEntity>());
         AdministradorEntity result = administradorLogic.createAdministrador(newEntity);
         Assert.assertNotNull(result);
         AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
@@ -149,7 +153,7 @@ public class AdministradorLogicTest {
      * Prueba para actualizar un Administrador.
      */
     @Test
-    public void updateAdministradorTest() {
+    public void updateAdministradorTest() throws BusinessLogicException {
         AdministradorEntity entity = data.get(0);
         AdministradorEntity pojoEntity = factory.manufacturePojo(AdministradorEntity.class);
 

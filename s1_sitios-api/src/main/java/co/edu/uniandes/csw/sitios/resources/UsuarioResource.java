@@ -29,7 +29,7 @@ import javax.ws.rs.WebApplicationException;
 /**
  * Recurso Usuario
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi.
  */
 @Path("users")
 @Produces("application/json")
@@ -53,7 +53,7 @@ public class UsuarioResource {
      * autogenerado.
      */
     @POST
-    public UsuarioDTO createUsuario(UsuarioDTO usuario) {
+    public UsuarioDTO createUsuario(UsuarioDTO usuario) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "UsuarioResource createUsuario: input: {0}", usuario);
         UsuarioDTO usuarioDTO = new UsuarioDTO(usuarioLogic.createUsuario(usuario.toEntity()));
         LOGGER.log(Level.INFO, "UsuarioResource createUsuario: output: {0}", usuarioDTO);
@@ -110,7 +110,7 @@ public class UsuarioResource {
      */
     @PUT
     @Path("{usersId: \\d+}")
-    public UsuarioDetailDTO updateUsuario(@PathParam("usersId") Long usersId, UsuarioDetailDTO usuario) {
+    public UsuarioDetailDTO updateUsuario(@PathParam("usersId") Long usersId, UsuarioDetailDTO usuario) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "UsuarioResource Usuario: input: usersId: {0} , usuario: {1}", new Object[]{usersId, usuario});
         usuario.setId(usersId);
         if (usuarioLogic.getUsuario(usersId) == null) {

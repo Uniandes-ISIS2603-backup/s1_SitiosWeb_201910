@@ -65,14 +65,20 @@ public class TicketLogic {
         {
             throw new BusinessLogicException("no puede crear un ticket sin descripcion \"" );
         }
-        if (pTicket.getEstado() != 1 | pTicket.getEstado() != 2  | pTicket.getEstado() != 3) 
+        if (pTicket.getEstado()>3||pTicket.getEstado()<1) 
         {
             throw new BusinessLogicException("no puede crear un ticket sin un tipo de estado valido o vacio \"" );
         }
-        if (pTicket.getFecha() != null) 
+        if (pTicket.getFecha() == null) 
         {
             throw new BusinessLogicException("no puede crear un ticket sin fecha \"" );
         }
+        
+         if (pTicket.getSitioAsociado()== null) 
+        {
+            throw new BusinessLogicException("no puede crear un ticket sin asociarlo a algun sitio \"" );
+        }
+        
         // Invoca la DB para crear un ticket
         DB.create(pTicket);
         LOGGER.log(Level.INFO, "Termina proceso de creación de un ticket");
@@ -117,7 +123,7 @@ public class TicketLogic {
      * @param pTicket: ticket con los cambios para ser actualizada en la DB
      * @return un ticket con los cambios actualizados en la base de datos.
      */
-    public TicketEntity updateEstadoWeb(Long ticketId, TicketEntity pTicket) 
+    public TicketEntity updateTicket(Long ticketId, TicketEntity pTicket) 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar un ticket con id = {0}", ticketId);
         TicketEntity updateEntity = DB.update(pTicket);
@@ -130,7 +136,7 @@ public class TicketLogic {
      *
      * @param ticketId: id del ticket a eliminar
      */
-    public void deleteEstadoWeb(Long ticketId) 
+    public void deleteTicket(Long ticketId) 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un ticket con id = {0}", ticketId);
         DB.delete(ticketId);

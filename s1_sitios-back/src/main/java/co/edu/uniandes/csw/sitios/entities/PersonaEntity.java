@@ -6,19 +6,20 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
  * @author estudiante
  */
-@Entity
+@MappedSuperclass
 public abstract class PersonaEntity extends BaseEntity {
 
     //-------------------------------------
     // Atributos---------------------------
     //-------------------------------------
    
-
     /**
      * Atributo de nombre de la persona
      */
@@ -27,11 +28,13 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * Atributo de email de la persona
      */
+    @PodamStringValue(strValue = "example@mail.com")
     protected String email;
 
     /**
      * Atributo de la contrasenia de la persona
      */
+    @PodamStringValue(length = 20)
     protected String password;
 
     /**
@@ -99,14 +102,6 @@ public abstract class PersonaEntity extends BaseEntity {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 }
