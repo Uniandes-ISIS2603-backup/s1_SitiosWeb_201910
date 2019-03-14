@@ -115,7 +115,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
      * 
      */
     @PodamExclude
-    @OneToMany(mappedBy = "sitioWeb",cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "sitioAsociado",cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<EstadoWebEntity> estadosWeb;
     
      /**
@@ -124,7 +124,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
      * 
      */
     @PodamExclude
-    @OneToMany(mappedBy = "sitioWeb",cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "sitioAsociado",cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<TicketEntity> ticketsSitio;
 
 

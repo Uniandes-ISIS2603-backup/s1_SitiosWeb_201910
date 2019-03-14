@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -31,6 +32,7 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * Atributo de la contrasenia de la persona
      */
+    @PodamStringValue(length = 20)
     protected String password;
 
     /**

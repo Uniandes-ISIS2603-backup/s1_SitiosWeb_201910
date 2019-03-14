@@ -83,8 +83,8 @@ public class SitioLogicTest {
     }
 
     private void clearData() {
-        em.createQuery("delete from AdministradorEntity").executeUpdate();
         em.createQuery("delete from SitioWebEntity").executeUpdate(); 
+        em.createQuery("delete from AdministradorEntity").executeUpdate();
         em.createQuery("delete from TecnologiaEntity").executeUpdate();
         em.createQuery("delete from NotificacionEntity").executeUpdate();         
         em.createQuery("delete from EstadoWebEntity").executeUpdate();
