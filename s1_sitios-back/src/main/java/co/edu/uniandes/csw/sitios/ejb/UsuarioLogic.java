@@ -33,6 +33,7 @@ public class UsuarioLogic {
      *
      * @param usuarioEntity Objeto de UsuarioEntity con los datos nuevos
      * @return Objeto de UsuarioEntity con los datos nuevos y su ID.
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
     public UsuarioEntity createUsuario(UsuarioEntity usuarioEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del usuario");
@@ -76,6 +77,7 @@ public class UsuarioLogic {
      * @param usuariosId Identificador de la instancia a actualizar
      * @param usuarioEntity Instancia de UsuarioEntity con los nuevos datos.
      * @return Instancia de UsuarioEntity con los datos actualizados.
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
     public UsuarioEntity updateUsuario(Long usuariosId, UsuarioEntity usuarioEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar el usuario con id = {0}", usuariosId);

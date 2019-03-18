@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.AdministradorPersistence;
+import co.edu.uniandes.csw.sitios.persistence.NotificacionPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,9 @@ public class AdministradorLogic {
 
     @Inject
     private AdministradorPersistence persistence;
+    
+    @Inject
+    private NotificacionPersistence notiPer;
 
     /**
      * Se encarga de crear un Administrador en la base de datos.
@@ -97,8 +101,8 @@ public class AdministradorLogic {
     public void deleteAdministrador(Long administradoresId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el autor con id = {0}", administradoresId);
         List<NotificacionEntity> notis = getAdministrador(administradoresId).getNotificaciones();
-        if (notis != null && !notis.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el admin con id = " + administradoresId + " porque tiene notis asociados");
+        for( NotificacionEntity noti : notis ){
+            notiPer.delete(noti.getId());
         }
         List<CambioEntity> cambios = getAdministrador(administradoresId).getCambios();
         if (cambios != null && !cambios.isEmpty()) {
