@@ -5,11 +5,11 @@
  */
 package co.edu.uniandes.csw.sitios.test.logic;
 
-import co.edu.uniandes.csw.sitios.ejb.PlataformaDeDespliegueLogic;
-import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
+import co.edu.uniandes.csw.sitios.ejb.CambioLogic;
+import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
+import co.edu.uniandes.csw.sitios.persistence.CambioPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -32,29 +32,29 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author s.ballesteros
  */
 @RunWith(Arquillian.class)
-public class PlataformaDeDespliegueLogicTest {
+public class CambioLogicTest {
     
     @Inject
-    private PlataformaDeDespliegueLogic plataformaLogic;
+    private CambioLogic cambioLogic;
     
     @Inject
     private UserTransaction utx;
     
      @PersistenceContext
     private EntityManager em;
-     
+    
     private PodamFactory factory = new PodamFactoryImpl();
     
-    private List<PlataformaDeDespliegueEntity> data = new ArrayList<PlataformaDeDespliegueEntity>();
+    private List<CambioEntity> data = new ArrayList<CambioEntity>();
     
     private List<SitioWebEntity> sitioData = new ArrayList<SitioWebEntity>();
     
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(PlataformaDeDespliegueEntity.class.getPackage())
-                .addPackage(PlataformaDeDespliegueLogic.class.getPackage())
-                .addPackage(PlataformaDeDesplieguePersistence.class.getPackage())
+                .addPackage(CambioEntity.class.getPackage())
+                .addPackage(CambioLogic.class.getPackage())
+                .addPackage(CambioPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -79,50 +79,50 @@ public class PlataformaDeDespliegueLogicTest {
     }
     
     public void clearData(){
-       em.createQuery("delete from SitioWebEntity").executeUpdate(); 
-       em.createQuery("delete from PlataformaDeDespliegueEntity").executeUpdate();
-       
+        em.createQuery("delete from CambioEntity").executeUpdate();
+        em.createQuery("delete from SitioWebEntity").executeUpdate();
+
     }
     
     private void insertData(){
         for(int i = 0;i<3;i++){
-            PlataformaDeDespliegueEntity entity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
+            CambioEntity entity = factory.manufacturePojo(CambioEntity.class);
             
             em.persist(entity);
             data.add(entity);
-        }
+        } 
         for (int i = 0; i < 3; i++) {
-            SitioWebEntity entity = factory.manufacturePojo(SitioWebEntity.class);
-            em.persist(entity);
-            sitioData.add(entity);
+            SitioWebEntity site = factory.manufacturePojo(SitioWebEntity.class);
+            em.persist(site);
+            sitioData.add(site);
         }
     }
     
     @Test
-    public void createPlataformaDeDespliegueTest() throws BusinessLogicException{
+    public void createCambioTest() throws BusinessLogicException{
 
-        PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
-        PlataformaDeDespliegueEntity result = plataformaLogic.createPlataformaDeDespliegue(newEntity);
+        CambioEntity newEntity = factory.manufacturePojo(CambioEntity.class);
+        CambioEntity result = cambioLogic.createCambio(newEntity);
         //Verificamos que no sea nulo
         Assert.assertNotNull(result);
         //Verificamos que el id o el objeto este en la base de datos buscando si el id existe
-        PlataformaDeDespliegueEntity entity = em.find(PlataformaDeDespliegueEntity.class, result.getId());
+        CambioEntity entity = em.find(CambioEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getIp(), entity.getIp());
-        Assert.assertEquals(newEntity.getCpu(), entity.getCpu());
-        Assert.assertEquals(newEntity.getCores(), entity.getCores());
-        Assert.assertEquals(newEntity.getClock(), entity.getClock());
-        Assert.assertEquals(newEntity.getHosting(), entity.getHosting());
-        Assert.assertEquals(newEntity.getIsVirtualizacion(), entity.getIsVirtualizacion());
+        Assert.assertEquals(newEntity.getLugarCambio(), entity.getLugarCambio());
+        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newEntity.getFechaCambio(), entity.getFechaCambio());
+        Assert.assertEquals(newEntity.getNuevo(), entity.getNuevo());
+        Assert.assertEquals(newEntity.getPrevio(), entity.getPrevio());
        // Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
     }
     
     
      @Test
-    public void createPlataformaDeDespliegueTest2() throws BusinessLogicException {
+    public void createCambioTest2() throws BusinessLogicException {
 
-        PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
-        newEntity.setIp(data.get(0).getIp());
-        plataformaLogic.createPlataformaDeDespliegue(newEntity);
+        CambioEntity newEntity = factory.manufacturePojo(CambioEntity.class);
+        newEntity.setDescripcion(data.get(0).getDescripcion());
+        cambioLogic.createCambio(newEntity);
     }
+    
 }
