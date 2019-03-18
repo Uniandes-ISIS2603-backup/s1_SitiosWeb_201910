@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * UsuarioDetailDTO implementa UsuarioDTO
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi
  */
 public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
 
