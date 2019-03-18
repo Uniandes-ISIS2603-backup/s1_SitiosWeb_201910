@@ -267,18 +267,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         OTRO
     }
 
-    /**
-     * @return the cambio
-     */
-    public CambioEntity getCambio() {
-        return cambio;
-    }
-
-    /**
-     * @param cambio the cambio to set
-     */
-    public void setCambio(CambioEntity cambio) {
-        this.cambio = cambio;
-    }
+ 
 
 }

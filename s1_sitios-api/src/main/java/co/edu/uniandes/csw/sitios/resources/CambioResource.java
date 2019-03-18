@@ -6,8 +6,6 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.CambioDTO;
-import co.edu.uniandes.csw.sitios.ejb.CambioLogic;
-import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -27,15 +25,5 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class CambioResource {
-    @Inject
-    private CambioLogic logica;
     
-    @POST
-    public CambioDTO createPlataformaDeDespliegue(CambioDTO cambioDto)throws BusinessLogicException{
-        
-        CambioEntity cambioEntity = cambioDto.toEntity();
-        cambioEntity = logica.createCambio(cambioEntity);
-        
-        return new CambioDTO(cambioEntity);
-    } 
 }

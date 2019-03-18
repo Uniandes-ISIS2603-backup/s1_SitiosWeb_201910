@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
-import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -41,24 +40,7 @@ public class CambioDTO implements Serializable{
     private String nuevo;
     
     
-    
-     public CambioDTO(CambioEntity entidad) {
-         setLugarCambio(entidad.getLugarCambio());
-         setDescripcion(entidad.getDescripcion());
-         setFechaCambio(entidad.getFechaCambio());
-         setPrevio(entidad.getPrevio());
-         setNuevo(entidad.getNuevo());
-      }
-    
-    public CambioEntity toEntity(){
-        CambioEntity entidad = new CambioEntity();
-        entidad.setLugarCambio(this.getLugarCambio());
-        entidad.setDescripcion(this.getDescripcion());
-        entidad.setFechaCambio(this.getFechaCambio());
-        entidad.setPrevio(this.getPrevio());
-        entidad.setNuevo(this.getNuevo());
-        return entidad;
-    }
+
 
     /**
      * @return the lugarCambio
