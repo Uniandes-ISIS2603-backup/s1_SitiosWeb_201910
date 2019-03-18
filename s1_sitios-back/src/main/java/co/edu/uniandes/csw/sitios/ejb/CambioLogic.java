@@ -89,10 +89,11 @@ public class CambioLogic {
         }
          
         //sitiosWeb = no puede ser null
-        if(cambioEntidad.getSitiosWeb()==null)
-           {
-            throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
-           }
+       // SitioWebEntity sitios = cambioEntidad.getSitiosWeb();
+       // if(sitios==null)
+         //  {
+         //   throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
+           //}
         
         //Invoco a la persistencia para crear a la plataforma
         persistence.create(cambioEntidad);

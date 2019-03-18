@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
 import javax.ejb.Stateless;
@@ -89,6 +90,7 @@ public class PlataformaDeDespliegueLogic {
         }
         
         //sitiosWeb = no puede ser null
+        SitioWebEntity sitios =(SitioWebEntity) plataforma.getSitiosWeb() ;
         if(plataforma.getSitiosWeb()==null)
            {
             throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");

@@ -124,7 +124,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "sitioAsociado",cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<TicketEntity> ticketsSitio;
 
-
     public SitioWebEntity() {
     }
 
@@ -256,6 +255,8 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         this.sitiosRelacionados = sitiosRelacionados;
     }
 
+    
+    
     /**
      * Categoria que puede tener un sitio web
      */
@@ -264,6 +265,20 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         INFORMATIVO,
         ACADEMICO,
         OTRO
+    }
+
+    /**
+     * @return the cambio
+     */
+    public CambioEntity getCambio() {
+        return cambio;
+    }
+
+    /**
+     * @param cambio the cambio to set
+     */
+    public void setCambio(CambioEntity cambio) {
+        this.cambio = cambio;
     }
 
 }

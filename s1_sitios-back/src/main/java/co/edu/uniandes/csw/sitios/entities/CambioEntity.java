@@ -55,13 +55,13 @@ public class CambioEntity extends BaseEntity implements Serializable  {
     private Long idAsociado;
     
        /*
-* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
-* plataforma de Despliegue    
-*/
-@PodamExclude
-@OneToOne(mappedBy = "change",
-         fetch = javax.persistence.FetchType.LAZY)
-private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
+    * La lista de sitiosWeb indica cuales sitios web pertenecen a una unico
+    * Cambio    
+    */
+    @PodamExclude
+    @OneToOne(mappedBy = "changes",
+              fetch = javax.persistence.FetchType.LAZY)
+    private SitioWebEntity sitiosWeb;
 
     /**
      * @return the lugarCambio
@@ -134,20 +134,6 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     }
 
     /**
-     * @return the sitiosWeb
-     */
-    public List<SitioWebEntity> getSitiosWeb() {
-        return sitiosWeb;
-    }
-
-    /**
-     * @param sitiosWeb the sitiosWeb to set
-     */
-    public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
-        this.sitiosWeb = sitiosWeb;
-    }
-
-    /**
      * @return the idAsociado
      */
     public Long getIdAsociado() {
@@ -159,5 +145,19 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
      */
     public void setIdAsociado(Long idAsociado) {
         this.idAsociado = idAsociado;
+    }
+
+    /**
+     * @return the sitiosWeb
+     */
+    public SitioWebEntity getSitiosWeb() {
+        return sitiosWeb;
+    }
+
+    /**
+     * @param sitiosWeb the sitiosWeb to set
+     */
+    public void setSitiosWeb(SitioWebEntity sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
     }
 }

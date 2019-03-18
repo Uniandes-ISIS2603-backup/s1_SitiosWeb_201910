@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.CambioLogic;
-import co.edu.uniandes.csw.sitios.ejb.PlataformaDeDespliegueLogic;
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
@@ -43,7 +42,7 @@ public class CambioLogicTest {
     
      @PersistenceContext
     private EntityManager em;
-     
+    
     private PodamFactory factory = new PodamFactoryImpl();
     
     private List<CambioEntity> data = new ArrayList<CambioEntity>();
@@ -82,6 +81,7 @@ public class CambioLogicTest {
     public void clearData(){
         em.createQuery("delete from CambioEntity").executeUpdate();
         em.createQuery("delete from SitioWebEntity").executeUpdate();
+
     }
     
     private void insertData(){
@@ -90,11 +90,11 @@ public class CambioLogicTest {
             
             em.persist(entity);
             data.add(entity);
-        }
+        } 
         for (int i = 0; i < 3; i++) {
-            SitioWebEntity entity = factory.manufacturePojo(SitioWebEntity.class);
-            em.persist(entity);
-            sitioData.add(entity);
+            SitioWebEntity site = factory.manufacturePojo(SitioWebEntity.class);
+            em.persist(site);
+            sitioData.add(site);
         }
     }
     
@@ -118,10 +118,11 @@ public class CambioLogicTest {
     
     
      @Test
-    public void createPlataformaDeDespliegueTest2() throws BusinessLogicException {
+    public void createCambioTest2() throws BusinessLogicException {
 
         CambioEntity newEntity = factory.manufacturePojo(CambioEntity.class);
         newEntity.setDescripcion(data.get(0).getDescripcion());
         cambioLogic.createCambio(newEntity);
     }
+    
 }
