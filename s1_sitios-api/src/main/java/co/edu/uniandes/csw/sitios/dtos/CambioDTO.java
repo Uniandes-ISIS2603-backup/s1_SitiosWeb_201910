@@ -39,8 +39,10 @@ public class CambioDTO implements Serializable{
      */    
     private String nuevo;
     
-    
+     public CambioDTO() {
+    }
 
+     
 
     /**
      * @return the lugarCambio
