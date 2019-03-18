@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.dtos;
 
+import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +15,16 @@ import java.util.Date;
  */
 public class CambioDTO implements Serializable{
      
+        /**
+     * Lugar de donde se registra el Cambio
+     */    
+    private Long id;
+    
+            /**
+     * Lugar de donde se registra el Cambio
+     */    
+    private Long idAsociado;
+    
     /**
      * Lugar de donde se registra el Cambio
      */    
@@ -39,11 +50,37 @@ public class CambioDTO implements Serializable{
      */    
     private String nuevo;
     
-     public CambioDTO() {
+    /**
+     * Sitio en el cual se presento el cambio
+     */
+    private SitioWebDTO sitioWeb;
+    
+       public CambioDTO(CambioEntity entity)
+    {
+        if(entity!=null)
+        {
+        this.id = entity.getId();
+        this.descripcion=entity.getDescripcion();
+        this.fechaCambio=entity.getFechaCambio();
+        this.lugarCambio=entity.getLugarCambio();
+        this.nuevo=entity.getNuevo();
+        this.previo=entity.getPrevio();
+        this.idAsociado=entity.getIdAsociado();
+        }
     }
-
-     
-
+    
+    public CambioEntity toEntity()
+    {
+        CambioEntity entity= new CambioEntity();
+        entity.setId(this.id);
+        entity.setDescripcion(this.descripcion);
+        entity.setFechaCambio(this.fechaCambio);
+        entity.setIdAsociado(this.idAsociado);
+        entity.setNuevo(this.nuevo);
+        entity.setPrevio(this.previo);
+        entity.setLugarCambio(this.lugarCambio);
+        return entity;
+    }
     /**
      * @return the lugarCambio
      */
@@ -112,6 +149,34 @@ public class CambioDTO implements Serializable{
      */
     public void setNuevo(String nuevo) {
         this.nuevo = nuevo;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the idAsociado
+     */
+    public Long getIdAsociado() {
+        return idAsociado;
+    }
+
+    /**
+     * @param idAsociado the idAsociado to set
+     */
+    public void setIdAsociado(Long idAsociado) {
+        this.idAsociado = idAsociado;
     }
     
     
