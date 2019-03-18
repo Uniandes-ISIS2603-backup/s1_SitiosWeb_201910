@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.sitios.resources;
 
-import co.edu.uniandes.csw.sitios.ejb.AdministradorCambiosLogic;
 import co.edu.uniandes.csw.sitios.ejb.NotificacionLogic;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -17,8 +16,6 @@ import javax.inject.Inject;
 public class AdministradorCambiosResource {
     private static final Logger LOGGER = Logger.getLogger(AdministradorCambiosResource.class.getName());
 
-    @Inject
-    private AdministradorCambiosLogic adminCambioLogic;
 
     @Inject
     private NotificacionLogic cambioLogic;

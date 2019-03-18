@@ -79,8 +79,9 @@ public class PlataformaDeDespliegueLogicTest {
     }
     
     public void clearData(){
-        em.createQuery("delete from PlataformaDeDespliegueEntity").executeUpdate();
-        em.createQuery("delete from SitioWebEntity").executeUpdate();
+       em.createQuery("delete from SitioWebEntity").executeUpdate(); 
+       em.createQuery("delete from PlataformaDeDespliegueEntity").executeUpdate();
+       
     }
     
     private void insertData(){

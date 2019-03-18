@@ -124,7 +124,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "sitioAsociado",cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<TicketEntity> ticketsSitio;
 
-
     public SitioWebEntity() {
     }
 
@@ -256,6 +255,8 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         this.sitiosRelacionados = sitiosRelacionados;
     }
 
+    
+    
     /**
      * Categoria que puede tener un sitio web
      */
@@ -265,5 +266,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         ACADEMICO,
         OTRO
     }
+
+ 
 
 }
