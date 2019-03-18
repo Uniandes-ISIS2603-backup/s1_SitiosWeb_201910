@@ -11,7 +11,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi
  */
 @Entity
 public class UsuarioEntity extends PersonaEntity {

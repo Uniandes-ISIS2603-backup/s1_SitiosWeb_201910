@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.sitios.entities;
-
-import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 import uk.co.jemos.podam.common.PodamStringValue;
 
@@ -23,6 +21,7 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * Atributo de nombre de la persona
      */
+    @PodamStringValue(length = 6)
     protected String nombre;
 
     /**
@@ -34,12 +33,13 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * Atributo de la contrasenia de la persona
      */
-    @PodamStringValue(length = 20)
+    @PodamStringValue(length = 10)
     protected String password;
 
     /**
      * Atributo del telefono de la persona
      */
+    @PodamStringValue(length = 8)
     protected String telefono;
 
     /**

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -34,6 +35,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * Nombre del cargo del administrador.
      */
+    @PodamStringValue(length = 6)
     private String nombreCargo;
 
     /**
