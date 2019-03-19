@@ -1,4 +1,9 @@
 # s1_SitiosWeb_201910
+[![BugStatus](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/api/project_badges/measure?project=co.edu.uniandes.csw%3As1_sitios&metric=bugs)](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/dashboard?id=co.edu.uniandes.csw%3As1_sitios)
+[![CodeSmells](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/api/project_badges/measure?project=co.edu.uniandes.csw%3As1_sitios&metric=code_smells)](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/dashboard?id=co.edu.uniandes.csw%3As1_sitios)
+[![Coverage](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/api/project_badges/measure?project=co.edu.uniandes.csw%3As1_sitios&metric=coverage)](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/dashboard?id=co.edu.uniandes.csw%3As1_sitios)
+[![lines](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/api/project_badges/measure?project=co.edu.uniandes.csw%3As1_sitios&metric=ncloc)](http://jenkins-1.sis.virtual.uniandes.edu.co:9000/dashboard?id=co.edu.uniandes.csw%3As1_sitios)
+
 Desarollo de software para CMSites:
 
   - Albert Molano
