@@ -33,7 +33,7 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * Atributo de la contrasenia de la persona
      */
-    @PodamStringValue(length = 10)
+    @PodamStringValue(length = 18)
     protected String password;
 
     /**
@@ -79,6 +79,7 @@ public abstract class PersonaEntity extends BaseEntity {
     /**
      * @return the password
      */
+    
     public String getPassword() {
         return password;
     }
