@@ -45,9 +45,9 @@ public class PlataformaDeDespliegueLogicTest {
      
     private PodamFactory factory = new PodamFactoryImpl();
     
-    private List<PlataformaDeDespliegueEntity> data = new ArrayList<PlataformaDeDespliegueEntity>();
+    private List<PlataformaDeDespliegueEntity> data = new ArrayList<>();
     
-    private List<SitioWebEntity> sitioData = new ArrayList<SitioWebEntity>();
+    private List<SitioWebEntity> sitioData = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment() {
@@ -79,9 +79,8 @@ public class PlataformaDeDespliegueLogicTest {
     }
     
     public void clearData(){
-       em.createQuery("delete from SitioWebEntity").executeUpdate(); 
        em.createQuery("delete from PlataformaDeDespliegueEntity").executeUpdate();
-       
+       em.createQuery("delete from SitioWebEntity").executeUpdate(); 
     }
     
     private void insertData(){
@@ -92,9 +91,9 @@ public class PlataformaDeDespliegueLogicTest {
             data.add(entity);
         }
         for (int i = 0; i < 3; i++) {
-            SitioWebEntity entity = factory.manufacturePojo(SitioWebEntity.class);
-            em.persist(entity);
-            sitioData.add(entity);
+            SitioWebEntity site = factory.manufacturePojo(SitioWebEntity.class);
+            em.persist(site);
+            sitioData.add(site);
         }
     }
     
@@ -114,15 +113,15 @@ public class PlataformaDeDespliegueLogicTest {
         Assert.assertEquals(newEntity.getClock(), entity.getClock());
         Assert.assertEquals(newEntity.getHosting(), entity.getHosting());
         Assert.assertEquals(newEntity.getIsVirtualizacion(), entity.getIsVirtualizacion());
-       // Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
+        Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
     }
     
     
-     @Test
+    @Test
     public void createPlataformaDeDespliegueTest2() throws BusinessLogicException {
 
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
-        newEntity.setIp(data.get(0).getIp());
+        newEntity.setId(data.get(0).getId());
         plataformaLogic.createPlataformaDeDespliegue(newEntity);
     }
 }

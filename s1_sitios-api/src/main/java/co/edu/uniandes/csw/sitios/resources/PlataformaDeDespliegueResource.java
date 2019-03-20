@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.sitios.ejb.PlataformaDeDespliegueLogic;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import static co.edu.uniandes.csw.sitios.resources.AdministradorResource.LOGGER;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import javax.enterprise.context.RequestScoped;
@@ -49,7 +50,7 @@ public class PlataformaDeDespliegueResource {
         return new PlataformaDeDespliegueDTO(plataformaEntity);
     }
     
-    /*
+    
     @GET
     @Path("{plataformasId: \\d+}")
     public PlataformaDeDespliegueDTO getPlataforma(@PathParam("plataformasId") Long plataformaId) throws  BusinessLogicException
@@ -63,10 +64,10 @@ public class PlataformaDeDespliegueResource {
     
     @GET
     public List<PlataformaDeDespliegueDetailDTO> getPlataformas() {
-        LOGGER.info("EditorialResource getEditorials: input: void");
-        List<PlataformaDeDespliegueDetailDTO> listaEditoriales = listEntity2DetailDTO(plataformaLogic.getPlataformas());
-        LOGGER.log(Level.INFO, "EditorialResource getEditorials: output: {0}", listaEditoriales);
-        return listaEditoriales;
+        LOGGER.info("PlataformaDeDespliegueResource getPlataformas: input: void");
+        List<PlataformaDeDespliegueDetailDTO> listaPlataformas= listEntity2DetailDTO(plataformaLogic.getPlataformas());
+        LOGGER.log(Level.INFO, "PlataformaDeDespliegueResource getPlataformas: output: {0}", listaPlataformas);
+        return listaPlataformas;
     }
     
 
@@ -80,15 +81,15 @@ public class PlataformaDeDespliegueResource {
     
     
     
-   
+    @DELETE
     @Path("{plataformasId: \\d+}")
     public void deletePlataforma(@PathParam("plataformasId") Long plataformasId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "PlataformDeDespliegueResource deletePlataforma: input: {0}", plataformasId);
+        LOGGER.log(Level.INFO, "PlataformaDeDespliegueResource deletePlataforma: input: {0}", plataformasId);
         if (plataformaLogic.getPlataformaDeDespliegue(plataformasId) == null) {
             throw new WebApplicationException("El recurso /platforms/" + plataformasId + " no existe.", 404);
         }
         plataformaLogic.deletePlataformaDeDespliegue(plataformasId);
-        LOGGER.info("OrganizationResource deleteOrganization: output: void");
+        LOGGER.info("PlataformaDeDespliegueResource deletePlataforma: output: void");
     }
 
     private List<PlataformaDeDespliegueDetailDTO> listEntity2DetailDTO(List<PlataformaDeDespliegueEntity> entityList) {
@@ -98,5 +99,5 @@ public class PlataformaDeDespliegueResource {
         }
         return list;
     }
-    */
+    
 }

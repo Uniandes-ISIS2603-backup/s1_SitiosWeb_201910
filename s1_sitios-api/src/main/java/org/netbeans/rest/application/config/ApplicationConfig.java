@@ -35,7 +35,6 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.uniandes.csw.sitios.mappers.WebApplicationExceptionMapper.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.AdministradorNotificacionesResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.AdministradorResource.class);
-        resources.add(co.edu.uniandes.csw.sitios.resources.CambioResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.DependenciaResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.EstadoWebResource.class);
         resources.add(co.edu.uniandes.csw.sitios.resources.EstadoWebSitioWebResource.class);

@@ -113,7 +113,7 @@ public class CambioLogicTest {
         Assert.assertEquals(newEntity.getFechaCambio(), entity.getFechaCambio());
         Assert.assertEquals(newEntity.getNuevo(), entity.getNuevo());
         Assert.assertEquals(newEntity.getPrevio(), entity.getPrevio());
-       // Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
+        Assert.assertEquals(newEntity.getSitioWeb(), entity.getSitioWeb());
     }
     
     
@@ -121,7 +121,7 @@ public class CambioLogicTest {
     public void createCambioTest2() throws BusinessLogicException {
 
         CambioEntity newEntity = factory.manufacturePojo(CambioEntity.class);
-        newEntity.setDescripcion(data.get(0).getDescripcion());
+        newEntity.setId(data.get(0).getId());
         cambioLogic.createCambio(newEntity);
     }
     
