@@ -65,9 +65,6 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
             IAAS,
             ONPREMISE
         }
-    
-    public PlataformaDeDespliegueEntity(){
-    }
 
    /*
 * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 

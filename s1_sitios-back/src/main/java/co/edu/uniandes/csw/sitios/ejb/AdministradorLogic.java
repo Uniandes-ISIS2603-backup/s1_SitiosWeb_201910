@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
-import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.AdministradorPersistence;
@@ -104,10 +103,6 @@ public class AdministradorLogic {
         for( NotificacionEntity noti : notis ){
             notiPer.delete(noti.getId());
         }
-        List<CambioEntity> cambios = getAdministrador(administradoresId).getCambios();
-        if (cambios != null && !cambios.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el admin con id = " + administradoresId + " porque tiene cambios asociados");
-        }
         persistence.delete(administradoresId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el administrador con id = {0}", administradoresId);
     }
@@ -137,9 +132,9 @@ public class AdministradorLogic {
         if(entity.getTelefono().trim().length() < 7 && entity.getTelefono().trim().length()> 11 ){
             throw new BusinessLogicException("Numero de telefono demasiado largo");
         }
-        if(entity.getCambios() == null ){
-            throw new BusinessLogicException("No existen los cambios");
-        }
+        if(entity.getCambios() == null ){ 
+            throw new BusinessLogicException("No existen los cambios"); 
+        } 
         if(entity.getNotificaciones()== null ){
             throw new BusinessLogicException("No existen notificaciones");
         }
