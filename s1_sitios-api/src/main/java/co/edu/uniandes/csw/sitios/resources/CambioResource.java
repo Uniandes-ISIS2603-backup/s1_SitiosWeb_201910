@@ -49,7 +49,7 @@ public class CambioResource {
      * Error de lógica que se genera cuando ya existe el cambio.
      */
     @POST
-    public CambioDTO createNotification(CambioDTO cambioDto)throws BusinessLogicException {
+    public CambioDTO createCambio(CambioDTO cambioDto)throws BusinessLogicException {
     
         CambioEntity cambioEntity = cambioDto.toEntity();
         cambioEntity = cambioLogic.createCambio(cambioEntity);
@@ -73,17 +73,17 @@ public class CambioResource {
     }
     
     /**
-     * Permite obtener todas las notificaciones del sistema
+     * Trae todos los cambios asociados a una entidad del sitio web
      * @return lista con todas las notificaciones presentes en el sistema
      */
     @GET
-    public List<CambioDTO> getNotificacion()throws BusinessLogicException {
-        LOGGER.info("BookResource getNotifications: input: void");
-        List<CambioDTO> listaNotis = new ArrayList<>();
+    public List<CambioDTO> getCambios()throws BusinessLogicException {
+        LOGGER.info("SitioWebResource getCambios: input: void");
+        List<CambioDTO> cambios = new ArrayList<>();
         for(CambioEntity siteEntity: cambioLogic.getCambios()) {
-            listaNotis.add(new CambioDTO(siteEntity));
+            cambios.add(new CambioDTO(siteEntity));
         }
-        LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaNotis.toString());
-        return listaNotis;
+        LOGGER.log(Level.INFO, "SitioWebResource getCambios: output: {0}", cambios.toString());
+        return cambios;
     }
 }

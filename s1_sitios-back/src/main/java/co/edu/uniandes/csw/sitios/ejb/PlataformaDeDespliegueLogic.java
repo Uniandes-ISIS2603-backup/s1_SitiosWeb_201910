@@ -9,7 +9,6 @@ import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.sitios.persistence.CambioPersistence;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
 import java.util.List;
 import java.util.logging.Logger;

@@ -6,9 +6,7 @@
 package co.edu.uniandes.csw.sitios.test.persistence;
 
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
-import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.persistence.CambioPersistence;
-import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
