@@ -106,8 +106,7 @@ public class AdministradorNotificacionesLogic {
         AdministradorEntity adminEntity = adminPersistence.find(adminId);
         NotificacionEntity notiEntity = notificacionPersistence.find(notiId);
         adminEntity.getNotificaciones().remove(notiEntity);
-        //notificacionPersistence.remove(notiEntity.getId());
-        //TODO checkear si deberia eliminar eso.
+        notificacionPersistence.delete(notiEntity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar una notificacion del administrador con id = {0}", adminId);
     }
 

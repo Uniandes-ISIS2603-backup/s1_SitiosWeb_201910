@@ -78,5 +78,36 @@ public class UsuarioTicketsLogic {
         }
         return te;
     }
+    
+    /**
+     * Remplaza las instancias de Tickets asociadas a una instancia de user
+     *
+     * @param userId Identificador de la instancia de user
+     * @param notis Colección de instancias de BookEntity a asociar a instancia
+     * de admin
+     * @return Nueva colección de NotificacionEntity asociada a la instancia de Admin
+     */
+    public List<TicketEntity> replaceCambios(Long userId, List<TicketEntity> notis) {
+        LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los tickets asocidos al user con id = {0}", userId);
+        UsuarioEntity userEntity = usuarioPersistence.find(userId);
+        userEntity.setTickets(notis);
+        LOGGER.log(Level.INFO, "Termina proceso de reemplazar los tickets asocidos al user con id = {0}", userId);
+        return userEntity.getTickets();
+    }
+    
+    /**
+     * Desasocia un Cambio existente de un Administrador existente
+     *
+     * @param userId Identificador de la instancia de user
+     * @param ticketId Identificador de la instancia de ticket
+     */
+    public void removeCambio(Long userId, Long ticketId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar un cambio del admin con id = {0}", userId);
+        UsuarioEntity userE = usuarioPersistence.find(userId);
+        TicketEntity cambioEntity = ticketPersistence.find(ticketId);
+        userE.getTickets().remove(cambioEntity);
+        ticketPersistence.delete(cambioEntity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar un cambio del administrador con id = {0}", userId);
+    }
 
 }

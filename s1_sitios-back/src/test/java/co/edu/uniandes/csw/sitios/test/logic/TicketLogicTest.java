@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.test.logic;
 import co.edu.uniandes.csw.sitios.ejb.TicketLogic;
 import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
+import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.TicketPersistence;
 import java.util.ArrayList;
@@ -74,7 +75,12 @@ public class TicketLogicTest {
     /**
      * list de data para las pruebas
      */
-    private List<SitioWebEntity> auxData = new ArrayList<SitioWebEntity>();
+    private List<SitioWebEntity> sitiosData = new ArrayList<SitioWebEntity>();
+    
+    /**
+     * list de data para las pruebas
+     */
+    private List<UsuarioEntity> usuariosData = new ArrayList<UsuarioEntity>();
     
     //__________________________________________________________________________
     // Metodos
@@ -128,8 +134,11 @@ public class TicketLogicTest {
      */
     private void clearData() 
     {
-        em.createQuery("delete from SitioWebEntity").executeUpdate();
         em.createQuery("delete from TicketEntity").executeUpdate();
+        em.createQuery("delete from SitioWebEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
+        
+        
     }
 
     /**
@@ -144,17 +153,27 @@ public class TicketLogicTest {
            SitioWebEntity newSitio=  factory.manufacturePojo(SitioWebEntity.class);
         
            em.persist(newSitio);
-           auxData.add(newSitio);
+           sitiosData.add(newSitio);
+        }
+        
+        for (int i = 0; i < 3; i++)
+        {
+           UsuarioEntity newUsuario =  factory.manufacturePojo(UsuarioEntity.class);
+        
+           em.persist(newUsuario);
+           usuariosData.add(newUsuario);
         }
         
         for (int i = 0; i < 3; i++)
         {
             TicketEntity entity = factory.manufacturePojo(TicketEntity.class);
-            entity.setSitioAsociado(auxData.get(0));
+            entity.setSitioAsociado(sitiosData.get(0));
+            entity.setUsuarioAsociado(usuariosData.get(0));
 
             em.persist(entity);
             data.add(entity);
         }
+        
     }
 
     /**
@@ -166,6 +185,29 @@ public class TicketLogicTest {
     public void createTicketTest()  
     {
         //TODO rehacer este test
+        
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
+        newEntity.setSitioAsociado(sitiosData.get(0));
+        newEntity.setUsuarioAsociado(usuariosData.get(0));
+        try
+        {
+            TicketEntity result = ticketLogic.createTicket(newEntity);
+            Assert.assertNotNull(result);
+            TicketEntity entity = em.find(TicketEntity.class, result.getId());
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+            Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+            Assert.assertEquals(newEntity.getEstado(), entity.getEstado());
+            Assert.assertEquals(newEntity.getSitioAsociado(), entity.getSitioAsociado());
+            Assert.assertEquals(newEntity.getUsuarioAsociado(), entity.getUsuarioAsociado());
+
+            
+        }
+        catch(BusinessLogicException e)
+        {
+             e.printStackTrace();
+            Assert.fail();
+           
+        }
     }
     
     /**
@@ -198,7 +240,7 @@ public class TicketLogicTest {
     public void createTicketTestFail2()  throws BusinessLogicException
     {
         TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
-        newEntity.setSitioAsociado(auxData.get(0));
+        newEntity.setSitioAsociado(sitiosData.get(0));
         newEntity.setDescripcion("");
         TicketEntity result = ticketLogic.createTicket(newEntity);
 
@@ -213,10 +255,14 @@ public class TicketLogicTest {
      * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
      
-    @Test //(expected = BusinessLogicException.class)
+    @Test (expected = BusinessLogicException.class)
     public void createTicketTestFail3()  throws BusinessLogicException
     {
        //TODO rehacer este test
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
+        newEntity.setSitioAsociado(sitiosData.get(0));
+        newEntity.setEstado(10);
+        TicketEntity result = ticketLogic.createTicket(newEntity);
     }
     
     /**
@@ -228,12 +274,34 @@ public class TicketLogicTest {
      * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      */
      
-    @Test //(expected = BusinessLogicException.class)
+    @Test (expected = BusinessLogicException.class)
     public void createTicketTestFail4()  throws BusinessLogicException
     {
         //TODO rehacer este test
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
+        newEntity.setSitioAsociado(sitiosData.get(0));
+        newEntity.setFecha(null);
+        TicketEntity result = ticketLogic.createTicket(newEntity);
     }
     
+    
+    /**
+     * Prueba para crear un Ticket.
+     * 
+     * en esta prueba se intenta crear un ticket que incumple con las 
+     * reglas de negocio
+     * caso 1: no se le asigna un usuario al ticket
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
+     */
+     
+    @Test (expected = BusinessLogicException.class)
+    public void createTicketTestFail5()  throws BusinessLogicException
+    {
+        TicketEntity newEntity = factory.manufacturePojo(TicketEntity.class);
+        newEntity.setSitioAsociado(sitiosData.get(0));
+        TicketEntity result = ticketLogic.createTicket(newEntity);
+ 
+    }
    
     /**
      * Prueba para consultar la lista de todos los Tickets.
@@ -242,6 +310,20 @@ public class TicketLogicTest {
     public void getTicketsTest() 
     {
        //TODO rehacer este test
+        List<TicketEntity> list = ticketLogic.getTickets();
+        Assert.assertEquals(data.size(), list.size());
+        for (TicketEntity entity : list) 
+        {
+            boolean found = false;
+            for (TicketEntity storedEntity : data)
+            {
+                if (entity.getId().equals(storedEntity.getId())) 
+                {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
     }
 
     /**
@@ -251,6 +333,14 @@ public class TicketLogicTest {
     public void getTicketTest() 
     {
       //TODO rehacer este test
+        TicketEntity entity = data.get(0);
+        TicketEntity resultEntity = ticketLogic.getTicket(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getDescripcion(), resultEntity.getDescripcion());
+        Assert.assertEquals(entity.getEstado(), resultEntity.getEstado());
+        Assert.assertEquals(entity.getSitioAsociado(), resultEntity.getSitioAsociado());
+        Assert.assertEquals(entity.getUsuarioAsociado(), resultEntity.getUsuarioAsociado());
     }
 
     /**
@@ -259,7 +349,30 @@ public class TicketLogicTest {
     @Test
     public void updateTicketTest()
     {
-      //TODO rehacer este test
+      //TODO rehacer este test}
+        try
+        {
+            TicketEntity entity = data.get(0);
+            TicketEntity pojoEntity = factory.manufacturePojo(TicketEntity.class);
+
+            pojoEntity.setId(entity.getId());
+
+            ticketLogic.updateTicket(pojoEntity.getId(), pojoEntity);
+            
+            TicketEntity resp = em.find(TicketEntity.class, entity.getId());
+
+            Assert.assertEquals(pojoEntity.getId(), resp.getId());
+            Assert.assertEquals(pojoEntity.getDescripcion(), resp.getDescripcion());
+            Assert.assertEquals(pojoEntity.getEstado(), resp.getEstado());
+            Assert.assertEquals(pojoEntity.getSitioAsociado(), resp.getSitioAsociado());
+            Assert.assertEquals(pojoEntity.getUsuarioAsociado(), resp.getUsuarioAsociado());
+        } 
+        catch (Exception e) 
+        {
+            Assert.fail();
+        }
+        
+        
     }
 
     /**
@@ -269,6 +382,10 @@ public class TicketLogicTest {
     public void deleteTicketTest() 
     {
        //TODO rehacer este test
+        TicketEntity entity = data.get(0);
+        ticketLogic.deleteTicket(entity.getId());
+        TicketEntity deleted = em.find(TicketEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
     
 }

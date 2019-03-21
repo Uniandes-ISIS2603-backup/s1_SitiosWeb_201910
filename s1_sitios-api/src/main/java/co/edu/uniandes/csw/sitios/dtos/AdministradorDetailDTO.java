@@ -7,14 +7,13 @@ package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
-import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author estudiante
+ * @author Allan Roy Corinaldi
  */
 public class AdministradorDetailDTO extends AdministradorDTO implements Serializable {
 

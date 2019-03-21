@@ -78,6 +78,11 @@ public class TicketLogic {
         {
             throw new BusinessLogicException("no puede crear un ticket sin asociarlo a algun sitio \"" );
         }
+         
+         if (pTicket.getUsuarioAsociado()== null) 
+        {
+            throw new BusinessLogicException("no puede crear un ticket sin asociarlo a algun usuario \"" );
+        }
         
         // Invoca la DB para crear un ticket
         DB.create(pTicket);
