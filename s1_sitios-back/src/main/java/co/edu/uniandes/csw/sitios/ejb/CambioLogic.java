@@ -6,9 +6,11 @@
 package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.CambioPersistence;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -105,16 +107,36 @@ public class CambioLogic {
         return cambioEntidad;
         }
         
-    
+     
      public CambioEntity getCambio(Long id) throws  BusinessLogicException
        {
            CambioEntity entity = persistence.find(id);
            if(entity==null)
            {
-               throw  new BusinessLogicException("El Cambio no encontrado");
+               throw  new BusinessLogicException("El Cambio no se a encontrado");
            }
            
            return  entity;
 
        }
+     
+       
+   public CambioEntity updateCambio(Long Id, CambioEntity cambioEntity){
+        
+        CambioEntity newEntity = persistence.update(cambioEntity);
+        
+        return newEntity;
+    }
+   
+    public List<CambioEntity> getCambios() {
+        
+        List<CambioEntity> editorials = persistence.findAll();
+        
+        return editorials;
+    }
+    
+    public void deleteCambio(Long id) {
+        
+        persistence.delete(id);
+    }
 }

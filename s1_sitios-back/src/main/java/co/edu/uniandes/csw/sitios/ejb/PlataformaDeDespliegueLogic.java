@@ -140,14 +140,5 @@ public class PlataformaDeDespliegueLogic {
         return editorials;
     }
     
-    public void deletePlataforma(Long editorialsId) throws BusinessLogicException {
-        
-        List<SitioWebEntity> books = getPlataformaDeDespliegue(editorialsId).getSitiosWeb();
-        if (books != null && !books.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar la editorial con id = " + editorialsId + " porque tiene books asociados");
-        }
-        persistence.delete(editorialsId);
-        
-    }
 }
 
