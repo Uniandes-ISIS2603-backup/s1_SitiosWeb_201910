@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
+import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,6 +47,10 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
             for (NotificacionEntity entityNotificacion : administradorEntity.getNotificaciones()) {
                 notificaciones.add(new NotificacionDTO(entityNotificacion));
             }
+             cambios = new ArrayList<>();
+            for (CambioEntity cambio : administradorEntity.getCambios()) {
+                cambios.add(new CambioDTO(cambio));
+            }
         }
     }
 
@@ -65,6 +70,13 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
                 notificacionEntity.add(dtoNotificaciones.toEntity());
             }
             administradorEntity.setNotificaciones(notificacionEntity);
+        }
+        if (cambios != null) {
+            List<CambioEntity> cambiosEntity = new ArrayList<>();
+            for (CambioDTO cambioDTO : cambios) {
+                cambiosEntity.add(cambioDTO.toEntity());
+            }
+            administradorEntity.setCambios(cambiosEntity);
         }
         return administradorEntity;
     }
