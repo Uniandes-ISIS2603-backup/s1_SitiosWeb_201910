@@ -47,7 +47,7 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
             for (NotificacionEntity entityNotificacion : administradorEntity.getNotificaciones()) {
                 notificaciones.add(new NotificacionDTO(entityNotificacion));
             }
-            cambios = new ArrayList<>();
+             cambios = new ArrayList<>();
             for (CambioEntity cambio : administradorEntity.getCambios()) {
                 cambios.add(new CambioDTO(cambio));
             }

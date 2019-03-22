@@ -7,9 +7,8 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import co.edu.uniandes.csw.sitios.podam.DateStrategy;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -54,14 +53,12 @@ public class CambioEntity extends BaseEntity implements Serializable  {
      */    
     private Long idAsociado;
     
-       /*
-* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
-* plataforma de Despliegue    
-*/
-@PodamExclude
-@OneToOne(mappedBy = "change",
-         fetch = javax.persistence.FetchType.LAZY)
-private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
+    /**
+     * Sitio en el cual se presento el cambio
+     */
+    @PodamExclude
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private SitioWebEntity sitioWeb;
 
     /**
      * @return the lugarCambio
@@ -134,20 +131,6 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     }
 
     /**
-     * @return the sitiosWeb
-     */
-    public List<SitioWebEntity> getSitiosWeb() {
-        return sitiosWeb;
-    }
-
-    /**
-     * @param sitiosWeb the sitiosWeb to set
-     */
-    public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
-        this.sitiosWeb = sitiosWeb;
-    }
-
-    /**
      * @return the idAsociado
      */
     public Long getIdAsociado() {
@@ -159,5 +142,19 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
      */
     public void setIdAsociado(Long idAsociado) {
         this.idAsociado = idAsociado;
+    }
+
+    /**
+     * @return the sitioWeb
+     */
+    public SitioWebEntity getSitioWeb() {
+        return sitioWeb;
+    }
+
+    /**
+     * @param sitioWeb the sitioWeb to set
+     */
+    public void setSitioWeb(SitioWebEntity sitioWeb) {
+        this.sitioWeb = sitioWeb;
     }
 }

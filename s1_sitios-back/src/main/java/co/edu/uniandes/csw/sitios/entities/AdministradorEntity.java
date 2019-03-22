@@ -45,8 +45,8 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     @OneToOne
     private DependenciaEntity dependencia;
 
-    /**
-     * Colleccion de cambios.
+     /**
+     * Collecion de notificaciones
      */
     @PodamExclude
     @OneToMany
@@ -125,19 +125,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
         this.notificaciones = notificaciones;
     }
 
-    /**
-     * @return the cambios
-     */
-    public List<CambioEntity> getCambios() {
-        return cambios;
-    }
 
-    /**
-     * @param cambios the cambios to set
-     */
-    public void setCambios(List<CambioEntity> cambios) {
-        this.cambios = cambios;
-    }
 
     /**
      * @return the sitioWebEntity
@@ -151,5 +139,19 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      */
     public void setSitioWeb(SitioWebEntity sitioWebEntity) {
         this.sitioWeb = sitioWebEntity;
+    }
+
+    /**
+     * @return the cambios
+     */
+    public List<CambioEntity> getCambios() {
+        return cambios;
+    }
+
+    /**
+     * @param cambios the cambios to set
+     */
+    public void setCambios(List<CambioEntity> cambios) {
+        this.cambios = cambios;
     }
 }

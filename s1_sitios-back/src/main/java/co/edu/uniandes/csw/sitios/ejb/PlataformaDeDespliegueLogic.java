@@ -7,8 +7,11 @@ package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.PlataformaDeDesplieguePersistence;
+import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -19,6 +22,9 @@ import javax.inject.Inject;
 
 @Stateless
 public class PlataformaDeDespliegueLogic {
+    
+    private static final Logger LOGGER = Logger.getLogger(PlataformaDeDespliegueLogic.class.getName());
+    
     
     @Inject
     private PlataformaDeDesplieguePersistence persistence;
@@ -89,7 +95,8 @@ public class PlataformaDeDespliegueLogic {
         }
         
         //sitiosWeb = no puede ser null
-        if(plataforma.getSitiosWeb()==null)
+        List<SitioWebEntity> sitios = plataforma.getSitiosWeb() ;
+        if(sitios==null)
            {
             throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
            }
@@ -105,11 +112,32 @@ public class PlataformaDeDespliegueLogic {
            PlataformaDeDespliegueEntity entity = persistence.find(id);
            if(entity==null)
            {
-               throw  new BusinessLogicException("la PlatafromaDeDespliegue no encontrado");
+               throw  new BusinessLogicException("la PlataformaDeDespliegue no se a encontrado");
            }
            
            return  entity;
 
        }
+    
+     public void deletePlataformaDeDespliegue(Long id) {
+       
+        persistence.delete(id);
+    }
+     
+       
+   public PlataformaDeDespliegueEntity updatePlataforma(Long Id, PlataformaDeDespliegueEntity plataformaEntity){
+        
+        PlataformaDeDespliegueEntity newEntity = persistence.update(plataformaEntity);
+        
+        return newEntity;
+    }
+   
+    public List<PlataformaDeDespliegueEntity> getPlataformas() {
+        
+        List<PlataformaDeDespliegueEntity> editorials = persistence.findAll();
+        
+        return editorials;
+    }
+    
 }
 

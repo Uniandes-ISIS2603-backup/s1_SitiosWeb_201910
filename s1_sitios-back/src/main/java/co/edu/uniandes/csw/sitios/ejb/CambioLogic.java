@@ -9,6 +9,9 @@ import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.CambioPersistence;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -19,6 +22,8 @@ import javax.inject.Inject;
 @Stateless
 public class CambioLogic {
     
+       private static final Logger LOGGER = Logger.getLogger(CambioLogic.class.getName());
+    
      @Inject
     private CambioPersistence persistence;
     
@@ -26,7 +31,7 @@ public class CambioLogic {
     public CambioEntity createCambio(CambioEntity cambioEntidad) throws BusinessLogicException{
         
          ///////                    Reglas De Negocio                  ////////
-         
+         LOGGER.log(Level.INFO, "Creando un Cambio nuevo");
         String lugarCambio = cambioEntidad.getLugarCambio();
         
         //ip = no puede ser null
@@ -89,26 +94,48 @@ public class CambioLogic {
         }
          
         //sitiosWeb = no puede ser null
-        if(cambioEntidad.getSitiosWeb()==null)
-           {
-            throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
-           }
+       // SitioWebEntity sitios = cambioEntidad.getSitiosWeb();
+       // if(sitios==null)
+         //  {
+         //   throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
+           //}
         
         //Invoco a la persistencia para crear a la plataforma
         persistence.create(cambioEntidad);
+        LOGGER.log(Level.FINE, "Cambio creado");
         return cambioEntidad;
         }
         
-    
+     
      public CambioEntity getCambio(Long id) throws  BusinessLogicException
        {
            CambioEntity entity = persistence.find(id);
            if(entity==null)
            {
-               throw  new BusinessLogicException("El Cambio no encontrado");
+               throw  new BusinessLogicException("El Cambio no se a encontrado");
            }
            
            return  entity;
 
        }
+     
+       
+   public CambioEntity updateCambio(Long Id, CambioEntity cambioEntity){
+        
+        CambioEntity newEntity = persistence.update(cambioEntity);
+        
+        return newEntity;
+    }
+   
+    public List<CambioEntity> getCambios() {
+        
+        List<CambioEntity> editorials = persistence.findAll();
+        
+        return editorials;
+    }
+    
+    public void deleteCambio(Long id) {
+        
+        persistence.delete(id);
+    }
 }
