@@ -101,7 +101,7 @@ public class UsuarioTicketsLogic {
      * @param userId Identificador de la instancia de user
      * @param ticketId Identificador de la instancia de ticket
      */
-    public void removeCambio(Long userId, Long ticketId) {
+    public void removeTicket(Long userId, Long ticketId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un cambio del admin con id = {0}", userId);
         UsuarioEntity userE = usuarioPersistence.find(userId);
         TicketEntity cambioEntity = ticketPersistence.find(ticketId);
