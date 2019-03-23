@@ -20,8 +20,8 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class CambioPersistence {
-    
-       private static final Logger LOGGER = Logger.getLogger(CambioPersistence.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(CambioPersistence.class.getName());
 
     @PersistenceContext(unitName = "sitiosPU")
     protected EntityManager em;
@@ -39,47 +39,44 @@ public class CambioPersistence {
     }
 
     // Busque en la tabla ----Entity un e(objeto o registro) donde el nombre es igual a una ip pasada por parametro
-    public CambioEntity findByIp(String ip){
-            TypedQuery<CambioEntity> query = em.createQuery("Select e from CambioEntity e where e.name = :name",CambioEntity.class);
-            // Aca le asigno que significa param param=ip
-            query = query.setParameter("name", ip);
-            //Hago una lista que me devuelve la lista del resultado
-            List<CambioEntity> sameParam = query.getResultList();
-           
-            CambioEntity result ;
-            // LISTA NULA
-            if(sameParam == null){
-                result = null;
-            } // LSITA VACIA
-            else if(sameParam.isEmpty()){
-                result = null;
-            } //EL PRIMER ELEMENTO 
-            else {
-                result = sameParam.get(0);
-            }
-            return result;
+    public CambioEntity findByIp(String ip) {
+        TypedQuery<CambioEntity> query = em.createQuery("Select e from CambioEntity e where e.name = :name", CambioEntity.class);
+        // Aca le asigno que significa param param=ip
+        query = query.setParameter("name", ip);
+        //Hago una lista que me devuelve la lista del resultado
+        List<CambioEntity> sameParam = query.getResultList();
+
+        CambioEntity result;
+        // LISTA NULA
+        if (sameParam == null) {
+            result = null;
+        } // LSITA VACIA
+        else if (sameParam.isEmpty()) {
+            result = null;
+        } //EL PRIMER ELEMENTO 
+        else {
+            result = sameParam.get(0);
+        }
+        return result;
     }
+
     public List<CambioEntity> findAll() {
-       
+
         LOGGER.log(Level.INFO, "Consultando todos los Cambios");
-        
-        TypedQuery<CambioEntity> query = em.createQuery("select u from CambioEntity u",CambioEntity.class);
+
+        TypedQuery<CambioEntity> query = em.createQuery("select u from CambioEntity u", CambioEntity.class);
         return query.getResultList();
     }
-    
-     public void delete(Long cambioId) {
+
+    public void delete(Long cambioId) {
         LOGGER.log(Level.INFO, "Borrando el Cambio con id={0}", cambioId);
         CambioEntity plataformaDeDespliegueEntity = em.find(CambioEntity.class, cambioId);
         em.remove(plataformaDeDespliegueEntity);
     }
-    
-     public CambioEntity update(CambioEntity cambioEntity) {
+
+    public CambioEntity update(CambioEntity cambioEntity) {
         LOGGER.log(Level.INFO, "Actualizando el Cambio con id={0}", cambioEntity.getId());
         return em.merge(cambioEntity);
     }
-     
-     
-    
-    
-    
+
 }

@@ -153,11 +153,27 @@ public class PlataformaDeDespliegueResource {
         plataformaLogic.deletePlataformaDeDespliegue(plataformasId);
         LOGGER.info("PlataformaDeDesplieguelResource deletePlatformaDeDespliegue: output: void");
     }
-
-    /**
+  /**
      * Conexión con el servicio de libros para una plataforma.
-     * {@link PlataformaDeDespliegueStiosWebResource}
-     
+     * {@link PlataformaDeDespliegueSitiosWebResource}
+     *
+     * Este método conecta la ruta de /plataformas con las rutas de /books que
+     * dependen de la plataforma, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de los libros de una plataforma.
+     *
+     * @param plataformasId El ID de la plataforma con respecto a la cual se
+     * accede al servicio.
+     * @return El servicio de libros para esta plataforma en paricular.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la plataforma.
+     */
+    @Path("{plataformasId: \\d+}/books")
+    public Class<PlataformaDeDespliegueSitiosWebResource> getPlataformaDeDespliegueSitiosWebResource(@PathParam("plataformasId") Long plataformasId) throws BusinessLogicException {
+        if (plataformaLogic.getPlataformaDeDespliegue(plataformasId) == null) {
+            throw new WebApplicationException("El recurso /platforms/" + plataformasId + " no existe.", 404);
+        }
+        return PlataformaDeDespliegueSitiosWebResource.class;
+    }
 
     /**
      * Convierte una lista de entidades a DTO.

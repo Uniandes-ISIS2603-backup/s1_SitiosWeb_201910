@@ -21,66 +21,65 @@ import uk.co.jemos.podam.common.PodamStringValue;
  */
 @Entity
 public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializable {
- 
+
     /**
      * Codigo ip correspondiente a la plataforma utilizada.
-     */    
+     */
     @PodamStringValue(strValue = "000.000.000.000", length = 15)
     private String ip;
 
     /**
      * Codigo de la CPU correspondiente a la plataforma utilizada.
-     */    
+     */
     private String cpu;
-    
+
     /**
      * Numero de cores la plataforma utilizada.
-     */    
+     */
     private Integer cores;
-    
+
     /**
      * Clock de la plataforma utilizada.
      */
     @PodamStringValue(strValue = "15 GHz")
     private String clock;
-    
+
     /**
-     * El servicio de hosting que tiene la plataforma utilizada. 
-     */    
+     * El servicio de hosting que tiene la plataforma utilizada.
+     */
     @Enumerated(EnumType.STRING)
     private TipoHosting hosting;
-    
+
     /**
      * Estado de la plataforma utilizada, virtualizada o no virtualizada.
-     */    
+     */
     private Boolean isVirtualizacion;
-    
-      /**
-       * TipoHosting que puede ser una plataforma de despliegue
-      */
-        public enum TipoHosting
-        {
-            SAAS,
-            PAAS,
-            IAAS,
-            ONPREMISE
-        }
 
-   /*
-* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
-* plataforma de Despliegue    
-*/
-@PodamExclude
-@OneToMany(mappedBy = "plataformaDeDespliegue",
-                         fetch = javax.persistence.FetchType.LAZY)
-private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
+    /**
+     * TipoHosting que puede ser una plataforma de despliegue
+     */
+    public enum TipoHosting {
+        SAAS,
+        PAAS,
+        IAAS,
+        ONPREMISE
+    }
+
+    /*
+    * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
+    * plataforma de Despliegue    
+     */
+    @PodamExclude
+    @OneToMany(mappedBy = "plataformaDeDespliegue",
+            fetch = javax.persistence.FetchType.LAZY)
+    private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
 
     public String getIp() {
         return ip;
     }
 
     public void setIp(String ip) {
-        
+
         this.ip = ip;
     }
 
@@ -132,5 +131,4 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
         this.sitiosWeb = sitiosWeb;
     }
 
-   
 }

@@ -16,11 +16,14 @@ import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -35,6 +38,7 @@ public class CambioResource {
 
     @Inject
     private CambioLogic cambioLogic;
+    
      /**
      * Crea un cambio con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -86,4 +90,54 @@ public class CambioResource {
         LOGGER.log(Level.INFO, "SitioWebResource getCambios: output: {0}", cambios.toString());
         return cambios;
     }
+    
+    /**
+     * Actualiza el cambio con el id recibido en la URL con la información
+     * que se recibe en el cuerpo de la petición.
+     *
+     * @param cambiosId Identificador de el cambio que se desea
+     * actualizar. Este debe ser una cadena de dígitos.
+     * @param cambio {@link CambioDTO} La cambio que se desea
+     * guardar.
+     * @return JSON {@link CambioDTO} - La cambio guardada.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el cambio a
+     * actualizar.
+     */
+    @PUT
+    @Path("{cambiosId: \\d+}")
+    public CambioDTO updateCambio(@PathParam("cambiosId") Long cambiosId, CambioDTO cambio) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "CambioResource updateCambio: input: id: {0} , cambio: {1}", new Object[]{cambiosId, cambio});
+        cambio.setId(cambiosId);
+        if (cambioLogic.getCambio(cambiosId) == null) {
+            throw new WebApplicationException("El recurso /changes/" + cambiosId + " no existe.", 404);
+        }
+        CambioDTO cambioDTO = new CambioDTO(cambioLogic.updateCambio(cambiosId, cambio.toEntity()));
+        LOGGER.log(Level.INFO, "CambioResource updateCambio: output: {0}", cambioDTO);
+        return cambioDTO;
+    }
+
+    /**
+     * Borra el cambio con el id asociado recibido en la URL.
+     *
+     * @param cambiosId Identificador de el cambio que se desea
+     * borrar. Este debe ser una cadena de dígitos.
+     * @throws WebApplicationException {@link BusinessLogicExceptionMapper} -
+     * Error de lógica que se genera cuando no se puede eliminar la
+     * cambio.
+     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
+     * Error de lógica que se genera cuando la organizacion tiene un premio
+     * asociado.
+     */
+    @DELETE
+    @Path("{cambiosId: \\d+}")
+    public void deleteCambio(@PathParam("cambiosId") Long cambiosId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "CambioResource deleteCambio: input: {0}", cambiosId);
+        if (cambioLogic.getCambio(cambiosId) == null) {
+            throw new WebApplicationException("El recurso /changes/" + cambiosId + " no existe.", 404);
+        }
+        cambioLogic.deleteCambio(cambiosId);
+        LOGGER.info("CambioResource deleteCambio: output: void");
+    }
+
 }

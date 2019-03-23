@@ -54,7 +54,6 @@ public class PlataformaDeDespliegueDTO implements Serializable {
             IAAS,
             ONPREMISE
         }
-
     
     /**
      * Constructor PlataformaDeDespliegueDTO vacio

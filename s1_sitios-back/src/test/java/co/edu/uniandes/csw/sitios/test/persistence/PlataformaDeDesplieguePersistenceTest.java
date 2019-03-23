@@ -32,10 +32,10 @@ public class PlataformaDeDesplieguePersistenceTest {
      */
     @Inject
     private PlataformaDeDesplieguePersistence pp;
-    
+
     /*
     / 
-    */
+     */
     @PersistenceContext
     private EntityManager em;
 
@@ -49,7 +49,6 @@ public class PlataformaDeDesplieguePersistenceTest {
     }
 
     // ep es entitypersistence
-    
     @Test
     public void createPlataformaDeDespliegueTest() {
 
@@ -57,15 +56,15 @@ public class PlataformaDeDesplieguePersistenceTest {
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
 
         PlataformaDeDespliegueEntity ep = pp.create(newEntity);
-       
+
         //Verificamos que no sea nulo
         Assert.assertNotNull(ep);
-        
+
         //Verificamos que el id o el objeto este en la base de datos buscando si el id existe
         PlataformaDeDespliegueEntity entity = em.find(PlataformaDeDespliegueEntity.class, ep.getId());
-        
+
         //El nombre aleatorio pp dado el metodo inject
-  //      Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getIp(), entity.getIp());
         Assert.assertEquals(newEntity.getCpu(), entity.getCpu());
         Assert.assertEquals(newEntity.getCores(), entity.getCores());
