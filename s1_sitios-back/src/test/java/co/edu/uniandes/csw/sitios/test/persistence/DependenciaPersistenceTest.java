@@ -5,10 +5,32 @@
  */
 package co.edu.uniandes.csw.sitios.test.persistence;
 
+import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
+import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
+import co.edu.uniandes.csw.sitios.persistence.DependenciaPersistence;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
+
 /**
  *
  * @author estudiante
  */
+@RunWith(Arquillian.class)
 public class DependenciaPersistenceTest {
-    
+
+
 }
