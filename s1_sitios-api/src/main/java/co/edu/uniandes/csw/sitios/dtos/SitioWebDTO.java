@@ -55,12 +55,6 @@ public class SitioWebDTO  implements Serializable{
 	
 	private String imagen;
 
-
-	/**
-	 * historial completo de estados que ha tenido este sitio
-	 */
-	private List<EstadoWebDTO> historialDeEstados;
-
 	/**
 	 * Lugar donde se encuentra desplegado el sitio web
 	 */
@@ -184,14 +178,6 @@ public class SitioWebDTO  implements Serializable{
         this.imagen = imagen;
     }
 
-
-    public List<EstadoWebDTO> getHistorialDeEstados() {
-        return historialDeEstados;
-    }
-
-    public void setHistorialDeEstados(List<EstadoWebDTO> historialDeEstados) {
-        this.historialDeEstados = historialDeEstados;
-    }
 
     public PlataformaDeDespliegueDTO getPlataformaDeDespliegue() {
         return plataformaDeDespliegue;
