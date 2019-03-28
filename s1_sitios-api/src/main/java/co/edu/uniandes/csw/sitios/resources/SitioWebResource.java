@@ -83,4 +83,16 @@ public class SitioWebResource {
         }
         return SitioWebTecnologiaResourse.class;
     }
+    
+    @Path("{sitioWebId: \\d+}/states")
+    public Class<SitioWebEstadosWebResource> getSiteStatesResource(@PathParam("sitioWebId") Long sitioWebId) {
+            try {
+            sitelogic.getWebSite(sitioWebId);
+       
+        } catch (Exception e) {
+            throw new WebApplicationException("El recurso /sites/" + sitioWebId + " no existe.", 404);
+        }
+        
+        return SitioWebEstadosWebResource.class;
+    }
 }
