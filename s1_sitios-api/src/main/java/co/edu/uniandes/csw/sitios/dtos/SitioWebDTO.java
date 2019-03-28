@@ -59,6 +59,8 @@ public class SitioWebDTO  implements Serializable{
 	 * Lugar donde se encuentra desplegado el sitio web
 	 */
 	private PlataformaDeDespliegueDTO plataformaDeDespliegue;
+        
+        private String url;
 
     
         
@@ -88,12 +90,24 @@ public class SitioWebDTO  implements Serializable{
                 this.id=entity.getId();
                 this.audienciaEsperada=entity.getAudienciaEsperada();
                 this.descripcion=entity.getDescripcion();
-                this.imagen=entity.getNombre();
+                this.imagen=entity.getImagen();
                 this.proposito=entity.getProposito();
                 this.nombre=entity.getNombre();
                 this.fechaLanzamiento=entity.getFechaLanzamiento();
+                this.url=entity.getUrl();
+                
             }
         }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+        
+        
         
         public SitioWebEntity toEntity()
         {
@@ -105,6 +119,7 @@ public class SitioWebDTO  implements Serializable{
             entity.setProposito(proposito);
             entity.setNombre(nombre);
             entity.setFechaLanzamiento(fechaLanzamiento);
+            entity.setUrl(url);
             return entity;
         }
 
