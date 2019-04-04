@@ -6,6 +6,10 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import javax.persistence.Entity;
+import uk.co.jemos.podam.common.PodamExclude;
+import uk.co.jemos.podam.common.PodamIntValue;
+import uk.co.jemos.podam.common.PodamLongValue;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -17,21 +21,25 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * nombre de la dependencia.
      */
+    @PodamStringValue(length = 10)
     private String nombreDependencia;
     
     /**
      * email de la dependencia
      */
+    @PodamStringValue(strValue = "holasoycorreo@extension.com")
     private String email;
     
     /**
      * telefono de la dependencia
      */
+    @PodamLongValue(minValue = 7L, maxValue = 11L)
     private String telefono;
     
+    @PodamExclude
     @javax.persistence.OneToOne(
         mappedBy = "dependencia",
-        fetch = javax.persistence.FetchType.EAGER
+        fetch = javax.persistence.FetchType.LAZY
     )
     private AdministradorEntity encargadoDependencia;
     
