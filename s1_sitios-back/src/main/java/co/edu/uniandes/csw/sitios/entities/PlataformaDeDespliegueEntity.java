@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -71,8 +72,7 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
 * plataforma de Despliegue    
 */
 @PodamExclude
-@OneToMany(mappedBy = "plataformaDeDespliegue",
-                         fetch = javax.persistence.FetchType.LAZY)
+@OneToMany(mappedBy = "plataformaDeDespliegue",cascade = CascadeType.PERSIST, orphanRemoval = true)
 private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
 
     public String getIp() {
