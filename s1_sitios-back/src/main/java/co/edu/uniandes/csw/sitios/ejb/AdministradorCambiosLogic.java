@@ -86,32 +86,30 @@ public class AdministradorCambiosLogic {
      * Remplaza las instancias de notificacion asociadas a una instancia de admin
      *
      * @param adminId Identificador de la instancia de admin
-     * @param notis Colección de instancias de BookEntity a asociar a instancia
+     * @param cambios Colección de instancias de BookEntity a asociar a instancia
      * de admin
      * @return Nueva colección de NotificacionEntity asociada a la instancia de Admin
      */
-    public List<CambioEntity> replaceNotificaciones(Long adminId, List<CambioEntity> cambios) {
+    public List<CambioEntity> replaceCambios(Long adminId, List<CambioEntity> cambios) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los cambios asocidos al administrador con id = {0}", adminId);
         AdministradorEntity adminEntity = adminPersistence.find(adminId);
-        List<CambioEntity> cambiosE = cambioPersistence.findAll();
         adminEntity.setCambios(cambios);
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los cambios asocidos al admin con id = {0}", adminId);
         return adminEntity.getCambios();
     }
     
     /**
-     * Desasocia una Notificacion existente de un Administrador existente
+     * Desasocia un Cambio existente de un Administrador existente
      *
      * @param adminId Identificador de la instancia de Admin
      * @param cambioId Identificador de la instancia de Notificacion
      */
-    public void removeNotificacion(Long adminId, Long cambioId) {
+    public void removeCambio(Long adminId, Long cambioId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un cambio del admin con id = {0}", adminId);
         AdministradorEntity adminEntity = adminPersistence.find(adminId);
         CambioEntity cambioEntity = cambioPersistence.find(cambioId);
         adminEntity.getCambios().remove(cambioEntity);
-        //cambioPersistence.delete(notiEntity.getId());
-        //TODO checkear si deberia eliminar eso.
+        cambioPersistence.delete(cambioEntity.getId());
         LOGGER.log(Level.INFO, "Termina proceso de borrar un cambio del administrador con id = {0}", adminId);
     }
 

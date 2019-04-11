@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author estudiante
  */
-@Path("technologies/{techID: \\d+}/site")
+
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TecnologiaSitioWebResourse {

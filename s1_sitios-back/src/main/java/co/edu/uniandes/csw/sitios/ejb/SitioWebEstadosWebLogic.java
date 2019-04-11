@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 
 import co.edu.uniandes.csw.sitios.persistence.EstadoWebPersistence;
 import co.edu.uniandes.csw.sitios.persistence.SitioWebPersistence;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,6 +111,20 @@ public class SitioWebEstadosWebLogic {
         throw new BusinessLogicException("El estadoWeb no está asociado a la sitioWeb");
     }
 
+    
+    public EstadoWebEntity getLastState(Long sitioWebId)
+    {
+    LOGGER.log(Level.INFO, "Inicia proceso de consultar los estadosWeb asociados a el sitioWeb con id = {0}", sitioWebId);
+        List<EstadoWebEntity> lista = sitioWebPersistence.find(sitioWebId).getEstadosWeb();
+        lista.sort(new Comparator<EstadoWebEntity>(){
+        @Override
+        public int compare(EstadoWebEntity o1, EstadoWebEntity o2) {
+           return o1.getFechaCambio().compareTo(o2.getFechaCambio());
+        }
+        });
+        return lista.get(0);
+    }    
+     
     /**
      * Remplaza los estadosWeb de un sitioWeb
      *

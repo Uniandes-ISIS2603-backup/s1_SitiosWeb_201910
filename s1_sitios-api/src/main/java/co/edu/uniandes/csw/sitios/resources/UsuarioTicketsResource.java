@@ -29,6 +29,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Allan Roy Corinaldi.
  */
+@Path("users/{usersId: \\d+}/tickets")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @RequestScoped
@@ -93,14 +94,13 @@ public class UsuarioTicketsResource {
      * @param usersId El ID del usuario del cual se busca el ticket
      * @param ticketsId El ID del ticket que se busca
      * @return {@link TicketDTO} - El ticket encontrado en el usuario.
-     * @throws co.edu.uniandes.csw.bookstore.exceptions.BusinessLogicException
-     * si el ticket no está asociado al usurio
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el ticket.
      */
     @GET
     @Path("{ticketsId: \\d+}")
-    public TicketDTO getBook(@PathParam("usersId") Long usersId, @PathParam("ticketsId") Long ticketsId) throws BusinessLogicException {
+    public TicketDTO getTicket(@PathParam("usersId") Long usersId, @PathParam("ticketsId") Long ticketsId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "UsuarioTicketsResource getTicket: input: usersId {0} , ticketssId {1}", new Object[]{usersId, ticketsId});
         if (ticketLogic.getTicket(ticketsId) == null) {
             throw new WebApplicationException("El recurso /tickets/" + ticketsId + " no existe.", 404);

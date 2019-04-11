@@ -6,10 +6,10 @@
 package co.edu.uniandes.csw.sitios.ejb;
 
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
-import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.AdministradorPersistence;
+import co.edu.uniandes.csw.sitios.persistence.NotificacionPersistence;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +27,9 @@ public class AdministradorLogic {
 
     @Inject
     private AdministradorPersistence persistence;
+    
+    @Inject
+    private NotificacionPersistence notiPer;
 
     /**
      * Se encarga de crear un Administrador en la base de datos.
@@ -97,12 +100,8 @@ public class AdministradorLogic {
     public void deleteAdministrador(Long administradoresId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el autor con id = {0}", administradoresId);
         List<NotificacionEntity> notis = getAdministrador(administradoresId).getNotificaciones();
-        if (notis != null && !notis.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el admin con id = " + administradoresId + " porque tiene notis asociados");
-        }
-        List<CambioEntity> cambios = getAdministrador(administradoresId).getCambios();
-        if (cambios != null && !cambios.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar el admin con id = " + administradoresId + " porque tiene cambios asociados");
+        for( NotificacionEntity noti : notis ){
+            notiPer.delete(noti.getId());
         }
         persistence.delete(administradoresId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar el administrador con id = {0}", administradoresId);
@@ -133,9 +132,9 @@ public class AdministradorLogic {
         if(entity.getTelefono().trim().length() < 7 && entity.getTelefono().trim().length()> 11 ){
             throw new BusinessLogicException("Numero de telefono demasiado largo");
         }
-        if(entity.getCambios() == null ){
-            throw new BusinessLogicException("No existen los cambios");
-        }
+        if(entity.getCambios() == null ){ 
+            throw new BusinessLogicException("No existen los cambios"); 
+        } 
         if(entity.getNotificaciones()== null ){
             throw new BusinessLogicException("No existen notificaciones");
         }

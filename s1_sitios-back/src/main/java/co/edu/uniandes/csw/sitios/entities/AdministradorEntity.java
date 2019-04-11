@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
+import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
  *
@@ -34,6 +35,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * Nombre del cargo del administrador.
      */
+    @PodamStringValue(length = 6)
     private String nombreCargo;
 
     /**
@@ -43,8 +45,8 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     @OneToOne
     private DependenciaEntity dependencia;
 
-    /**
-     * Colleccion de cambios.
+     /**
+     * Collecion de notificaciones
      */
     @PodamExclude
     @OneToMany
@@ -123,19 +125,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
         this.notificaciones = notificaciones;
     }
 
-    /**
-     * @return the cambios
-     */
-    public List<CambioEntity> getCambios() {
-        return cambios;
-    }
 
-    /**
-     * @param cambios the cambios to set
-     */
-    public void setCambios(List<CambioEntity> cambios) {
-        this.cambios = cambios;
-    }
 
     /**
      * @return the sitioWebEntity
@@ -149,5 +139,19 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      */
     public void setSitioWeb(SitioWebEntity sitioWebEntity) {
         this.sitioWeb = sitioWebEntity;
+    }
+
+    /**
+     * @return the cambios
+     */
+    public List<CambioEntity> getCambios() {
+        return cambios;
+    }
+
+    /**
+     * @param cambios the cambios to set
+     */
+    public void setCambios(List<CambioEntity> cambios) {
+        this.cambios = cambios;
     }
 }

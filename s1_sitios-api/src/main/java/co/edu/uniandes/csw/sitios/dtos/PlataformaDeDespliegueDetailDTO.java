@@ -24,6 +24,12 @@ public class PlataformaDeDespliegueDetailDTO extends PlataformaDeDespliegueDTO i
 private List<SitioWebDTO> sitiosWeb;
 
 /*
+* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
+* plataforma de Despliegue    
+*/
+private Long id;
+
+/*
 * Constructor vacio de plataformaDeDespliegueDetailDTO
 */
 public PlataformaDeDespliegueDetailDTO(){
@@ -55,5 +61,19 @@ public PlataformaDeDespliegueDetailDTO(PlataformaDeDespliegueEntity plataformaEn
      */
     public void setSitiosWeb(List<SitioWebDTO> sitiosWeb) {
         this.sitiosWeb = sitiosWeb;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

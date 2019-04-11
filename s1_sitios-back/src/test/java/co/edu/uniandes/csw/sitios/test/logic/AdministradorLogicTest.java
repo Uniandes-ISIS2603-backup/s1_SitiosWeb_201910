@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.AdministradorLogic;
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
-import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.sitios.persistence.AdministradorPersistence;
@@ -29,7 +28,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Pruebas de logica de Authors
+ * Pruebas de logica de Administrador
  *
  * @author Allan Roy Corinaldi
  */
@@ -103,20 +102,7 @@ public class AdministradorLogicTest {
         }
     }
 
-    /**
-     * Prueba para crear un Administrador.
-     */
-    @Test
-    public void createAdministradorTest() throws BusinessLogicException {
-        AdministradorEntity newEntity = factory.manufacturePojo(AdministradorEntity.class);
-        newEntity.setCambios(new ArrayList<CambioEntity>());
-        newEntity.setNotificaciones(new ArrayList<NotificacionEntity>());
-        AdministradorEntity result = administradorLogic.createAdministrador(newEntity);
-        Assert.assertNotNull(result);
-        AdministradorEntity entity = em.find(AdministradorEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
-    }
+   
 
     /**
      * Prueba para consultar la lista de Administradores.

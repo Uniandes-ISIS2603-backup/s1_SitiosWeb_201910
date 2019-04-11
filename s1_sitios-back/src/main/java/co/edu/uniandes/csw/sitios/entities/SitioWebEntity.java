@@ -32,6 +32,8 @@ import uk.co.jemos.podam.common.PodamStringValue;
 @Entity
 public class SitioWebEntity extends BaseEntity implements Serializable {
 
+    @PodamStringValue(strValue = "http://www.test.com")
+    private String url;
     /**
      * nombre del sitio web nomre != "" && nombre !=null
      */
@@ -124,11 +126,19 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "sitioAsociado",cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<TicketEntity> ticketsSitio;
 
-
     public SitioWebEntity() {
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
  
+    
 
     public String getNombre() {
         return nombre;
@@ -256,6 +266,8 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         this.sitiosRelacionados = sitiosRelacionados;
     }
 
+    
+    
     /**
      * Categoria que puede tener un sitio web
      */
@@ -265,5 +277,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         ACADEMICO,
         OTRO
     }
+
+ 
 
 }

@@ -69,9 +69,9 @@ public class AdministradorNotificacionesResource {
     /**
      * Busca y devuelve todos las notificaciones que existen en un admin.
      *
-     * @param adminsId El ID del autor del cual se buscan los libros
-     * @return JSONArray {@link NotificacionDTO} - Los libros encontrados en el
-     * autor. Si no hay ninguno retorna una lista vacía.
+     * @param adminsId El ID del autor del cual se buscan las noificaciones
+     * @return JSONArray {@link NotificacionDTO} - Las notificaciones encontrados en el
+     * admin. Si no hay ninguno retorna una lista vacía.
      */
     @GET
     public List<NotificacionDTO> getNotificaciones(@PathParam("adminsId") Long adminsId) {
@@ -86,8 +86,8 @@ public class AdministradorNotificacionesResource {
     }
 
     /**
-     * Busca y devuelve el ticket con el ID recibido en la URL, relativo a un
-     * usuario.
+     * Busca y devuelve la noti con el ID recibido en la URL, relativo a un
+     * admin.
      *
      * @param adminsId El ID del admin del cual se busca la notificacion
      * @param notificationsId El ID del notificacion que se busca
@@ -124,7 +124,7 @@ public class AdministradorNotificacionesResource {
         List<NotificacionEntity> entities = new ArrayList<>();
         for (NotificacionDTO noti : notis) {
             if (notificacionLogic.getNotificacion(noti.getId()) == null) {
-                throw new WebApplicationException("El recurso /books/" + noti.getId() + " no existe.", 404);
+                throw new WebApplicationException("El recurso /notifications/" + noti.getId() + " no existe.", 404);
             }
             entities.add(noti.toEntity());
         }
@@ -140,22 +140,22 @@ public class AdministradorNotificacionesResource {
     }
     
     /**
-     * Elimina la conexión entre el libro y e autor recibidos en la URL.
+     * Elimina la conexión entre la noti y el admin recibidos en la URL.
      *
-     * @param adminId El ID del autor al cual se le va a desasociar el libro
-     * @param notiId El ID del libro que se desasocia
+     * @param adminId El ID del admin al cual se le va a desasociar la not
+     * @param notiId El ID de la noti que se desasocia
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el libro.
+     * Error de lógica que se genera cuando no se encuentra el notificacion.
      */
     @DELETE
     @Path("{notificationId: \\d+}")
     public void removeNotificacion(@PathParam("adminId") Long adminId, @PathParam("notificationId") Long notiId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "AdministradorNotificacionesResource deleteNotificacion: input: adminId {0} , notiId {1}", new Object[]{adminId, notiId});
+        LOGGER.log(Level.INFO, "AdministradorNotificacionesResource removeNotificacion: input: adminId {0} , notiId {1}", new Object[]{adminId, notiId});
         if (notificacionLogic.getNotificacion(notiId) == null) {
             throw new WebApplicationException("El recurso /notifications/" + notiId + " no existe.", 404);
         }
         administradorNotificacionesLogic.removeNotificacion(adminId, notiId);
-        LOGGER.info("AdministradorNotificacionesResource deleteNotificacion: output: void");
+        LOGGER.info("AdministradorNotificacionesResource removeNotificacion: output: void");
     }
 
 }

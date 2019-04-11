@@ -39,16 +39,17 @@ public class TicketEntity extends BaseEntity  implements Serializable{
     private Date fecha;
 
     /**
-     * estado del ticket, tiene 3: 1, 2, 3
+     * estado del ticket, tiene 3: 1, 2, 3.
      */
     @PodamIntValue(minValue = 1,maxValue = 3)
     private Integer estado; //Solo 3 estados
 
     /**
-     *
+     * Usuario al cual pertenece el ticket.
      */
-    @javax.persistence.ManyToOne
-    private UsuarioEntity usuarioEntity;
+    @ManyToOne
+    @PodamExclude
+    private UsuarioEntity usuarioAsociado;
     
     /**
      * sitio al que corresponde el estado web
@@ -58,74 +59,116 @@ public class TicketEntity extends BaseEntity  implements Serializable{
     private SitioWebEntity sitioAsociado;
 
 
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
-     * Constructor TicketEntity vacio
+     * Constructor TicketEntity vacio.
      */
-    public TicketEntity() {
+    public TicketEntity() 
+    {
     }
 
     /**
+     * Devuelve la descripcion del ticket
+     * 
      * @return the descripcion
      */
-    public String getDescripcion() {
+    public String getDescripcion() 
+    {
         return descripcion;
     }
 
     /**
+     * Asigna la descripcion asignada al ticket
+     * 
      * @param descripcion the descripcion to set
      */
-    public void setDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion)
+    {
         this.descripcion = descripcion;
     }
 
     /**
+     * Obtiene la fecha en la que se genero el ticket
+     * 
      * @return the fecha
      */
-    public Date getFecha() {
+    public Date getFecha() 
+    {
         return fecha;
     }
 
     /**
+     * Establece la fecha en la que se genero el ticket
+     * 
      * @param fecha the fecha to set
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(Date fecha) 
+    {
         this.fecha = fecha;
     }
 
     /**
+     * Obtiene el estado del ticket 
+     * el valor corresponde a 1|2|3
+     * 
      * @return the estado
      */
-    public Integer getEstado() {
+    public Integer getEstado() 
+    {
         return estado;
     }
 
     /**
+     * Asigna el estado del ticket
+     * el valor corresponde a 1|2|3
+     * 
      * @param estado the estado to set
      */
-    public void setEstado(Integer estado) {
+    public void setEstado(Integer estado) 
+    {
         this.estado = estado;
     }
 
     /**
-     * @return the usuarioEntity
+     * Obtiene el usuario asociado al ticket
+     * 
+     * @return the usuarioAsociado
      */
-    public UsuarioEntity getUsuarioEntity() {
-        return usuarioEntity;
+    public UsuarioEntity getUsuarioAsociado() 
+    {
+        return usuarioAsociado;
     }
 
     /**
-     * @param usuarioEntity the usuarioEntity to set
+     * Asigna el usuario asociado a un ticket
+     * 
+     * @param usuarioAsociado the usuarioAsociado to set
      */
-    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-        this.usuarioEntity = usuarioEntity;
+    public void setUsuarioAsociado(UsuarioEntity usuarioAsociado) 
+    {
+        this.usuarioAsociado = usuarioAsociado;
     }
     
-        public SitioWebEntity getSitioAsociado() {
+    /**
+     * Obtiene el sitioWeb al cual esta asociado el ticket
+     * 
+     * @return  the sitioAsociado
+     */
+    public SitioWebEntity getSitioAsociado() 
+    {
         return sitioAsociado;
     }
 
-    public void setSitioAsociado(SitioWebEntity sitioAsociado) {
+    /**
+     * Asigna el sitioWeb asociado a un ticket
+     * 
+     * @param sitioAsociado  the sitioAsociado to set
+     */
+    public void setSitioAsociado(SitioWebEntity sitioAsociado) 
+    {
         this.sitioAsociado = sitioAsociado;
     }
 }

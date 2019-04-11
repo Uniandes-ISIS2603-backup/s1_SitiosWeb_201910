@@ -79,12 +79,12 @@ public class NotificacionResourse {
      */
     @GET
     public List<NotificacionDTO> getNotificacion()throws BusinessLogicException {
-        LOGGER.info("BookResource getNotifications: input: void");
+        LOGGER.info("NoTificationResource getNotifications: input: void");
         List<NotificacionDTO> listaNotis = new ArrayList<>();
-        for(NotificacionEntity siteEntity: notilogic.getAll()) {
-            listaNotis.add(new NotificacionDTO(siteEntity));
+        for(NotificacionEntity not: notilogic.getAll()) {
+            listaNotis.add(new NotificacionDTO(not  ));
         }
-        LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaNotis.toString());
+        LOGGER.log(Level.INFO, "NotificationResource getSites: output: {0}", listaNotis.toString());
         return listaNotis;
     }
     
