@@ -83,7 +83,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
      */
     //TODO asignar multiplicidad
     @PodamExclude
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private PlataformaDeDespliegueEntity plataformaDeDespliegue;
 
 

@@ -12,6 +12,7 @@ package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.EstadoWebDTO;
 import co.edu.uniandes.csw.sitios.dtos.SitioWebDTO;
+import co.edu.uniandes.csw.sitios.dtos.SitioWebDetailDTO;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebEstadosWebLogic;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
@@ -65,11 +66,11 @@ public class SitioWebResource {
 
     @GET
     @Path("{sitesId: \\d+}")
-    public SitioWebDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
+    public SitioWebDetailDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
     {
         LOGGER.log(Level.INFO, "SitioWebResource getWebSite: input: {0}", id);
         SitioWebEntity entity = sitelogic.getWebSite(id);
-        SitioWebDTO obtenido= new SitioWebDTO(entity);
+        SitioWebDetailDTO obtenido= new SitioWebDetailDTO(entity);
         return  obtenido;
     }
 
