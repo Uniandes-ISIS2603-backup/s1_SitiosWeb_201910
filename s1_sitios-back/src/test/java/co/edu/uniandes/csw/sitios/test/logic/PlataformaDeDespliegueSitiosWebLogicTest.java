@@ -40,7 +40,7 @@ public class PlataformaDeDespliegueSitiosWebLogicTest {
     private SitioWebLogic sitioLogic;
     
     //@Inject
-    // private SitiosWebPlataformaDeDespliegueLogic sitioPlataformaDeDespliegueLogic;
+    //private SitiosWebPlataformaDeDespliegueLogic sitioPlataformaDeDespliegueLogic;
 
     @PersistenceContext
     private EntityManager em;

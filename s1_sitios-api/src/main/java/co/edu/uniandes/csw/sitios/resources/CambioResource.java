@@ -82,12 +82,12 @@ public class CambioResource {
      */
     @GET
     public List<CambioDTO> getCambios()throws BusinessLogicException {
-        LOGGER.info("SitioWebResource getCambios: input: void");
+       // LOGGER.info("SitioWebResource getCambios: input: void");
         List<CambioDTO> cambios = new ArrayList<>();
         for(CambioEntity siteEntity: cambioLogic.getCambios()) {
             cambios.add(new CambioDTO(siteEntity));
         }
-        LOGGER.log(Level.INFO, "SitioWebResource getCambios: output: {0}", cambios.toString());
+       // LOGGER.log(Level.INFO, "SitioWebResource getCambios: output: {0}", cambios.toString());
         return cambios;
     }
     

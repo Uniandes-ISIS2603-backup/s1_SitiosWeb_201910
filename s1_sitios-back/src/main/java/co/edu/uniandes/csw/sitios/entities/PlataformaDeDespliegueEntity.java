@@ -77,10 +77,10 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     * La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
     * plataforma de Despliegue    
      */
-    @PodamExclude
-    @OneToMany(mappedBy = "plataformaDeDespliegue",
-            fetch = javax.persistence.FetchType.LAZY)
-    private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
+  //  @PodamExclude
+    //@OneToMany(mappedBy = "plataformaDeDespliegue",
+    //       fetch = javax.persistence.FetchType.LAZY)
+    // private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
 
     public String getIp() {
         return ip;

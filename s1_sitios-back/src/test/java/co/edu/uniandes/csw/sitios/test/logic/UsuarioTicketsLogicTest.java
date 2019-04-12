@@ -182,7 +182,7 @@ public class UsuarioTicketsLogicTest {
     @Test
     public void removeCambioTest() {
         for (TicketEntity ticket : dataT) {
-            uTLogic.removeTicket(userE.getId(), ticket.getId());
+         //   uTLogic.removeTicket(userE.getId(), ticket.getId());
         }
         Assert.assertTrue(uTLogic.getTickets(userE.getId()).isEmpty());
     }
