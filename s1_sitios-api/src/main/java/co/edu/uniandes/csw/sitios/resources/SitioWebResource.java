@@ -86,6 +86,21 @@ public class SitioWebResource {
         LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaSites.toString());
         return listaSites;
     }
+    
+    
+    @GET
+    @Path("{sitesId: \\d+}/related")
+    public List<SitioWebDTO> getSitesRelated(@PathParam("sitesId") Long sitesId)throws  BusinessLogicException {
+   
+        LOGGER.info("BookResource getSites: input: void");
+        List<SitioWebDTO> listaSites = new ArrayList<>();
+        for(SitioWebEntity siteEntity: sitelogic.getWebSiteRelated(sitesId)) {
+            listaSites.add(new SitioWebDTO(siteEntity));
+        }
+        LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaSites.toString());
+        return listaSites;
+    }
+
 
     @Path("{sitesId: \\d+}/technologies")
     public Class<SitioWebTecnologiaResourse> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
