@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -55,6 +56,13 @@ public class PlataformaDeDespliegueEntity extends BaseEntity implements Serializ
      */
     private Boolean isVirtualizacion;
 
+   /*
+* La lista de sitiosWeb indica cuales sitios web pertenecen a una unica 
+* plataforma de Despliegue    
+*/
+@PodamExclude
+@OneToMany(mappedBy = "plataformaDeDespliegue",cascade = CascadeType.PERSIST, orphanRemoval = true)
+private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     /**
      * TipoHosting que puede ser una plataforma de despliegue
      */

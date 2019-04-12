@@ -12,6 +12,7 @@ package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.EstadoWebDTO;
 import co.edu.uniandes.csw.sitios.dtos.SitioWebDTO;
+import co.edu.uniandes.csw.sitios.dtos.SitioWebDetailDTO;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebEstadosWebLogic;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
@@ -65,11 +66,11 @@ public class SitioWebResource {
 
     @GET
     @Path("{sitesId: \\d+}")
-    public SitioWebDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
+    public SitioWebDetailDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
     {
         LOGGER.log(Level.INFO, "SitioWebResource getWebSite: input: {0}", id);
         SitioWebEntity entity = sitelogic.getWebSite(id);
-        SitioWebDTO obtenido= new SitioWebDTO(entity);
+        SitioWebDetailDTO obtenido= new SitioWebDetailDTO(entity);
         return  obtenido;
     }
 
@@ -85,6 +86,21 @@ public class SitioWebResource {
         LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaSites.toString());
         return listaSites;
     }
+    
+    
+    @GET
+    @Path("{sitesId: \\d+}/related")
+    public List<SitioWebDTO> getSitesRelated(@PathParam("sitesId") Long sitesId)throws  BusinessLogicException {
+   
+        LOGGER.info("BookResource getSites: input: void");
+        List<SitioWebDTO> listaSites = new ArrayList<>();
+        for(SitioWebEntity siteEntity: sitelogic.getWebSiteRelated(sitesId)) {
+            listaSites.add(new SitioWebDTO(siteEntity));
+        }
+        LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaSites.toString());
+        return listaSites;
+    }
+
 
     @Path("{sitesId: \\d+}/technologies")
     public Class<SitioWebTecnologiaResourse> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {

@@ -90,8 +90,21 @@ public class SitioWebLogic {
            {
                throw  new BusinessLogicException("Sitio Web no encontrado");
            }
-           
+           LOGGER.log(Level.INFO,"Se ha leido un sitio web: "+entity);
            return  entity;
+
+       }
+       
+       
+       public List<SitioWebEntity> getWebSiteRelated(Long id) throws  BusinessLogicException
+       {
+           SitioWebEntity entity = persistence.find(id);
+           if(entity==null)
+           {
+               throw  new BusinessLogicException("Sitio Web no encontrado");
+           }
+           LOGGER.log(Level.INFO,"Se ha leido un sitio web: "+entity);
+           return  entity.getSitiosRelacionados();
 
        }
 
