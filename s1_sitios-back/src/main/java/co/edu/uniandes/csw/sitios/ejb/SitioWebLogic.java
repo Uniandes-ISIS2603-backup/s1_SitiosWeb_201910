@@ -90,7 +90,7 @@ public class SitioWebLogic {
            {
                throw  new BusinessLogicException("Sitio Web no encontrado");
            }
-           
+           LOGGER.log(Level.INFO,"Se ha leido un sitio web: "+entity);
            return  entity;
 
        }

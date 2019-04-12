@@ -53,12 +53,18 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
                 tecnologiasDeDesarrollo.add(new TecnologiaDTO(tec));
                 }
             }
+            else{
+            tecnologiasDeDesarrollo=new ArrayList<>();
+            }
             if(entity.getAdministradores()!=null)
             {
                 for(AdministradorEntity adm: entity.getAdministradores())
                 {
                     administradores.add(new AdministradorDTO(adm));
                 }
+            }
+            else{
+                administradores=new ArrayList();
             }
             if(entity.getSitiosRelacionados()!=null)
             {
@@ -67,6 +73,10 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
                     sitiosRelacionados.add(new SitioWebDTO(site));
                 }
 
+            }
+            else
+            {
+                sitiosRelacionados =new ArrayList();
             }
             
             //se comprueba que los estados web no sea una lista nula
@@ -79,7 +89,9 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
                     estadosWeb.add(new EstadoWebDTO(entityEstado));
                 }
             }
-            
+            else{
+            estadosWeb=new ArrayList();
+            }
             //se comprueba que los tickets no sea una lista nula
             //y se llenan los tickets que llegan por parametro
             if (entity.getTicketsSitio()!= null) 
@@ -90,8 +102,18 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
                     ticketsSitio.add(new TicketDTO(entityTicket));
                 }
             }
-            
+            else{
+            ticketsSitio =new ArrayList();
+            }
            
+        }
+        
+        else{
+        tecnologiasDeDesarrollo=new ArrayList();
+        administradores=new ArrayList();
+        sitiosRelacionados =new ArrayList();
+        estadosWeb=new ArrayList();
+        ticketsSitio =new ArrayList();
         }
     }
 
@@ -119,6 +141,12 @@ public class SitioWebDetailDTO extends SitioWebDTO implements Serializable {
         }
         if(sitiosRelacionados!=null)
         {
+             List<SitioWebEntity> siteEntity= new ArrayList<>();
+            for(SitioWebDTO ste: sitiosRelacionados)
+            {
+                siteEntity.add(ste.toEntity());
+            }
+            entity.setSitiosRelacionados(siteEntity);
 
         }
         

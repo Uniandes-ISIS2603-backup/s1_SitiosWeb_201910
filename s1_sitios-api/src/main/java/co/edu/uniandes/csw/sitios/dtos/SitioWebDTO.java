@@ -95,7 +95,19 @@ public class SitioWebDTO  implements Serializable{
                 this.nombre=entity.getNombre();
                 this.fechaLanzamiento=entity.getFechaLanzamiento();
                 this.url=entity.getUrl();
+                if(entity.getPlataformaDeDespliegue()!=null)
+                {
+                    this.plataformaDeDespliegue=new PlataformaDeDespliegueDTO(entity.getPlataformaDeDespliegue());
+                }
+                else
+                {
+                    this.plataformaDeDespliegue=null;
+                }
                 
+            }
+            else
+            {
+                this.plataformaDeDespliegue=null;
             }
         }
 
