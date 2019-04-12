@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.sitios.ejb;
-
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
@@ -23,7 +22,7 @@ import javax.inject.Inject;
 @Stateless
 public class DependenciaLogic {
      
-     private static final Logger LOGGER = Logger.getLogger(TecnologiaLogic.class.getName());
+     private static final Logger LOGGER = Logger.getLogger(DependenciaLogic.class.getName());
      
     @Inject 
     private DependenciaPersistence persistence;

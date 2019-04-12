@@ -115,6 +115,25 @@ public class EstadoWebResource {
         LOGGER.log(Level.INFO, "EstadosWebResource getEstadosWeb: output: {0}", estadosWebRetorno.toString());
         return estadosWebRetorno;
     }
+    
+    @GET
+     @Path("/count")
+    public List<Integer> getContadorEstados() 
+    {
+        LOGGER.info("EstadosWebResource getEstadosWeb: input: void");
+        List<EstadoWebDTO> estadosWebRetorno = listEntity2DetailDTO(estadoWebLogic.getEstadosWeb());
+        List<Integer> respuesta= new ArrayList<>();
+        Integer activo= 0;
+        Integer inactivo= 0;
+        Integer enfalla= 0;
+        Integer otros= 0;
+        respuesta.add(activo);
+        respuesta.add(inactivo);
+        respuesta.add(enfalla);
+        respuesta.add(otros);
+        LOGGER.log(Level.INFO, "EstadosWebResource getEstadosWeb: output: {0}", estadosWebRetorno.toString());
+        return respuesta;
+    }
 
     /**
      * Busca el estado Web con el id asociado recibido en la URL y lo devuelve.

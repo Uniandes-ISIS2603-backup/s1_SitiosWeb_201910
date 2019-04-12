@@ -28,7 +28,7 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Pruebas de logica de Authors
+ * Pruebas de logica de Administrador
  *
  * @author Allan Roy Corinaldi
  */

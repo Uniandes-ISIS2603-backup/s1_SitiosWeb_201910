@@ -109,6 +109,21 @@ public class SitioWebEstadosWebResource {
         LOGGER.log(Level.INFO, "SitioWebEstadosWebResource getEstadosWeb: output: {0}", listaEstadosWebDTOs);
         return listaEstadosWebDTOs;
     }
+    
+    @GET
+    @Path("/last")
+    public EstadoWebDTO getCurrentState(@PathParam("sitioWebId") Long sitioWebId) 
+    {
+        LOGGER.log(Level.INFO, "SitioWebEstadosWebResource getEstadosWeb: input: {0}", sitioWebId);
+        List<EstadoWebDTO> listaEstadosWebDTOs = estadosWebListEntity2DTO(sitioWebEstadosWebLogic.getEstadosWeb(sitioWebId));
+        LOGGER.log(Level.INFO, "SitioWebEstadosWebResource getEstadosWeb: output: {0}", listaEstadosWebDTOs);
+        return listaEstadosWebDTOs.get(0);
+    }
+    
+    
+  
+    
+   
 
     /**
      * Busca el estadoWeb con el id asociado dentro de la sitioWeb con id asociado.

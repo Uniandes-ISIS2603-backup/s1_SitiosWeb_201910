@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -52,10 +53,8 @@ public class DependenciaPersistence {
      */
     public List<DependenciaEntity> findAll() {
         LOGGER.log(Level.INFO, "Consultando todas las dependencias");
-        // Se crea un query para buscar todas las dependencias en la base de datos.
-        TypedQuery<DependenciaEntity> query = em.createQuery("select u from DependenciaEntity u left join FETCH u.administrador p", DependenciaEntity.class);
-        // Note que en el query se hace uso del método getResultList() que obtiene una lista de dependencias.
-        return query.getResultList();
+        Query q = em.createQuery("select u from DependenciaEntity u");
+        return q.getResultList();
     }
 
     /**
@@ -67,18 +66,7 @@ public class DependenciaPersistence {
      */
     public DependenciaEntity find(Long dependenciaID) {
         LOGGER.log(Level.INFO, "Consultando dependencia con id={0}", dependenciaID);
-        /* Note que se hace uso del metodo "find" propio del EntityManager, el cual recibe como argumento 
-        el tipo de la clase y el objeto que nos hara el filtro en la base de datos en este caso el "id"
-        Suponga que es algo similar a "select * from DependenciaEntity where id=id;" - "SELECT * FROM table_name WHERE condition;" en SQL.
-         */
-        TypedQuery<DependenciaEntity> query = em.createQuery("select u from DependenciaEntity u left join FETCH u.admninistrador p where u.id =:id", DependenciaEntity.class);
-        query = query.setParameter("id", dependenciaID);
-        List<DependenciaEntity> dependencias = query.getResultList();
-        DependenciaEntity result = null;
-        if (!(dependencias == null || dependencias.isEmpty())) {
-            result = dependencias.get(0);
-        }
-        return result;
+        return em.find(DependenciaEntity.class, dependenciaID);
     }
 
     /**
@@ -91,10 +79,6 @@ public class DependenciaPersistence {
      */
     public DependenciaEntity update(DependenciaEntity dependenciaEntity) {
         LOGGER.log(Level.INFO, "Actualizando dependencia con id = {0}", dependenciaEntity.getId());
-        /* Note que hacemos uso de un método propio del EntityManager llamado merge() que recibe como argumento
-        la dependencia con los cambios, esto es similar a 
-        "UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;" en SQL.
-         */
         return em.merge(dependenciaEntity);
     }
 
@@ -106,14 +90,8 @@ public class DependenciaPersistence {
      */
     public void delete(Long dependenciaId) {
         LOGGER.log(Level.INFO, "Borrando dependencia con id={0}", dependenciaId);
-        // Se hace uso DependenciaEntity de mismo método que esta explicado en public DependenciaEntity find(Long id) para obtener la dependencia a borrar.
-        TypedQuery<DependenciaEntity> query = em.createQuery("select u from DependenciaEntity u left join FETCH u.admninistrador p where u.id =:id", DependenciaEntity.class);
-        query = query.setParameter("id", dependenciaId);
-        DependenciaEntity dependenciaEntity = query.getSingleResult();
-        /* Note que una vez obtenido el objeto desde la base de datos llamado "entity", volvemos hacer uso de un método propio del
-        EntityManager para eliminar de la base de datos el objeto que encontramos y queremos borrar.
-        Es similar a "delete from DependenciaEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
-        em.remove(dependenciaEntity);
+        DependenciaEntity entity = em.find(DependenciaEntity.class, dependenciaId);
+        em.remove(entity);
     }
 
     /**

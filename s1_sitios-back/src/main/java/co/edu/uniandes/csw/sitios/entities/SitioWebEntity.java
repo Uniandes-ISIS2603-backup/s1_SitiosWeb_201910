@@ -32,6 +32,8 @@ import uk.co.jemos.podam.common.PodamStringValue;
 @Entity
 public class SitioWebEntity extends BaseEntity implements Serializable {
 
+    @PodamStringValue(strValue = "http://www.test.com")
+    private String url;
     /**
      * nombre del sitio web nomre != "" && nombre !=null
      */
@@ -127,7 +129,16 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     public SitioWebEntity() {
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
  
+    
 
     public String getNombre() {
         return nombre;

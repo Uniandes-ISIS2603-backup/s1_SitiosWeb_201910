@@ -3,9 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+/**
+ * there was a thing failing that makes no sence so im adding a comment
+ */
 package co.edu.uniandes.csw.sitios.resources;
 
+import co.edu.uniandes.csw.sitios.dtos.EstadoWebDTO;
 import co.edu.uniandes.csw.sitios.dtos.SitioWebDTO;
+import co.edu.uniandes.csw.sitios.ejb.SitioWebEstadosWebLogic;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
@@ -32,6 +39,9 @@ public class SitioWebResource {
     
     @Inject
     private SitioWebLogic sitelogic;
+    
+    @Inject
+    private SitioWebEstadosWebLogic sitioWebEstadosWebLogic; 
      /**
      * Crea un sitio web con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -83,4 +93,22 @@ public class SitioWebResource {
         }
         return SitioWebTecnologiaResourse.class;
     }
+    
+    @Path("{sitioWebId: \\d+}/states/")
+    public Class<SitioWebEstadosWebResource> getSiteStatesResource(@PathParam("sitioWebId") Long sitioWebId) {
+            try {
+            sitelogic.getWebSite(sitioWebId);
+       
+        } catch (Exception e) {
+            throw new WebApplicationException("El recurso /sites/" + sitioWebId + " no existe.", 404);
+        }
+        
+        return SitioWebEstadosWebResource.class;
+    }
+    
+   
+    
+  
+    
+    
 }
