@@ -105,7 +105,7 @@ public class TecnologiaResource {
      */
     @PUT
     @Path("{technologiesId: \\d+}")
-    public TecnologiaDetailDTO updateAuthor(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) throws BusinessLogicException {
+    public TecnologiaDetailDTO updateTechnology(@PathParam("technologiesId") Long technologyId, TecnologiaDetailDTO technology) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: input: technologysId: {0} , technology: {1}", new Object[]{technologyId, technology});
         technology.setId(technologyId);
         if (technologyLogic.getTechnology(technologyId) == null) {
@@ -127,7 +127,7 @@ public class TecnologiaResource {
      */
     @DELETE
     @Path("{technologiesId: \\d+}")
-    public void deleteAuthor(@PathParam("technologiesId") Long technologyId) throws BusinessLogicException {
+    public void deleteTechnology(@PathParam("technologiesId") Long technologyId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "TecnologiaResource deleteTechnology: input: {0}", technologyId);
         if (technologyLogic.getTechnology(technologyId) == null) {
             throw new WebApplicationException("El recurso /technologies/" + technologyId + " no existe.", 404);

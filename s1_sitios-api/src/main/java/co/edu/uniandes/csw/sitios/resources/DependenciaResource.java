@@ -82,10 +82,16 @@ public class DependenciaResource {
      * @return Dependencia actualizado.
      */
     @PUT
-        @Path("{id: \\d+}")
-    public DependenciaDTO updateDependencia(  @PathParam("id") int id, DependenciaDTO dependencia ){
-        
-        return null;
+    @Path("{id: \\d+}")
+    public DependenciaDetailDTO updateTechnology(@PathParam("dependenciesId") Long dependencyId, DependenciaDetailDTO dependency) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: input: technologysId: {0} , technology: {1}", new Object[]{dependencyId, dependency});
+        dependency.setId(dependencyId);
+        if (dependenciaLogic.getDependency(dependencyId) == null) {
+            throw new WebApplicationException("El recurso /authors/" + dependencyId + " no existe.", 404);
+        }
+        DependenciaDetailDTO detailDTO = new DependenciaDetailDTO(dependenciaLogic.updateDependency(dependencyId, dependency.toEntity()));
+        LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: output: {0}", detailDTO);
+        return detailDTO;
     }
     
     /**
