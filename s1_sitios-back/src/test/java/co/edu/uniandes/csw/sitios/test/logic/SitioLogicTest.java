@@ -151,6 +151,7 @@ public class SitioLogicTest {
             Assert.fail("no deberia generar error: "+e.getMessage());
         }  
     }
+    /*
      @Test (expected = BusinessLogicException.class)
     public void createSiteTestFail1() throws BusinessLogicException
     {
@@ -210,7 +211,8 @@ public class SitioLogicTest {
              newsite.setPlataformaDeDespliegue(null);
            
              SitioWebEntity createWebSite = logic.createWebSite(newsite);
-    }
+}
+*/
       @Test (expected = BusinessLogicException.class)
     public void createSiteTestFail6() throws BusinessLogicException
     {
