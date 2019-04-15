@@ -54,6 +54,9 @@ public class TecnologiaDTO implements Serializable{
         this.version=entity.getVersion();
         this.url=entity.getUrl();
         this.techCategory=entity.getTechCategory();
+        this.descripcion=entity.getDescription();
+        this.id=entity.getId();
+        this.descripcion=entity.getDescription();
       }
     }
     public TecnologiaEntity toEntity()
@@ -63,7 +66,8 @@ public class TecnologiaDTO implements Serializable{
         entity.setVersion(version);
         entity.setDescription(descripcion);
         entity.setUrl(url);
-        entity.setTechCategory(techCategory);
+        entity.setTechCategory(getTechCategory());
+        entity.setId(id);
         return entity;
     }
     /**
@@ -135,4 +139,19 @@ public class TecnologiaDTO implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
+
+    /**
+     * @return the techCategory
+     */
+    public String getTechCategory() {
+        return techCategory;
+    }
+
+    /**
+     * @param techCategory the techCategory to set
+     */
+    public void setTechCategory(String techCategory) {
+        this.techCategory = techCategory;
+    }
+    
 }

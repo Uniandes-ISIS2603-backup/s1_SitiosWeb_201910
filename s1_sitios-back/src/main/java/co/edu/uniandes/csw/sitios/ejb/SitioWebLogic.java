@@ -28,10 +28,28 @@ public class SitioWebLogic {
        
        public SitioWebEntity createWebSite(SitioWebEntity entity) throws BusinessLogicException
        {
-           if(entity.getEstadosWeb()==null)
+           /*if(entity.getEstadosWeb()==null)
            {
                throw new BusinessLogicException("Historial inexistente");
            }
+           if(entity.getSitiosRelacionados()==null)
+           {
+              throw new BusinessLogicException("Lista de sitios relacionados es inexistente");
+           }
+           
+           if(entity.getAdministradores()==null)
+           {
+                throw new BusinessLogicException("La lista de solicitantes no se existe");
+           }
+           if(entity.getTechnologies()==null)
+           {
+               throw new BusinessLogicException("La lista de tecnologias de desarrollo no existe");
+           }
+           if(entity.getPlataformaDeDespliegue()==null)
+           {
+            throw new BusinessLogicException("No hay plataforma de despliegue asignada");
+           }
+           */
            if(entity.getNombre()==null)
            {
                throw new BusinessLogicException("Nombre inexistente");
@@ -56,27 +74,12 @@ public class SitioWebLogic {
            {
               throw new BusinessLogicException("Categoria de sitio no asignada");
            }
-           if(entity.getSitiosRelacionados()==null)
-           {
-              throw new BusinessLogicException("Lista de sitios relacionados es inexistente");
-           }
            
-           if(entity.getAdministradores()==null)
-           {
-                throw new BusinessLogicException("La lista de solicitantes no se existe");
-           }
-           if(entity.getTechnologies()==null)
-           {
-               throw new BusinessLogicException("La lista de tecnologias de desarrollo no existe");
-           }
            if(!entity.getImagen().matches("(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)"))
             {
               throw new BusinessLogicException("La ruta de la imagen es incorrecta");
             }
-           if(entity.getPlataformaDeDespliegue()==null)
-           {
-            throw new BusinessLogicException("No hay plataforma de despliegue asignada");
-           }
+           
            
            return persistence.create(entity);
 
@@ -90,8 +93,21 @@ public class SitioWebLogic {
            {
                throw  new BusinessLogicException("Sitio Web no encontrado");
            }
-           
+           LOGGER.log(Level.INFO,"Se ha leido un sitio web: "+entity);
            return  entity;
+
+       }
+       
+       
+       public List<SitioWebEntity> getWebSiteRelated(Long id) throws  BusinessLogicException
+       {
+           SitioWebEntity entity = persistence.find(id);
+           if(entity==null)
+           {
+               throw  new BusinessLogicException("Sitio Web no encontrado");
+           }
+           LOGGER.log(Level.INFO,"Se ha leido un sitio web: "+entity);
+           return  entity.getSitiosRelacionados();
 
        }
 
@@ -109,8 +125,8 @@ public class SitioWebLogic {
     }
      
        
-   public SitioWebEntity updateSitio(Long booksId, SitioWebEntity siteEntity){
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el sitio con id = {0}", booksId);
+   public SitioWebEntity updateSitio(SitioWebEntity siteEntity){
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el sitio con id = {0}", siteEntity.id);
         SitioWebEntity newEntity = persistence.update(siteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el sitio con id = {0}", siteEntity.getId());
         return newEntity;
