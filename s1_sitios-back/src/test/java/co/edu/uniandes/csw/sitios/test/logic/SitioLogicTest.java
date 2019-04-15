@@ -353,7 +353,7 @@ public class SitioLogicTest {
         SitioWebEntity entity = logic.getWebSite(data.get(0).getId());
         int value = new Random().nextInt()+1;
         entity.setAudienciaEsperada(value);
-        logic.updateSitio(entity.getId(), entity);
+        logic.updateSitio(entity);
         SitioWebEntity entity2 = logic.getWebSite(data.get(0).getId());
         Assert.assertEquals(entity2.getAudienciaEsperada(), value);
         
