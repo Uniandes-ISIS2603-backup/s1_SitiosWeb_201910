@@ -83,16 +83,16 @@ public class DependenciaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public DependenciaDetailDTO updateTechnology(@PathParam("dependenciesId") Long dependencyId, DependenciaDetailDTO dependency) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: input: technologysId: {0} , technology: {1}", new Object[]{dependencyId, dependency});
-        dependency.setId(dependencyId);
-        if (dependenciaLogic.getDependency(dependencyId) == null) {
-            throw new WebApplicationException("El recurso /authors/" + dependencyId + " no existe.", 404);
-        }
-        DependenciaDetailDTO detailDTO = new DependenciaDetailDTO(dependenciaLogic.updateDependency(dependencyId, dependency.toEntity()));
-        LOGGER.log(Level.INFO, "TecnologiaResource updateTecnologia: output: {0}", detailDTO);
-        return detailDTO;
-    }
+    public DependenciaDetailDTO updateDependency(@PathParam("dependenciesId") Long dependencyId, DependenciaDetailDTO dependency) throws BusinessLogicException { 
+        LOGGER.log(Level.INFO, "DependenciaResource updateDependency: input: dependencyId: {0} , dependency: {1}", new Object[]{dependencyId, dependency}); 
+        dependency.setId(dependencyId); 
+        if (dependenciaLogic.getDependency(dependencyId) == null) { 
+            throw new WebApplicationException("El recurso /dependencies/" + dependencyId + " no existe.", 404); 
+        } 
+        DependenciaDetailDTO detailDTO = new DependenciaDetailDTO(dependenciaLogic.updateDependency(dependencyId, dependency.toEntity())); 
+        LOGGER.log(Level.INFO, "DependenciaResource updateDependency: output: {0}", detailDTO); 
+        return detailDTO; 
+    } 
     
     /**
      * Elimina la dependencia siempre que no se
@@ -101,8 +101,13 @@ public class DependenciaResource {
      */
     @DELETE
         @Path("{id: \\d+}")
-    public void deleteDependencia( @PathParam("id") int id ){
-        
-    }
+    public void deleteDependency(@PathParam("dependenciesId") Long dependencyId) throws BusinessLogicException { 
+        LOGGER.log(Level.INFO, "DependenciaResource deleteTechnology: input: {0}", dependencyId); 
+        if (dependenciaLogic.getDependency(dependencyId) == null) { 
+            throw new WebApplicationException("El recurso /dependencies/" + dependencyId + " no existe.", 404); 
+        } 
+        dependenciaLogic.deleteDependency(dependencyId); 
+        LOGGER.info("TecnologiaResource deleteDependency: output: void"); 
+    } 
     
 }

@@ -86,11 +86,10 @@ public class TecnologiaLogic {
      */
     public TecnologiaEntity updateTechnology(Long tecnologiaId, TecnologiaEntity tecnologiaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la tecnología con id = {0}", tecnologiaId);
-        TecnologiaEntity existe = getTechnology(tecnologiaEntity.getId());
         String category = tecnologiaEntity.getTechCategory();
-        if(existe!=null&&!Objects.equals(tecnologiaId, existe.getId()))
+        if(tecnologiaId != tecnologiaEntity.getId())
         {
-            throw new BusinessLogicException("Ya existe una tecnología con este ID");
+            throw new BusinessLogicException("Los ID no coinciden con la tecnología a actualizar");
         }
         verificarReglasDeNegocio(tecnologiaEntity);
         TecnologiaEntity newTecnologiaEntity = persistence.update(tecnologiaEntity);

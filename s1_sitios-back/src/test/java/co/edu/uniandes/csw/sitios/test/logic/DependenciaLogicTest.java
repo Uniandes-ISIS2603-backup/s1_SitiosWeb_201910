@@ -114,7 +114,14 @@ public class DependenciaLogicTest {
      */
     @Test
     public void createDependency() {
-        //TODO rehacer este test
+        try {
+            DependenciaEntity newDep = factory.manufacturePojo(DependenciaEntity.class);
+            newDep.setEmail("holaprofesor@hotmail.com");
+            DependenciaEntity createDep = dependenciaLogic.createDependency(newDep);
+            data.add(createDep);
+        } catch (BusinessLogicException e) {
+            Assert.fail("no deberia generar error: " + e.getMessage());
+        }
     }
 
     /**
@@ -122,7 +129,8 @@ public class DependenciaLogicTest {
      */
     @Test
     public void getDependenciasTest() {
-       //TODO rehacer este test
+        List<DependenciaEntity> deps = dependenciaLogic.getDependencies();
+        Assert.assertEquals(deps.size(), data.size());
     }
 
     /**
@@ -130,7 +138,8 @@ public class DependenciaLogicTest {
      */
     @Test
     public void getDependenciaTest() {
-     //TODO rehacer este test
+        DependenciaEntity dependenciaEntity = dependenciaLogic.getDependency(data.get(0).getId());
+        Assert.assertEquals(dependenciaEntity, data.get(0));
     }
 
     /**
@@ -138,7 +147,22 @@ public class DependenciaLogicTest {
      */
     @Test
     public void updateDependenciaTest() {
-        //TODO rehacer este test
+        try {
+            DependenciaEntity entity = dependenciaLogic.getDependency(data.get(0).getId());
+            String value = String.valueOf(new Random().nextInt() + 1);
+            String value2 = String.valueOf(new Random().nextInt() + 1);
+            entity.setEmail("holaprofesor@uniandes.edu.co");
+            entity.setNombreDependencia(value);
+            entity.setTelefono(value2);
+            dependenciaLogic.updateDependency(entity.getId(), entity);
+            DependenciaEntity entity2 = dependenciaLogic.getDependency(entity.getId());
+            Assert.assertEquals(entity2.getTelefono(), value2);
+            Assert.assertEquals(entity2.getNombreDependencia(), value);
+
+        } catch (BusinessLogicException e) {
+            LOGGER.log(Level.INFO, "TESTNUMEROUNOLOGGER = {0}", e  );
+            Assert.fail(e.getMessage());
+        }
     }
 
     /**
@@ -146,8 +170,13 @@ public class DependenciaLogicTest {
      *
      * @throws BusinessLogicException
      */
-    @Test//(expected = BusinessLogicException.class)
+    @Test
     public void deleteDependencia() throws BusinessLogicException {
-        //TODO rehacer este test
+
+        DependenciaEntity newDep = factory.manufacturePojo(DependenciaEntity.class);
+        DependenciaEntity depEntity = dependenciaLogic.createDependency(newDep);
+        Long id = depEntity.getId();
+        dependenciaLogic.deleteDependency(id);
+        dependenciaLogic.getDependency(id);
     }
 }

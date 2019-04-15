@@ -118,7 +118,17 @@ public class TecnologiaLogicTest {
      */
     @Test
     public void createTechnologyTest() {
-        //TODO rehacer este test
+        try {
+            TecnologiaEntity newTech = factory.manufacturePojo(TecnologiaEntity.class);
+            newTech.setUrl("https://stackoverflow.com/questions/30423776/post-to-jersey-rest-service-getting-error-415-unsupported-media-type");
+            newTech.setSitiosWeb(sitioData);
+            newTech.setTechCategory("LenguajeDeProgramacion");
+            //em.persist(newsite);
+            TecnologiaEntity createTech = tecnologiaLogic.createTechnology(newTech);
+            data.add(newTech);  
+        } catch (BusinessLogicException e) {
+            Assert.fail("no deberia generar error: " + e.getMessage());
+        }
     }
 
     /**
@@ -144,7 +154,24 @@ public class TecnologiaLogicTest {
      */
     @Test
     public void updateTechnologyTest() {
-       //TODO rehacer este test
+        try {
+
+            TecnologiaEntity entity = tecnologiaLogic.getTechnology(data.get(0).getId());
+            String value = String.valueOf(new Random().nextInt() + 1);
+            String value2 = String.valueOf(new Random().nextInt() + 1)+"1234567890123456789000";
+            entity.setName(value);
+            entity.setDescription(value2);
+            entity.setUrl("https://holaprofesor.com/estoes/30423776/una-prueeeba");
+            entity.setTechCategory("Libreria");
+            tecnologiaLogic.updateTechnology(entity.getId(), entity);
+            TecnologiaEntity entity2 = tecnologiaLogic.getTechnology(entity.getId());
+            Assert.assertEquals(entity2.getName(), value);
+            Assert.assertEquals(entity2.getDescription(), value2);
+            Assert.assertEquals(entity2.getUrl(), "https://holaprofesor.com/estoes/30423776/una-prueeeba");
+
+        } catch (BusinessLogicException e) {
+            Assert.fail(e.getMessage());
+        }
     }
 
     /**
@@ -166,3 +193,4 @@ public class TecnologiaLogicTest {
     }
 
 }
+

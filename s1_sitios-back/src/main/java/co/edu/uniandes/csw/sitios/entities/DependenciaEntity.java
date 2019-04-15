@@ -33,7 +33,7 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * telefono de la dependencia
      */
-    @PodamLongValue(minValue = 7L, maxValue = 11L)
+    @PodamStringValue(length = 8)
     private String telefono;
     
     @PodamExclude
