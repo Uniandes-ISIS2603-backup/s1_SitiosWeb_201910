@@ -33,22 +33,22 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class PlataformaDeDespliegueLogicTest {
-    
+
     @Inject
     private PlataformaDeDespliegueLogic plataformaLogic;
-    
+
     @Inject
     private UserTransaction utx;
-    
-     @PersistenceContext
+
+    @PersistenceContext
     private EntityManager em;
-     
+
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
     private List<PlataformaDeDespliegueEntity> data = new ArrayList<>();
-    
+
     private List<SitioWebEntity> sitioData = new ArrayList<>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -58,35 +58,33 @@ public class PlataformaDeDespliegueLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     @Before
-    public void configTest(){
-        try{
+    public void configTest() {
+        try {
             utx.begin();
             clearData();
             insertData();
             utx.commit();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        try{
+        try {
             utx.rollback();
-        }
-        catch(Exception e1){
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
     }
-    
-    public void clearData(){
-       em.createQuery("delete from PlataformaDeDespliegueEntity").executeUpdate();
-       em.createQuery("delete from SitioWebEntity").executeUpdate(); 
+
+    public void clearData() {
+        em.createQuery("delete from PlataformaDeDespliegueEntity").executeUpdate();
+        em.createQuery("delete from SitioWebEntity").executeUpdate();
     }
-    
-    private void insertData(){
-        for(int i = 0;i<3;i++){
+
+    private void insertData() {
+        for (int i = 0; i < 3; i++) {
             PlataformaDeDespliegueEntity entity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
-            
+
             em.persist(entity);
             data.add(entity);
         }
@@ -96,9 +94,9 @@ public class PlataformaDeDespliegueLogicTest {
             sitioData.add(site);
         }
     }
-    
+
     @Test
-    public void createPlataformaDeDespliegueTest() throws BusinessLogicException{
+    public void createPlataformaDeDespliegueTest() throws BusinessLogicException {
 
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
         PlataformaDeDespliegueEntity result = plataformaLogic.createPlataformaDeDespliegue(newEntity);
@@ -115,8 +113,7 @@ public class PlataformaDeDespliegueLogicTest {
         Assert.assertEquals(newEntity.getIsVirtualizacion(), entity.getIsVirtualizacion());
         Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
     }
-    
-    
+
     @Test
     public void createPlataformaDeDespliegueTest2() throws BusinessLogicException {
 

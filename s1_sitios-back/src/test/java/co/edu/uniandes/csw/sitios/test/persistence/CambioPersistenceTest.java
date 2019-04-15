@@ -26,16 +26,16 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CambioPersistenceTest {
-    
-     /*
+
+    /*
     /atributo pp PlataformaDeDesplieguePersistence
      */
     @Inject
     private CambioPersistence cp;
-    
+
     /*
     / 
-    */
+     */
     @PersistenceContext
     private EntityManager em;
 
@@ -49,7 +49,6 @@ public class CambioPersistenceTest {
     }
 
     // ep es entitypersistence
-    
     @Test
     public void createCambioTest() {
 
@@ -57,22 +56,21 @@ public class CambioPersistenceTest {
         CambioEntity newEntity = factory.manufacturePojo(CambioEntity.class);
 
         CambioEntity ep = cp.create(newEntity);
-       
+
         //Verificamos que no sea nulo
         Assert.assertNotNull(ep);
-        
+
         //Verificamos que el id o el objeto este en la base de datos buscando si el id existe
         CambioEntity entity = em.find(CambioEntity.class, ep.getId());
-        
+
         //El nombre aleatorio pp dado el metodo inject
-  //    Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
         Assert.assertEquals(newEntity.getLugarCambio(), entity.getLugarCambio());
         Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
         Assert.assertEquals(newEntity.getFechaCambio(), entity.getFechaCambio());
         Assert.assertEquals(newEntity.getNuevo(), entity.getNuevo());
         Assert.assertEquals(newEntity.getPrevio(), entity.getPrevio());
-//        Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
+        Assert.assertEquals(newEntity.getSitioWeb(), entity.getSitioWeb());
     }
-    
-    
+
 }

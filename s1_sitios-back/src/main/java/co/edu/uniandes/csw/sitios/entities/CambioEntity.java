@@ -19,40 +19,39 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  * @author s.ballesteros
  */
 @Entity
-public class CambioEntity extends BaseEntity implements Serializable  {
-    
-    
+public class CambioEntity extends BaseEntity implements Serializable {
+
     /**
      * Lugar de donde se registra el Cambio
-     */ 
+     */
     private String lugarCambio;
 
     /**
      * Descripciòn del cambio que se esta haciendo
-     */    
+     */
     private String descripcion;
-    
+
     /**
      * Fecha en la cual se hizo el cambio en Bitacora
-     */ 
+     */
     @PodamStrategyValue(DateStrategy.class)
     private Date fechaCambio;
-    
+
     /**
      * Cambio previo que se hizo
-     */    
+     */
     private String previo;
-    
+
     /**
      * Cambio nuevo que se va a realizar
-     */    
+     */
     private String nuevo;
-    
+
     /**
      * Cambio nuevo que se va a realizar
-     */    
+     */
     private Long idAsociado;
-    
+
     /**
      * Sitio en el cual se presento el cambio
      */
