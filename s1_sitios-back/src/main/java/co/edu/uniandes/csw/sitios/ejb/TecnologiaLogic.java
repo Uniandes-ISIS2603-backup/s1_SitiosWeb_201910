@@ -142,7 +142,7 @@ public class TecnologiaLogic {
         } 
         if(category==null||category.equals(""))
         {
-             throw new BusinessLogicException("La version no puede estar vacia");
+             throw new BusinessLogicException("La categoria no puede estar vacia");
         } 
         if(!category.equalsIgnoreCase("LenguajeDeProgramacion")&&!category.equalsIgnoreCase("FrameWork")&&!category.equalsIgnoreCase("ServidorDeAplicacion")&&!category.equalsIgnoreCase("Libreria"))
         {
