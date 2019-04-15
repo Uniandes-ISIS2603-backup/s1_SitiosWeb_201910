@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.DependenciaDTO;
+import co.edu.uniandes.csw.sitios.dtos.DependenciaDetailDTO;
 import co.edu.uniandes.csw.sitios.ejb.DependenciaLogic;
 import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
@@ -27,7 +28,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author estudiante
  */
-@Path("Dependencies")
+@Path("dependencies")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -63,12 +64,14 @@ public class DependenciaResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public DependenciaDTO getDependencia( @PathParam("id") long id ){
+    public DependenciaDTO getDependencia( @PathParam("id") Long id ){
         DependenciaEntity entity = dependenciaLogic.getDependency(id);
         if(entity == null) {
             throw new WebApplicationException("Dependencia with id: " + id + " does not exists", 404);
         }
-        return null;
+        DependenciaDetailDTO detailDTO = new DependenciaDetailDTO(entity);
+        LOGGER.log(Level.INFO, "DependenciaResource getDependencia: output: {0}", detailDTO);
+        return detailDTO;
     }
     
     /**

@@ -19,6 +19,7 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
 
     public DependenciaDetailDTO() {
         super();
+        
 
     }
 
@@ -58,7 +59,6 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
      *
      * @return DTO del administrador
      */
-    @Override
     public AdministradorDTO getEncargadoDependencia() {
         return admin;
     }
@@ -68,9 +68,10 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
      *
      * @param prize the author to set
      */
-    public void setPrize(AdministradorDTO administrador) {
+    public void setEncargadoDependencia (AdministradorDTO administrador) {
         this.admin = administrador;
     }
+    
 
     @Override
     public String toString() {
