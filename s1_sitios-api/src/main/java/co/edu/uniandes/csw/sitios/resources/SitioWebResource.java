@@ -66,11 +66,11 @@ public class SitioWebResource {
 
     @GET
     @Path("{sitesId: \\d+}")
-    public SitioWebDetailDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
+    public SitioWebDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
     {
         LOGGER.log(Level.INFO, "SitioWebResource getWebSite: input: {0}", id);
         SitioWebEntity entity = sitelogic.getWebSite(id);
-        SitioWebDetailDTO obtenido= new SitioWebDetailDTO(entity);
+        SitioWebDTO obtenido= new SitioWebDTO(entity);
         return  obtenido;
     }
 
@@ -100,7 +100,25 @@ public class SitioWebResource {
         LOGGER.log(Level.INFO, "BookResource getSites: output: {0}", listaSites.toString());
         return listaSites;
     }
+    
+    @PUT
+    public void updateSite(SitioWebDTO website)  throws  BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "SitioWebResource updateSite: input: {0}", website.getId());
+        sitelogic.updateSitio(website.toEntity());
+    }
 
+    
+     @DELETE
+    @Path("{sitesId: \\d+}")
+    public String deleteSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
+    {
+        LOGGER.log(Level.INFO, "SitioWebResource deleteSite: input: {0}", id);
+        sitelogic.deleteSite(id);
+        return  "deleted";
+    }
+
+    
 
     @Path("{sitesId: \\d+}/technologies")
     public Class<SitioWebTecnologiaResourse> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
