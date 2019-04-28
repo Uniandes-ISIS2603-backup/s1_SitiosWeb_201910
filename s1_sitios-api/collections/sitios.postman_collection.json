@@ -1,0 +1,306 @@
+{
+	"info": {
+		"_postman_id": "858ab8c7-ad84-4e8f-be04-faae2453821a",
+		"name": "sitios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+        {
+			"name": "Crear un Sitio Web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d4c3964-e075-4c2f-818a-1f29af521800",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.environment.set(\"lastAdded\", pm.response.json().id);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 9,\n    \"nombre\": \"Sitio Test\",\n    \"descripcion\": \"Descripcion tes test test test test\",\n    \"proposito\": \"Proposito test test test test test test test tes test test test test\",\n    \"audienciaEsperada\": 50,\n    \"fechaLanzamiento\": \"1917-01-13T00:00:00-05:00\",\n    \"categoriaSitio\": \"ACADEMICO\",\n    \"imagen\": \"https://www.google.com/imagen.png\",\n    \"url\": \"www.google.com\",\n    \"tecnologiasDeDesarrollo\": [],\n    \"sitiosRelacionados\": [],\n    \"estadosWeb\": [],\n    \"ticketsSitio\": [],\n    \"solicitantes\": []\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los sitios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a77bdd7a-67f9-4c14-af34-6ef853f9a4da",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites"
+					]
+				},
+				"description": "Obtencion lista de sitios web"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener los sitios relacionados a un sitio Especifico",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbd0dba4-3140-4ca6-b6b7-ae3202b4c72e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/{{new_id_e}}/related",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"1",
+						"related"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un sitio que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3146385d-5798-457c-af61-fcefce949e43",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un sitio existente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ec14fc54-604e-4a26-9b7c-50be867f49b3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Un Sitio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "810339f0-37bc-4671-8138-fe57b062bf26",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"audienciaEsperada\": 50,\n    \"descripcion\": \"Description succesfully updated\",\n    \"fechaLanzamiento\": \"1901-11-20T00:00:00-04:56\",\n    \"id\": 9,\n    \"imagen\": \"registro.uniandes.edu.co\",\n    \"nombre\": \"Admisiones y registro\",\n    \"plataformaDeDespliegue\": {\n        \"clock\": \"3600\",\n        \"cores\": 9,\n        \"cpu\": \"AMD 486 DX2 80\",\n        \"ip\": \"23.122.77.135\"\n    },\n    \"proposito\": \"Dogs have been writting letters. \",\n    \"url\": \"registro.uniandes.edu.co\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un sitio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "983b778c-78c4-4537-bcac-29c6b05b5450",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/{{lastAdded}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"{{lastAdded}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

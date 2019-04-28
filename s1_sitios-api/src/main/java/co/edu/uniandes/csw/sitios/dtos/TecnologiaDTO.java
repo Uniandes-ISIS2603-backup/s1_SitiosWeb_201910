@@ -54,6 +54,7 @@ public class TecnologiaDTO implements Serializable{
         this.version=entity.getVersion();
         this.url=entity.getUrl();
         this.techCategory=entity.getTechCategory();
+        this.descripcion=entity.getDescription();
         this.id=entity.getId();
         this.descripcion=entity.getDescription();
       }

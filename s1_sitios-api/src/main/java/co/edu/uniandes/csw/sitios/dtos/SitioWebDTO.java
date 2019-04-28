@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity.Categoria;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -64,18 +65,6 @@ public class SitioWebDTO  implements Serializable{
 
     
         
-         
-        /**
-         * Categoria que puede tener un sitio web
-         */
-        public enum Categoria
-        {
-            Administrativo,
-            Informativo,
-            Academico,
-            Otros
-        }
-        
         
         /**
          * Constructor por defecto
@@ -131,7 +120,8 @@ public class SitioWebDTO  implements Serializable{
             entity.setProposito(proposito);
             entity.setNombre(nombre);
             entity.setFechaLanzamiento(fechaLanzamiento);
-//            entity.setUrl(url);
+            entity.setUrl(url);
+            entity.setCategoriaSitio(this.categoriaSitio);
             return entity;
         }
 
