@@ -54,11 +54,6 @@ public class AdministradorDTO implements Serializable {
     private String nombreCargo;
 
     /**
-     * Nombre de la dependencia.
-     */
-    private DependenciaDTO dependencia;
-
-    /**
      * Sitio web.
      */
     private SitioWebDTO sitioWeb;
@@ -83,11 +78,6 @@ public class AdministradorDTO implements Serializable {
             this.nombre = entity.getNombre();
             this.password = entity.getPassword();
             this.telefono = entity.getTelefono();
-            if (entity.getDependencia() != null) {
-                this.dependencia = new DependenciaDTO(entity.getDependencia());
-            } else {
-                this.dependencia = null;
-            }
             if(entity.getSitioWeb() != null){
                 this.sitioWeb = new SitioWebDTO(entity.getSitioWeb());
             } else {
@@ -103,8 +93,6 @@ public class AdministradorDTO implements Serializable {
      */
     public AdministradorEntity toEntity() {
         AdministradorEntity entity = new AdministradorEntity();
-        entity.setDependencia(this.getDependencia().toEntity());
-        entity.setSitioWeb(this.getSitioWeb().toEntity());
         entity.setNivel(this.getNivel());
         entity.setNombreCargo(this.getNombreCargo());
         entity.setId(this.getId());
@@ -141,20 +129,6 @@ public class AdministradorDTO implements Serializable {
      */
     public void setNombreCargo(String nombreCargo) {
         this.nombreCargo = nombreCargo;
-    }
-
-    /**
-     * @return the dependencia
-     */
-    public DependenciaDTO getDependencia() {
-        return dependencia;
-    }
-
-    /**
-     * @param dependencia the dependencia to set
-     */
-    public void setDependencia(DependenciaDTO dependencia) {
-        this.dependencia = dependencia;
     }
 
     /**
@@ -226,19 +200,7 @@ public class AdministradorDTO implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    /**
-     * @return the sitioWeb
-     */
-    public SitioWebDTO getSitioWeb() {
-        return sitioWeb;
-    }
-
-    /**
-     * @param sitioWeb the sitioWeb to set
-     */
-    public void setSitioWeb(SitioWebDTO sitioWeb) {
-        this.sitioWeb = sitioWeb;
-    }
+    
+    
 
 }

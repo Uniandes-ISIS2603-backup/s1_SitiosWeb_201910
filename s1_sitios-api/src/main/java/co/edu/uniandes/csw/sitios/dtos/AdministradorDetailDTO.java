@@ -27,6 +27,11 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      * Cambios
      */
     private List<CambioDTO> cambios;
+    
+    /**
+     * Dependencia
+     */
+    private DependenciaDTO dependencia;
 
     public AdministradorDetailDTO() {
         super();
@@ -46,11 +51,14 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
             notificaciones = new ArrayList<>();
             for (NotificacionEntity entityNotificacion : administradorEntity.getNotificaciones()) {
                 notificaciones.add(new NotificacionDTO(entityNotificacion));
-            }
+             }
              cambios = new ArrayList<>();
             for (CambioEntity cambio : administradorEntity.getCambios()) {
                 cambios.add(new CambioDTO(cambio));
-            }
+             }
+            if (administradorEntity.getDependencia() != null) {
+            this.dependencia = new DependenciaDTO(administradorEntity.getDependencia());
+             }
         }
     }
 
@@ -64,19 +72,22 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     @Override
     public AdministradorEntity toEntity() {
         AdministradorEntity administradorEntity = super.toEntity();
-        if (notificaciones != null) {
+        if (getNotificaciones() != null) {
             List<NotificacionEntity> notificacionEntity = new ArrayList<>();
-            for (NotificacionDTO dtoNotificaciones : notificaciones) {
+            for (NotificacionDTO dtoNotificaciones : getNotificaciones()) {
                 notificacionEntity.add(dtoNotificaciones.toEntity());
             }
             administradorEntity.setNotificaciones(notificacionEntity);
         }
-        if (cambios != null) {
+        if (getCambios() != null) {
             List<CambioEntity> cambiosEntity = new ArrayList<>();
-            for (CambioDTO cambioDTO : cambios) {
+            for (CambioDTO cambioDTO : getCambios()) {
                 cambiosEntity.add(cambioDTO.toEntity());
             }
             administradorEntity.setCambios(cambiosEntity);
+        }
+        if (getDependencia() != null) {
+            administradorEntity.setDependencia(getDependencia().toEntity());
         }
         return administradorEntity;
     }
@@ -107,6 +118,20 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      */
     public void setCambios(List<CambioDTO> cambios) {
         this.cambios = cambios;
+    }
+
+    /**
+     * @return Dependencia asociada al administrador
+     */
+    public DependenciaDTO getDependencia() {
+        return dependencia;
+    }
+
+    /**
+     * @param dependencia Dependencia por asociar al administrador
+     */
+    public void setDependencia(DependenciaDTO dependencia) {
+        this.dependencia = dependencia;
     }
 
 }

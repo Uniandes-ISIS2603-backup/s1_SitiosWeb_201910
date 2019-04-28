@@ -96,8 +96,8 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * @param administrador the administrador to set
      */
-    public void setEncargadoDependencia(AdministradorEntity encargadoDependencia) {
-        this.encargadoDependencia = encargadoDependencia;
+    public void setEncargadoDependencia(AdministradorEntity administrador) {
+        this.encargadoDependencia = administrador;
     }
     
 }
