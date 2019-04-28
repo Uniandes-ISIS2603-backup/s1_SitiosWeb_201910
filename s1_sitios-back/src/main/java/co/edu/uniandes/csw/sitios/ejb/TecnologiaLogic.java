@@ -37,10 +37,9 @@ public class TecnologiaLogic {
      */
     public TecnologiaEntity createTechnology(TecnologiaEntity tecnologiaEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la tecnologia");
-        TecnologiaEntity existe = getTechnology(tecnologiaEntity.getId());
-        if(existe!=null)
-        {
-            throw new BusinessLogicException("Ya existe una tecnología con este ID");
+        TecnologiaEntity entity = persistence.find(tecnologiaEntity.getId());
+        if(entity!=null){
+            throw new BusinessLogicException("Ya existe una tecnologia con ese ID");
         }
         verificarReglasDeNegocio(tecnologiaEntity);
         TecnologiaEntity newTecnologiaEntity = persistence.create(tecnologiaEntity);
@@ -69,9 +68,6 @@ public class TecnologiaLogic {
     public TecnologiaEntity getTechnology(Long tecnologiaId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la tecnología con id = {0}", tecnologiaId);
         TecnologiaEntity tecnologiaEntity = persistence.find(tecnologiaId);
-        if (tecnologiaEntity == null) {
-            LOGGER.log(Level.SEVERE, "La tecnología con el id = {0} no existe", tecnologiaId);
-        }
         LOGGER.log(Level.INFO, "Termina proceso de consultar tecnología con id = {0}", tecnologiaId);
         return tecnologiaEntity;
     }
@@ -105,7 +101,8 @@ public class TecnologiaLogic {
      */
     public void deleteTechnology(Long tecnologiaId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la tecnologia con id = {0}", tecnologiaId);
-        List<SitioWebEntity> sitios = getTechnology(tecnologiaId).getSitiosWeb();
+        TecnologiaEntity tecnologiaEntity = persistence.find(tecnologiaId);
+        List<SitioWebEntity> sitios = tecnologiaEntity.getSitiosWeb();
         if (sitios != null && !sitios.isEmpty()) {
             throw new BusinessLogicException("No se puede borrar la tecnologia con id = " + tecnologiaId + " porque tiene sitiosWeb asociados");
         }

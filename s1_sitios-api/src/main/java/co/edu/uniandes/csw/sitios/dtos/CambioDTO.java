@@ -50,10 +50,6 @@ public class CambioDTO implements Serializable{
      */    
     private String nuevo;
     
-    /**
-     * Sitio en el cual se presento el cambio
-     */
-    private SitioWebDTO sitioWeb;
     
        public CambioDTO(CambioEntity entity)
     {

@@ -56,7 +56,7 @@ public class TecnologiaDTO implements Serializable{
         this.techCategory=entity.getTechCategory();
         this.descripcion=entity.getDescription();
         this.id=entity.getId();
-        this.descripcion=entity.getDescription();
+ 
       }
     }
     public TecnologiaEntity toEntity()
@@ -66,7 +66,7 @@ public class TecnologiaDTO implements Serializable{
         entity.setVersion(version);
         entity.setDescription(descripcion);
         entity.setUrl(url);
-        entity.setTechCategory(getTechCategory());
+        entity.setTechCategory(techCategory);
         entity.setId(id);
         return entity;
     }

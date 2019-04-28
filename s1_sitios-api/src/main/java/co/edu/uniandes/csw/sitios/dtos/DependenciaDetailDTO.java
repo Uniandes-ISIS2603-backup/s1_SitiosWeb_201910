@@ -42,7 +42,7 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
      * Convierte un objeto DependenciaDetailDTO a DependenciaEntity incluyendo
      * los atributos de DependenciaDTO.
      *
-     * @return Nueva objeto DependenciaEntity.
+     * @return Nuevo objeto DependenciaEntity.
      *
      */
     @Override
@@ -64,9 +64,9 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
     }
 
     /**
-     * Modifica el premio asociado a esta organizacion.
+     * Modifica el administrador asociado a esta dependencia.
      *
-     * @param prize the author to set
+     * @param administrador el administrador por asociar.
      */
     public void setEncargadoDependencia (AdministradorDTO administrador) {
         this.admin = administrador;

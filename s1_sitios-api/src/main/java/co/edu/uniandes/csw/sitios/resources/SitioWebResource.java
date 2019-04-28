@@ -121,11 +121,11 @@ public class SitioWebResource {
     
 
     @Path("{sitesId: \\d+}/technologies")
-    public Class<SitioWebTecnologiaResourse> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
+    public Class<SitioWebTecnologiaResource> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
         if (sitelogic.getWebSite(sitesId) == null) {
-            throw new WebApplicationException("El recurso /books/" + sitesId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /websites/" + sitesId + " no existe.", 404);
         }
-        return SitioWebTecnologiaResourse.class;
+        return SitioWebTecnologiaResource.class;
     }
     
     @Path("{sitioWebId: \\d+}/states/")
@@ -134,15 +134,9 @@ public class SitioWebResource {
             sitelogic.getWebSite(sitioWebId);
        
         } catch (Exception e) {
-            throw new WebApplicationException("El recurso /sites/" + sitioWebId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /websites/" + sitioWebId + " no existe.", 404);
         }
         
         return SitioWebEstadosWebResource.class;
-    }
-    
-   
-    
-  
-    
-    
+    }   
 }

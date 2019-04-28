@@ -28,10 +28,10 @@ import java.util.logging.Logger;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class TecnologiaSitioWebResourse {
+public class TecnologiaSitioWebResource {
 
 
-    private static final Logger LOGGER = Logger.getLogger(TecnologiaSitioWebResourse.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TecnologiaSitioWebResource.class.getName());
 
     @Inject
     private SitioWebLogic sitioWebLogic;

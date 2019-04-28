@@ -26,7 +26,7 @@ public class DependenciaDTO implements Serializable{
     /**
      * nombre de la dependencia.
      */
-    private String nombreDependencia;
+    private String nombre;
     
     /**
      * email de la dependencia
@@ -38,7 +38,10 @@ public class DependenciaDTO implements Serializable{
      */
     private String telefono;
     
-
+    /**
+     * administrador asociado a la dependencia
+     */
+    private AdministradorDTO administrador;
     /**
      * Constructor DependenciDTO vacio.
      */
@@ -54,8 +57,11 @@ public class DependenciaDTO implements Serializable{
         if(entity != null) {
             this.id = entity.id;
             this.email = entity.getEmail();
-            this.nombreDependencia = entity.getNombreDependencia();
+            this.nombre = entity.getNombreDependencia();
             this.telefono = entity.getTelefono();
+            if (entity.getEncargadoDependencia() != null) {
+            this.administrador = new AdministradorDTO(entity.getEncargadoDependencia());
+        }
         }
     }
     
@@ -67,8 +73,9 @@ public class DependenciaDTO implements Serializable{
         DependenciaEntity entity = new DependenciaEntity();
         entity.setEmail(this.email);
         entity.setId(this.id);
-        entity.setNombreDependencia(this.nombreDependencia);
+        entity.setNombreDependencia(this.nombre);
         entity.setTelefono(this.telefono);
+        entity.setEncargadoDependencia(this.administrador.toEntity());
         return entity;
     }
     
@@ -90,14 +97,14 @@ public class DependenciaDTO implements Serializable{
      * @return the nombreDependencia
      */
     public String getNombreDependencia() {
-        return nombreDependencia;
+        return nombre;
     }
 
     /**
      * @param nombreDependencia the nombreDependencia to set
      */
     public void setNombreDependencia(String nombreDependencia) {
-        this.nombreDependencia = nombreDependencia;
+        this.nombre = nombreDependencia;
     }
 
     /**
@@ -126,6 +133,20 @@ public class DependenciaDTO implements Serializable{
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    /**
+     * @return the administrador
+     */
+    public AdministradorDTO getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     * @param administrador the administrador to set
+     */
+    public void setAdministrador(AdministradorDTO administrador) {
+        this.administrador = administrador;
     }
 
 }
