@@ -34,7 +34,12 @@ public class SitioTecnologiaLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de asociarle un libro al sitio web con id = {0}", websiteId);
         SitioWebEntity websiteEntity = sitioWebPersistence.find(websiteId);
         TecnologiaEntity tecnologiaEntity = tecnologiaPersistence.find(technologyId);
-        tecnologiaEntity.getSitiosWeb().add(websiteEntity);
+        List<SitioWebEntity> sites = tecnologiaEntity.getSitiosWeb();
+        if (!sites.contains(websiteEntity)) sites.add(websiteEntity);
+        tecnologiaEntity.setSitiosWeb(sites);
+        List<TecnologiaEntity> techs = websiteEntity.getTechnologies();
+        if (!techs.contains(tecnologiaEntity))techs.add(tecnologiaEntity);
+        websiteEntity.setTechnologies(techs);
         LOGGER.log(Level.INFO, "Termina proceso de asociarle una tecnologia al sitio web con id = {0}", websiteId);
         return tecnologiaPersistence.find(technologyId);
     }
@@ -49,7 +54,7 @@ public class SitioTecnologiaLogic {
      */
     public List<TecnologiaEntity> getTechnologies(Long websiteId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los tecnologias del sitio web con id = {0}", websiteId);
-        return sitioWebPersistence.find(websiteId).getTechnologies();
+        return (sitioWebPersistence.find(websiteId)).getTechnologies();
     }
 
     /**
@@ -80,20 +85,13 @@ public class SitioTecnologiaLogic {
      * de Tecnologia
      * @return Nueva colección de TecnologiaEntity asociada a la instancia de Tecnologia
      */
-    public List<TecnologiaEntity> replaceTechnologies(Long websiteId, List<TecnologiaEntity> books) {
+    public List<TecnologiaEntity> replaceTechnologies(Long websiteId, List<TecnologiaEntity> newTechs) {
         LOGGER.log(Level.INFO, "Inicia proceso de reemplazar los tecnologias asocidos al sitio web con id = {0}", websiteId);
         SitioWebEntity webSiteEntity = sitioWebPersistence.find(websiteId);
         List<TecnologiaEntity> technologies = tecnologiaPersistence.findAll();
-        for (TecnologiaEntity tech : technologies) {
-            if (books.contains(tech)) {
-                if (!tech.getSitiosWeb().contains(webSiteEntity)) {
-                    tech.getSitiosWeb().add(webSiteEntity);
-                }
-            } else {
-                tech.getSitiosWeb().remove(webSiteEntity);
-            }
+        for (TecnologiaEntity tech : newTechs) {
+            addTechnology(webSiteEntity.getId(),tech.getId());
         }
-        webSiteEntity.setTechnologies(technologies);
         LOGGER.log(Level.INFO, "Termina proceso de reemplazar los tecnologias asociadas al sitio web con id = {0}", websiteId);
         return webSiteEntity.getTechnologies();
     }
@@ -108,6 +106,7 @@ public class SitioTecnologiaLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar un tecnologia del sitio web con id = {0}", websiteId);
         SitioWebEntity websiteEntity = sitioWebPersistence.find(websiteId);
         TecnologiaEntity technologyEntity = tecnologiaPersistence.find(technologyId);
+        websiteEntity.getTechnologies().remove(technologyEntity);
         technologyEntity.getSitiosWeb().remove(websiteEntity);
         LOGGER.log(Level.INFO, "Termina proceso de borrar un tecnologia del sitio web con id = {0}", websiteId);
     }

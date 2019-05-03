@@ -1,0 +1,724 @@
+{
+	"info": {
+		"_postman_id": "148b6b05-1b00-457f-bace-c7529fb56c85",
+		"name": "SitioWebTecnologiaResourceTest",
+		"description": "Tecnologia Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Asociar una tecnología a un sitio web exitosamente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"type\": \"tecnologiaDetailDTO\",\n        \"descripcion\": \"Esta es una descripción predefinida para las pruebas de POSTMAN correspondientes al POST del recurso TECNOLOGIAS\",\n        \"id\": { \"id\": {{new_id_e}} },\n        \"name\": \"PruebaPostman\",\n        \"techCategory\": \"ServidorDeAplicacion\",\n        \"url\": \"https://www.prueba.com/jknsxdmpqkt/hxntgc.php\",\n        \"version\": \"74.0.8600\",\n        \"sitiosWeb\": []\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/technologies",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"technologies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar una tecnología a un sitio web exitosamente 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No se crea la tecnologia con URL invalida\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Url invalida\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"type\": \"tecnologiaDetailDTO\",\n        \"descripcion\": \"Esta es una descripción predefinida para las pruebas de POSTMAN correspondientes al POST del recurso TECNOLOGIAS\",\n        \"id\":{ \"id\": {{new_id_e}} },\n        \"name\": \"PruebaPostman\",\n        \"techCategory\": \"ServidorDeAplicacion\",\n        \"url\": \"Url Invalida\",\n        \"version\": \"74.0.8600\",\n        \"sitiosWeb\": []\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/technologies",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"technologies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar una tecnología a un sitio web que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No se asocia la tecnologia a un sitio web que no existe\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Sitio Web no encontrado\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"type\": \"tecnologiaDetailDTO\",\n        \"descripcion\": \"Descripción corta\",\n        \"id\": { \"id\": {{new_id_e}} },\n        \"name\": \"PruebaPostman\",\n        \"techCategory\": \"ServidorDeAplicacion\",\n        \"url\": \"https://www.prueba.com/jknsxdmpqkt/hxntgc.php\",\n        \"version\": \"74.0.8600\",\n        \"sitiosWeb\": []\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/0/technologies/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"0",
+						"technologies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Asociar una tecnología inexistente a un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No se asocia la tecnologia inexistente a un sitio web\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /technologies/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"type\": \"tecnologiaDetailDTO\",\n        \"descripcion\": \"Esta es una descripción predefinida para las pruebas de POSTMAN correspondientes al POST del recurso TECNOLOGIAS\",\n        \"id\":{ \"id\": {{new_id_e}} },\n        \"name\": \"PruebaPostman\",\n        \"techCategory\": \"CategoriaInvalida\",\n        \"url\": \"https://www.prueba.com/jknsxdmpqkt/hxntgc.php\",\n        \"version\": \"74.0.8600\",\n        \"sitiosWeb\": []\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/1/technologies/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"1",
+						"technologies",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las tecnologias de un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Cantidad de tecnologías\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/1/technologies",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"1",
+						"technologies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una tecnologia de un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/{{new_id_b}}/technologies/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"{{new_id_b}}",
+						"technologies",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una tecnologia inexistente de un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /technologies/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/technologies/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"technologies",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una tecnologia de un sitio web que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 412; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Sitio Web no encontrado\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/0/technologies/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"0",
+						"technologies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar lista de tecnologias de un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   [ {\"id\": 1}, {\"id\": 2}, {\"id\": 3}, {\"id\": 4 }]"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/1/technologies",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"1",
+						"technologies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar lista de tecnologias de un sitio web 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   [ {\"id\": 1}, {\"id\": 5}, {\"id\": 3}, {\"id\": 6 }]"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/3/technologies",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"3",
+						"technologies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar lista de tecnologias de un sitio web inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No crea con id invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Sitio Web no encontrado\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   [ {\"id\": 1}, {\"id\": 2}, {\"id\": 3}, {\"id\": 4 }, {\"id\": 5 }]"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/0/technologies",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"0",
+						"technologies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar lista de tecnologias con id's que no existen de un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No crea con id's invalido\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /technologies/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   [ {\"id\": 0}, {\"id\": -2}, {\"id\": -3}, {\"id\": 900 }, {\"id\": 5222 }]"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/1/technologies",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"1",
+						"technologies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desasociar una tecnología de un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/3/technologies/2",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"3",
+						"technologies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desasociar una tecnología inexistente de un sitio web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /technologies/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/3/technologies/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"3",
+						"technologies",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desasociar una tecnología de un sitio web inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/websites/3/technologies/2",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"websites",
+						"3",
+						"technologies",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

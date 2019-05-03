@@ -121,7 +121,7 @@ public class SitioWebResource {
     
 
     @Path("{sitesId: \\d+}/technologies")
-    public Class<SitioWebTecnologiaResource> getSitioWebTecnologiaResourse(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
+    public Class<SitioWebTecnologiaResource> getSitioWebTecnologiaResource(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
         if (sitelogic.getWebSite(sitesId) == null) {
             throw new WebApplicationException("El recurso /websites/" + sitesId + " no existe.", 404);
         }

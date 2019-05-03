@@ -60,10 +60,10 @@ public class SitioWebTecnologiaResource {
      */
     @POST
     @Path("{technologysId: \\d+}")
-    public TecnologiaDetailDTO addTecnologia(@PathParam("websiteId") Long websiteId, @PathParam("technologysId") Long technologyId) {
-        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource addTecnologia: input: websiteId {0} , technologyId {1}", new Object[]{websiteId, technologyId});
+    public TecnologiaDetailDTO addTechnology(@PathParam("sitesId") Long websiteId, @PathParam("technologysId") Long technologyId) {
+        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource addTecnologia: input: sitesId {0} , technologyId {1}", new Object[]{websiteId, technologyId});
         if (tecnologiaLogic.getTechnology(technologyId) == null) {
-            throw new WebApplicationException("El recurso /technologys/" + technologyId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /technologies/" + technologyId + " no existe.", 404);
         }
         TecnologiaDetailDTO detailDTO = new TecnologiaDetailDTO(sitioTecnologiaLogic.addTechnology(websiteId, technologyId));
         LOGGER.log(Level.INFO, "SitioWebTecnologiasResource addTecnologia: output: {0}", detailDTO);
@@ -71,14 +71,14 @@ public class SitioWebTecnologiaResource {
     }
 
     /**
-     * Busca y devuelve todos los libros que existen en un sitio web.
+     * Busca y devuelve todos las tecnologias que existen en un sitio web.
      *
-     * @param websiteId El ID del sitio web del cual se buscan los libros
+     * @param websiteId El ID del sitio web del cual se buscan las tecnologias
      * @return JSONArray {@link TecnologiaDetailDTO} - Los libros encontrados en el
      * sitio web. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public List<TecnologiaDetailDTO> getTecnologias(@PathParam("websiteId") Long websiteId) {
+    public List<TecnologiaDetailDTO> getTechnologies(@PathParam("sitesId") Long websiteId) {
         LOGGER.log(Level.INFO, "SitioWebTecnologiasResource getTecnologias: input: {0}", websiteId);
         List<TecnologiaDetailDTO> lista = technologysListEntity2DTO(sitioTecnologiaLogic.getTechnologies(websiteId));
         LOGGER.log(Level.INFO, "SitioWebTecnologiasResource getTecnologias: output: {0}", lista);
@@ -86,23 +86,21 @@ public class SitioWebTecnologiaResource {
     }
 
     /**
-     * Busca y devuelve el libro con el ID recibido en la URL, relativo a un
+     * Busca y devuelve la tecnologia con el ID recibido en la URL, relativo a un
      * sitio web.
      *
-     * @param websiteId El ID del sitio web del cual se busca el libro
+     * @param websiteId El ID del sitio web del cual se busca la tecnologia
      * @param technologysId El ID del libro que se busca
      * @return {@link TecnologiaDetailDTO} - El libro encontrado en el sitio web.
-     * @throws co.edu.uniandes.csw.technologystore.exceptions.BusinessLogicException
-     * si el libro no está asociado al sitio web
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el libro.
      */
     @GET
     @Path("{technologysId: \\d+}")
-    public TecnologiaDetailDTO getTecnologia(@PathParam("websiteId") Long websiteId, @PathParam("technologysId") Long technologysId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource getTecnologia: input: websiteId {0} , technologysId {1}", new Object[]{websiteId, technologysId});
+    public TecnologiaDetailDTO getTechnology(@PathParam("sitesId") Long websiteId, @PathParam("technologysId") Long technologysId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource getTecnologia: input: sitesId {0} , technologysId {1}", new Object[]{websiteId, technologysId});
         if (tecnologiaLogic.getTechnology(technologysId) == null) {
-            throw new WebApplicationException("El recurso /technologys/" + technologysId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /technologies/" + technologysId + " no existe.", 404);
         }
         TecnologiaDetailDTO detailDTO = new TecnologiaDetailDTO(sitioTecnologiaLogic.getTechnology(websiteId, technologysId));
         LOGGER.log(Level.INFO, "SitioWebTecnologiasResource getTecnologia: output: {0}", detailDTO);
@@ -121,18 +119,19 @@ public class SitioWebTecnologiaResource {
      * Error de lógica que se genera cuando no se encuentra el libro.
      */
     @PUT
-    public List<TecnologiaDetailDTO> replaceTecnologias(@PathParam("websiteId") Long websiteId, List<TecnologiaDetailDTO> technologys) {
-        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource replaceTecnologias: input: websiteId {0} , technologys {1}", new Object[]{websiteId, technologys});
-        for (TecnologiaDetailDTO technology : technologys) {
+    public List<TecnologiaDetailDTO> replaceTechnologies(@PathParam("sitesId") Long websiteId, List<TecnologiaDetailDTO> technologies) {
+        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource replaceTechnologies: input: sitesId {0} , technologies {1}", new Object[]{websiteId, technologies});
+        for (TecnologiaDetailDTO technology : technologies) {
             if (tecnologiaLogic.getTechnology(technology.getId()) == null) {
-                throw new WebApplicationException("El recurso /technologys/" + technology.getId() + " no existe.", 404);
+                throw new WebApplicationException("El recurso /technologies/" + technology.getId() + " no existe.", 404);
             }
         }
-        List<TecnologiaDetailDTO> lista = technologysListEntity2DTO(sitioTecnologiaLogic.replaceTechnologies(websiteId, technologysListDTO2Entity(technologys)));
-        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource replaceTecnologias: output: {0}", lista);
+        List<TecnologiaDetailDTO> lista = technologysListEntity2DTO(sitioTecnologiaLogic.replaceTechnologies(websiteId, technologysListDTO2Entity(technologies)));
+        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource replaceTechnologies: output: {0}", lista);
         return lista;
     }
 
+    
     /**
      * Elimina la conexión entre el libro y e sitio web recibidos en la URL.
      *
@@ -143,13 +142,13 @@ public class SitioWebTecnologiaResource {
      */
     @DELETE
     @Path("{technologysId: \\d+}")
-    public void removeTecnologia(@PathParam("websiteId") Long websiteId, @PathParam("technologysId") Long technologysId) {
-        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource deleteTecnologia: input: websiteId {0} , technologysId {1}", new Object[]{websiteId, technologysId});
+    public void removeTechnology(@PathParam("sitesId") Long websiteId, @PathParam("technologysId") Long technologysId) {
+        LOGGER.log(Level.INFO, "SitioWebTecnologiasResource removeTechnology: input: sitesId {0} , technologysId {1}", new Object[]{websiteId, technologysId});
         if (tecnologiaLogic.getTechnology(technologysId) == null) {
-            throw new WebApplicationException("El recurso /technologys/" + technologysId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /technologies/" + technologysId + " no existe.", 404);
         }
         sitioTecnologiaLogic.removeTechnology(websiteId, technologysId);
-        LOGGER.info("SitioWebTecnologiasResource deleteTecnologia: output: void");
+        LOGGER.info("SitioWebTecnologiasResource removeTechnology: output: void");
     }
 
     /**
