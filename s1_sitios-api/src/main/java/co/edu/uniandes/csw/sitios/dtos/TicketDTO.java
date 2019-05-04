@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.sitios.dtos;
 import co.edu.uniandes.csw.sitios.entities.TicketEntity;
 import java.io.Serializable;
 import java.util.Date;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * TicketDTO implementa Serializable
@@ -194,5 +196,16 @@ public class TicketDTO implements Serializable{
         return entity;
     }
     
+    
+    /**
+     * se sobreescribe el to string
+     * 
+     * @return 
+     */
+     @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
     
 }

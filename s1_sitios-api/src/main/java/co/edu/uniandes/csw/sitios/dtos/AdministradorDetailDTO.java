@@ -17,21 +17,25 @@ import java.util.List;
  * @author Allan Roy Corinaldi
  */
 public class AdministradorDetailDTO extends AdministradorDTO implements Serializable {
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
 
     /**
-     * Notificaciones.
+     * Relacion de 0 a muchas Notificaciones.
      */
     private List<NotificacionDTO> notificaciones;
 
     /**
-     * Cambios
+     * Relacion de 0 a muchos Cambios.
      */
     private List<CambioDTO> cambios;
     
-    /**
-     * Dependencia
-     */
-    private DependenciaDTO dependencia;
+    
+    //__________________________________________________________________________
+    // Constructores
+    //__________________________________________________________________________
 
     public AdministradorDetailDTO() {
         super();
@@ -56,11 +60,12 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
             for (CambioEntity cambio : administradorEntity.getCambios()) {
                 cambios.add(new CambioDTO(cambio));
              }
-            if (administradorEntity.getDependencia() != null) {
-            this.dependencia = new DependenciaDTO(administradorEntity.getDependencia());
-             }
         }
     }
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
      * Convierte un objeto AdministradorDetailDTO a AdministradorEntity
@@ -85,9 +90,6 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
                 cambiosEntity.add(cambioDTO.toEntity());
             }
             administradorEntity.setCambios(cambiosEntity);
-        }
-        if (getDependencia() != null) {
-            administradorEntity.setDependencia(getDependencia().toEntity());
         }
         return administradorEntity;
     }
@@ -120,18 +122,6 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
         this.cambios = cambios;
     }
 
-    /**
-     * @return Dependencia asociada al administrador
-     */
-    public DependenciaDTO getDependencia() {
-        return dependencia;
-    }
-
-    /**
-     * @param dependencia Dependencia por asociar al administrador
-     */
-    public void setDependencia(DependenciaDTO dependencia) {
-        this.dependencia = dependencia;
-    }
+    
 
 }

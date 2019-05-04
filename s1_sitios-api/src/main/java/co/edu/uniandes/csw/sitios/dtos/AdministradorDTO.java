@@ -7,17 +7,21 @@ package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * AdministradorDTO implementa Serializable
  *
  * @author Allan Roy Corinaldi.
+ * 
  */
 public class AdministradorDTO implements Serializable {
 
-    //-------------------------------------
-    // Atributos---------------------------
-    //-------------------------------------
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
     /**
      * Id del usuario
      */
@@ -57,6 +61,15 @@ public class AdministradorDTO implements Serializable {
      * Sitio web.
      */
     private SitioWebDTO sitioWeb;
+    
+    /**
+     * Dependencia a la que pertenece un administrador.
+     */
+    private DependenciaDTO dependencia;
+
+    //__________________________________________________________________________
+    // Constructores
+    //__________________________________________________________________________
 
     /**
      * Constructor AdministradorDTO vacio
@@ -70,36 +83,64 @@ public class AdministradorDTO implements Serializable {
      * @param entity != null
      */
     public AdministradorDTO(AdministradorEntity entity) {
-        if (entity != null) {
+        if (entity != null) 
+        {
             this.id = entity.getId();
-            this.nombreCargo = entity.getNombreCargo();
-            this.nivel = entity.getNivel();
-            this.email = entity.getEmail();
             this.nombre = entity.getNombre();
+            this.email = entity.getEmail();
             this.password = entity.getPassword();
             this.telefono = entity.getTelefono();
-            if(entity.getSitioWeb() != null){
+            this.nivel = entity.getNivel();
+            this.nombreCargo = entity.getNombreCargo();         
+            
+            if(entity.getSitioWeb() != null)
+            {
                 this.sitioWeb = new SitioWebDTO(entity.getSitioWeb());
-            } else {
+            } 
+            else 
+            {
                 this.sitioWeb = null;
+            }
+            if(entity.getDependencia()!= null)
+            {
+                this.dependencia = new DependenciaDTO(entity.getDependencia());
+            } 
+            else 
+            {
+                this.dependencia = null;
             }
         }
     }
 
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
+    
     /**
-     * Chequeo de la implementacion toEntity del DTO
+     * Metodo que convierte un DTO a Entity
      *
      * @return AdministradorEntity
      */
-    public AdministradorEntity toEntity() {
+    public AdministradorEntity toEntity() 
+    {
         AdministradorEntity entity = new AdministradorEntity();
-        entity.setNivel(this.getNivel());
-        entity.setNombreCargo(this.getNombreCargo());
+        
         entity.setId(this.getId());
-        entity.setEmail(this.getEmail());
         entity.setNombre(this.getNombre());
+        entity.setEmail(this.getEmail());
         entity.setPassword(this.getPassword());
         entity.setTelefono(this.getTelefono());
+        entity.setNivel(this.getNivel());
+        entity.setNombreCargo(this.getNombreCargo());
+        if (this.getSitioWeb() != null) 
+        {
+            entity.setSitioWeb(this.sitioWeb.toEntity());
+        } 
+        if (this.getDependencia()!= null) 
+        {
+            entity.setDependencia(this.dependencia.toEntity());
+        }
+        
         return entity;
     }
 
@@ -199,6 +240,48 @@ public class AdministradorDTO implements Serializable {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    
+    /**
+     * @return sitioWeb of Administrador
+     */
+    public SitioWebDTO getSitioWeb() 
+    {
+        return sitioWeb;
+    }
+
+    /**
+     * 
+     * @param sitioWeb to assign
+     */
+    public void setSitioWeb(SitioWebDTO sitioWeb) 
+    {
+        this.sitioWeb = sitioWeb;
+    }
+    
+    /**
+     * @return Dependencia asociada al administrador
+     */
+    public DependenciaDTO getDependencia() {
+        return dependencia;
+    }
+
+    /**
+     * @param dependencia Dependencia por asociar al administrador
+     */
+    public void setDependencia(DependenciaDTO dependencia) {
+        this.dependencia = dependencia;
+    }
+    
+    
+    /**
+     * sobre escritura del metodo to string 
+     * @return 
+     */
+     @Override
+    public String toString() 
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
     
     

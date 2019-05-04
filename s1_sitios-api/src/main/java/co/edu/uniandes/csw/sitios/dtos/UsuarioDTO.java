@@ -15,9 +15,10 @@ import java.io.Serializable;
  */
 public class UsuarioDTO implements Serializable {
 
-    //-------------------------------------
-    // Atributos---------------------------
-    //-------------------------------------
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
     /**
      * Id del usuario
      */
@@ -52,6 +53,10 @@ public class UsuarioDTO implements Serializable {
      * numero de tickets, int >= 0
      */
     private Integer numeroTickets;
+    
+    //__________________________________________________________________________
+    // Constructores
+    //__________________________________________________________________________
 
     /**
      * Constructor UsuarioDTO vacio
@@ -76,6 +81,10 @@ public class UsuarioDTO implements Serializable {
             this.telefono = entity.getTelefono();
         }
     }
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
      * Chequeo de la implementacion toEntity del DTO

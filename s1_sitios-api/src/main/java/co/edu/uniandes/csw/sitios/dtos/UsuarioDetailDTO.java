@@ -17,11 +17,21 @@ import java.util.List;
  * @author Allan Roy Corinaldi
  */
 public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+
 
     /**
      * Lista de tickets que puede tener un usuario.
      */
     private List<TicketDTO> tickets;
+    
+    //__________________________________________________________________________
+    // Constructores
+    //__________________________________________________________________________
+
 
     /**
      * Constructor de UsuarioDetailDTO vacio
@@ -46,6 +56,11 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
         }
     }
 
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
+
+    
     /**
      * Chequeo de la implementacion toEntity del DTO
      *
