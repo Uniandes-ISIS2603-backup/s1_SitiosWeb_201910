@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.UsuarioEntity;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * UsuarioDTO implementa Serializable
@@ -198,6 +200,17 @@ public class UsuarioDTO implements Serializable {
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    
+    /**
+     * se sobreescribe el to string
+     * 
+     * @return 
+     */
+     @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }
