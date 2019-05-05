@@ -23,32 +23,32 @@ public class AdministradorDTO implements Serializable {
     //__________________________________________________________________________
     
     /**
-     * Id del usuario
+     * Id del usuario.
      */
     private Long id;
 
     /**
-     * Nombre del usuario
+     * Nombre del usuario.
      */
     private String nombre;
 
     /**
-     * Email del usuario
+     * Email del usuario.
      */
     private String email;
 
     /**
-     * Contraseñ¡nia del usuario
+     * Contraseñ¡nia del usuario.
      */
     private String password;
 
     /**
-     * Telefono del usuario
+     * Telefono del usuario.
      */
     private String telefono;
 
     /**
-     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
+     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}.
      */
     private Integer nivel;
 
@@ -58,7 +58,7 @@ public class AdministradorDTO implements Serializable {
     private String nombreCargo;
 
     /**
-     * Sitio web.
+     * Sitio web que administra.
      */
     private SitioWebDTO sitioWeb;
     
@@ -272,7 +272,6 @@ public class AdministradorDTO implements Serializable {
     public void setDependencia(DependenciaDTO dependencia) {
         this.dependencia = dependencia;
     }
-    
     
     /**
      * sobre escritura del metodo to string 

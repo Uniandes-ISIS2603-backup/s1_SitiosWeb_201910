@@ -47,8 +47,10 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     public UsuarioDetailDTO(UsuarioEntity entity) {
         super(entity);
         if (entity != null) {
-            if (entity.getTickets() != null) {
-                for (TicketEntity ticketEntity : entity.getTickets()) {
+            if (entity.getTickets() != null) 
+            {
+                for (TicketEntity ticketEntity : entity.getTickets())
+                {
                     tickets.add(new TicketDTO(ticketEntity));
                 }
             }
@@ -84,14 +86,16 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
     /**
      * @return the tickets
      */
-    public List<TicketDTO> getTickets() {
+    public List<TicketDTO> getTickets() 
+    {
         return tickets;
     }
 
     /**
      * @param tickets the tickets to set
      */
-    public void setTickets(List<TicketDTO> tickets) {
+    public void setTickets(List<TicketDTO> tickets) 
+    {
         this.tickets = tickets;
     }
 

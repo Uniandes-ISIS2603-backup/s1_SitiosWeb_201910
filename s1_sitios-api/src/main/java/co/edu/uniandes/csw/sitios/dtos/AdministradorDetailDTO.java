@@ -23,20 +23,23 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     //__________________________________________________________________________
 
     /**
-     * Relacion de 0 a muchas Notificaciones.
-     */
-    private List<NotificacionDTO> notificaciones;
-
-    /**
      * Relacion de 0 a muchos Cambios.
      */
     private List<CambioDTO> cambios;
+    
+    /**
+     * Relacion de 0 a muchas Notificaciones.
+     */
+    private List<NotificacionDTO> notificaciones;  
     
     
     //__________________________________________________________________________
     // Constructores
     //__________________________________________________________________________
 
+    /**
+     * 
+     */
     public AdministradorDetailDTO() {
         super();
     }
@@ -51,7 +54,8 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      */
     public AdministradorDetailDTO(AdministradorEntity administradorEntity) {
         super(administradorEntity);
-        if (administradorEntity != null) {
+        if (administradorEntity != null)
+        {
             notificaciones = new ArrayList<>();
             for (NotificacionEntity entityNotificacion : administradorEntity.getNotificaciones()) {
                 notificaciones.add(new NotificacionDTO(entityNotificacion));
@@ -77,14 +81,16 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     @Override
     public AdministradorEntity toEntity() {
         AdministradorEntity administradorEntity = super.toEntity();
-        if (getNotificaciones() != null) {
+        if (getNotificaciones() != null) 
+        {
             List<NotificacionEntity> notificacionEntity = new ArrayList<>();
             for (NotificacionDTO dtoNotificaciones : getNotificaciones()) {
                 notificacionEntity.add(dtoNotificaciones.toEntity());
             }
             administradorEntity.setNotificaciones(notificacionEntity);
         }
-        if (getCambios() != null) {
+        if (getCambios() != null) 
+        {
             List<CambioEntity> cambiosEntity = new ArrayList<>();
             for (CambioDTO cambioDTO : getCambios()) {
                 cambiosEntity.add(cambioDTO.toEntity());

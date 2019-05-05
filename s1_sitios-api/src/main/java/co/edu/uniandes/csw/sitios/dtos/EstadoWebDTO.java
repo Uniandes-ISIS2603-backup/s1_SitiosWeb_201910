@@ -56,7 +56,7 @@ public class EstadoWebDTO implements Serializable{
     //__________________________________________________________________________
 
     /**
-     * Constructor por defecto para la clase
+     * Constructor por defecto para la clase.
      * 
      */
     public EstadoWebDTO() {
@@ -80,7 +80,8 @@ public class EstadoWebDTO implements Serializable{
             if (pEstadoWebEntity.getSitioAsociado()!= null) 
             {
                 this.sitioAsociado = new SitioWebDTO(pEstadoWebEntity.getSitioAsociado());
-            } else 
+            }
+            else 
             {
                 this.sitioAsociado = null;
             }

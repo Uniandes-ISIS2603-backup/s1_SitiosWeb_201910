@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * TicketDTO implementa Serializable
- * @author  Daniel Preciado /Allan Corinaldi 
+ * @author  Daniel Preciado / Allan Corinaldi 
  */
 public class TicketDTO implements Serializable{
 
@@ -42,11 +42,18 @@ public class TicketDTO implements Serializable{
     private Integer estado;
     
     /**
+     * Relación a un usuario  
+     * dado que esta tiene cardinalidad 1.
+     */
+    private UsuarioDTO usuarioAsociado;
+
+    
+    /**
      * Relación a un sitioWeb  
      * dado que esta tiene cardinalidad 1.
      */
     private SitioWebDTO sitioAsociado;
-
+    
     
     
     //__________________________________________________________________________
@@ -82,6 +89,13 @@ public class TicketDTO implements Serializable{
             } else 
             {
                 this.sitioAsociado = null;
+            }
+            if (entity.getUsuarioAsociado()!= null) 
+            {
+                this.usuarioAsociado = new UsuarioDTO(entity.getUsuarioAsociado());
+            } else 
+            {
+                this.usuarioAsociado = null;
             }
         }
     }
@@ -177,6 +191,24 @@ public class TicketDTO implements Serializable{
     }
     
     /**
+     * obtiene el usuario asociado a este ticket
+     * @return usuarioAsociado
+     */
+    public UsuarioDTO getUsuarioAsociado() 
+    {
+        return usuarioAsociado;
+    }
+
+    /**
+     * asigna el usuario asociado a este ticket
+     * @param usuarioAsociado 
+     */
+    public void setUsuarioAsociado(UsuarioDTO usuarioAsociado) 
+    {
+        this.usuarioAsociado = usuarioAsociado;
+    }
+    
+    /**
      * Convierte un DTO a Entity
      * 
      * @return TicketEntity con los valores del DTO
@@ -192,6 +224,10 @@ public class TicketDTO implements Serializable{
         if (this.sitioAsociado != null) 
         {
             entity.setSitioAsociado(this.sitioAsociado.toEntity());
+        }
+        if (this.usuarioAsociado != null) 
+        {
+            entity.setUsuarioAsociado(this.usuarioAsociado.toEntity());
         }
         return entity;
     }
