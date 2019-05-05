@@ -7,9 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -22,8 +21,6 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class EstadoWebEntity extends BaseEntity implements Serializable {
-
-    
 
     //__________________________________________________________________________
     // Atributos
@@ -41,7 +38,7 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
     /**
      * represnta el estado del sitio web
      */
-      @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private estado estado;
 
     /**
@@ -61,6 +58,16 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
     @ManyToOne
     @PodamExclude
     private SitioWebEntity sitioAsociado;
+    
+    /**
+     * lista de notificaciones asociadas a un cambio de estado
+     */
+    @PodamExclude
+    @OneToMany(mappedBy = "cambioSitio", fetch = FetchType.LAZY)
+    private List<NotificacionEntity> notificaciones;
+
+    
+    
     //__________________________________________________________________________
     // Metodos
     //__________________________________________________________________________
@@ -137,6 +144,21 @@ public class EstadoWebEntity extends BaseEntity implements Serializable {
         this.sitioAsociado = asociado;
     }
 
+    /**
+     * obtiene la lista de notificaciones asociadas a un estado
+     * @return notifiaciones
+     */
+    public List<NotificacionEntity> getNotificaciones() {
+        return notificaciones;
+    }
+
+    /**
+     * asigna la lista de notificaciones asociadas a un estado
+     * @param notificaciones 
+     */
+    public void setNotificaciones(List<NotificacionEntity> notificaciones) {
+        this.notificaciones = notificaciones;
+    }
     
 
 

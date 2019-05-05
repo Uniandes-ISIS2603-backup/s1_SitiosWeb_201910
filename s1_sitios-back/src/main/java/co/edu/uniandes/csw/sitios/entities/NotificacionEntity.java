@@ -12,8 +12,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 /**
  *
@@ -21,35 +20,12 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class NotificacionEntity extends BaseEntity implements Serializable {
-
-    public AdministradorEntity getNotificado() {
-        return notificado;
-    }
-
-    public void setNotificado(AdministradorEntity notificado) {
-        this.notificado = notificado;
-    }
-
-    public EstadoWebEntity getCambioSitio() {
-        return cambioSitio;
-    }
-
-    public void setCambioSitio(EstadoWebEntity cambioSitio) {
-        this.cambioSitio = cambioSitio;
-    }
-
-    public SitioWebEntity getSitioWeb() {
-        return sitioWeb;
-    }
-
-    public void setSitioWeb(SitioWebEntity sitioWeb) {
-        this.sitioWeb = sitioWeb;
-    }
     
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
     
-  
-  
-    /**
+     /**
      * Persona a la cual se debe notificar
      */
     @PodamExclude
@@ -60,14 +36,69 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
      * nuevo estado al cual se cambio el sitio web
      */
     @PodamExclude
-    @OneToOne(cascade = CascadeType.PERSIST) 
+    @ManyToOne(cascade = CascadeType.PERSIST) 
     private EstadoWebEntity cambioSitio;
     
     /**
      * Sitio en el cual se presento el cambio
      */
     @PodamExclude
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private SitioWebEntity sitioWeb;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
+    
+    /**
+     * ontiene el administrador que es notificado 
+     * @return notificado
+     */
+    public AdministradorEntity getNotificado() {
+        return notificado;
+    }
+
+    /**
+     * asigna el administrador que se notificara
+     * @param notificado 
+     */
+    public void setNotificado(AdministradorEntity notificado) {
+        this.notificado = notificado;
+    }
+
+    /**
+     * obtiene el cambio de estado que hubo en el sitio al cual corresponde
+     * la notificacion
+     * @return cambioSitio
+     */
+    public EstadoWebEntity getCambioSitio() {
+        return cambioSitio;
+    }
+
+    /**
+     * asigna el cambio de estado que hubo en el sitio al cual corresponde
+     * la notificacion
+     * @param cambioSitio 
+     */
+    public void setCambioSitio(EstadoWebEntity cambioSitio) {
+        this.cambioSitio = cambioSitio;
+    }
+
+    /**
+     * obtiene el sitioWeb al cual se le hizo el cambio
+     * @return sitioWeb
+     */
+    public SitioWebEntity getSitioWeb() {
+        return sitioWeb;
+    }
+
+    /**
+     * asigna el sitioWeb al cual se le hizo el cambio
+     * @param sitioWeb 
+     */
+    public void setSitioWeb(SitioWebEntity sitioWeb) {
+        this.sitioWeb = sitioWeb;
+    }
+    
    
 }

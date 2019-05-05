@@ -52,7 +52,7 @@ public class TicketEntity extends BaseEntity  implements Serializable{
     private UsuarioEntity usuarioAsociado;
     
     /**
-     * sitio al que corresponde el estado web
+     * sitio al que corresponde el estado web.
      */
     @ManyToOne
     @PodamExclude

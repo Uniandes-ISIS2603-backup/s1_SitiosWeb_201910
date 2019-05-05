@@ -8,10 +8,8 @@ package co.edu.uniandes.csw.sitios.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamStringValue;
@@ -23,11 +21,12 @@ import uk.co.jemos.podam.common.PodamStringValue;
 @Entity
 public class AdministradorEntity extends PersonaEntity implements Serializable {
 
-    //-------------------------------------
-    // Atributos---------------------------
-    //-------------------------------------
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
     /**
-     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}
+     * Nivel que tiene un administrador, nivel = {1, 2, 3, 4, 5}.
      */
     @PodamIntValue(minValue = 1,maxValue = 5)
     private Integer nivel;
@@ -42,32 +41,33 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      * Nombre de la dependencia.
      */
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private DependenciaEntity dependencia;
-
-     /**
-     * Collecion de notificaciones
-     */
-    @PodamExclude
-    @OneToMany
-    private List<CambioEntity> cambios;
-
+    
     /**
-     * Collecion de notificaciones
+     * Sitio Web que administra.
      */
-    @PodamExclude
-    @OneToMany
-    private List<NotificacionEntity> notificaciones;
-
     @PodamExclude
     @ManyToOne
     private SitioWebEntity sitioWeb;
 
-    /**
-     * Constructor AdministradorEntity vacio
+     /**
+     * Collecion de cambios en la bitacora de un administrador.
      */
-    public AdministradorEntity() {
-    }
+    @PodamExclude
+    @OneToMany(mappedBy = "administrador")
+    private List<CambioEntity> cambios;
+
+    /**
+     * Collecion de notificaciones.
+     */
+    @PodamExclude
+    @OneToMany(mappedBy = "notificado")
+    private List<NotificacionEntity> notificaciones;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________    
 
     /**
      * @return the nivel
@@ -124,8 +124,6 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     public void setNotificaciones(List<NotificacionEntity> notificaciones) {
         this.notificaciones = notificaciones;
     }
-
-
 
     /**
      * @return the sitioWebEntity

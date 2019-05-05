@@ -6,7 +6,9 @@
 package co.edu.uniandes.csw.sitios.entities;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -15,9 +17,10 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class UsuarioEntity extends PersonaEntity {
-    //-------------------------------------
-    // Atributos---------------------------
-    //-------------------------------------
+
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
 
     /**
      * nombre de usuario, String != ("" y null)
@@ -30,11 +33,16 @@ public class UsuarioEntity extends PersonaEntity {
     private Integer numeroTickets;
 
     /**
-     * Collecion de tickets
+     * Collecion de tickets de un usuario
      */
     @PodamExclude
-    @javax.persistence.OneToMany
+    @OneToMany(mappedBy = "usuarioAsociado", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<TicketEntity> tickets;
+
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
      * Constructor UsuarioDTO vacio
