@@ -50,6 +50,10 @@ public class CambioDTO implements Serializable{
      */    
     private String nuevo;
     
+    public CambioDTO()
+    {
+        
+    }
     
        public CambioDTO(CambioEntity entity)
     {

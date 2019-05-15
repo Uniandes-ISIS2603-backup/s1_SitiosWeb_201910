@@ -167,7 +167,7 @@ public class PlataformaDeDespliegueResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la plataforma.
      */
-    @Path("{plataformasId: \\d+}/books")
+    @Path("{plataformasId: \\d+}/sitesId")
     public Class<PlataformaDeDespliegueSitiosWebResource> getPlataformaDeDespliegueSitiosWebResource(@PathParam("plataformasId") Long plataformasId) throws BusinessLogicException {
         if (plataformaLogic.getPlataformaDeDespliegue(plataformasId) == null) {
             throw new WebApplicationException("El recurso /platforms/" + plataformasId + " no existe.", 404);

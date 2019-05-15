@@ -58,6 +58,7 @@ public class TecnologiaLogic {
         LOGGER.log(Level.INFO, "Termina proceso de consultar todas las tecnologías");
         return lista;
     }
+    
 
     /**
      * Obtiene los datos de una instancia de Tecnologia a partir de su ID.

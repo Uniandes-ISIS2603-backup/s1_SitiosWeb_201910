@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.sitios.dtos.CambioDTO;
 import co.edu.uniandes.csw.sitios.ejb.CambioLogic;
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,6 +24,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 
 /**
@@ -67,6 +69,7 @@ public class CambioResource {
      * @return CambioDTO. 
      */
     @GET
+    @Consumes("application/json")
     @Path("{cambioid: \\d+}")
     public CambioDTO getCambio( @PathParam("cambioid") Long cambioId )throws BusinessLogicException {
 
@@ -85,6 +88,28 @@ public class CambioResource {
        // LOGGER.info("SitioWebResource getCambios: input: void");
         List<CambioDTO> cambios = new ArrayList<>();
         for(CambioEntity siteEntity: cambioLogic.getCambios()) {
+            cambios.add(new CambioDTO(siteEntity));
+        }
+       // LOGGER.log(Level.INFO, "SitioWebResource getCambios: output: {0}", cambios.toString());
+        return cambios;
+    }
+    
+        /**
+     * Trae todos los cambios asociados a una entidad del sitio web filtrados por un atributo
+     * @return lista con todas las notificaciones presentes en el sistema filtrados por un atributo
+     */
+     /**
+     * Permite dar un cambio segun su Id.
+     * @param filter
+     * @return CambioDTO. 
+     * @throws co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException 
+     */
+    @GET
+    @Path("/filter")
+    public List<CambioDTO> getCambiosFiltro(@QueryParam("atribute")String atribute, @QueryParam("param") String param)throws BusinessLogicException {
+        
+        List<CambioDTO> cambios = new ArrayList<>();
+        for(CambioEntity siteEntity: cambioLogic.getCambiosFiltro(atribute, param)) {
             cambios.add(new CambioDTO(siteEntity));
         }
        // LOGGER.log(Level.INFO, "SitioWebResource getCambios: output: {0}", cambios.toString());
@@ -138,6 +163,46 @@ public class CambioResource {
         }
         cambioLogic.deleteCambio(cambiosId);
         LOGGER.info("CambioResource deleteCambio: output: void");
+    }
+    
+    public class Filtro implements Serializable
+    {
+        private String atributo;
+        private String param;
+        public Filtro(String pAtr, String pParam)
+        {
+            atributo = pAtr;
+            param = pParam;
+        }
+
+        /**
+         * @return the atributo
+         */
+        public String getAtributo() {
+            return atributo;
+        }
+
+        /**
+         * @param atributo the atributo to set
+         */
+        public void setAtributo(String atributo) {
+            this.atributo = atributo;
+        }
+
+        /**
+         * @return the param
+         */
+        public String getParam() {
+            return param;
+        }
+
+        /**
+         * @param param the param to set
+         */
+        public void setParam(String param) {
+            this.param = param;
+        }
+        
     }
 
 }

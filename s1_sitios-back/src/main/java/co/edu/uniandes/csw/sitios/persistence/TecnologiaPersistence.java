@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -58,6 +59,12 @@ public class TecnologiaPersistence {
     public TecnologiaEntity find(Long technologysId) {
         LOGGER.log(Level.INFO, "Consultando la tecnologóa con id={0}", technologysId);
         return em.find(TecnologiaEntity.class, technologysId);
+    }
+    
+    public List<TecnologiaEntity> findBy(String atribute, String parameter)
+    {
+        Query q = em.createQuery("SELECT u from TecnologiaEntity u WHERE u."+atribute+" LIKE :parameter").setParameter("parameter", parameter);
+        return q.getResultList();
     }
 
     /**

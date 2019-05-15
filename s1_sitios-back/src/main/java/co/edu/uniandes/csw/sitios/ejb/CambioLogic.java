@@ -125,6 +125,12 @@ public class CambioLogic {
 
         return editorials;
     }
+    
+    public List<CambioEntity> getCambiosFiltro(String atribute, String parameter){
+        List<CambioEntity> filtro = persistence.findBy(atribute, parameter);
+
+        return filtro;
+    }
 
     public void deleteCambio(Long id) {
 

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -66,6 +67,11 @@ public class CambioPersistence {
 
         TypedQuery<CambioEntity> query = em.createQuery("select u from CambioEntity u", CambioEntity.class);
         return query.getResultList();
+    }
+    public List<CambioEntity> findBy(String atribute, String parameter)
+    {
+        Query q = em.createQuery("SELECT u from CambioEntity u WHERE u."+atribute+" LIKE :parameter").setParameter("parameter", "%"+parameter+"%");
+        return q.getResultList();
     }
 
     public void delete(Long cambioId) {

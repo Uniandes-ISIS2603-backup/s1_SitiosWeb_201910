@@ -137,9 +137,6 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
         this.url = url;
     }
 
- 
-    
-
     public String getNombre() {
         return nombre;
     }
@@ -245,7 +242,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
     public List<TecnologiaEntity> getTechnologies() {
         return technologies;
     }
-
+    
     public void setTechnologies(List<TecnologiaEntity> technologies) {
         this.technologies = technologies;
     }
