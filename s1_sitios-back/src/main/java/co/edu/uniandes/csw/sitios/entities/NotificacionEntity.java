@@ -46,9 +46,6 @@ public class NotificacionEntity extends BaseEntity implements Serializable {
         this.sitioWeb = sitioWeb;
     }
     
-    
-  
-  
     /**
      * Persona a la cual se debe notificar
      */

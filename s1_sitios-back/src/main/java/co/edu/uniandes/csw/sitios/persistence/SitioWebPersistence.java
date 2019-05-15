@@ -51,7 +51,7 @@ public class SitioWebPersistence {
     {
         LOGGER.log(Level.INFO, "Actualizando el sitio web con id={0}", sitioWebEntity.getId());
 
-        return     em.merge(sitioWebEntity);
+        return em.merge(sitioWebEntity);
 
     }
 
