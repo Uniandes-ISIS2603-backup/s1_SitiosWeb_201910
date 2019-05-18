@@ -136,7 +136,7 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     }
 
     public List<SitioWebEntity> getSitiosWeb() {
-        return sitiosWeb;
+        return this.sitiosWeb;
     }
 
     public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {

@@ -33,7 +33,7 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * telefono de la dependencia
      */
-    @PodamStringValue(length = 8)
+    @PodamStringValue(strValue = "4157349284")
     private String telefono;
     
     @PodamExclude

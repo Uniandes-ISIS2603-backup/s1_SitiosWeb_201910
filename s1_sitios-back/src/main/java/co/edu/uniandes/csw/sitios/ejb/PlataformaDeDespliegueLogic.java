@@ -29,7 +29,6 @@ public class PlataformaDeDespliegueLogic {
 
     // El metodo recibe editorial entity porque back no conoce a los DTOS
     public PlataformaDeDespliegueEntity createPlataformaDeDespliegue(PlataformaDeDespliegueEntity plataforma) throws BusinessLogicException {
-        
         verificarReglasNegocio(plataforma);
         //Invoco a la persistencia para crear a la plataforma
         persistence.create(plataforma);

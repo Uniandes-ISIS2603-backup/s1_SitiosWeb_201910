@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.test.logic;
 
 import co.edu.uniandes.csw.sitios.ejb.PlataformaDeDespliegueLogic;
+import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
@@ -36,6 +37,9 @@ public class PlataformaDeDespliegueLogicTest {
 
     @Inject
     private PlataformaDeDespliegueLogic plataformaLogic;
+    
+    @Inject
+    private SitioWebLogic sitioLogic;
 
     @Inject
     private UserTransaction utx;
@@ -111,13 +115,16 @@ public class PlataformaDeDespliegueLogicTest {
         Assert.assertEquals(newEntity.getClock(), entity.getClock());
         Assert.assertEquals(newEntity.getHosting(), entity.getHosting());
         Assert.assertEquals(newEntity.getIsVirtualizacion(), entity.getIsVirtualizacion());
-        Assert.assertEquals(newEntity.getSitiosWeb(), entity.getSitiosWeb());
     }
 
     @Test
     public void createPlataformaDeDespliegueTest2() throws BusinessLogicException {
 
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
+        SitioWebEntity sitioAsociado = factory.manufacturePojo(SitioWebEntity.class);
+        List<SitioWebEntity> lista = new ArrayList();
+        lista.add(sitioAsociado);
+        newEntity.setSitiosWeb(lista);
         newEntity.setId(data.get(0).getId());
         plataformaLogic.createPlataformaDeDespliegue(newEntity);
     }

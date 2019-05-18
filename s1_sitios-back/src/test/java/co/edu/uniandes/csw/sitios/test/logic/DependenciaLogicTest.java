@@ -150,7 +150,16 @@ public class DependenciaLogicTest {
         try {
             DependenciaEntity entity = dependenciaLogic.getDependency(data.get(0).getId());
             String value = String.valueOf(new Random().nextInt() + 1);
-            String value2 = String.valueOf(new Random().nextInt() + 1);
+            String value2 = "";
+            while(true)
+            {
+                value2 = value2.concat(String.valueOf(new Random().nextInt()));
+                if(value2.length()>=11)
+                {
+                    value2 = value2.substring(0,10);
+                    break;
+                }
+            }
             entity.setEmail("holaprofesor@uniandes.edu.co");
             entity.setNombreDependencia(value);
             entity.setTelefono(value2);
