@@ -75,6 +75,9 @@ public class CambioResource {
 
         LOGGER.log(Level.INFO, "CambioResource getCambio: input: {0}", cambioId);
         CambioEntity entity = cambioLogic.getCambio(cambioId);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /changes/" + cambioId + " no existe.", 404);
+        }
         CambioDTO camDTO = new CambioDTO(entity);
         return  camDTO;
     }

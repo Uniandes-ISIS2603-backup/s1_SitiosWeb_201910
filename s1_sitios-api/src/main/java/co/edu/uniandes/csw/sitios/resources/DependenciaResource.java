@@ -64,7 +64,7 @@ public class DependenciaResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public DependenciaDTO getDependencia( @PathParam("id") Long id ){
+    public DependenciaDetailDTO getDependencia( @PathParam("id") Long id ){
         DependenciaEntity entity = dependenciaLogic.getDependency(id);
         if(entity == null) {
             throw new WebApplicationException("Dependencia with id: " + id + " does not exists", 404);
@@ -83,13 +83,12 @@ public class DependenciaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public DependenciaDetailDTO updateDependency(@PathParam("id") Long id, DependenciaDetailDTO dependencia) throws BusinessLogicException { 
+    public DependenciaDTO updateDependency(@PathParam("id") Long id, DependenciaDTO dependencia) throws BusinessLogicException { 
         LOGGER.log(Level.INFO, "DependenciaResource updateDependency: input: id: {0} , dependencia: {1}", new Object[]{id, dependencia}); 
-        dependencia.setId(id); 
         if (dependenciaLogic.getDependency(id) == null) { 
             throw new WebApplicationException("El recurso /dependencies/" + id + " no existe.", 404); 
         } 
-        DependenciaDetailDTO detailDTO = new DependenciaDetailDTO(dependenciaLogic.updateDependency(id, dependencia.toEntity())); 
+        DependenciaDTO detailDTO = new DependenciaDTO(dependenciaLogic.updateDependency(id, dependencia.toEntity())); 
         LOGGER.log(Level.INFO, "DependenciaResource updateDependency: output: {0}", detailDTO); 
         return detailDTO; 
     } 

@@ -83,7 +83,6 @@ public class TecnologiaLogic {
      */
     public TecnologiaEntity updateTechnology(Long tecnologiaId, TecnologiaEntity tecnologiaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la tecnología con id = {0}", tecnologiaId);
-        String category = tecnologiaEntity.getTechCategory();
         if(tecnologiaId != tecnologiaEntity.getId())
         {
             throw new BusinessLogicException("Los ID no coinciden con la tecnología a actualizar");

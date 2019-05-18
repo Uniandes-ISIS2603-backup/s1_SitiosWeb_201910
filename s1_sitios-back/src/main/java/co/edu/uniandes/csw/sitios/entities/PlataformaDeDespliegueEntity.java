@@ -66,11 +66,15 @@ private List<SitioWebEntity> sitiosWeb = new ArrayList<>();
     /**
      * TipoHosting que puede ser una plataforma de despliegue
      */
-    public enum TipoHosting {
+    public enum TipoHosting implements Serializable {
         SAAS,
         PAAS,
         IAAS,
-        ONPREMISE
+        ONPREMISE;
+        
+        public String getHosting() {
+        return this.name();
+        }
     }
 
     /*

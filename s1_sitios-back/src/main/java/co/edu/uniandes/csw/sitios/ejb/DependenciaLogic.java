@@ -36,7 +36,7 @@ public class DependenciaLogic {
      */
     public DependenciaEntity createDependency(DependenciaEntity dependenciaEntity)throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la dependencia");
-        DependenciaEntity existe = getDependency(dependenciaEntity.getId());
+        DependenciaEntity existe = persistence.find(dependenciaEntity.getId());
         if(existe!=null)
         {
             throw new BusinessLogicException("Ya existe una dependencia con este ID");
@@ -86,12 +86,12 @@ public class DependenciaLogic {
     public DependenciaEntity updateDependency(Long dependenciaID, DependenciaEntity dependenciaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la dependencia con id = {0}", dependenciaID);
         DependenciaEntity existe = getDependency(dependenciaEntity.getId());
-        if(existe!=null&&!Objects.equals(dependenciaID, existe.getId()))
+        if(dependenciaID != dependenciaEntity.getId())
         {
             throw new BusinessLogicException("Ya existe una dependencia con este ID");
         }
         verificarReglasDeNegocio(dependenciaEntity);
-        DependenciaEntity newDependencyEntity = persistence.create(dependenciaEntity);
+        DependenciaEntity newDependencyEntity = persistence.update(dependenciaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizacion de la dependencia con id = {0}", dependenciaID);
         return newDependencyEntity;
     }
@@ -126,7 +126,7 @@ public class DependenciaLogic {
              throw new BusinessLogicException("Email invalido");
         } 
         int cantidadDigitos = dependenciaEntity.getTelefono().length();
-        if(cantidadDigitos<7||cantidadDigitos>11)
+        if(!dependenciaEntity.getTelefono().matches("^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")||cantidadDigitos<7||cantidadDigitos>11)
         {
              throw new BusinessLogicException("El numero de telefono no es valido");
         }

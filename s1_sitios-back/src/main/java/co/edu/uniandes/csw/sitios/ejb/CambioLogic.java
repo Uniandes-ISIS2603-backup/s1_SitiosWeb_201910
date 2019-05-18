@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -30,8 +30,47 @@ public class CambioLogic {
     // El metodo recibe editorial entity porque back no conoce a los DTOS
     public CambioEntity createCambio(CambioEntity cambioEntidad) throws BusinessLogicException {
 
-        ///////                    Reglas De Negocio                  ////////
         LOGGER.log(Level.INFO, "Creando un Cambio nuevo");
+        ///////                    Reglas De Negocio                  ////////
+        verificarReglasDeNegocio(cambioEntidad);
+        //Invoco a la persistencia para crear a la plataforma
+        persistence.create(cambioEntidad);
+        LOGGER.log(Level.FINE, "Cambio creado");
+        return cambioEntidad;
+    }
+
+    public CambioEntity getCambio(Long id) throws BusinessLogicException 
+    {
+        return persistence.find(id);
+    }
+
+    public CambioEntity updateCambio(Long Id, CambioEntity cambioEntity) throws BusinessLogicException {
+        verificarReglasDeNegocio(cambioEntity);
+        CambioEntity newEntity = persistence.update(cambioEntity);
+
+        return newEntity;
+    }
+
+    public List<CambioEntity> getCambios() {
+
+        List<CambioEntity> editorials = persistence.findAll();
+
+        return editorials;
+    }
+    
+    public List<CambioEntity> getCambiosFiltro(String atribute, String parameter){
+        List<CambioEntity> filtro = persistence.findBy(atribute, parameter);
+
+        return filtro;
+    }
+
+    public void deleteCambio(Long id) {
+
+        persistence.delete(id);
+    }
+    
+    public void verificarReglasDeNegocio(CambioEntity cambioEntidad) throws BusinessLogicException
+    {
         String lugarCambio = cambioEntidad.getLugarCambio();
 
         //ip = no puede ser null
@@ -41,25 +80,25 @@ public class CambioLogic {
 
         //2.lugarCambio != ""
         if (lugarCambio.equals("")) {
-            throw new BusinessLogicException("El lugar es vacio");
+            throw new BusinessLogicException("El lugar no puede ser vacio");
         }
 
         String descripcion = cambioEntidad.getDescripcion();
 
         //4.descripcion != null
         if (descripcion == null) {
-            throw new BusinessLogicException("La descripcion es nula");
+            throw new BusinessLogicException("La descripcion no puede ser nula");
         }
         //5.descripcion != ""
         if (descripcion.equals("")) {
-            throw new BusinessLogicException("La descripcion es vacia");
+            throw new BusinessLogicException("La descripcion no puede estar vacia");
         }
 
         Long idAsociado = cambioEntidad.getIdAsociado();
 
         //6.idAsociado != null
         if (idAsociado == null) {
-            throw new BusinessLogicException("El idAsociado es nulo");
+            throw new BusinessLogicException("El idAsociado no puede ser nulo");
         }
         /*
         //idAsociado != ""
@@ -89,51 +128,5 @@ public class CambioLogic {
         if (nuevo == null) {
             throw new BusinessLogicException("Nuevo no puede ser nulo");
         }
-
-        //sitiosWeb = no puede ser null
-        // SitioWebEntity sitios = cambioEntidad.getSitiosWeb();
-        // if(sitios==null)
-        //  {
-        //   throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
-        //}
-        //Invoco a la persistencia para crear a la plataforma
-        persistence.create(cambioEntidad);
-        LOGGER.log(Level.FINE, "Cambio creado");
-        return cambioEntidad;
-    }
-
-    public CambioEntity getCambio(Long id) throws BusinessLogicException {
-        CambioEntity entity = persistence.find(id);
-        if (entity == null) {
-            throw new BusinessLogicException("El Cambio no se a encontrado");
-        }
-
-        return entity;
-
-    }
-
-    public CambioEntity updateCambio(Long Id, CambioEntity cambioEntity) {
-
-        CambioEntity newEntity = persistence.update(cambioEntity);
-
-        return newEntity;
-    }
-
-    public List<CambioEntity> getCambios() {
-
-        List<CambioEntity> editorials = persistence.findAll();
-
-        return editorials;
-    }
-    
-    public List<CambioEntity> getCambiosFiltro(String atribute, String parameter){
-        List<CambioEntity> filtro = persistence.findBy(atribute, parameter);
-
-        return filtro;
-    }
-
-    public void deleteCambio(Long id) {
-
-        persistence.delete(id);
     }
 }

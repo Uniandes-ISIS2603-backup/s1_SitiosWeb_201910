@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.sitios.dtos;
 
 import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity;
+import co.edu.uniandes.csw.sitios.entities.PlataformaDeDespliegueEntity.TipoHosting;
 import java.io.Serializable;
 
 /**
@@ -14,6 +15,10 @@ import java.io.Serializable;
  */
 public class PlataformaDeDespliegueDTO implements Serializable {
 
+    /**
+     * Id de la plataforma de despliegue.
+     */
+    private Long id;
     /**
      * Codigo ip correspondiente a la plataforma utilizada.
      */    
@@ -44,16 +49,7 @@ public class PlataformaDeDespliegueDTO implements Serializable {
     */
     private TipoHosting tipoHosting;
     
-     /**
-       * TipoHosting que puede ser una plataforma de despliegue
-      */
-        public enum TipoHosting
-        {
-            SAAS,
-            PAAS,
-            IAAS,
-            ONPREMISE
-        }
+
     
     /**
      * Constructor PlataformaDeDespliegueDTO vacio
@@ -66,14 +62,20 @@ public class PlataformaDeDespliegueDTO implements Serializable {
          setCores(entidad.getCores());
          setCpu(entidad.getCpu());
          setIp(entidad.getIp());
+         setTipoHosting(entidad.getHosting());
+         setId(entidad.getId());
+         setVirtualizacion(entidad.getIsVirtualizacion());
       }
-    
+    //
     public PlataformaDeDespliegueEntity toEntity(){
         PlataformaDeDespliegueEntity entidad = new PlataformaDeDespliegueEntity();
         entidad.setClock(this.getClock());
         entidad.setCores(this.getCores());
         entidad.setCpu(this.getCpu());
         entidad.setIp(this.getIp());
+        entidad.setHosting(this.getTipoHosting());
+        entidad.setId(this.getId());
+        entidad.setIsVirtualizacion(this.getVirtualizacion());
         return entidad;
     }
     
@@ -159,6 +161,20 @@ public class PlataformaDeDespliegueDTO implements Serializable {
      */
     public void setTipoHosting(TipoHosting tipoHosting) {
         this.tipoHosting = tipoHosting;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

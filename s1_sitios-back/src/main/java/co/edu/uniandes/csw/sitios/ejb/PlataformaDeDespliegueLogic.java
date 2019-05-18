@@ -29,8 +29,44 @@ public class PlataformaDeDespliegueLogic {
 
     // El metodo recibe editorial entity porque back no conoce a los DTOS
     public PlataformaDeDespliegueEntity createPlataformaDeDespliegue(PlataformaDeDespliegueEntity plataforma) throws BusinessLogicException {
+        
+        verificarReglasNegocio(plataforma);
+        //Invoco a la persistencia para crear a la plataforma
+        persistence.create(plataforma);
+        return plataforma;
+    }
 
-        ///////                    Reglas De Negocio                  ////////
+    public PlataformaDeDespliegueEntity getPlataformaDeDespliegue(Long id) throws BusinessLogicException {
+        PlataformaDeDespliegueEntity entity = persistence.find(id);
+        if (entity == null) {
+            throw new BusinessLogicException("la PlataformaDeDespliegue no se ha encontrado");
+        }
+
+        return entity;
+
+    }
+
+    public void deletePlataformaDeDespliegue(Long id) {
+
+        persistence.delete(id);
+    }
+
+    public PlataformaDeDespliegueEntity updatePlataforma(Long Id, PlataformaDeDespliegueEntity plataformaEntity) throws BusinessLogicException {
+        verificarReglasNegocio(plataformaEntity);
+        PlataformaDeDespliegueEntity newEntity = persistence.update(plataformaEntity);
+        return newEntity;
+    }
+
+    public List<PlataformaDeDespliegueEntity> getPlataformas() {
+
+        List<PlataformaDeDespliegueEntity> editorials = persistence.findAll();
+
+        return editorials;
+    }
+    
+    private void verificarReglasNegocio(PlataformaDeDespliegueEntity plataforma) throws BusinessLogicException
+    {
+         ///////                    Reglas De Negocio                  ////////
         // ip = cumplir con los rangos de ips determinado el tipo de sistema Paas, Iaas, Saas, OnPremise
         String ip = plataforma.getIp();
 
@@ -53,7 +89,7 @@ public class PlataformaDeDespliegueLogic {
         // regla futura
         //cpu = no puede ser nulo
         String cpu = plataforma.getCpu();
-        if (cpu == null) {
+        if (plataforma.getCpu() == null) {
             throw new BusinessLogicException("La cpu es nula");
         }
         //cpu = no puede ser vacío
@@ -85,42 +121,13 @@ public class PlataformaDeDespliegueLogic {
 
         //sitiosWeb = no puede ser null
         List<SitioWebEntity> sitios = plataforma.getSitiosWeb();
-        if (sitios == null) {
+        if (sitios.isEmpty()) {
             throw new BusinessLogicException("No hay sitioWeb asociado a la platafroma de Despliegue");
         }
-
-        //Invoco a la persistencia para crear a la plataforma
-        persistence.create(plataforma);
-        return plataforma;
-    }
-
-    public PlataformaDeDespliegueEntity getPlataformaDeDespliegue(Long id) throws BusinessLogicException {
-        PlataformaDeDespliegueEntity entity = persistence.find(id);
-        if (entity == null) {
-            throw new BusinessLogicException("la PlataformaDeDespliegue no se a encontrado");
+        
+        if(plataforma.getIsVirtualizacion() == null)
+        {
+            throw new BusinessLogicException("La virtualización no puede tener un valor nulo");
         }
-
-        return entity;
-
     }
-
-    public void deletePlataformaDeDespliegue(Long id) {
-
-        persistence.delete(id);
-    }
-
-    public PlataformaDeDespliegueEntity updatePlataforma(Long Id, PlataformaDeDespliegueEntity plataformaEntity) {
-
-        PlataformaDeDespliegueEntity newEntity = persistence.update(plataformaEntity);
-
-        return newEntity;
-    }
-
-    public List<PlataformaDeDespliegueEntity> getPlataformas() {
-
-        List<PlataformaDeDespliegueEntity> editorials = persistence.findAll();
-
-        return editorials;
-    }
-
 }

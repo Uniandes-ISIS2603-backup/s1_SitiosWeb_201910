@@ -1,0 +1,632 @@
+{
+	"info": {
+		"_postman_id": "54de28cc-3842-48a4-9f5d-b7b360b6a625",
+		"name": "PlataformaDeDespliegueResourceTest ",
+		"description": "PlataformaDeDespliegue Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una plataforma exitosamente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"000.000.000.000\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"SAAS\",\n        \"virtualizacion\": true,\n        \"sitiosWeb\":[\n        \t{\n                \"audienciaEsperada\": 2,\n                \"descripcion\": \"Similarly , janitor is driving all day long. \",\n                \"fechaLanzamiento\": \"1774-01-29T00:00:00-05:00\",\n                \"id\": 1,\n                \"imagen\": \"mibanner.uniandes.edu.co\",\n                \"nombre\": \"Banner Uniandes\",\n                \"proposito\": \"Onversely , crooked lab rat isnt leaving the school. \"\n            }\n        \t]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una plataforma con ip invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No se crea la plataforma con el ip invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"No hay congruencia en la cantidad de puntos que separan una ip: #.#.#.#\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"Ip invalido\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"SAAS\",\n        \"virtualizacion\": true,\n        \"sitiosWeb\":[\n        \t{\n                \"audienciaEsperada\": 2,\n                \"descripcion\": \"Similarly , janitor is driving all day long. \",\n                \"fechaLanzamiento\": \"1774-01-29T00:00:00-05:00\",\n                \"id\": 1,\n                \"imagen\": \"mibanner.uniandes.edu.co\",\n                \"nombre\": \"Banner Uniandes\",\n                \"proposito\": \"Onversely , crooked lab rat isnt leaving the school. \"\n            }\n        \t]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una plataforma con hosting invalido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No crea la plataforma con el hosting invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El hosting no puede ser nulo\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"000.000.000.000\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"HostingInvalido\",\n        \"virtualizacion\": true,\n        \"sitiosWeb\":[\n        \t{\n                \"audienciaEsperada\": 2,\n                \"descripcion\": \"Similarly , janitor is driving all day long. \",\n                \"fechaLanzamiento\": \"1774-01-29T00:00:00-05:00\",\n                \"id\": 1,\n                \"imagen\": \"mibanner.uniandes.edu.co\",\n                \"nombre\": \"Banner Uniandes\",\n                \"proposito\": \"Onversely , crooked lab rat isnt leaving the school. \"\n            }\n        \t]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una plataforma sin sitios web ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No se crea la plataforma sin sitios web\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"No hay sitioWeb asociado a la platafroma de Despliegue\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"000.000.000.000\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"SAAS\",\n        \"virtualizacion\": null,\n        \"sitiosWeb\":[]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las plataformas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"Cantidad de plataformas\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una plataforma",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una plataforma que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 412; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"la PlataformaDeDespliegue no se ha encontrado\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una plataforma",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"000.000.000.000\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"SAAS\",\n        \"virtualizacion\": true,\n        \"sitiosWeb\":[\n        \t{\n                \"audienciaEsperada\": 2,\n                \"descripcion\": \"Similarly , janitor is driving all day long. \",\n                \"fechaLanzamiento\": \"1774-01-29T00:00:00-05:00\",\n                \"id\": 1,\n                \"imagen\": \"mibanner.uniandes.edu.co\",\n                \"nombre\": \"Banner Uniandes\",\n                \"proposito\": \"Onversely , crooked lab rat isnt leaving the school. \"\n            }\n        \t]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una plataforma con id invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No crea con id invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"la PlataformaDeDespliegue no se ha encontrado\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"000.000.000.000\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"SAAS\",\n        \"virtualizacion\": true,\n        \"sitiosWeb\":[\n        \t{\n                \"audienciaEsperada\": 2,\n                \"descripcion\": \"Similarly , janitor is driving all day long. \",\n                \"fechaLanzamiento\": \"1774-01-29T00:00:00-05:00\",\n                \"id\": 1,\n                \"imagen\": \"mibanner.uniandes.edu.co\",\n                \"nombre\": \"Banner Uniandes\",\n                \"proposito\": \"Onversely , crooked lab rat isnt leaving the school. \"\n            }\n        \t]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una plataforma con ip invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No crea con URL invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"No hay congruencia en la cantidad de puntos que separan una ip: #.#.#.#\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"IpInvalido\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"SAAS\",\n        \"virtualizacion\": true,\n        \"sitiosWeb\":[\n        \t{\n                \"audienciaEsperada\": 2,\n                \"descripcion\": \"Similarly , janitor is driving all day long. \",\n                \"fechaLanzamiento\": \"1774-01-29T00:00:00-05:00\",\n                \"id\": 1,\n                \"imagen\": \"mibanner.uniandes.edu.co\",\n                \"nombre\": \"Banner Uniandes\",\n                \"proposito\": \"Onversely , crooked lab rat isnt leaving the school. \"\n            }\n        \t]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una plataforma sin sitios web",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No crea con id invalido\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"No hay sitioWeb asociado a la platafroma de Despliegue\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"ip\": \"000.000.000.000\",\n        \"cpu\": \"CO 2591338\",\n        \"cores\": 6,\n        \"clock\": \"15 GHz\",\n        \"tipoHosting\":\"SAAS\",\n        \"virtualizacion\": true,\n        \"sitiosWeb\":[]\n    }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una plataforma",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"var last = postman.getGlobalVariable(\"new_id_e\");",
+							"last = last-1;",
+							"postman.setGlobalVariable(\"new_id_e\", last);",
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"{{new_id_e}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una tecnologia que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c07204b-d2dc-4046-b439-fc9510a4fd0c",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"la PlataformaDeDespliegue no se ha encontrado\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/platforms/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_sitios-api",
+						"api",
+						"platforms",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "be5a3458-edac-44d5-8ef5-663049d61a2a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "da9150e8-5449-4b5e-b9b9-439bf068e212",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

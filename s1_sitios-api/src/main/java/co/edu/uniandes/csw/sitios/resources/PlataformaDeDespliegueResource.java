@@ -57,14 +57,14 @@ public class PlataformaDeDespliegueResource {
      * Error de lógica que se genera cuando ya existe la plataforma.
      */
     @POST
-    public PlataformaDeDespliegueDTO createPlataformaDeDespliegue(PlataformaDeDespliegueDTO plataforma) throws BusinessLogicException {
+    public PlataformaDeDespliegueDetailDTO createPlataformaDeDespliegue(PlataformaDeDespliegueDetailDTO plataforma) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "PlataformaDeDespliegueResource createPlataformaDeDespliegue: input: {0}", plataforma);
         // Convierte el DTO (json) en un objeto Entity para ser manejado por la lógica.
         PlataformaDeDespliegueEntity plataformaEntity = plataforma.toEntity();
         // Invoca la lógica para crear la plataforma nueva
         PlataformaDeDespliegueEntity nuevaPlataformaEntity = plataformaLogic.createPlataformaDeDespliegue(plataformaEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        PlataformaDeDespliegueDTO nuevaPlataformaDTO = new PlataformaDeDespliegueDTO(plataformaEntity);
+        PlataformaDeDespliegueDetailDTO nuevaPlataformaDTO = new PlataformaDeDespliegueDetailDTO(plataformaEntity);
         LOGGER.log(Level.INFO, "PlataformaDeDespliegueResource createPlataformaDeDespliegue: output: {0}", nuevaPlataformaDTO);
         return nuevaPlataformaDTO;
     }
@@ -119,6 +119,7 @@ public class PlataformaDeDespliegueResource {
      * Error de lógica que se genera cuando no se encuentra la plataforma a
      * actualizar.
      */
+    //
     @PUT
     @Path("{plataformasId: \\d+}")
     public PlataformaDeDespliegueDetailDTO updatePlataformaDeDespliegue(@PathParam("plataformasId") Long plataformasId, PlataformaDeDespliegueDetailDTO plataforma) throws WebApplicationException, BusinessLogicException {
