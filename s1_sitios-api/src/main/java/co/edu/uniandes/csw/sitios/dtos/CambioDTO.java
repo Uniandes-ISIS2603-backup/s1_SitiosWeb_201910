@@ -50,6 +50,8 @@ public class CambioDTO implements Serializable{
      */    
     private String nuevo;
     
+    private AdministradorDTO administrador;
+    
     
        public CambioDTO(CambioEntity entity)
     {
@@ -62,12 +64,22 @@ public class CambioDTO implements Serializable{
         this.nuevo=entity.getNuevo();
         this.previo=entity.getPrevio();
         this.idAsociado=entity.getIdAsociado();
+        
+        if (entity.getAdministrador()!= null) 
+            {
+                this.administrador = new AdministradorDTO(entity.getAdministrador());
+            }
+            else 
+            {
+                this.administrador = null;
+            }
         }
     }
     
     public CambioEntity toEntity()
     {
         CambioEntity entity= new CambioEntity();
+        
         entity.setId(this.id);
         entity.setDescripcion(this.descripcion);
         entity.setFechaCambio(this.fechaCambio);
@@ -75,6 +87,11 @@ public class CambioDTO implements Serializable{
         entity.setNuevo(this.nuevo);
         entity.setPrevio(this.previo);
         entity.setLugarCambio(this.lugarCambio);
+        
+        if (this.administrador != null) 
+        {
+            entity.setAdministrador(this.administrador.toEntity());
+        }
         return entity;
     }
     /**

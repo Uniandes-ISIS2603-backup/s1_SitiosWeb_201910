@@ -108,14 +108,14 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
      * Personas que administran el sitio web.
      */
     @PodamExclude
-    @ManyToMany(mappedBy = "sitioWeb",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<AdministradorEntity> administradores;
 
     /**
      * Sitios web que estan asociados a este.
      */
     @PodamExclude
-    @ManyToMany(fetch = FetchType.LAZY )
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY )
     private List<SitioWebEntity> sitiosRelacionados;
 
     /**

@@ -7,7 +7,9 @@ package co.edu.uniandes.csw.sitios.entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -42,28 +44,28 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      * Nombre de la dependencia.
      */
     @PodamExclude 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private DependenciaEntity dependencia;
     
     /**
      * Sitio Web que administra.
      */
     @PodamExclude
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<SitioWebEntity> sitiosWeb;
 
      /**
      * Collecion de cambios en la bitacora de un administrador.
      */
     @PodamExclude
-    @OneToMany(mappedBy = "administrador")
+    @OneToMany(mappedBy = "administrador",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<CambioEntity> cambios;
 
     /**
      * Collecion de notificaciones.
      */
     @PodamExclude
-    @OneToMany(mappedBy = "notificado")
+    @OneToMany(mappedBy = "notificado",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<NotificacionEntity> notificaciones;
     
     //__________________________________________________________________________

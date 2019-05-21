@@ -10,7 +10,9 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
@@ -35,6 +37,7 @@ public class CambioEntity extends BaseEntity implements Serializable {
      * Fecha en la cual se hizo el cambio en Bitacora
      */
     @PodamStrategyValue(DateStrategy.class)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaCambio;
 
     /**
@@ -58,6 +61,12 @@ public class CambioEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToOne(cascade = CascadeType.PERSIST)
     private SitioWebEntity sitioWeb;
+    
+    /**
+     * administrador que realizo el cambio
+     */
+    @ManyToOne (cascade = CascadeType.PERSIST)
+    private AdministradorEntity administrador;
 
     /**
      * @return the lugarCambio
@@ -156,4 +165,23 @@ public class CambioEntity extends BaseEntity implements Serializable {
     public void setSitioWeb(SitioWebEntity sitioWeb) {
         this.sitioWeb = sitioWeb;
     }
+
+    /**
+     *  administrador que realizo el cambio
+     * @return  administrador
+     */
+    public AdministradorEntity getAdministrador() {
+        return administrador;
+    }
+
+    /**
+     *  asigna el administrador que realiza el cambio
+     * @param administrador 
+     */
+    public void setAdministrador(AdministradorEntity administrador) {
+        this.administrador = administrador;
+    }
+    
+    
+    
 }
