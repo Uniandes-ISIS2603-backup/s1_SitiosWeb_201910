@@ -103,6 +103,10 @@ public class PlataformaDeDespliegueLogicTest {
     public void createPlataformaDeDespliegueTest() throws BusinessLogicException {
 
         PlataformaDeDespliegueEntity newEntity = factory.manufacturePojo(PlataformaDeDespliegueEntity.class);
+        SitioWebEntity sitioEntity = factory.manufacturePojo(SitioWebEntity.class);
+        List<SitioWebEntity> lista = new ArrayList();
+        lista.add(sitioEntity);
+        newEntity.setSitiosWeb(lista);
         PlataformaDeDespliegueEntity result = plataformaLogic.createPlataformaDeDespliegue(newEntity);
         //Verificamos que no sea nulo
         Assert.assertNotNull(result);
