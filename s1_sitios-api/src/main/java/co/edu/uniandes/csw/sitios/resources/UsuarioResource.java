@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.sitios.resources;
 
+
 import co.edu.uniandes.csw.sitios.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.sitios.dtos.UsuarioDetailDTO;
 import co.edu.uniandes.csw.sitios.ejb.UsuarioLogic;
@@ -27,21 +28,39 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
 /**
- * Recurso Usuario
- *
- * @author Allan Roy Corinaldi.
+ * Clase que implementa el recurso usario
+ * 
+ * @author Allan Roy Corinaldi
  */
+
 @Path("users")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class UsuarioResource {
-
-    /*UsuarioResource*/
-    public final static Logger LOGGER = Logger.getLogger(UsuarioResource.class.getName());
-
+    
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, una especie de huella.
+     */
+    private static final Logger LOGGER = Logger.getLogger(UsuarioResource.class.getName());
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+    /**
+     * variable para acceder a la logica de un usuario.
+     */
     @Inject
     private UsuarioLogic usuarioLogic;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
      * Crea un nuevo Usuario con la informacion que se recibe en el cuerpo de la
@@ -176,5 +195,5 @@ public class UsuarioResource {
         }
         return list;
     }
-
+    
 }

@@ -32,10 +32,30 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class NotificacionResourse {
-      private static final Logger LOGGER = Logger.getLogger(NotificacionResourse.class.getName());
+    
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, una especie de huella
+     */
+    private static final Logger LOGGER = Logger.getLogger(NotificacionResourse.class.getName());
 
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+    /**
+     *  variable que permite acceder a la logica de una notificacion 
+     */
     @Inject
     private NotificacionLogic notilogic;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
+    
      /**
      * Crea una noticiacion con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por

@@ -35,14 +35,35 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class AdministradorNotificacionesResource {
-
+    
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, una especie de huella
+     */
     private static final Logger LOGGER = Logger.getLogger(AdministradorNotificacionesResource.class.getName());
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
 
+    /**
+     * variable que permite acceder a la logica  de la relacion entre un administrador y sus notificaciones
+     */
     @Inject
     private AdministradorNotificacionesLogic administradorNotificacionesLogic;
 
+    /**
+     * variable que permite acceder a la logica d euna notificacion
+     */
     @Inject
     private NotificacionLogic notificacionLogic;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
      * Asocia una notificacion existente con un administrador existente

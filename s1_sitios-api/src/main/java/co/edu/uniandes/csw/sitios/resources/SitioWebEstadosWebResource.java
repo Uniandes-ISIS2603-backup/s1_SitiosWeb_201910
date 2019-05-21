@@ -121,10 +121,6 @@ public class SitioWebEstadosWebResource {
     }
     
     
-  
-    
-   
-
     /**
      * Busca el estadoWeb con el id asociado dentro de la sitioWeb con id asociado.
      *

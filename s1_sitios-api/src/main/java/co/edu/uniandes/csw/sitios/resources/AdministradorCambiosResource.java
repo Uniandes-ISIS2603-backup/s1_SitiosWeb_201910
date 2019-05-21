@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.sitios.resources;
 
 import co.edu.uniandes.csw.sitios.dtos.CambioDTO;
-import co.edu.uniandes.csw.sitios.dtos.NotificacionDTO;
 import co.edu.uniandes.csw.sitios.ejb.AdministradorCambiosLogic;
 import co.edu.uniandes.csw.sitios.ejb.CambioLogic;
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
@@ -36,13 +35,35 @@ import javax.ws.rs.PathParam;
 @Consumes("application/json")
 @RequestScoped
 public class AdministradorCambiosResource {
+    
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, una especie de huella
+     */
     private static final Logger LOGGER = Logger.getLogger(AdministradorCambiosResource.class.getName());
-
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+    /**
+     * variable empleada para acceder a la logica de un cambio
+     */
     @Inject
     private CambioLogic cambioLogic;
     
+    /**
+     * variable que permite acceder a la logica de la relacion Administrador / cambios
+     */
     @Inject
     private AdministradorCambiosLogic adminCambiosLogic;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
     
     /**
      * Asocia una cambios existente con un administrador existente

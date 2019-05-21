@@ -20,8 +20,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.Pattern;
 import uk.co.jemos.podam.common.PodamLongValue;
 import uk.co.jemos.podam.common.PodamStringValue;
 
@@ -110,7 +108,7 @@ public class SitioWebEntity extends BaseEntity implements Serializable {
      * Personas que administran el sitio web.
      */
     @PodamExclude
-    @OneToMany(mappedBy = "sitioWeb",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "sitioWeb",cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private List<AdministradorEntity> administradores;
 
     /**

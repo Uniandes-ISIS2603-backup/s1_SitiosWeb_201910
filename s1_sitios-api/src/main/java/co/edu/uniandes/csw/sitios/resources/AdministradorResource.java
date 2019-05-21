@@ -27,20 +27,39 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 
 /**
- * Recurso administrador
- *
- * @author Allan Roy Corinaldi.
+ * Clase que implementa el recurso para un administrador
+ * 
+ * @author Allan Roy Corinaldi/Daniel Preciado
  */
-@Path("/admins")
+
+@Path("admins")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class AdministradorResource {
-
-    public final static Logger LOGGER = Logger.getLogger(AdministradorResource.class.getName());
-
+    
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, una especie de huella.
+     */
+    private static final Logger LOGGER = Logger.getLogger(AdministradorResource.class.getName());
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+    /**
+     * variable para acceder a la logica de un administrador.
+     */
     @Inject
     private AdministradorLogic administradorLogic;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
      * Crea un nuevo autor con la informacion que se recibe en el cuerpo de la
@@ -196,4 +215,5 @@ public class AdministradorResource {
         }
         return list;
     }
+    
 }

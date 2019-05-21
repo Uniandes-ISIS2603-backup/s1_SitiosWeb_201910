@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.dtos;
 import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.CambioEntity;
 import co.edu.uniandes.csw.sitios.entities.NotificacionEntity;
+import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,11 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      * Relacion de 0 a muchas Notificaciones.
      */
     private List<NotificacionDTO> notificaciones;  
+    
+    /**
+     * Sitios web que administra.
+     */
+    private List <SitioWebDTO> sitiosWeb;
     
     
     //__________________________________________________________________________
@@ -64,6 +70,12 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
             for (CambioEntity cambio : administradorEntity.getCambios()) {
                 cambios.add(new CambioDTO(cambio));
              }
+            
+            sitiosWeb = new ArrayList<>();
+            for (SitioWebEntity sitio : administradorEntity.getSitiosWeb()) {
+                sitiosWeb.add(new SitioWebDTO(sitio));
+             }
+            
         }
     }
     
@@ -81,22 +93,37 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
     @Override
     public AdministradorEntity toEntity() {
         AdministradorEntity administradorEntity = super.toEntity();
+        
         if (getNotificaciones() != null) 
         {
             List<NotificacionEntity> notificacionEntity = new ArrayList<>();
-            for (NotificacionDTO dtoNotificaciones : getNotificaciones()) {
+            for (NotificacionDTO dtoNotificaciones : getNotificaciones())
+            {
                 notificacionEntity.add(dtoNotificaciones.toEntity());
             }
             administradorEntity.setNotificaciones(notificacionEntity);
         }
+        
         if (getCambios() != null) 
         {
             List<CambioEntity> cambiosEntity = new ArrayList<>();
-            for (CambioDTO cambioDTO : getCambios()) {
+            for (CambioDTO cambioDTO : getCambios()) 
+            {
                 cambiosEntity.add(cambioDTO.toEntity());
             }
             administradorEntity.setCambios(cambiosEntity);
         }
+        
+        if (getSitiosWeb()!= null) 
+        {
+            List<SitioWebEntity> sitiosWebEntity = new ArrayList<>();
+            for (SitioWebDTO sitioDTO : getSitiosWeb()) 
+            {
+                sitiosWebEntity.add(sitioDTO.toEntity());
+            }
+            administradorEntity.setSitiosWeb(sitiosWebEntity);
+        }
+        
         return administradorEntity;
     }
 
@@ -126,6 +153,22 @@ public class AdministradorDetailDTO extends AdministradorDTO implements Serializ
      */
     public void setCambios(List<CambioDTO> cambios) {
         this.cambios = cambios;
+    }
+    
+    
+    /**
+     * @return sitiosWeb of Administrador
+     */
+    public List<SitioWebDTO> getSitiosWeb() 
+    {
+        return sitiosWeb;
+    }
+
+    /**
+     * @param sitiosWeb to assign
+     */
+    public void setSitiosWeb(List<SitioWebDTO> sitiosWeb) {    
+        this.sitiosWeb = sitiosWeb;
     }
 
     

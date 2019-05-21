@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.sitios.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -40,7 +41,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     /**
      * Nombre de la dependencia.
      */
-    @PodamExclude
+    @PodamExclude 
     @ManyToOne
     private DependenciaEntity dependencia;
     
@@ -48,8 +49,8 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      * Sitio Web que administra.
      */
     @PodamExclude
-    @ManyToOne
-    private SitioWebEntity sitioWeb;
+    @ManyToMany
+    private List<SitioWebEntity> sitiosWeb;
 
      /**
      * Collecion de cambios en la bitacora de un administrador.
@@ -126,18 +127,19 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
     }
 
     /**
-     * @return the sitioWebEntity
+     * @return the sitiosWebEntity
      */
-    public SitioWebEntity getSitioWeb() {
-        return sitioWeb;
+    public List<SitioWebEntity> getSitiosWeb() {
+        return sitiosWeb;
     }
 
     /**
-     * @param sitioWebEntity the sitioWebEntity to set
+     * @param sitiosWeb the sitiosWebEntity to set
      */
-    public void setSitioWeb(SitioWebEntity sitioWebEntity) {
-        this.sitioWeb = sitioWebEntity;
+    public void setSitiosWeb(List<SitioWebEntity> sitiosWeb) {
+        this.sitiosWeb = sitiosWeb;
     }
+
 
     /**
      * @return the cambios

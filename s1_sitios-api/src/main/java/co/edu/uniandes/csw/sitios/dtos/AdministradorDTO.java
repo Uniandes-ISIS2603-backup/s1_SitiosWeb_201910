@@ -58,11 +58,6 @@ public class AdministradorDTO implements Serializable {
     private String nombreCargo;
 
     /**
-     * Sitio web que administra.
-     */
-    private SitioWebDTO sitioWeb;
-    
-    /**
      * Dependencia a la que pertenece un administrador.
      */
     private DependenciaDTO dependencia;
@@ -83,6 +78,7 @@ public class AdministradorDTO implements Serializable {
      * @param entity != null
      */
     public AdministradorDTO(AdministradorEntity entity) {
+        
         if (entity != null) 
         {
             this.id = entity.getId();
@@ -93,14 +89,6 @@ public class AdministradorDTO implements Serializable {
             this.nivel = entity.getNivel();
             this.nombreCargo = entity.getNombreCargo();         
             
-            if(entity.getSitioWeb() != null)
-            {
-                this.sitioWeb = new SitioWebDTO(entity.getSitioWeb());
-            } 
-            else 
-            {
-                this.sitioWeb = null;
-            }
             if(entity.getDependencia()!= null)
             {
                 this.dependencia = new DependenciaDTO(entity.getDependencia());
@@ -132,10 +120,7 @@ public class AdministradorDTO implements Serializable {
         entity.setTelefono(this.getTelefono());
         entity.setNivel(this.getNivel());
         entity.setNombreCargo(this.getNombreCargo());
-        if (this.getSitioWeb() != null) 
-        {
-            entity.setSitioWeb(this.sitioWeb.toEntity());
-        } 
+         
         if (this.getDependencia()!= null) 
         {
             entity.setDependencia(this.dependencia.toEntity());
@@ -242,22 +227,6 @@ public class AdministradorDTO implements Serializable {
         this.telefono = telefono;
     }
     
-    /**
-     * @return sitioWeb of Administrador
-     */
-    public SitioWebDTO getSitioWeb() 
-    {
-        return sitioWeb;
-    }
-
-    /**
-     * 
-     * @param sitioWeb to assign
-     */
-    public void setSitioWeb(SitioWebDTO sitioWeb) 
-    {
-        this.sitioWeb = sitioWeb;
-    }
     
     /**
      * @return Dependencia asociada al administrador

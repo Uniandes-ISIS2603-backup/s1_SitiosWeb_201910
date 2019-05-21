@@ -10,9 +10,8 @@
  */
 package co.edu.uniandes.csw.sitios.resources;
 
-import co.edu.uniandes.csw.sitios.dtos.EstadoWebDTO;
+
 import co.edu.uniandes.csw.sitios.dtos.SitioWebDTO;
-import co.edu.uniandes.csw.sitios.dtos.SitioWebDetailDTO;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebEstadosWebLogic;
 import co.edu.uniandes.csw.sitios.ejb.SitioWebLogic;
 import co.edu.uniandes.csw.sitios.entities.SitioWebEntity;
@@ -36,13 +35,36 @@ import javax.ws.rs.*;
 @RequestScoped
 public class SitioWebResource {
     
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, una especie de huella
+     */
     private static final Logger LOGGER = Logger.getLogger(SitioWebResource.class.getName());
     
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+    /**
+     * variable que sirve para acceder a la logica de un sitioWeb
+     */
     @Inject
     private SitioWebLogic sitelogic;
     
+    /**
+     * variable que sirve para acceder la la logica de la relacion de 
+     * un sitioWeb con sus estados
+     */
     @Inject
     private SitioWebEstadosWebLogic sitioWebEstadosWebLogic; 
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
+    
      /**
      * Crea un sitio web con la informacion que se recibe en el cuerpo de
      * la petición y se regresa un objeto identico con un id auto-generado por
@@ -64,6 +86,12 @@ public class SitioWebResource {
         return nuevoSitioDTO;
     }
 
+    /**
+     * obtiene un siitio web
+     * @param id del sitio web a buscar
+     * @return el sitio web buscado
+     * @throws BusinessLogicException 
+     */
     @GET
     @Path("{sitesId: \\d+}")
     public SitioWebDTO getWebSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
@@ -74,7 +102,10 @@ public class SitioWebResource {
         return  obtenido;
     }
 
-
+    /**
+     * obtiene una lista con todos los sitios web en la DB
+     * @return listaSites
+     */
     @GET
     public List<SitioWebDTO> getSites()
     {
@@ -87,7 +118,12 @@ public class SitioWebResource {
         return listaSites;
     }
     
-    
+    /**
+     *  obtiene una lista con todos los sitios relacionados al sitio dado por id
+     * @param sitesId sitio al que se le quieres buscar los sitios relacionados
+     * @return listaSites 
+     * @throws BusinessLogicException 
+     */
     @GET
     @Path("{sitesId: \\d+}/related")
     public List<SitioWebDTO> getSitesRelated(@PathParam("sitesId") Long sitesId)throws  BusinessLogicException {
@@ -101,6 +137,11 @@ public class SitioWebResource {
         return listaSites;
     }
     
+    /**
+     * actualiza la informacion de un sitioWeb
+     * @param website to update
+     * @throws BusinessLogicException 
+     */
     @PUT
     public void updateSite(SitioWebDTO website)  throws  BusinessLogicException
     {
@@ -108,8 +149,13 @@ public class SitioWebResource {
         sitelogic.updateSitio(website.toEntity());
     }
 
-    
-     @DELETE
+    /**
+     * Elimina un sitio web por el id dado como parametro
+     * @param id del sitio a borrar
+     * @return una confirmacion "deleted" de quel sitio se borro
+     * @throws BusinessLogicException 
+     */
+    @DELETE
     @Path("{sitesId: \\d+}")
     public String deleteSite(@PathParam("sitesId") Long id) throws  BusinessLogicException
     {
@@ -118,8 +164,12 @@ public class SitioWebResource {
         return  "deleted";
     }
 
-    
-
+    /**
+     * 
+     * @param sitesId
+     * @return
+     * @throws BusinessLogicException 
+     */
     @Path("{sitesId: \\d+}/technologies")
     public Class<SitioWebTecnologiaResource> getSitioWebTecnologiaResource(@PathParam("sitesId") Long sitesId) throws  BusinessLogicException {
         if (sitelogic.getWebSite(sitesId) == null) {
@@ -128,6 +178,11 @@ public class SitioWebResource {
         return SitioWebTecnologiaResource.class;
     }
     
+    /**
+     * 
+     * @param sitioWebId
+     * @return 
+     */
     @Path("{sitioWebId: \\d+}/states/")
     public Class<SitioWebEstadosWebResource> getSiteStatesResource(@PathParam("sitioWebId") Long sitioWebId) {
             try {

@@ -35,13 +35,35 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class UsuarioTicketsResource {
 
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, un especie de huella
+     */
     private static final Logger LOGGER = Logger.getLogger(UsuarioTicketsResource.class.getName());
-
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+    /**
+     * variable empleada para acceder a la logica de la relacion de un usario y
+     * sus tickets
+     */
     @Inject
     private UsuarioTicketsLogic usuarioTicketsLogic;
 
+    /**
+     * variable empleada para acceder a la logica de un ticket
+     */
     @Inject
     private TicketLogic ticketLogic;
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
 
     /**
      * Guarda un ticket dentro de un usuario con la informacion que recibe el la

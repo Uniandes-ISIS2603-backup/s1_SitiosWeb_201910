@@ -24,21 +24,48 @@ import javax.ws.rs.core.MediaType;
  *
  * @author estudiante
  */
-
+@Path("sitiosWeb/{sitiosWebId: \\d+}/tecnologias")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+
 public class SitioWebTecnologiaResource {
+    
+    //__________________________________________________________________________
+    // Constantes
+    //__________________________________________________________________________
+    
+    /**
+     * constante empleada para dejar registro, una especie de huella
+     */
+    private static final Logger LOGGER = Logger.getLogger(SitioWebTecnologiaResource.class.getName());
+      
+    
+    //__________________________________________________________________________
+    // Atributos
+    //__________________________________________________________________________
+    
+    /**
+     * variable usada para acceder a la logica de un sitioWeb
+     */
     @Inject
     private SitioWebLogic sitioWebLogic;
 
+    /**
+     * variable para acceder a la logica de una tecnologia
+     */
     @Inject
     private TecnologiaLogic tecnologiaLogic;
 
+    /**
+     * variable para acceder a la logica de la relacion entre sitio y tecnologia
+     */
     @Inject
     private SitioTecnologiaLogic sitioTecnologiaLogic;
-    
-    private static final Logger LOGGER = Logger.getLogger(SitioWebTecnologiaResource.class.getName());
 
+    
+    //__________________________________________________________________________
+    // Metodos
+    //__________________________________________________________________________
     
    /**
      * Asocia un libro existente con un sitio web existente
@@ -53,7 +80,7 @@ public class SitioWebTecnologiaResource {
      * Asocia un libro existente con un sitio web existente
      *
      * @param websiteId El ID del sitio web al cual se le va a asociar el libro
-     * @param technologysId El ID del libro que se asocia
+     * @param technologysId El ID de la tecnologia que se asocia
      * @return JSON {@link TecnologiaDetailDTO} - El libro asociado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el libro.

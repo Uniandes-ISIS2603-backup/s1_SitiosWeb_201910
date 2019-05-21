@@ -116,6 +116,12 @@ public class EstadoWebResource {
         return estadosWebRetorno;
     }
     
+    /**
+     * Busca y devuelve la cantidad de estados que hay para los diferentes sitiosWeb
+     * 
+     * @return JSONArray - los numeros correspondientes  a la cantidad de estados
+     *  #ACTIVO, #INACTIVO, #ENFALLA, #OTROS
+     */
     @GET
      @Path("/count")
     public List<Integer> getContadorEstados() 
