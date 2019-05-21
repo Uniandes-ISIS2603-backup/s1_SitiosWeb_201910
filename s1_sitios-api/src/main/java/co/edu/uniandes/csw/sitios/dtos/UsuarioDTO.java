@@ -90,6 +90,7 @@ public class UsuarioDTO implements Serializable {
         entity.setNombre(this.getNombre());
         entity.setPassword(this.getPassword());
         entity.setTelefono(this.getTelefono());
+        entity.setId(this.getId());
         return entity;
     }
 

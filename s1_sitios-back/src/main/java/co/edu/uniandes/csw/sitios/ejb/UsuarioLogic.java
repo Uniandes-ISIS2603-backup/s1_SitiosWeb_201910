@@ -123,9 +123,6 @@ public class UsuarioLogic {
         if (entity.getTelefono().trim().length() < 7 && entity.getTelefono().trim().length() > 11) {
             throw new BusinessLogicException("Numero de telefono demasiado largo");
         }
-        if (entity.getTickets()== null) {
-            throw new BusinessLogicException("No existen los tickets");
-        }
         if (entity.getNumeroTickets() < 0 ) {
             throw new BusinessLogicException("Invalido el numero de tickets");
         }
