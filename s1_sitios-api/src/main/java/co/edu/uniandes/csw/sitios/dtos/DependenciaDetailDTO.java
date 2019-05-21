@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.sitios.dtos;
+import co.edu.uniandes.csw.sitios.entities.AdministradorEntity;
 import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -13,9 +16,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author estudiante
  */
+
 public class DependenciaDetailDTO extends DependenciaDTO implements Serializable {
 
-    private AdministradorDTO admin;
+    private List<AdministradorDTO> admins;
 
     public DependenciaDetailDTO() {
         super();
@@ -33,8 +37,13 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
      */
     public DependenciaDetailDTO(DependenciaEntity dependenciaEntity) {
         super(dependenciaEntity);
-        if (dependenciaEntity.getEncargadoDependencia() != null) {
-            this.admin = new AdministradorDTO(dependenciaEntity.getEncargadoDependencia());
+        if (dependenciaEntity.getEncargadosDependencia()!= null) 
+        {
+            admins = new ArrayList<>();
+            for (AdministradorEntity adminEntity : dependenciaEntity.getEncargadosDependencia()) 
+            {
+                admins.add(new AdministradorDTO(adminEntity));
+            }
         }
     }
 
@@ -48,8 +57,14 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
     @Override
     public DependenciaEntity toEntity() {
         DependenciaEntity entity = super.toEntity();
-        if (getEncargadoDependencia() != null) {
-            entity.setEncargadoDependencia(getEncargadoDependencia().toEntity());
+         if (admins != null) 
+        {
+            List<AdministradorEntity> adminEntity = new ArrayList<>();
+            for (AdministradorDTO dtoAdmin : getAdmins())
+            {
+                adminEntity.add(dtoAdmin.toEntity());
+            }
+            entity.setEncargadosDependencia(adminEntity);
         }
         return entity;
     }
@@ -57,21 +72,20 @@ public class DependenciaDetailDTO extends DependenciaDTO implements Serializable
     /**
      * Devuelve el Administrador asociado a la dependencia
      *
-     * @return DTO del administrador
+     * @return DTO del adminsistrador
      */
-    public AdministradorDTO getEncargadoDependencia() {
-        return admin;
+    public List<AdministradorDTO> getAdmins () {
+        return admins;
     }
 
     /**
-     * Modifica el administrador asociado a esta dependencia.
+     * Modifica el adminsistrador asociado a esta dependencia.
      *
-     * @param administrador el administrador por asociar.
+     * @param admins los adminsistradores por asociar.
      */
-    public void setEncargadoDependencia (AdministradorDTO administrador) {
-        this.admin = administrador;
+    public void setAdmins(List<AdministradorDTO> admins) {
+        this.admins = admins;
     }
-    
 
     @Override
     public String toString() {

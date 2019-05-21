@@ -39,10 +39,6 @@ public class DependenciaDTO implements Serializable{
     private String telefono;
     
     /**
-     * administrador asociado a la dependencia
-     */
-    private AdministradorDTO administrador;
-    /**
      * Constructor DependenciDTO vacio.
      */
     public DependenciaDTO() {
@@ -59,9 +55,6 @@ public class DependenciaDTO implements Serializable{
             this.email = entity.getEmail();
             this.nombre = entity.getNombreDependencia();
             this.telefono = entity.getTelefono();
-            if (entity.getEncargadoDependencia() != null) {
-            this.administrador = new AdministradorDTO(entity.getEncargadoDependencia());
-        }
         }
     }
     
@@ -75,7 +68,7 @@ public class DependenciaDTO implements Serializable{
         entity.setId(this.id);
         entity.setNombreDependencia(this.nombre);
         entity.setTelefono(this.telefono);
-        entity.setEncargadoDependencia(this.administrador.toEntity());
+
         return entity;
     }
     
@@ -133,20 +126,6 @@ public class DependenciaDTO implements Serializable{
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    /**
-     * @return the administrador
-     */
-    public AdministradorDTO getAdministrador() {
-        return administrador;
-    }
-
-    /**
-     * @param administrador the administrador to set
-     */
-    public void setAdministrador(AdministradorDTO administrador) {
-        this.administrador = administrador;
     }
 
 }

@@ -5,10 +5,12 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamIntValue;
-import uk.co.jemos.podam.common.PodamLongValue;
 import uk.co.jemos.podam.common.PodamStringValue;
 
 /**
@@ -37,11 +39,8 @@ public class DependenciaEntity extends BaseEntity {
     private String telefono;
     
     @PodamExclude
-    @javax.persistence.OneToOne(
-        mappedBy = "dependencia",
-        fetch = javax.persistence.FetchType.LAZY
-    )
-    private AdministradorEntity encargadoDependencia;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "dependencia",fetch = FetchType.LAZY)
+    private List<AdministradorEntity> encargadosDependencia;
     
     
     /**
@@ -89,15 +88,16 @@ public class DependenciaEntity extends BaseEntity {
     /**
      * @return the administrador
      */
-    public AdministradorEntity getEncargadoDependencia() {
-        return encargadoDependencia;
+    public List<AdministradorEntity> getEncargadosDependencia() {
+        return encargadosDependencia;
     }
 
+
     /**
-     * @param administrador the administrador to set
+     * @param encargadosDependencia
      */
-    public void setEncargadoDependencia(AdministradorEntity administrador) {
-        this.encargadoDependencia = administrador;
+    public void setEncargadosDependencia(List<AdministradorEntity> encargadosDependencia) {
+        this.encargadosDependencia = encargadosDependencia;
     }
     
 }

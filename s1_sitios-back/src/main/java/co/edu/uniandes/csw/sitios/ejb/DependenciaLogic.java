@@ -104,9 +104,9 @@ public class DependenciaLogic {
      */
     public void deleteDependency(Long dependenciaId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la dependencia con id = {0}", dependenciaId);
-        AdministradorEntity administrador = getDependency(dependenciaId).getEncargadoDependencia();
+         List<AdministradorEntity> administrador = getDependency(dependenciaId).getEncargadosDependencia();
         if (administrador != null) {
-            throw new BusinessLogicException("No se puede borrar la dependencia con id = " + dependenciaId + " porque tiene un Administrador asociado");
+            throw new BusinessLogicException("No se puede borrar la dependencia con id = " + dependenciaId + " porque tiene uno o varios Administradores asociados");
         }
         persistence.delete(dependenciaId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la dependencia con id = {0}", dependenciaId);

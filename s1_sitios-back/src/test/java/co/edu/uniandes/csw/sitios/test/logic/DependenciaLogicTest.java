@@ -103,7 +103,7 @@ public class DependenciaLogicTest {
         for (int i = 0; i < 30; i++) {
             DependenciaEntity dependenciaEntity = factory.manufacturePojo(DependenciaEntity.class);
             DependenciaEntity newdep = factory.manufacturePojo(DependenciaEntity.class);
-            newdep.setEncargadoDependencia(new AdministradorEntity());
+           // newdep.setEncargadoDependencia(new AdministradorEntity());
             em.persist(dependenciaEntity); //entity
             data.add(dependenciaEntity);
         }

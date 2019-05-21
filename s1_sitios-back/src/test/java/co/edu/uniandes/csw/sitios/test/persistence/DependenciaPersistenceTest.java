@@ -98,13 +98,12 @@ public class DependenciaPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             DependenciaEntity entity = factory.manufacturePojo(DependenciaEntity.class);
-            AdministradorEntity adminEntity = factory.manufacturePojo(AdministradorEntity.class);
+           // AdministradorEntity adminEntity = factory.manufacturePojo(AdministradorEntity.class);
 
-            entity.setEncargadoDependencia(adminEntity);
-            adminEntity.setDependencia(entity);
+         //   adminEntity.setDependencia(entity);
 
             em.persist(entity);
-            em.persist(adminEntity);
+           // em.persist(adminEntity);
             data.add(entity);
         }
         DependenciaEntity entity = factory.manufacturePojo(DependenciaEntity.class);
@@ -186,7 +185,7 @@ public class DependenciaPersistenceTest {
 
         entity.setId(newEntity.id);
         entity.setEmail(newEntity.getEmail());
-        entity.setEncargadoDependencia(newEntity.getEncargadoDependencia());
+
         entity.setNombreDependencia(newEntity.getNombreDependencia());
         entity.setTelefono(newEntity.getTelefono());
 
