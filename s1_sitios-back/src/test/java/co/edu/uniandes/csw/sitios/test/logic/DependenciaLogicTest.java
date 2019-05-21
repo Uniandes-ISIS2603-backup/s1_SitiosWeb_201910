@@ -103,7 +103,6 @@ public class DependenciaLogicTest {
         for (int i = 0; i < 30; i++) {
             DependenciaEntity dependenciaEntity = factory.manufacturePojo(DependenciaEntity.class);
             DependenciaEntity newdep = factory.manufacturePojo(DependenciaEntity.class);
-            newdep.setEncargadoDependencia(new AdministradorEntity());
             em.persist(dependenciaEntity); //entity
             data.add(dependenciaEntity);
         }
@@ -150,22 +149,12 @@ public class DependenciaLogicTest {
         try {
             DependenciaEntity entity = dependenciaLogic.getDependency(data.get(0).getId());
             String value = String.valueOf(new Random().nextInt() + 1);
-            String value2 = "";
-            while(true)
-            {
-                value2 = value2.concat(String.valueOf(new Random().nextInt()));
-                if(value2.length()>=11)
-                {
-                    value2 = value2.substring(0,10);
-                    break;
-                }
-            }
             entity.setEmail("holaprofesor@uniandes.edu.co");
             entity.setNombreDependencia(value);
-            entity.setTelefono(value2);
+            entity.setTelefono("9241847373");
             dependenciaLogic.updateDependency(entity.getId(), entity);
             DependenciaEntity entity2 = dependenciaLogic.getDependency(entity.getId());
-            Assert.assertEquals(entity2.getTelefono(), value2);
+            Assert.assertEquals(entity2.getTelefono(), "9241847373");
             Assert.assertEquals(entity2.getNombreDependencia(), value);
 
         } catch (BusinessLogicException e) {
@@ -183,8 +172,9 @@ public class DependenciaLogicTest {
     public void deleteDependencia() throws BusinessLogicException {
 
         DependenciaEntity newDep = factory.manufacturePojo(DependenciaEntity.class);
+        newDep.setAdmins(new ArrayList());
         DependenciaEntity depEntity = dependenciaLogic.createDependency(newDep);
-        Long id = depEntity.getId();
+        Long id = newDep.getId();
         dependenciaLogic.deleteDependency(id);
         dependenciaLogic.getDependency(id);
     }

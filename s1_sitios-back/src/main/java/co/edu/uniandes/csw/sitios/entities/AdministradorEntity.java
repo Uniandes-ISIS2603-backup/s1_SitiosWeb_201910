@@ -42,7 +42,7 @@ public class AdministradorEntity extends PersonaEntity implements Serializable {
      * Nombre de la dependencia.
      */
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private DependenciaEntity dependencia;
 
      /**

@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.sitios.entities;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamIntValue;
 import uk.co.jemos.podam.common.PodamLongValue;
@@ -36,12 +39,9 @@ public class DependenciaEntity extends BaseEntity {
     @PodamStringValue(strValue = "4157349284")
     private String telefono;
     
+    @OneToMany(mappedBy = "dependencia")
     @PodamExclude
-    @javax.persistence.OneToOne(
-        mappedBy = "dependencia",
-        fetch = javax.persistence.FetchType.LAZY
-    )
-    private AdministradorEntity encargadoDependencia;
+    private List<AdministradorEntity> admins;
     
     
     /**
@@ -85,19 +85,18 @@ public class DependenciaEntity extends BaseEntity {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    /**
-     * @return the administrador
-     */
-    public AdministradorEntity getEncargadoDependencia() {
-        return encargadoDependencia;
-    }
-
-    /**
-     * @param administrador the administrador to set
-     */
-    public void setEncargadoDependencia(AdministradorEntity administrador) {
-        this.encargadoDependencia = administrador;
-    }
     
+    /**
+     * @return the admins
+     */
+    public List<AdministradorEntity> getAdmins() {
+        return admins;
+    }
+
+    /**
+     * @param admins the admins to set
+     */
+    public void setAdmins(List<AdministradorEntity> admins) {
+        this.admins = admins;
+    }
 }
