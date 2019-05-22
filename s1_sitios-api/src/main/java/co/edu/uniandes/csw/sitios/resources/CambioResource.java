@@ -168,7 +168,7 @@ public class CambioResource {
         LOGGER.info("CambioResource deleteCambio: output: void");
     }
     
-    public class Filtro implements Serializable
+    public static class Filtro implements Serializable
     {
         private String atributo;
         private String param;
