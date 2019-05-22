@@ -168,44 +168,4 @@ public class CambioResource {
         LOGGER.info("CambioResource deleteCambio: output: void");
     }
     
-    public static class Filtro implements Serializable
-    {
-        private String atributo;
-        private String param;
-        public Filtro(String pAtr, String pParam)
-        {
-            atributo = pAtr;
-            param = pParam;
-        }
-
-        /**
-         * @return the atributo
-         */
-        public String getAtributo() {
-            return atributo;
-        }
-
-        /**
-         * @param atributo the atributo to set
-         */
-        public void setAtributo(String atributo) {
-            this.atributo = atributo;
-        }
-
-        /**
-         * @return the param
-         */
-        public String getParam() {
-            return param;
-        }
-
-        /**
-         * @param param the param to set
-         */
-        public void setParam(String param) {
-            this.param = param;
-        }
-        
-    }
-
 }
