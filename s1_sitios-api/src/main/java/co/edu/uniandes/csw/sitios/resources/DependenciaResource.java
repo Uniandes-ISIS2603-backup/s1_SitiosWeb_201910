@@ -10,6 +10,8 @@ import co.edu.uniandes.csw.sitios.dtos.DependenciaDetailDTO;
 import co.edu.uniandes.csw.sitios.ejb.DependenciaLogic;
 import co.edu.uniandes.csw.sitios.entities.DependenciaEntity;
 import co.edu.uniandes.csw.sitios.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -56,6 +58,20 @@ public class DependenciaResource {
         return dependenciaDTO;
     }
     
+    /**
+     * Busca y devuelve todas las dependencias que existen en la aplicacion.
+     *
+     * @return JSONArray {@link DependenciaDetailDTO} - Las dependencias encontradas en la
+     * aplicación. Si no hay ninguna retorna una lista vacía.
+     */
+    @GET
+    public List<DependenciaDetailDTO> getDependencies() {
+        LOGGER.info("TecnologiaResource getTechnologies: input: void");
+        List<DependenciaDetailDTO> listaTechnologies = listEntity2DTO(dependenciaLogic.getDependencies());
+        LOGGER.log(Level.INFO, "TecnologiaResource getTechnologies: output: {0}", listaTechnologies);
+        return listaTechnologies;
+    }
+    
      /**
      * Permite dar un Dependencia segun su Id.
      * @param id : Numero entero, id con
@@ -83,12 +99,12 @@ public class DependenciaResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public DependenciaDTO updateDependency(@PathParam("id") Long id, DependenciaDTO dependencia) throws BusinessLogicException { 
+    public DependenciaDetailDTO updateDependency(@PathParam("id") Long id, DependenciaDetailDTO dependencia) throws BusinessLogicException { 
         LOGGER.log(Level.INFO, "DependenciaResource updateDependency: input: id: {0} , dependencia: {1}", new Object[]{id, dependencia}); 
         if (dependenciaLogic.getDependency(id) == null) { 
             throw new WebApplicationException("El recurso /dependencies/" + id + " no existe.", 404); 
         } 
-        DependenciaDTO detailDTO = new DependenciaDTO(dependenciaLogic.updateDependency(id, dependencia.toEntity())); 
+        DependenciaDetailDTO detailDTO = new DependenciaDetailDTO(dependenciaLogic.updateDependency(id, dependencia.toEntity())); 
         LOGGER.log(Level.INFO, "DependenciaResource updateDependency: output: {0}", detailDTO); 
         return detailDTO; 
     } 
@@ -108,5 +124,17 @@ public class DependenciaResource {
         dependenciaLogic.deleteDependency(id); 
         LOGGER.info("DependenciaResource deleteDependency: output: void"); 
     } 
-    
+    /**
+     * Convierte una lista de TecnologiaEntity a una lista de TecnologiaDetailDTO.
+     *
+     * @param entityList Lista de TecnologiaEntity a convertir.
+     * @return Lista de TecnologiaDetailDTO convertida.
+     */
+    private List<DependenciaDetailDTO> listEntity2DTO(List<DependenciaEntity> entityList) {
+        List<DependenciaDetailDTO> list = new ArrayList<>();
+        for (DependenciaEntity entity : entityList) {
+            list.add(new DependenciaDetailDTO(entity));
+        }
+        return list;
+    }
 }

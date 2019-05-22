@@ -70,7 +70,14 @@ public class CambioPersistence {
     }
     public List<CambioEntity> findBy(String atribute, String parameter)
     {
-        Query q = em.createQuery("SELECT u from CambioEntity u WHERE u."+atribute+" LIKE :parameter").setParameter("parameter", "%"+parameter+"%");
+        Query q = null;
+        if(atribute.equals("id")||atribute.equals("idAsociado"))
+        {
+            q = em.createQuery("SELECT u from CambioEntity u WHERE u."+atribute+" = :parameter").setParameter("parameter", Integer.valueOf(parameter));
+        }
+        else{
+            q = em.createQuery("SELECT u from CambioEntity u WHERE u."+atribute+" LIKE :parameter").setParameter("parameter", "%"+parameter+"%");
+        }
         return q.getResultList();
     }
 

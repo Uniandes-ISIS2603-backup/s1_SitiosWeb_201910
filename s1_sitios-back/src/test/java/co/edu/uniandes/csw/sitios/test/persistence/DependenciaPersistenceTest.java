@@ -98,13 +98,7 @@ public class DependenciaPersistenceTest {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             DependenciaEntity entity = factory.manufacturePojo(DependenciaEntity.class);
-            AdministradorEntity adminEntity = factory.manufacturePojo(AdministradorEntity.class);
-
-            entity.setEncargadoDependencia(adminEntity);
-            adminEntity.setDependencia(entity);
-
             em.persist(entity);
-            em.persist(adminEntity);
             data.add(entity);
         }
         DependenciaEntity entity = factory.manufacturePojo(DependenciaEntity.class);
@@ -170,6 +164,7 @@ public class DependenciaPersistenceTest {
     @Test
     public void deleteDependenciaTest() {
         DependenciaEntity entity = data.get(3);
+        entity.setAdmins(new ArrayList());
         dependenciaPersistence.delete(entity.getId());
         DependenciaEntity deleted = em.find(DependenciaEntity.class, entity.getId());
         Assert.assertNull(deleted);
@@ -186,7 +181,6 @@ public class DependenciaPersistenceTest {
 
         entity.setId(newEntity.id);
         entity.setEmail(newEntity.getEmail());
-        entity.setEncargadoDependencia(newEntity.getEncargadoDependencia());
         entity.setNombreDependencia(newEntity.getNombreDependencia());
         entity.setTelefono(newEntity.getTelefono());
 

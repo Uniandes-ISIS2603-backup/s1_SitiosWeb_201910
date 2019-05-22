@@ -264,7 +264,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"tggayp.jctrwv@hrvwfwi.com\",\n    \"id\":  {{new_id_e}} ,\n    \"nombreDependencia\": \"EditarDependencia\",\n    \"telefono\": \"3132266270\",\n    \"encargadoDependencia\": {}\n}"
+					"raw": "{\n    \"email\": \"tggayp.jctrwv@hrvwfwi.com\",\n    \"id\":  {{new_id_e}} ,\n    \"nombreDependencia\": \"EditarDependencia\",\n    \"telefono\": \"3132266270\",\n    \"admins\": []\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/dependencies/{{new_id_e}}",
@@ -310,7 +310,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\": \"tggayp.jctrwv@hrvwfwi.com\",\n    \"id\":  2 ,\n    \"nombreDependencia\": \"EditarDependencia\",\n    \"telefono\": \"3132266270\",\n    \"encargadoDependencia\": {}\n}"
+					"raw": "{\n    \"email\": \"tggayp.jctrwv@hrvwfwi.com\",\n    \"id\":  2 ,\n    \"nombreDependencia\": \"EditarDependencia\",\n    \"telefono\": \"3132266270\",\n    \"admins\": []\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/dependencies/1",
@@ -402,7 +402,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"type\": \"tecnologiaDetailDTO\",\n        \"descripcion\": \"Esta es una descripción predefinida para las pruebas de POSTMAN correspondientes al PUT del recurso TECNOLOGIAS\",\n        \"id\": 0,\n        \"name\": \"PruebaPostman\",\n        \"techCategory\": \"ServidorDeAplicacion\",\n        \"url\": \"https://www.holasoyunaurl.com\",\n        \"version\": \"74.0.8600\",\n        \"sitiosWeb\": []\n    }"
+					"raw": "{\n    \"email\": \"tggayp.jctrwv@hrvwfwi.com\",\n    \"id\":  {{new_id_e}} ,\n    \"nombreDependencia\": \"EditarDependencia\",\n    \"telefono\": \"NumeroInvalido\",\n    \"admins\": []\n}"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s1_sitios-api/api/dependencies/0",

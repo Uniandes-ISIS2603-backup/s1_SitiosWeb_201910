@@ -104,9 +104,9 @@ public class DependenciaLogic {
      */
     public void deleteDependency(Long dependenciaId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la dependencia con id = {0}", dependenciaId);
-        AdministradorEntity administrador = getDependency(dependenciaId).getEncargadoDependencia();
-        if (administrador != null) {
-            throw new BusinessLogicException("No se puede borrar la dependencia con id = " + dependenciaId + " porque tiene un Administrador asociado");
+         List<AdministradorEntity> administrador = getDependency(dependenciaId).getAdmins();
+        if (administrador == null || !administrador.isEmpty()) {
+            throw new BusinessLogicException("No se puede borrar la dependencia con id = " + dependenciaId + " porque tiene Administradores asociados");
         }
         persistence.delete(dependenciaId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la dependencia con id = {0}", dependenciaId);
@@ -126,7 +126,7 @@ public class DependenciaLogic {
              throw new BusinessLogicException("Email invalido");
         } 
         int cantidadDigitos = dependenciaEntity.getTelefono().length();
-        if(!dependenciaEntity.getTelefono().matches("^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$")||cantidadDigitos<7||cantidadDigitos>11)
+        if(cantidadDigitos<7||cantidadDigitos>11)
         {
              throw new BusinessLogicException("El numero de telefono no es valido");
         }

@@ -132,11 +132,5 @@ public class AdministradorLogic {
         if(entity.getTelefono().trim().length() < 7 && entity.getTelefono().trim().length()> 11 ){
             throw new BusinessLogicException("Numero de telefono demasiado largo");
         }
-        if(entity.getCambios() == null ){ 
-            throw new BusinessLogicException("No existen los cambios"); 
-        } 
-        if(entity.getNotificaciones()== null ){
-            throw new BusinessLogicException("No existen notificaciones");
-        }
     }
 }
